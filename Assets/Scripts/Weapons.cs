@@ -27,7 +27,7 @@ public class Weapons : MonoBehaviour
         {
             if(melee_weapon_equiped == true)
             {
-                Text.text = "Bow equiped!";
+                Text.text = "Bow equipped!";
                 melee_weapon_equiped = false;
                 range_weapon_equiped = true;
                 Sword.gameObject.SetActive(false);
@@ -35,7 +35,7 @@ public class Weapons : MonoBehaviour
             }
             else if(range_weapon_equiped == true)
             {
-                Text.text = "Sword equiped!";
+                Text.text = "Sword equipped!";
                 melee_weapon_equiped = true;
                 range_weapon_equiped = false;
                 Sword.gameObject.SetActive(true);
