@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -41,4 +39,3 @@ public class PlayerController : MonoBehaviour
             grounded = true;
     }
 }
->>>>>>> parent of 50beb99 (Merge branch 'master' of https://github.com/SaiTatter133/rae)

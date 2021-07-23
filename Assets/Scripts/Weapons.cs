@@ -18,7 +18,8 @@ public class Weapons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Sword.gameObject.SetActive(true);
+        Bow.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
