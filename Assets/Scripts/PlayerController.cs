@@ -2,40 +2,75 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-        [SerializeField] private float speed;
-        private Rigidbody2D body;
-        private bool grounded;
+    [SerializeField] private float speed;
+    [SerializeField] private float jumpHeight;
+
+    private Rigidbody2D rb;
+    private float hInput;
+
+    [HideInInspector] public bool grounded;
+    [HideInInspector] public bool isJumping;
+
+    public enum Direction
+    {
+        left,
+        right
+    }
+    private Direction direction;
 
     private void Awake()
     {
-        body = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        direction = Direction.right;
+        isJumping = false;
+        grounded = true;
+    }
+
+    //Polls input every frame and updates flags accordingly
+    private void HandleInput()
+    {
+        hInput = Input.GetAxis("Horizontal");
+
+        if (Input.GetKey(KeyCode.Space) && grounded)
+            isJumping = true;
+    }
+
+    //Flip player when changing direction
+    private void ChangeDirection()
+    {
+        if (hInput > 0.01f)
+        {
+            if (direction == Direction.left)
+            {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                direction = Direction.right;
+            }
+
+        }
+        else if (hInput < -0.01f)
+        {
+            if (direction == Direction.right)
+            {
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                direction = Direction.left;
+            }
+        }
     }
 
     private void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
-
-        //Flip player when moving left-right
-        if (horizontalInput > 0.01f)
-            transform.localScale = new Vector3(5, 5, 5);//pune in paranteza dimensiunile obiectului 
-        else if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-5, 5, 5);
-
-        //pentru saritura:
-        if (Input.GetKey(KeyCode.Space) && grounded)
-            Jump();
+        HandleInput();
+        ChangeDirection();
     }
 
-    private void Jump()
+    private void FixedUpdate()
     {
-        body.velocity = new Vector2(body.velocity.x, speed);
-        grounded = false;
-    }
+        rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-            grounded = true;
+        if (isJumping && grounded)
+        {
+            rb.AddForce(new Vector2(rb.velocity.x, jumpHeight), ForceMode2D.Impulse);
+
+        }
     }
 }
