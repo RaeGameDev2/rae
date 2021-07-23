@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class PlayerSpells : MonoBehaviour
 {
     public float coolDownFireBolt = 10f; // in seconds
@@ -56,7 +55,6 @@ public class PlayerSpells : MonoBehaviour
 
     private void MainSpell()
     {
-
         mana -= costMainSpell;
         Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, 30) * attackDirection * 3, Color.cyan, 2f);
         Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, -30) * attackDirection * 3, Color.cyan, 2f);
