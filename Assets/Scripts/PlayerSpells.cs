@@ -10,16 +10,18 @@ public class PlayerSpells : MonoBehaviour
     public float manaRegenerateSpeed = 10f; // 10 unitati din 100 pe secunda
     private float timeNextFireBolt;
     private float timeNextMainSpell;
+    private Vector2 attackDirection;
 
     private void Start()
     {
+        attackDirection = Vector2.right;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            if (Time.time >= timeNextMainSpell)
+            if (Time.time >= timeNextMainSpell && mana >= costMainSpell)
             {
                 timeNextMainSpell = Time.time + coolDownMainSpell;
                 MainSpell();
@@ -33,7 +35,7 @@ public class PlayerSpells : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (Time.time >= timeNextFireBolt)
+            if (Time.time >= timeNextFireBolt && mana >= costFireBolt)
             {
                 timeNextFireBolt = Time.time + coolDownFireBolt;
                 FireBolt();
@@ -46,23 +48,35 @@ public class PlayerSpells : MonoBehaviour
         }
 
         mana += manaRegenerateSpeed * Time.deltaTime;
+        if (mana > 100f)
+            mana = 100f;
+
+        GetDirection();
     }
 
     private void MainSpell()
     {
+
         mana -= costMainSpell;
+        Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, 30) * attackDirection * 3, Color.cyan, 2f);
+        Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, -30) * attackDirection * 3, Color.cyan, 2f);
     }
 
     private void FireBolt()
     {
         mana -= costFireBolt;
+        Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, 30) * attackDirection * 3, Color.red, 2f);
+        Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, -30) * attackDirection * 3, Color.red, 2f);
     }
 
-    private Vector2 GetDirection()
+    private void GetDirection()
     {
-        var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
+        var x = Input.GetAxisRaw("Horizontal");
+        var y = Input.GetAxisRaw("Vertical");
+        if (y < 0)
+            y = 0;
 
-        return new Vector2(x, y).normalized;
+        if (x != 0 || y != 0)
+            attackDirection = new Vector2(x, y).normalized;
     }
 }
