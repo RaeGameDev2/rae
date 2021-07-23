@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapons : MonoBehaviour
 {
-<<<<<<< HEAD
     //public GameObject Player;
     public ParticleSystem expl;
     public ParticleSystem expl1;
@@ -12,9 +12,7 @@ public class Weapons : MonoBehaviour
     public GameObject Sword;
     public GameObject Bow;
     public Text Text;
-=======
     public GameObject Player;
->>>>>>> e17ca19cfe05f9f6b40e585710cdbb8cc4805572
     public static bool melee_weapon_equiped = true;
     public static bool range_weapon_equiped = false;
     // Start is called before the first frame update
@@ -27,7 +25,6 @@ public class Weapons : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.T))
         {
             if(melee_weapon_equiped == true)
@@ -54,9 +51,6 @@ public class Weapons : MonoBehaviour
                 Destroy(expl1, expl1.duration + expl1.startLifetime);
                 Destroy(expl2, expl2.duration + expl2.startLifetime);
             }
-        }
-=======
->>>>>>> e17ca19cfe05f9f6b40e585710cdbb8cc4805572
-        
+        } 
     }
 }
