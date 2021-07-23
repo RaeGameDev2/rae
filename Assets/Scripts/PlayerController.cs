@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     [SerializeField] private float speed;
     private Rigidbody2D body;
     private bool grounded;
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && grounded)
             Jump();
 =======
+=======
+>>>>>>> parent of 50beb99 (Merge branch 'master' of https://github.com/SaiTatter133/rae)
         [SerializeField] private float speed;
         private Rigidbody2D body;
         private bool grounded;
@@ -62,6 +65,9 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
             grounded = true;
+<<<<<<< HEAD
+>>>>>>> parent of 50beb99 (Merge branch 'master' of https://github.com/SaiTatter133/rae)
+=======
 >>>>>>> parent of 50beb99 (Merge branch 'master' of https://github.com/SaiTatter133/rae)
     }
 
