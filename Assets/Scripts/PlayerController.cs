@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-        [SerializeField] private float speed;
-        private Rigidbody2D body;
-        private bool grounded;
+    [SerializeField] private float speed;
+    private Rigidbody2D body;
+    private bool grounded;
 
     private void Awake()
     {
@@ -33,9 +33,4 @@ public class PlayerController : MonoBehaviour
         grounded = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-            grounded = true;
-    }
 }
