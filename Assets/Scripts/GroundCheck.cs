@@ -13,15 +13,12 @@ public class GroundCheck : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Ground"))
-        {
-            pc.grounded = true;
-            pc.isJumping = false;
-        }
+            pc.isGrounded = true;
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
         if (col.CompareTag("Ground"))
-            pc.grounded = false;
+            pc.isGrounded = false;
     }
 }
