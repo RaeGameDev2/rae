@@ -6,10 +6,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight;
 
     private Rigidbody2D rb;
-    private float hInput;
+    [SerializeField] private float hInput;  // modificat
 
-    [HideInInspector] public bool grounded;
-    [HideInInspector] public bool isJumping;
+    public bool grounded;  // modificat
+    public bool isJumping;  // modificat
+    public bool onIce;  // adaugat
 
     public enum Direction
     {
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     //Polls input every frame and updates flags accordingly
     private void HandleInput()
     {
-        hInput = Input.GetAxis("Horizontal");
+        hInput = Input.GetAxisRaw("Horizontal");  // modificat
 
         if (Input.GetKey(KeyCode.Space) && grounded)
             isJumping = true;
@@ -65,12 +66,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
+        if (!onIce || hInput != 0)  // modificat
+            rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
 
         if (isJumping && grounded)
         {
-            rb.AddForce(new Vector2(rb.velocity.x, jumpHeight), ForceMode2D.Impulse);
-
+            rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);  // modificat
         }
     }
-}
+} 
