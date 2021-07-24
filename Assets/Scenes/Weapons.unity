@@ -280,7 +280,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200152140}
-  m_LocalRotation: {x: -0, y: -0, z: -0.24511331, w: 0.96949446}
+  m_LocalRotation: {x: 0, y: 0, z: -0.24511276, w: 0.9694946}
   m_LocalPosition: {x: 3.19, y: 5.51, z: 0}
   m_LocalScale: {x: 0.7328439, y: 3.177771, z: 0}
   m_Children: []
@@ -319,6 +319,11 @@ MonoBehaviour:
   Player: {fileID: 785299857}
   Sword: {fileID: 200152140}
   Bow: {fileID: 178770048}
+  is_attacking: 0
+  attack_timer: 700
+  melee_atack_direction: 
+  test: 0
+  direction: 
 --- !u!4 &448017048
 Transform:
   m_ObjectHideFlags: 0
