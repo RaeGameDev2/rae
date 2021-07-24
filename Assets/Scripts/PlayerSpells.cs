@@ -8,6 +8,7 @@ using UnityEngine;
 //     Doar primul inamic este afectat pe o distanta de X unitati (3 si 3 momentan)
 //     Fiecare spell are un cooldown si un manaCost asociat
 //     Mana se regenereaza singura in acest script, ulterior poate fi modificat
+//     trebuie activat Gizmos in Game Tab in Unity ca sa se vada liniile desenate
 public class PlayerSpells : MonoBehaviour
 {
     public float coolDownFireBolt = 10f; // in seconds
@@ -77,7 +78,7 @@ public class PlayerSpells : MonoBehaviour
     private void FireBolt()
     {
         mana -= costFireBolt;
-        DrawLines(Color.red, distanceFireBolt);
+        DrawLines(Color.red, distanceFireBolt);  // TODO: mecanicile si animatiile
         HitEnemy(damageFireBolt, distanceFireBolt);
     }
 
@@ -94,10 +95,15 @@ public class PlayerSpells : MonoBehaviour
             Debug.Log("Hit enemy");
             enemy.hitPoints -= damage;
             if (enemy.hitPoints <= 0)
+            {
+                // TODO: disable enemy not to be hit after death before it is destroyed
+                enemy.hitPoints = 0;
                 Destroy(enemy.gameObject, 1f);
+            }
+
             var components = enemy.gameObject.GetComponentsInChildren<Transform>();
 
-            Transform hpBar = components.FirstOrDefault(component => component.tag == "HP");
+            var hpBar = components.FirstOrDefault(component => component.tag == "HP");
             if (hpBar != null)
                 hpBar.localScale = new Vector3(enemy.hitPoints / 100, hpBar.localScale.y, hpBar.localScale.z);
         }
