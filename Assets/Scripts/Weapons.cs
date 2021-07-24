@@ -49,6 +49,18 @@ public class Weapons : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             weapon_switch();
-        } 
+        }
+        if (Input.GetKey("left") && melee_weapon_equiped == true)
+        {
+            Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
+        }
+        if (Input.GetKey("right") && melee_weapon_equiped == true)
+        {
+            Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
+        }
+        if (Input.GetKey("up") && melee_weapon_equiped == true)
+        {
+            Sword.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 3);
+        }
     }
 }
