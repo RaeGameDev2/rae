@@ -10,8 +10,8 @@ public class Weapons : MonoBehaviour
     public GameObject Bow;
     public static bool melee_weapon_equiped = true;
     public static bool range_weapon_equiped = false;
-    public bool is_attacking = false;
-    public int attack_timer = 700;
+    public static bool is_attacking = false;
+    private int attack_timer = 300;
     public string melee_atack_direction;
     public int test = 0;
     public string direction = "right";
@@ -50,7 +50,8 @@ public class Weapons : MonoBehaviour
             if(attack_timer <= 0)
             {
                 is_attacking = false;
-                attack_timer = 700;
+                attack_timer = 300;
+                Weapons_Enemy.Hit_Detected = false;
             }
         }
         if(melee_weapon_equiped == true)
