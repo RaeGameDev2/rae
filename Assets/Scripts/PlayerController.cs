@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool grounded;
     [HideInInspector] public bool isJumping;
+    [HideInInspector] public bool canDoubleJump;
 
     public enum Direction
     {
