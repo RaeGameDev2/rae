@@ -348,8 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e972e619c7443409292ab5e29db3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  jumpForce: 0
+  speed: 10
+  jumpForce: 10
 --- !u!61 &879060161
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -480,6 +480,8 @@ MonoBehaviour:
   costMainSpell: 30
   damageMainSpell: 30
   damageFireBolt: 50
+  distanceMainSpell: 3
+  distanceFireBolt: 3
   mana: 100
   manaRegenerateSpeed: 10
 --- !u!1 &911935801
