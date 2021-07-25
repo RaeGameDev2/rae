@@ -30,8 +30,11 @@ public class Weapons_Enemy : MonoBehaviour
             Hit_Detected = true;
             HP -= 20;
             HP_Text.text = HP + "";
-            if(HP <= 0)
+            if (HP <= 0)
+            {
+                Destroy(HP_Text.gameObject);
                 Destroy(this.gameObject);
+            }
         }
     }
 }
