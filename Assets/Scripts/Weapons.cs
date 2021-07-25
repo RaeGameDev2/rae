@@ -39,6 +39,7 @@ public class Weapons : MonoBehaviour
     {
         Sword.gameObject.SetActive(true);
         Bow.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame

@@ -11,17 +11,23 @@ public class Weapons_Enemy : MonoBehaviour
     public static bool Hit_Detected = false;
     public GameObject Player;
     public TMP_Text HP_Text;
+    // public Transform parent;
+    // public GameObject FloatingText;
+    // private GameObject newInstance;
     // Start is called before the first frame update
     void Start()
     {
         HP = 100;
         HP_Text.text = "100";
+        // newInstance = Instantiate(FloatingText, new Vector3(0,0,0), Quaternion.identity);
+        // newInstance.transform.SetParent(parent);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Sword" && Weapons.is_attacking == true && Hit_Detected == false)
         {
+            
             Hit_Detected = true;
             HP -= Weapons.melee_damage;
             HP_Text.text = HP + "";
