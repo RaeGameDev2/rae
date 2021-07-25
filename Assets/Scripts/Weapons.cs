@@ -14,6 +14,7 @@ public class Weapons : MonoBehaviour
     private int attack_timer = 300;
     private string melee_atack_direction;
     private string direction = "right";
+    private int object_rotated = 1;
     void weapon_switch()
     {
         if (melee_weapon_equiped == true)
@@ -58,9 +59,23 @@ public class Weapons : MonoBehaviour
             if (is_attacking == false)
             {
                 if (direction == "right")
+                {
                     Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
+                    if(object_rotated == 0)
+                    {
+                        Sword.transform.Rotate(new Vector3(0, 0, -60));
+                        object_rotated = 1;
+                    }
+                }
                 if (direction == "left")
+                {
                     Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
+                    if (object_rotated == 0)
+                    {
+                        Sword.transform.Rotate(new Vector3(0, 0, 60));
+                        object_rotated = 1;
+                    }
+                }
             }
             else
             {
@@ -84,10 +99,14 @@ public class Weapons : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
+            if (direction == "left")
+                object_rotated = 0;
             direction = "right";
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
+            if(direction == "right")
+                object_rotated = 0;
             direction = "left";
         }
         if (Input.GetKey("left") && is_attacking == false)
