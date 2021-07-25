@@ -13,6 +13,7 @@ public class Weapons : MonoBehaviour
     public static bool is_attacking = false;
     private int attack_timer = 300;
     private string melee_atack_direction;
+    public static float melee_damage = 20;
     private string direction = "right";
     private int object_rotated = 1;
     void weapon_switch()
@@ -84,7 +85,7 @@ public class Weapons : MonoBehaviour
                 if (melee_atack_direction == "right")
                     Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
                 if (melee_atack_direction == "up")
-                    Sword.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 3);
+                    Sword.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 4);
             }
         }
         else if (range_weapon_equiped == true && is_attacking == false)

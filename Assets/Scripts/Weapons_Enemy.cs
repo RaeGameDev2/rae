@@ -7,20 +7,15 @@ using System;
 
 public class Weapons_Enemy : MonoBehaviour
 {
-    private int HP = 100;
+    private float HP;
     public static bool Hit_Detected = false;
     public GameObject Player;
     public TMP_Text HP_Text;
     // Start is called before the first frame update
     void Start()
     {
+        HP = 100;
         HP_Text.text = "100";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,7 +23,7 @@ public class Weapons_Enemy : MonoBehaviour
         if(collision.tag == "Sword" && Weapons.is_attacking == true && Hit_Detected == false)
         {
             Hit_Detected = true;
-            HP -= 20;
+            HP -= Weapons.melee_damage;
             HP_Text.text = HP + "";
             if (HP <= 0)
             {
