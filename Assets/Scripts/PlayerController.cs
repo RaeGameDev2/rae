@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity;
 
     [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashDistance;
 
     private float currGravity;
     private float prevVelocityY;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool canJump;
     [HideInInspector] public bool canDoubleJump;
+    [HideInInspector] public bool diagonalJump;
 
     private bool jumpPressed;
     private bool dashPressed;
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
         direction = Direction.right;
         dashDirection = Direction.right;
         canJump = false;
+        diagonalJump = false;
         isGrounded = true;
         currGravity = gravity;
         canDoubleJump = false;
@@ -91,7 +94,6 @@ public class PlayerController : MonoBehaviour
     {
         HandleInput();
         ChangeDirection();
-
     }
 
     private void FixedUpdate()
@@ -109,6 +111,8 @@ public class PlayerController : MonoBehaviour
                 currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
                 rb.AddForce(jumpSpeed * Vector2.up, ForceMode2D.Impulse);
                 canDoubleJump = true;
+                if (rb.velocity.x != 0)
+                    diagonalJump = true;
             }
             else if (canDoubleJump)
             {
@@ -125,33 +129,38 @@ public class PlayerController : MonoBehaviour
         else
         {
             float speed = hInput * airSpeed + rb.velocity.x;
-            speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
+            if (diagonalJump)
+                speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
+            else
+                speed = Mathf.Clamp(speed, -airSpeed, airSpeed);
             if (rb.velocity.y == 0 || (rb.velocity.y < 0 && prevVelocityY > 0))
             {
-                rb.velocity = new Vector2(rb.velocity.x, -fallSpeed);
+                rb.velocity = new Vector2(speed, -fallSpeed);
 
             }
             rb.velocity = new Vector2(speed, rb.velocity.y);
         }
-        if (dashPressed)
-        {
-            if (dashDirection == Direction.left)
-            {
-                // Debug.Log("Dash!");
-                rb.velocity = new Vector2(rb.velocity.x - dashSpeed, rb.velocity.y);
-                //rb.AddForce(dashSpeed * Vector2.left, ForceMode2D.Impulse);
-            }
-            else
-            {
-                rb.velocity = new Vector2(rb.velocity.x + dashSpeed, rb.velocity.y);
-                //rb.AddForce(dashSpeed * Vector2.right, ForceMode2D.Impulse);
-            }
-            dashPressed = false;
-        }
+        // if (dashPressed)
+        // {
+        //     if (dashDirection == Direction.left)
+        //     {
+        //         // Debug.Log("Dash!");
+        //         rb.velocity = new Vector2(rb.velocity.x - dashSpeed, rb.velocity.y);
+        //         //rb.AddForce(dashSpeed * Vector2.left, ForceMode2D.Impulse);
+        //     }
+        //     else
+        //     {
+        //         rb.velocity = new Vector2(rb.velocity.x + dashSpeed, rb.velocity.y);
+        //         //rb.AddForce(dashSpeed * Vector2.right, ForceMode2D.Impulse);
+        //     }
+        //     dashPressed = false;
+        // }
         //Add simulated gravity
         rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
 
         //Save previous y-velocity for adding fallSpeed
         prevVelocityY = rb.velocity.y;
+        Debug.Log(rb.velocity);
+
     }
 }
