@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private bool dashPressed;
     private Direction dashDirection;
 
+    private bool isDashing;
+
     public enum Direction
     {
         left,
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
         currGravity = gravity;
         canDoubleJump = false;
         prevVelocityY = 0;
+        isDashing = false;
     }
 
     //Polls input every frame and updates flags accordingly
@@ -71,7 +74,7 @@ public class PlayerController : MonoBehaviour
     //Flip player when changing direction
     private void ChangeDirection()
     {
-        if (hInput > 0.01f)
+        if (hInput > 0.01f && rb.velocity.x > 0)
         {
             if (direction == Direction.left)
             {
@@ -80,7 +83,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        else if (hInput < -0.01f)
+        else if (hInput < -0.01f && rb.velocity.x < 0)
         {
             if (direction == Direction.right)
             {
@@ -96,50 +99,66 @@ public class PlayerController : MonoBehaviour
         ChangeDirection();
     }
 
-    private void FixedUpdate()
+    private void Jump()
     {
-        if (isGrounded || rb.velocity.y < 0)
-            currGravity = gravity;
+        rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
+        if (rb.velocity.x != 0)
+            diagonalJump = true;
+    }
 
+    private void CheckJump()
+    {
         if (jumpPressed)
         {
             jumpPressed = false;
 
             if (isGrounded)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
-                rb.AddForce(jumpSpeed * Vector2.up, ForceMode2D.Impulse);
+                Jump();
                 canDoubleJump = true;
-                if (rb.velocity.x != 0)
-                    diagonalJump = true;
+
             }
             else if (canDoubleJump)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
-                rb.AddForce(jumpSpeed * Vector2.up, ForceMode2D.Impulse);
+                Jump();
                 canDoubleJump = false;
             }
         }
+    }
 
+    private void FixedUpdate()
+    {
+        //Reset gravity to default values
+        if (isGrounded || rb.velocity.y < 0)
+            currGravity = gravity;
 
-        if (isGrounded)
-            rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
-        else
+        //If not in dash, handles jump
+        if (!isDashing)
         {
-            float speed = hInput * airSpeed + rb.velocity.x;
-            if (diagonalJump)
-                speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
-            else
-                speed = Mathf.Clamp(speed, -airSpeed, airSpeed);
-            if (rb.velocity.y == 0 || (rb.velocity.y < 0 && prevVelocityY > 0))
-            {
-                rb.velocity = new Vector2(speed, -fallSpeed);
+            CheckJump();
 
+            if (isGrounded)
+                rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
+            else
+            {
+                float speed = hInput * airSpeed + rb.velocity.x;
+                if (diagonalJump)
+                    speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
+                else
+                    speed = Mathf.Clamp(speed, -airSpeed, airSpeed);
+                if (rb.velocity.y == 0 || (rb.velocity.y < 0 && prevVelocityY > 0))
+                {
+                    rb.velocity = new Vector2(speed, -fallSpeed);
+
+                }
+                rb.velocity = new Vector2(speed, rb.velocity.y);
             }
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            //Add simulated gravity
+            rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
+
         }
+
         // if (dashPressed)
         // {
         //     if (dashDirection == Direction.left)
@@ -155,12 +174,9 @@ public class PlayerController : MonoBehaviour
         //     }
         //     dashPressed = false;
         // }
-        //Add simulated gravity
-        rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
 
         //Save previous y-velocity for adding fallSpeed
         prevVelocityY = rb.velocity.y;
         Debug.Log(rb.velocity);
-
     }
 }

@@ -228,9 +228,11 @@ MonoBehaviour:
   fallSpeed: 20
   gravity: 10
   dashSpeed: 100
+  dashDistance: 0
   isGrounded: 0
   canJump: 0
   canDoubleJump: 0
+  diagonalJump: 0
 --- !u!50 &295641782
 Rigidbody2D:
   serializedVersion: 4
@@ -553,7 +555,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010680512, y: -0.43256015}
+  m_Offset: {x: -0.012032956, y: -0.43256015}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -564,7 +566,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5941411, y: 0.13487971}
+  m_Size: {x: 0.4052608, y: 0.13487971}
   m_EdgeRadius: 0
 --- !u!1 &2136876884
 GameObject:
