@@ -333,7 +333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178770048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1, y: 5.59, z: 0}
+  m_LocalPosition: {x: -43.56, y: 5.59, z: 0}
   m_LocalScale: {x: 0.7328439, y: 3.177771, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -416,7 +416,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200152140}
   m_LocalRotation: {x: -0, y: -0, z: -0.24511276, w: 0.9694946}
-  m_LocalPosition: {x: 3.1900024, y: 5.5099945, z: 0}
+  m_LocalPosition: {x: -43.469997, y: 5.5099945, z: 0}
   m_LocalScale: {x: 0.732844, y: 3.1777716, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1141,6 +1141,34 @@ PrefabInstance:
     - target: {fileID: 9209915973563751928, guid: 7dac05893f459c54d8e5b4e9867f1361, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209915973563751930, guid: 7dac05893f459c54d8e5b4e9867f1361, type: 3}
+      propertyPath: gravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209915973563751930, guid: 7dac05893f459c54d8e5b4e9867f1361, type: 3}
+      propertyPath: airSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209915973563751930, guid: 7dac05893f459c54d8e5b4e9867f1361, type: 3}
+      propertyPath: dashSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209915973563751930, guid: 7dac05893f459c54d8e5b4e9867f1361, type: 3}
+      propertyPath: fallSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209915973563751930, guid: 7dac05893f459c54d8e5b4e9867f1361, type: 3}
+      propertyPath: jumpSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209915973563751930, guid: 7dac05893f459c54d8e5b4e9867f1361, type: 3}
+      propertyPath: jumpHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209915973563751930, guid: 7dac05893f459c54d8e5b4e9867f1361, type: 3}
+      propertyPath: groundSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9209915973563751931, guid: 7dac05893f459c54d8e5b4e9867f1361, type: 3}
       propertyPath: m_RootOrder
