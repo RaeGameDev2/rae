@@ -12,9 +12,8 @@ public class Weapons : MonoBehaviour
     public static bool range_weapon_equiped = false;
     public static bool is_attacking = false;
     private int attack_timer = 300;
-    public string melee_atack_direction;
-    public int test = 0;
-    public string direction = "right";
+    private string melee_atack_direction;
+    private string direction = "right";
     void weapon_switch()
     {
         if (melee_weapon_equiped == true)
