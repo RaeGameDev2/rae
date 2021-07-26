@@ -25,6 +25,7 @@ public class Weapons : MonoBehaviour
     public GameObject arrow_prefab;
     private GameObject new_instance;
     public int arrow_speed = 10;
+    public int flow = 10;
 
     void weapon_switch()
     {
