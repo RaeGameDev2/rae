@@ -63,20 +63,20 @@ public class Weapons : MonoBehaviour
                 if (direction == "right")
                 {
                     Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
-                    if(object_rotated == 0)
-                    {
-                        Sword.transform.Rotate(new Vector3(0, 0, -60));
-                        object_rotated = 1;
-                    }
+                    // if(object_rotated == 0)
+                    // {
+                    //     //Sword.transform.Rotate(new Vector3(0, 0, -60));
+                    //     object_rotated = 1;
+                    // }
                 }
                 if (direction == "left")
                 {
                     Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
-                    if (object_rotated == 0)
-                    {
-                        Sword.transform.Rotate(new Vector3(0, 0, 60));
-                        object_rotated = 1;
-                    }
+                    // if (object_rotated == 0)
+                    // {
+                    //     //Sword.transform.Rotate(new Vector3(0, 0, 60));
+                    //     object_rotated = 1;
+                    // }
                 }
             }
             else
