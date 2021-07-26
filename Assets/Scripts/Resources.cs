@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Resources : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currentHealth;
+    public int currentHealth = 0;
 
     public HealthBar healthBar;
 
@@ -22,13 +22,17 @@ public class Resources : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            TakeDamage(20);
+            if (currentHealth > 0)
+            {
+                TakeDamage(20);
+            }
+            else currentHealth = 0;
         }
     }
 
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        healthBar.SetMaxHealth(currentHealth);
+        healthBar.SetHealth(currentHealth);
     }
 }
