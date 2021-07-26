@@ -8,10 +8,15 @@ public class Weapons : MonoBehaviour
     public GameObject Player;
     public GameObject Sword;
     public GameObject Bow;
+
     public static bool melee_weapon_equiped = true;
     public static bool range_weapon_equiped = false;
     public static bool is_attacking = false;
-    private float attack_timer = 0.5f;
+
+    //Attack constraints
+    private static float attackTime = 0.5f;
+    private float remainingAttackTime;
+
     private string melee_atack_direction;
     public static float melee_damage = 20;
     public static float spell_damage = 20;
@@ -20,6 +25,7 @@ public class Weapons : MonoBehaviour
     public GameObject arrow_prefab;
     private GameObject new_instance;
     public int arrow_speed = 10;
+
     void weapon_switch()
     {
         if (melee_weapon_equiped == true)
@@ -44,6 +50,7 @@ public class Weapons : MonoBehaviour
         Sword.gameObject.SetActive(true);
         Bow.gameObject.SetActive(false);
 
+        remainingAttackTime = attackTime;
     }
 
     // Update is called once per frame
@@ -75,7 +82,7 @@ public class Weapons : MonoBehaviour
         {
             is_attacking = true;
             melee_atack_direction = "right";
-        }else if (Input.GetKey("up") && is_attacking == false)
+        } else if (Input.GetKey("up") && is_attacking == false)
         {
             is_attacking = true;
             melee_atack_direction = "up";
@@ -83,12 +90,12 @@ public class Weapons : MonoBehaviour
 
         if (is_attacking == true)
         {
-            attack_timer -= Time.deltaTime;
+            remainingAttackTime -= Time.deltaTime;
             
-            if(attack_timer <= 0)
+            if(remainingAttackTime <= 0)
             {
                 is_attacking = false;
-                attack_timer = 0.5f;
+                remainingAttackTime = attackTime;
                 Weapons_Enemy.Hit_Detected = false;
             }
         }
@@ -117,12 +124,7 @@ public class Weapons : MonoBehaviour
             }
             else
             {
-                if (melee_atack_direction == "left")
-                    Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
-                else if (melee_atack_direction == "right")
-                    Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
-                else if (melee_atack_direction == "up")
-                    Sword.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 4);
+                Attack();
             }
         }
         else if (range_weapon_equiped == true && is_attacking == false)
@@ -130,5 +132,15 @@ public class Weapons : MonoBehaviour
             if (is_attacking == false)
                 Bow.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
         }
+    }
+
+    void Attack()
+    {
+        if (melee_atack_direction == "left")
+            Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
+        else if (melee_atack_direction == "right")
+            Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
+        else if (melee_atack_direction == "up")
+            Sword.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 4);
     }
 }
