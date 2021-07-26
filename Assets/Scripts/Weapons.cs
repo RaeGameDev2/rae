@@ -99,13 +99,13 @@ public class Weapons : MonoBehaviour
         {
             weapon_switch();
         }
-        if (Input.GetKeyDown(KeyCode.D) && is_attacking == false)
+        if (Input.GetKeyDown(KeyCode.D))
         {
             if (direction == "left")
                 object_rotated = 0;
             direction = "right";
         }
-        if (Input.GetKeyDown(KeyCode.A) && is_attacking == false)
+        if (Input.GetKeyDown(KeyCode.A))
         {
             if(direction == "right")
                 object_rotated = 0;
