@@ -52,7 +52,7 @@ public class Weapons : MonoBehaviour
         {
             weapon_switch();
         }
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && range_weapon_equiped == true)
         {
             new_instance = Instantiate(arrow_prefab,new Vector3(Player.transform.position.x + 1,Player.transform.position.y,Player.transform.position.z),Quaternion.identity);
         }
