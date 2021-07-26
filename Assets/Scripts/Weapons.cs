@@ -14,6 +14,7 @@ public class Weapons : MonoBehaviour
     private float attack_timer = 0.5f;
     private string melee_atack_direction;
     public static float melee_damage = 20;
+    public static float spell_damage = 20;
     public static string direction = "right";
     private int object_rotated = 1;
     public GameObject arrow_prefab;
