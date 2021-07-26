@@ -95,29 +95,29 @@ public class Weapons : MonoBehaviour
                 Bow.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T) && is_attacking == false)
         {
             weapon_switch();
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && is_attacking == false)
         {
             if (direction == "left")
                 object_rotated = 0;
             direction = "right";
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && is_attacking == false)
         {
             if(direction == "right")
                 object_rotated = 0;
             direction = "left";
         }
-        if (Input.GetKey("left") && is_attacking == false)
+        if (Input.GetKey("left") && is_attacking == false && direction == "left")
         {
             Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
             is_attacking = true;
             melee_atack_direction = "left";
         }
-        if (Input.GetKey("right") && is_attacking == false)
+        if (Input.GetKey("right") && is_attacking == false && direction == "right")
         {
             Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
             is_attacking = true;
