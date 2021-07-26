@@ -37,5 +37,18 @@ public class Weapons_Enemy : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+        else if(collision.tag == "Arrow")
+        {
+           
+            Debug.Log("arrow aici");
+            HP -= Weapons.melee_damage;
+            HP_Text.text = HP + "";
+            Destroy(collision.gameObject);
+            if (HP <= 0)
+            {
+                Destroy(HP_Text.gameObject);
+                Destroy(this.gameObject);
+            }
+        }
     }
 }
