@@ -11,7 +11,7 @@ public class Weapons : MonoBehaviour
     public static bool melee_weapon_equiped = true;
     public static bool range_weapon_equiped = false;
     public static bool is_attacking = false;
-    private int attack_timer = 300;
+    private float attack_timer = 0.5f;
     private string melee_atack_direction;
     public static float melee_damage = 20;
     private string direction = "right";
@@ -39,19 +39,51 @@ public class Weapons : MonoBehaviour
     {
         Sword.gameObject.SetActive(true);
         Bow.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(is_attacking == true)
+        if (Input.GetKeyDown(KeyCode.T) && is_attacking == false)
         {
-            attack_timer--;
-            Debug.Log(attack_timer);
+            weapon_switch();
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (direction == "left")
+                object_rotated = 0;
+            direction = "right";
+        } else if (Input.GetKeyDown(KeyCode.A)) {
+            if (direction == "right")
+                object_rotated = 0;
+            direction = "left";
+        }
+        if (Input.GetKey("left") && is_attacking == false && direction == "left")
+        {
+            //Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
+            is_attacking = true;
+            melee_atack_direction = "left";
+        } else if (Input.GetKey("right") && is_attacking == false && direction == "right")
+        {
+            //Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
+            is_attacking = true;
+            melee_atack_direction = "right";
+        }else if (Input.GetKey("up") && is_attacking == false)
+        {
+            //Sword.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 3);
+            is_attacking = true;
+            melee_atack_direction = "up";
+        }
+
+        if (is_attacking == true)
+        {
+            attack_timer -= Time.deltaTime;
+            
             if(attack_timer <= 0)
             {
                 is_attacking = false;
-                attack_timer = 300;
+                attack_timer = 0.5f;
                 Weapons_Enemy.Hit_Detected = false;
             }
         }
@@ -64,17 +96,26 @@ public class Weapons : MonoBehaviour
                     Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
                     if(object_rotated == 0)
                     {
-                        Sword.transform.Rotate(new Vector3(0, 0, -60));
+
+                        //if (Sword.transform.rotation.z != -28.377)
+                        //{
+                            //float z_rotation = Sword.transform.rotation.z;
+                        Sword.transform.eulerAngles = new Vector3(Sword.transform.eulerAngles.x, Sword.transform.eulerAngles.y, -28.377f);
+                        Debug.Log("Aici1");
+                        //}
                         object_rotated = 1;
                     }
-                }
-                if (direction == "left")
-                {
+                } else if (direction == "left") {
                     Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
                     if (object_rotated == 0)
                     {
-                        Sword.transform.Rotate(new Vector3(0, 0, 60));
+                        //if (Sword.transform.rotation.z != 31.623) {
+                        //    Sword.transform.Rotate(new Vector3(0, 0, 60));
+                        //    Debug.Log("Aici2");
+                        //}
+                        Sword.transform.eulerAngles = new Vector3(Sword.transform.eulerAngles.x, Sword.transform.eulerAngles.y, 31.623f);
                         object_rotated = 1;
+                        Debug.Log("Aici2");
                     }
                 }
             }
@@ -82,9 +123,9 @@ public class Weapons : MonoBehaviour
             {
                 if (melee_atack_direction == "left")
                     Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
-                if (melee_atack_direction == "right")
+                else if (melee_atack_direction == "right")
                     Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
-                if (melee_atack_direction == "up")
+                else if (melee_atack_direction == "up")
                     Sword.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 4);
             }
         }
@@ -92,41 +133,6 @@ public class Weapons : MonoBehaviour
         {
             if (is_attacking == false)
                 Bow.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            weapon_switch();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            if (direction == "left")
-                object_rotated = 0;
-            direction = "right";
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if(direction == "right")
-                object_rotated = 0;
-            direction = "left";
-        }
-        if (Input.GetKey("left") && is_attacking == false)
-        {
-            Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
-            is_attacking = true;
-            melee_atack_direction = "left";
-        }
-        if (Input.GetKey("right") && is_attacking == false)
-        {
-            Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
-            is_attacking = true;
-            melee_atack_direction = "right";
-        }
-        if (Input.GetKey("up") && is_attacking == false)
-        {
-            Sword.transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 3);
-            is_attacking = true;
-            melee_atack_direction = "up";
         }
     }
 }
