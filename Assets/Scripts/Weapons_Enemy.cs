@@ -39,8 +39,6 @@ public class Weapons_Enemy : MonoBehaviour
         }
         else if(collision.tag == "Arrow")
         {
-           
-            Debug.Log("arrow aici");
             HP -= Weapons.melee_damage;
             HP_Text.text = HP + "";
             Destroy(collision.gameObject);
