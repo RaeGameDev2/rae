@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashDistance;
+    [SerializeField] private float dashCooldown;
 
     private float currGravity;
     private float prevVelocityY;
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private bool jumpPressed;
     private bool dashPressed;
+    private float distanceTraveled;
+    private float timeSinceDash;
 
     private bool isDashing;
 
@@ -50,6 +53,8 @@ public class PlayerController : MonoBehaviour
         canDoubleJump = false;
         prevVelocityY = 0;
         isDashing = false;
+        distanceTraveled = 0;
+        timeSinceDash = dashCooldown;
     }
 
     //Polls input every frame and updates flags accordingly
@@ -88,6 +93,10 @@ public class PlayerController : MonoBehaviour
     {
         HandleInput();
         ChangeDirection();
+        if (isDashing == false)
+        {
+            timeSinceDash += Time.deltaTime;
+        }
     }
 
     private void Jump()
@@ -100,12 +109,21 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        if (distanceTraveled < dashDistance)
-        {
+        Vector2 initPos = rb.position;
+        distanceTraveled = 0;
 
+        while (distanceTraveled < dashDistance)
+        {
+            distanceTraveled += dashSpeed * Time.fixedDeltaTime;
+            Debug.Log(distanceTraveled);
             yield return new WaitForFixedUpdate();
         }
+        if (direction == Direction.right)
+            rb.position = new Vector2(initPos.x + dashDistance, initPos.y);
+        else
+            rb.position = new Vector2(initPos.x - dashDistance, initPos.y);
         isDashing = false;
+        timeSinceDash = 0;
     }
 
     private void CheckJump()
@@ -159,24 +177,23 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
         }
 
-        // if (dashPressed)
-        // {
-        //     if (dashDirection == Direction.left)
-        //     {
-        //         // Debug.Log("Dash!");
-        //         rb.velocity = new Vector2(rb.velocity.x - dashSpeed, rb.velocity.y);
-        //         //rb.AddForce(dashSpeed * Vector2.left, ForceMode2D.Impulse);
-        //     }
-        //     else
-        //     {
-        //         rb.velocity = new Vector2(rb.velocity.x + dashSpeed, rb.velocity.y);
-        //         //rb.AddForce(dashSpeed * Vector2.right, ForceMode2D.Impulse);
-        //     }
-        //     dashPressed = false;
-        // }
+        if (dashPressed && !isDashing && timeSinceDash >= dashCooldown)
+        {
+            dashPressed = false;
+            isDashing = true;
+            StartCoroutine("Dash");
+            if (direction == Direction.right)
+            {
+                rb.velocity = new Vector2(dashSpeed, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(-dashSpeed, 0);
+            }
+        }
 
         //Save previous y-velocity for adding fallSpeed
         prevVelocityY = rb.velocity.y;
-        Debug.Log(rb.velocity);
+        //  Debug.Log(rb.velocity);
     }
 }
