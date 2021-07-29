@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -28,7 +29,6 @@ public class PlayerController : MonoBehaviour
 
     private bool jumpPressed;
     private bool dashPressed;
-    private Direction dashDirection;
 
     private bool isDashing;
 
@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         direction = Direction.right;
-        dashDirection = Direction.right;
         canJump = false;
         diagonalJump = false;
         isGrounded = true;
@@ -59,16 +58,8 @@ public class PlayerController : MonoBehaviour
         hInput = Input.GetAxisRaw("Horizontal");
         if (Input.GetKeyDown(KeyCode.Space))
             jumpPressed = true;
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            dashDirection = Direction.left;
+        if (Input.GetKeyDown(KeyCode.LeftShift))
             dashPressed = true;
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            dashDirection = Direction.right;
-            dashPressed = true;
-        }
     }
 
     //Flip player when changing direction
@@ -105,6 +96,16 @@ public class PlayerController : MonoBehaviour
         currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
         if (rb.velocity.x != 0)
             diagonalJump = true;
+    }
+
+    private IEnumerator Dash()
+    {
+        if (distanceTraveled < dashDistance)
+        {
+
+            yield return new WaitForFixedUpdate();
+        }
+        isDashing = false;
     }
 
     private void CheckJump()
@@ -156,7 +157,6 @@ public class PlayerController : MonoBehaviour
             }
             //Add simulated gravity
             rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
-
         }
 
         // if (dashPressed)

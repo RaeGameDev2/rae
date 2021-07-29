@@ -227,8 +227,8 @@ MonoBehaviour:
   jumpSpeed: 30
   fallSpeed: 20
   gravity: 10
-  dashSpeed: 100
-  dashDistance: 0
+  dashSpeed: 15
+  dashDistance: 30
   isGrounded: 0
   canJump: 0
   canDoubleJump: 0
@@ -267,7 +267,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.042333983}
+  m_Offset: {x: -0.027894318, y: 0.05278766}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -278,7 +278,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.555332}
+  m_Size: {x: 0.5499456, y: 0.53442466}
   m_EdgeRadius: 0
 --- !u!1 &1133418105
 GameObject:
@@ -555,7 +555,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012032956, y: -0.43256015}
+  m_Offset: {x: -0.024774134, y: -0.43256015}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -566,7 +566,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4052608, y: 0.13487971}
+  m_Size: {x: 0.55190384, y: 0.13487971}
   m_EdgeRadius: 0
 --- !u!1 &2136876884
 GameObject:
