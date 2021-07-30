@@ -25,11 +25,11 @@ public class Weapons_Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Sword" && Weapons.is_attacking == true && Hit_Detected == false)
+        if(collision.tag == "Sword" && Weapons_Handler.is_attacking == true && Hit_Detected == false)
         {
             
             Hit_Detected = true;
-            HP -= Weapons.melee_damage;
+            HP -= Weapons_Melee.damage;
             HP_Text.text = HP + "";
             if (HP <= 0)
             {
@@ -39,7 +39,7 @@ public class Weapons_Enemy : MonoBehaviour
         }
         else if(collision.tag == "Arrow")
         {
-            HP -= Weapons.melee_damage;
+            HP -= Weapons_Melee.damage;
             HP_Text.text = HP + "";
             Destroy(collision.gameObject);
             if (HP <= 0)
