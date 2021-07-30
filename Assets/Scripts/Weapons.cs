@@ -100,6 +100,8 @@ public class Weapons : MonoBehaviour
                 Weapons_Enemy.Hit_Detected = false;
             }
         }
+
+        
         if(melee_weapon_equiped == true)
         {
             if (is_attacking == false)
@@ -109,17 +111,21 @@ public class Weapons : MonoBehaviour
                     Sword.transform.position = new Vector2(Player.transform.position.x - 3, Player.transform.position.y + 1);
                     if(object_rotated == 0)
                     {
-                        Sword.transform.eulerAngles = new Vector3(Sword.transform.eulerAngles.x, Sword.transform.eulerAngles.y, -28.377f);
-                        Debug.Log("Aici1");
+                        Sword.transform.localScale = new Vector3(Sword.transform.localScale.x * -1,Sword.transform.localScale.y,Sword.transform.localScale.z);
                         object_rotated = 1;
+                        // Sword.transform.eulerAngles = new Vector3(Sword.transform.eulerAngles.x, Sword.transform.eulerAngles.y, -28.377f);
+                        // Debug.Log("Aici1");
+                        // object_rotated = 1;
                     }
                 } else if (direction == "left") {
                     Sword.transform.position = new Vector2(Player.transform.position.x + 3, Player.transform.position.y + 1);
                     if (object_rotated == 0)
                     {
-                        Sword.transform.eulerAngles = new Vector3(Sword.transform.eulerAngles.x, Sword.transform.eulerAngles.y, 31.623f);
+                        Sword.transform.localScale = new Vector3(Sword.transform.localScale.x * -1,Sword.transform.localScale.y,Sword.transform.localScale.z);
                         object_rotated = 1;
-                        Debug.Log("Aici2");
+                        // Sword.transform.eulerAngles = new Vector3(Sword.transform.eulerAngles.x, Sword.transform.eulerAngles.y, 31.623f);
+                        // object_rotated = 1;
+                        // Debug.Log("Aici2");
                     }
                 }
             }
