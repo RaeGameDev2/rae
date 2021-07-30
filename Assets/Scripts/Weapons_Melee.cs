@@ -27,7 +27,7 @@ public class Weapons_Melee : MonoBehaviour
         {
             damage = 50;
         }
-        
+
         if (Weapons_Handler.is_attacking == true)
         {
             remainingAttackTime -= Time.deltaTime;
@@ -61,7 +61,7 @@ public class Weapons_Melee : MonoBehaviour
             }
         }        
     }
-
+    
     void Attack()
     {
         if (Weapons_Handler.melee_atack_direction == "left")
