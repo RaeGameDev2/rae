@@ -33,7 +33,6 @@ public class Weapons_Handler : MonoBehaviour
     void Start()
     {
         Sword.gameObject.SetActive(true);
-        Bow.gameObject.SetActive(false);
         Scythe.gameObject.SetActive(false);
         Spear.gameObject.SetActive(false);
         Ancient_Staff.gameObject.SetActive(false);
