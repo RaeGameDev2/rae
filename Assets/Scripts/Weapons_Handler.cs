@@ -7,9 +7,7 @@ public class Weapons_Handler : MonoBehaviour
 {
     public GameObject Player;
     public GameObject Sword;
-
     public GameObject Bow;
-
     public GameObject Scythe;
     public static bool melee_weapon_equiped = true;
     public static string current_melee_weapon = "Sword";
@@ -46,7 +44,6 @@ public class Weapons_Handler : MonoBehaviour
                 weapon_rotate = 0;
             direction = "left";
         }
-        
         if (Input.GetKey("left") && is_attacking == false && direction == "left")
         {
             is_attacking = true;
