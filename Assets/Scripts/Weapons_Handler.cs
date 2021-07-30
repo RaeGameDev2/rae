@@ -5,17 +5,29 @@ using UnityEngine.UI;
 
 public class Weapons_Handler : MonoBehaviour
 {
+    public enum Weapons
+    {
+        SWORD = 1,
+        SCYTHE = 2,
+        SPEAR = 3,
+        ANCIENT_STAFF = 4,
+        BASIC_STAFF = 5
+    }
     public GameObject Player;
     public GameObject Sword;
-    public GameObject Bow;
     public GameObject Scythe;
+    public GameObject Spear;
+    public GameObject Ancient_Staff;
+    public GameObject Basic_Staff;
     public static bool melee_weapon_equiped = true;
-    public static string current_melee_weapon = "Sword";
+    public static int current_melee_weapon = 1;
     public static bool range_weapon_equiped = false;
     public static string direction = "right";
     public static int weapon_rotate = 1;
     public static bool is_attacking = false;
     public static string melee_atack_direction;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +35,9 @@ public class Weapons_Handler : MonoBehaviour
         Sword.gameObject.SetActive(true);
         Bow.gameObject.SetActive(false);
         Scythe.gameObject.SetActive(false);
+        Spear.gameObject.SetActive(false);
+        Ancient_Staff.gameObject.SetActive(false);
+        Basic_Staff.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,11 +63,13 @@ public class Weapons_Handler : MonoBehaviour
         {
             is_attacking = true;
             melee_atack_direction = "left";
-        } else if (Input.GetKey("right") && is_attacking == false && direction == "right")
+        } 
+        else if (Input.GetKey("right") && is_attacking == false && direction == "right")
         {
             is_attacking = true;
             melee_atack_direction = "right";
-        } else if (Input.GetKey("up") && is_attacking == false)
+        } 
+        else if (Input.GetKey("up") && is_attacking == false)
         {
             is_attacking = true;
             melee_atack_direction = "up";
@@ -60,17 +77,53 @@ public class Weapons_Handler : MonoBehaviour
     }
     void weapon_switch()
     {
-        if(current_melee_weapon == "Sword")
+        if(current_melee_weapon == 5)
         {
-            current_melee_weapon = "Scythe";
-            Sword.gameObject.SetActive(false);
-            Scythe.gameObject.SetActive(true);
+            current_melee_weapon = 1;
         }
-        else if(current_melee_weapon == "Scythe")
+        else
         {
-            current_melee_weapon = "Sword";
+            current_melee_weapon++;
+        }
+        if(current_melee_weapon == (int) Weapons.SWORD)
+        {
             Sword.gameObject.SetActive(true);
             Scythe.gameObject.SetActive(false);
+            Spear.gameObject.SetActive(false);
+            Ancient_Staff.gameObject.SetActive(false);
+            Basic_Staff.gameObject.SetActive(false);
+        }
+        else if(current_melee_weapon == (int) Weapons.SCYTHE)
+        {
+            Sword.gameObject.SetActive(false);
+            Scythe.gameObject.SetActive(true);
+            Spear.gameObject.SetActive(false);
+            Ancient_Staff.gameObject.SetActive(false);
+            Basic_Staff.gameObject.SetActive(false);
+        }
+        else if(current_melee_weapon == (int) Weapons.SPEAR)
+        {
+            Sword.gameObject.SetActive(false);
+            Scythe.gameObject.SetActive(false);
+            Spear.gameObject.SetActive(true);
+            Ancient_Staff.gameObject.SetActive(false);
+            Basic_Staff.gameObject.SetActive(false);
+        }
+        else if(current_melee_weapon == (int) Weapons.ANCIENT_STAFF)
+        {
+            Sword.gameObject.SetActive(false);
+            Scythe.gameObject.SetActive(false);
+            Spear.gameObject.SetActive(false);
+            Ancient_Staff.gameObject.SetActive(true);
+            Basic_Staff.gameObject.SetActive(false);
+        }
+        else if(current_melee_weapon == (int) Weapons.BASIC_STAFF)
+        {
+            Sword.gameObject.SetActive(false);
+            Scythe.gameObject.SetActive(false);
+            Spear.gameObject.SetActive(false);
+            Ancient_Staff.gameObject.SetActive(false);
+            Basic_Staff.gameObject.SetActive(true);
         }
     }
 }
