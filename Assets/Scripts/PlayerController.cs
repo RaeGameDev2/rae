@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool canJump;
     [HideInInspector] public bool canDoubleJump;
     [HideInInspector] public bool diagonalJump;
+    [HideInInspector] public bool onIce;
 
     private bool jumpPressed;
     private bool dashPressed;
