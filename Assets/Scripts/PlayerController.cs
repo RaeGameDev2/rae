@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity;
 
     [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashDistance;
+    [SerializeField] private float dashCooldown;
 
     private float currGravity;
     private float prevVelocityY;
@@ -23,10 +26,14 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool canJump;
     [HideInInspector] public bool canDoubleJump;
+    [HideInInspector] public bool diagonalJump;
 
     private bool jumpPressed;
     private bool dashPressed;
-    private Direction dashDirection;
+    private float distanceTraveled;
+    private float timeSinceDash;
+
+    private bool isDashing;
 
     public enum Direction
     {
@@ -39,12 +46,15 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         direction = Direction.right;
-        dashDirection = Direction.right;
         canJump = false;
+        diagonalJump = false;
         isGrounded = true;
         currGravity = gravity;
         canDoubleJump = false;
         prevVelocityY = 0;
+        isDashing = false;
+        distanceTraveled = 0;
+        timeSinceDash = dashCooldown;
     }
 
     //Polls input every frame and updates flags accordingly
@@ -53,22 +63,14 @@ public class PlayerController : MonoBehaviour
         hInput = Input.GetAxisRaw("Horizontal");
         if (Input.GetKeyDown(KeyCode.Space))
             jumpPressed = true;
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            dashDirection = Direction.left;
+        if (Input.GetKeyDown(KeyCode.LeftShift))
             dashPressed = true;
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            dashDirection = Direction.right;
-            dashPressed = true;
-        }
     }
 
     //Flip player when changing direction
     private void ChangeDirection()
     {
-        if (hInput > 0.01f)
+        if (hInput > 0.01f && rb.velocity.x > 0)
         {
             if (direction == Direction.left)
             {
@@ -77,7 +79,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        else if (hInput < -0.01f)
+        else if (hInput < -0.01f && rb.velocity.x < 0)
         {
             if (direction == Direction.right)
             {
@@ -91,67 +93,107 @@ public class PlayerController : MonoBehaviour
     {
         HandleInput();
         ChangeDirection();
-
+        if (isDashing == false)
+        {
+            timeSinceDash += Time.deltaTime;
+        }
     }
 
-    private void FixedUpdate()
+    private void Jump()
     {
-        if (isGrounded || rb.velocity.y < 0)
-            currGravity = gravity;
+        rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
+        if (rb.velocity.x != 0)
+            diagonalJump = true;
+    }
 
+    private IEnumerator Dash()
+    {
+        Vector2 initPos = rb.position;
+        distanceTraveled = 0;
+
+        while (distanceTraveled < dashDistance)
+        {
+            distanceTraveled += dashSpeed * Time.fixedDeltaTime;
+            Debug.Log(distanceTraveled);
+            yield return new WaitForFixedUpdate();
+        }
+        if (direction == Direction.right)
+            rb.position = new Vector2(initPos.x + dashDistance, initPos.y);
+        else
+            rb.position = new Vector2(initPos.x - dashDistance, initPos.y);
+        isDashing = false;
+        timeSinceDash = 0;
+    }
+
+    private void CheckJump()
+    {
         if (jumpPressed)
         {
             jumpPressed = false;
 
             if (isGrounded)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
-                rb.AddForce(jumpSpeed * Vector2.up, ForceMode2D.Impulse);
+                Jump();
                 canDoubleJump = true;
+
             }
             else if (canDoubleJump)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
-                rb.AddForce(jumpSpeed * Vector2.up, ForceMode2D.Impulse);
+                Jump();
                 canDoubleJump = false;
             }
         }
+    }
 
+    private void FixedUpdate()
+    {
+        //Reset gravity to default values
+        if (isGrounded || rb.velocity.y < 0)
+            currGravity = gravity;
 
-        if (isGrounded)
-            rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
-        else
+        //If not in dash, handles jump
+        if (!isDashing)
         {
-            float speed = hInput * airSpeed + rb.velocity.x;
-            speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
-            if (rb.velocity.y == 0 || (rb.velocity.y < 0 && prevVelocityY > 0))
-            {
-                rb.velocity = new Vector2(rb.velocity.x, -fallSpeed);
+            CheckJump();
 
+            if (isGrounded)
+                rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
+            else
+            {
+                float speed = hInput * airSpeed + rb.velocity.x;
+                if (diagonalJump)
+                    speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
+                else
+                    speed = Mathf.Clamp(speed, -airSpeed, airSpeed);
+                if (rb.velocity.y == 0 || (rb.velocity.y < 0 && prevVelocityY > 0))
+                {
+                    rb.velocity = new Vector2(speed, -fallSpeed);
+
+                }
+                rb.velocity = new Vector2(speed, rb.velocity.y);
             }
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            //Add simulated gravity
+            rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
         }
-        if (dashPressed)
+
+        if (dashPressed && !isDashing && timeSinceDash >= dashCooldown)
         {
-            if (dashDirection == Direction.left)
+            dashPressed = false;
+            isDashing = true;
+            StartCoroutine("Dash");
+            if (direction == Direction.right)
             {
-                // Debug.Log("Dash!");
-                rb.velocity = new Vector2(rb.velocity.x - dashSpeed, rb.velocity.y);
-                //rb.AddForce(dashSpeed * Vector2.left, ForceMode2D.Impulse);
+                rb.velocity = new Vector2(dashSpeed, 0);
             }
             else
             {
-                rb.velocity = new Vector2(rb.velocity.x + dashSpeed, rb.velocity.y);
-                //rb.AddForce(dashSpeed * Vector2.right, ForceMode2D.Impulse);
+                rb.velocity = new Vector2(-dashSpeed, 0);
             }
-            dashPressed = false;
         }
-        //Add simulated gravity
-        rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
 
         //Save previous y-velocity for adding fallSpeed
         prevVelocityY = rb.velocity.y;
+        //  Debug.Log(rb.velocity);
     }
 }
