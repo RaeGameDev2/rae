@@ -13,12 +13,8 @@ public class Weapons_Handler : MonoBehaviour
         ANCIENT_STAFF,
         BASIC_STAFF
     }
+
     public enum Directions
-    {
-        LEFT,
-        RIGHT
-    }
-    public enum Attack_Directions
     {
         LEFT,
         RIGHT,
@@ -36,7 +32,7 @@ public class Weapons_Handler : MonoBehaviour
     public static Directions direction = Directions.RIGHT;
     public static int weapon_rotate = 1;
     public static bool is_attacking = false;
-    public static Attack_Directions melee_atack_direction;
+    public static Directions melee_atack_direction;
 
 
     // Start is called before the first frame update
@@ -61,74 +57,71 @@ public class Weapons_Handler : MonoBehaviour
             if (direction == Directions.LEFT)
                 weapon_rotate = 0;
             direction = Directions.RIGHT;
-        } 
-        else if (Input.GetKeyDown(KeyCode.A)) 
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
         {
             if (direction == Directions.RIGHT)
                 weapon_rotate = 0;
             direction = Directions.LEFT;
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && is_attacking == false && direction == Directions.LEFT)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || (Input.GetKey(KeyCode.RightArrow)) || Input.GetKey(KeyCode.UpArrow))
         {
-            is_attacking = true;
-            melee_atack_direction = Attack_Directions.LEFT;
-        } 
-        else if (Input.GetKey(KeyCode.RightArrow) && is_attacking == false && direction == Directions.RIGHT)
-        {
-            is_attacking = true;
-            melee_atack_direction = Attack_Directions.RIGHT;
-        } 
-        else if (Input.GetKey(KeyCode.UpArrow) && is_attacking == false)
-        {
-            is_attacking = true;
-            melee_atack_direction = Attack_Directions.UP;
-        } 
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+                melee_atack_direction = Directions.LEFT;
+            
+            else if (Input.GetKey(KeyCode.RightArrow))
+                melee_atack_direction = Directions.RIGHT;
+            else if (Input.GetKey(KeyCode.UpArrow))
+                melee_atack_direction = Directions.UP;
+          
+
+          if ((direction == melee_atack_direction || melee_atack_direction == Directions.UP) && is_attacking==false)
+                is_attacking = true;
+
+
+        }
     }
     void weapon_switch()
     {
         switch (current_melee_weapon)
         {
-            case Weapons.SWORD: current_melee_weapon = Weapons.SCYTHE; break;
-            case Weapons.SCYTHE: current_melee_weapon = Weapons.SPEAR; break;
-            case Weapons.SPEAR: current_melee_weapon = Weapons.ANCIENT_STAFF; break;
-            case Weapons.ANCIENT_STAFF: current_melee_weapon = Weapons.BASIC_STAFF; break;
-            case Weapons.BASIC_STAFF: current_melee_weapon = Weapons.SWORD; break;
-        }
-        switch (current_melee_weapon)
-        {
-            case Weapons.SWORD: Sword.gameObject.SetActive(true);
-            Scythe.gameObject.SetActive(false);
-            Spear.gameObject.SetActive(false);
-            Ancient_Staff.gameObject.SetActive(false);
-            Basic_Staff.gameObject.SetActive(false);
+            case Weapons.SWORD: current_melee_weapon = Weapons.SCYTHE;
+                 Sword.gameObject.SetActive(false);
+                 Scythe.gameObject.SetActive(true);
+                 Spear.gameObject.SetActive(false);
+                 Ancient_Staff.gameObject.SetActive(false);
+                  Basic_Staff.gameObject.SetActive(false);
+            break;
+            case Weapons.SCYTHE: current_melee_weapon = Weapons.SPEAR;
+                Sword.gameObject.SetActive(false);
+                Scythe.gameObject.SetActive(false);
+                Spear.gameObject.SetActive(true);
+                Ancient_Staff.gameObject.SetActive(false);
+                Basic_Staff.gameObject.SetActive(false);
             break;
 
-            case Weapons.SCYTHE: Sword.gameObject.SetActive(false);
-            Scythe.gameObject.SetActive(true);
-            Spear.gameObject.SetActive(false);
-            Ancient_Staff.gameObject.SetActive(false);
-            Basic_Staff.gameObject.SetActive(false);
+            case Weapons.SPEAR: current_melee_weapon = Weapons.ANCIENT_STAFF;
+                Sword.gameObject.SetActive(false);
+                Scythe.gameObject.SetActive(false);
+                Spear.gameObject.SetActive(false);
+                Ancient_Staff.gameObject.SetActive(true);
+                Basic_Staff.gameObject.SetActive(false);
             break;
 
-            case Weapons.SPEAR: Sword.gameObject.SetActive(false);
-            Scythe.gameObject.SetActive(false);
-            Spear.gameObject.SetActive(true);
-            Ancient_Staff.gameObject.SetActive(false);
-            Basic_Staff.gameObject.SetActive(false);
-            break;
 
-            case Weapons.ANCIENT_STAFF: Sword.gameObject.SetActive(false);
-            Scythe.gameObject.SetActive(false);
-            Spear.gameObject.SetActive(false);
-            Ancient_Staff.gameObject.SetActive(true);
-            Basic_Staff.gameObject.SetActive(false);
+            case Weapons.ANCIENT_STAFF: current_melee_weapon = Weapons.BASIC_STAFF;
+                Sword.gameObject.SetActive(false);
+                Scythe.gameObject.SetActive(false);
+                Spear.gameObject.SetActive(false);
+                Ancient_Staff.gameObject.SetActive(false);
+                Basic_Staff.gameObject.SetActive(true);
             break;
-
-            case Weapons.BASIC_STAFF: Sword.gameObject.SetActive(false);
-            Scythe.gameObject.SetActive(false);
-            Spear.gameObject.SetActive(false);
-            Ancient_Staff.gameObject.SetActive(false);
-            Basic_Staff.gameObject.SetActive(true);
+            case Weapons.BASIC_STAFF: current_melee_weapon = Weapons.SWORD;
+                Sword.gameObject.SetActive(true);
+                Scythe.gameObject.SetActive(false);
+                Spear.gameObject.SetActive(false);
+                Ancient_Staff.gameObject.SetActive(false);
+                Basic_Staff.gameObject.SetActive(false);
             break;
         }
     }
