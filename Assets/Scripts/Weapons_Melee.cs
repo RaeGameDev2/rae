@@ -43,12 +43,12 @@ public class Weapons_Melee : MonoBehaviour
         {
             if (Weapons_Handler.is_attacking == false)
             {
-                if (Weapons_Handler.direction == "right")
+                if (Weapons_Handler.direction == Weapons_Handler.Directions.RIGHT)
                 {
                     transform.position = new Vector2(Player.transform.position.x - 4, Player.transform.position.y + 1);
                     SpriteRender.flipX = false;
                 } 
-                else if (Weapons_Handler.direction == "left") 
+                else if (Weapons_Handler.direction == Weapons_Handler.Directions.LEFT) 
                 {
                     transform.position = new Vector2(Player.transform.position.x + 4, Player.transform.position.y + 1);
                     SpriteRender.flipX = true;
@@ -63,11 +63,11 @@ public class Weapons_Melee : MonoBehaviour
     
     void Attack()
     {
-        if (Weapons_Handler.melee_atack_direction == "left")
+        if (Weapons_Handler.melee_atack_direction == Weapons_Handler.Attack_Directions.LEFT)
             transform.position = new Vector2(Player.transform.position.x - 4, Player.transform.position.y + 1);
-        else if (Weapons_Handler.melee_atack_direction == "right")
+        else if (Weapons_Handler.melee_atack_direction == Weapons_Handler.Attack_Directions.RIGHT)
             transform.position = new Vector2(Player.transform.position.x + 4, Player.transform.position.y + 1);
-        else if (Weapons_Handler.melee_atack_direction == "up")
+        else if (Weapons_Handler.melee_atack_direction == Weapons_Handler.Attack_Directions.UP)
             transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 4);
     }
 }
