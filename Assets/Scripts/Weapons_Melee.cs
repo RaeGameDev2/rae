@@ -19,25 +19,13 @@ public class Weapons_Melee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.SWORD)
+        switch (Weapons_Handler.current_melee_weapon)
         {
-            damage = 20;
-        }
-        else if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.SCYTHE)
-        {
-            damage = 50;
-        }
-        else if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.SPEAR)
-        {
-            damage = 30;
-        }
-        else if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.ANCIENT_STAFF)
-        {
-            damage = 60;
-        }
-        else if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.BASIC_STAFF)
-        {
-            damage = 10;
+            case Weapons_Handler.Weapons.SWORD: damage = 20; break;
+            case Weapons_Handler.Weapons.SCYTHE: damage = 50; break;
+            case Weapons_Handler.Weapons.SPEAR: damage = 30; break;
+            case Weapons_Handler.Weapons.ANCIENT_STAFF: damage = 60; break;
+            case Weapons_Handler.Weapons.BASIC_STAFF: damage = 10; break;
         }
         if (Weapons_Handler.is_attacking == true)
         {

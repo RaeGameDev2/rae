@@ -7,11 +7,11 @@ public class Weapons_Handler : MonoBehaviour
 {
     public enum Weapons
     {
-        SWORD = 1,
-        SCYTHE = 2,
-        SPEAR = 3,
-        ANCIENT_STAFF = 4,
-        BASIC_STAFF = 5
+        SWORD,
+        SCYTHE,
+        SPEAR,
+        ANCIENT_STAFF,
+        BASIC_STAFF
     }
     public GameObject Player;
     public GameObject Sword;
@@ -20,14 +20,13 @@ public class Weapons_Handler : MonoBehaviour
     public GameObject Ancient_Staff;
     public GameObject Basic_Staff;
     public static bool melee_weapon_equiped = true;
-    public static int current_melee_weapon = 1;
+    public static Weapons current_melee_weapon = Weapons.SWORD;
     public static bool range_weapon_equiped = false;
     public static string direction = "right";
     public static int weapon_rotate = 1;
     public static bool is_attacking = false;
     public static string melee_atack_direction;
 
-    
 
     // Start is called before the first frame update
     void Start()
@@ -58,17 +57,17 @@ public class Weapons_Handler : MonoBehaviour
                 weapon_rotate = 0;
             direction = "left";
         }
-        if (Input.GetKey("left") && is_attacking == false && direction == "left")
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && is_attacking == false && direction == "left")
         {
             is_attacking = true;
             melee_atack_direction = "left";
         } 
-        else if (Input.GetKey("right") && is_attacking == false && direction == "right")
+        else if (Input.GetKey(KeyCode.RightArrow) && is_attacking == false && direction == "right")
         {
             is_attacking = true;
             melee_atack_direction = "right";
         } 
-        else if (Input.GetKey("up") && is_attacking == false)
+        else if (Input.GetKey(KeyCode.UpArrow) && is_attacking == false)
         {
             is_attacking = true;
             melee_atack_direction = "up";
@@ -76,54 +75,91 @@ public class Weapons_Handler : MonoBehaviour
     }
     void weapon_switch()
     {
-        if(current_melee_weapon == 5)
+        switch (current_melee_weapon)
         {
-            current_melee_weapon = 1;
+            case Weapons.SWORD: current_melee_weapon = Weapons.SCYTHE; break;
+            case Weapons.SCYTHE: current_melee_weapon = Weapons.SPEAR; break;
+            case Weapons.SPEAR: current_melee_weapon = Weapons.ANCIENT_STAFF; break;
+            case Weapons.ANCIENT_STAFF: current_melee_weapon = Weapons.BASIC_STAFF; break;
+            case Weapons.BASIC_STAFF: current_melee_weapon = Weapons.SWORD; break;
         }
-        else
+        switch (current_melee_weapon)
         {
-            current_melee_weapon++;
-        }
-        if(current_melee_weapon == (int) Weapons.SWORD)
-        {
-            Sword.gameObject.SetActive(true);
+            case Weapons.SWORD: Sword.gameObject.SetActive(true);
             Scythe.gameObject.SetActive(false);
             Spear.gameObject.SetActive(false);
             Ancient_Staff.gameObject.SetActive(false);
             Basic_Staff.gameObject.SetActive(false);
-        }
-        else if(current_melee_weapon == (int) Weapons.SCYTHE)
-        {
-            Sword.gameObject.SetActive(false);
+            break;
+
+            case Weapons.SCYTHE: Sword.gameObject.SetActive(false);
             Scythe.gameObject.SetActive(true);
             Spear.gameObject.SetActive(false);
             Ancient_Staff.gameObject.SetActive(false);
             Basic_Staff.gameObject.SetActive(false);
-        }
-        else if(current_melee_weapon == (int) Weapons.SPEAR)
-        {
-            Sword.gameObject.SetActive(false);
+            break;
+
+            case Weapons.SPEAR: Sword.gameObject.SetActive(false);
             Scythe.gameObject.SetActive(false);
             Spear.gameObject.SetActive(true);
             Ancient_Staff.gameObject.SetActive(false);
             Basic_Staff.gameObject.SetActive(false);
-        }
-        else if(current_melee_weapon == (int) Weapons.ANCIENT_STAFF)
-        {
-            Sword.gameObject.SetActive(false);
+            break;
+
+            case Weapons.ANCIENT_STAFF: Sword.gameObject.SetActive(false);
             Scythe.gameObject.SetActive(false);
             Spear.gameObject.SetActive(false);
             Ancient_Staff.gameObject.SetActive(true);
             Basic_Staff.gameObject.SetActive(false);
-        }
-        else if(current_melee_weapon == (int) Weapons.BASIC_STAFF)
-        {
-            Sword.gameObject.SetActive(false);
+            break;
+
+            case Weapons.BASIC_STAFF: Sword.gameObject.SetActive(false);
             Scythe.gameObject.SetActive(false);
             Spear.gameObject.SetActive(false);
             Ancient_Staff.gameObject.SetActive(false);
             Basic_Staff.gameObject.SetActive(true);
+            break;
         }
+        // if(current_melee_weapon == (int) Weapons.SWORD)
+        // {
+        //     Sword.gameObject.SetActive(true);
+        //     Scythe.gameObject.SetActive(false);
+        //     Spear.gameObject.SetActive(false);
+        //     Ancient_Staff.gameObject.SetActive(false);
+        //     Basic_Staff.gameObject.SetActive(false);
+        // }
+        // else if(current_melee_weapon == (int) Weapons.SCYTHE)
+        // {
+        //     Sword.gameObject.SetActive(false);
+        //     Scythe.gameObject.SetActive(true);
+        //     Spear.gameObject.SetActive(false);
+        //     Ancient_Staff.gameObject.SetActive(false);
+        //     Basic_Staff.gameObject.SetActive(false);
+        // }
+        // else if(current_melee_weapon == (int) Weapons.SPEAR)
+        // {
+        //     Sword.gameObject.SetActive(false);
+        //     Scythe.gameObject.SetActive(false);
+        //     Spear.gameObject.SetActive(true);
+        //     Ancient_Staff.gameObject.SetActive(false);
+        //     Basic_Staff.gameObject.SetActive(false);
+        // }
+        // else if(current_melee_weapon == (int) Weapons.ANCIENT_STAFF)
+        // {
+        //     Sword.gameObject.SetActive(false);
+        //     Scythe.gameObject.SetActive(false);
+        //     Spear.gameObject.SetActive(false);
+        //     Ancient_Staff.gameObject.SetActive(true);
+        //     Basic_Staff.gameObject.SetActive(false);
+        // }
+        // else if(current_melee_weapon == (int) Weapons.BASIC_STAFF)
+        // {
+        //     Sword.gameObject.SetActive(false);
+        //     Scythe.gameObject.SetActive(false);
+        //     Spear.gameObject.SetActive(false);
+        //     Ancient_Staff.gameObject.SetActive(false);
+        //     Basic_Staff.gameObject.SetActive(true);
+        // }
     }
 }
 
