@@ -48,7 +48,7 @@ public class Weapons_Handler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.T) || Input.GetAxis("Mouse ScrollWheel") > 0f  || (Input.GetAxis("Mouse ScrollWheel") < 0f ))  && is_attacking == false)
+        if ((Input.GetKeyDown(KeyCode.T) || Input.GetAxis("Mouse ScrollWheel") > 0f || (Input.GetAxis("Mouse ScrollWheel") < 0f)) && is_attacking == false)
         {
             weapon_switch();
         }
@@ -68,61 +68,60 @@ public class Weapons_Handler : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
                 melee_atack_direction = Directions.LEFT;
-            
+
             else if (Input.GetKey(KeyCode.RightArrow))
                 melee_atack_direction = Directions.RIGHT;
             else if (Input.GetKey(KeyCode.UpArrow))
                 melee_atack_direction = Directions.UP;
-          
 
-          if ((direction == melee_atack_direction || melee_atack_direction == Directions.UP) && is_attacking==false)
+
+            if ((direction == melee_atack_direction || melee_atack_direction == Directions.UP) && is_attacking == false)
                 is_attacking = true;
-
-
         }
     }
     void weapon_switch()
     {
         switch (current_melee_weapon)
         {
-            case Weapons.SWORD: current_melee_weapon = Weapons.SCYTHE;
-                 Sword.gameObject.SetActive(false);
-                 Scythe.gameObject.SetActive(true);
-                 Spear.gameObject.SetActive(false);
-                 Ancient_Staff.gameObject.SetActive(false);
-                  Basic_Staff.gameObject.SetActive(false);
-            break;
-            case Weapons.SCYTHE: current_melee_weapon = Weapons.SPEAR;
-                Sword.gameObject.SetActive(false);
-                Scythe.gameObject.SetActive(false);
-                Spear.gameObject.SetActive(true);
-                Ancient_Staff.gameObject.SetActive(false);
-                Basic_Staff.gameObject.SetActive(false);
-            break;
+            case Weapons.SWORD:
+                current_melee_weapon = Weapons.SCYTHE;
+                EquipWeapon(Scythe);
+                break;
 
-            case Weapons.SPEAR: current_melee_weapon = Weapons.ANCIENT_STAFF;
-                Sword.gameObject.SetActive(false);
-                Scythe.gameObject.SetActive(false);
-                Spear.gameObject.SetActive(false);
-                Ancient_Staff.gameObject.SetActive(true);
-                Basic_Staff.gameObject.SetActive(false);
-            break;
+            case Weapons.SCYTHE:
+                current_melee_weapon = Weapons.SPEAR;
+                EquipWeapon(Spear);
+                break;
 
+            case Weapons.SPEAR:
+                current_melee_weapon = Weapons.ANCIENT_STAFF;
+                EquipWeapon(Ancient_Staff);
+                break;
 
-            case Weapons.ANCIENT_STAFF: current_melee_weapon = Weapons.BASIC_STAFF;
-                Sword.gameObject.SetActive(false);
-                Scythe.gameObject.SetActive(false);
-                Spear.gameObject.SetActive(false);
-                Ancient_Staff.gameObject.SetActive(false);
-                Basic_Staff.gameObject.SetActive(true);
-            break;
-            case Weapons.BASIC_STAFF: current_melee_weapon = Weapons.SWORD;
-                Sword.gameObject.SetActive(true);
-                Scythe.gameObject.SetActive(false);
-                Spear.gameObject.SetActive(false);
-                Ancient_Staff.gameObject.SetActive(false);
-                Basic_Staff.gameObject.SetActive(false);
-            break;
+            case Weapons.ANCIENT_STAFF:
+                current_melee_weapon = Weapons.BASIC_STAFF;
+                EquipWeapon(Basic_Staff);
+                break;
+
+            case Weapons.BASIC_STAFF:
+                current_melee_weapon = Weapons.SWORD;
+                EquipWeapon(Sword);
+                break;
+        }
+    }
+
+    void EquipWeapon(GameObject Weapon)
+    {
+        Weapon.gameObject.SetActive(true);
+        Debug.Log(Weapon.name);
+
+        foreach (Transform t in Player.transform)
+        {
+            if (!Weapon.name.Equals(t.name))
+            {
+                Debug.Log(t.name);
+                t.gameObject.SetActive(false);
+            }
         }
     }
 }
