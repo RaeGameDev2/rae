@@ -43,7 +43,7 @@ public class Weapons_Melee : MonoBehaviour
         {
             if (Weapons_Handler.is_attacking == false)
             {
-                transform.localPosition = new Vector2(-4, 1);
+                transform.localPosition = new Vector2(-2.5f, 1);
             }
             else
             {
@@ -56,8 +56,8 @@ public class Weapons_Melee : MonoBehaviour
     {
     
         if (Weapons_Handler.melee_atack_direction == Weapons_Handler.Directions.UP)
-            transform.localPosition = new Vector2(1, 4);
+            transform.localPosition = new Vector2(1, 3.5f);
         else 
-            transform.localPosition = new Vector2(4, 1);
+            transform.localPosition = new Vector2(2.5f, 1);
     }
 }
