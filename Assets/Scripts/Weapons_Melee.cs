@@ -19,25 +19,13 @@ public class Weapons_Melee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.SWORD)
+        switch (Weapons_Handler.current_melee_weapon)
         {
-            damage = 20;
-        }
-        else if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.SCYTHE)
-        {
-            damage = 50;
-        }
-        else if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.SPEAR)
-        {
-            damage = 30;
-        }
-        else if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.ANCIENT_STAFF)
-        {
-            damage = 60;
-        }
-        else if(Weapons_Handler.current_melee_weapon == (int) Weapons_Handler.Weapons.BASIC_STAFF)
-        {
-            damage = 10;
+            case Weapons_Handler.Weapons.SWORD: damage = 20; break;
+            case Weapons_Handler.Weapons.SCYTHE: damage = 50; break;
+            case Weapons_Handler.Weapons.SPEAR: damage = 30; break;
+            case Weapons_Handler.Weapons.ANCIENT_STAFF: damage = 60; break;
+            case Weapons_Handler.Weapons.BASIC_STAFF: damage = 10; break;
         }
         if (Weapons_Handler.is_attacking == true)
         {
@@ -55,16 +43,7 @@ public class Weapons_Melee : MonoBehaviour
         {
             if (Weapons_Handler.is_attacking == false)
             {
-                if (Weapons_Handler.direction == "right")
-                {
-                    transform.position = new Vector2(Player.transform.position.x - 4, Player.transform.position.y + 1);
-                    SpriteRender.flipX = false;
-                } 
-                else if (Weapons_Handler.direction == "left") 
-                {
-                    transform.position = new Vector2(Player.transform.position.x + 4, Player.transform.position.y + 1);
-                    SpriteRender.flipX = true;
-                }
+                transform.localPosition = new Vector2(-2.5f, 1);
             }
             else
             {
@@ -75,11 +54,10 @@ public class Weapons_Melee : MonoBehaviour
     
     void Attack()
     {
-        if (Weapons_Handler.melee_atack_direction == "left")
-            transform.position = new Vector2(Player.transform.position.x - 4, Player.transform.position.y + 1);
-        else if (Weapons_Handler.melee_atack_direction == "right")
-            transform.position = new Vector2(Player.transform.position.x + 4, Player.transform.position.y + 1);
-        else if (Weapons_Handler.melee_atack_direction == "up")
-            transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 4);
+    
+        if (Weapons_Handler.melee_atack_direction == Weapons_Handler.Directions.UP)
+            transform.localPosition = new Vector2(1, 3.5f);
+        else 
+            transform.localPosition = new Vector2(2.5f, 1);
     }
 }
