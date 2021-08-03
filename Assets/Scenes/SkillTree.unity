@@ -277,6 +277,175 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37835113}
   m_CullTransparentMesh: 1
+--- !u!1 &65826575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 65826581}
+  - component: {fileID: 65826580}
+  - component: {fileID: 65826579}
+  - component: {fileID: 65826578}
+  - component: {fileID: 65826577}
+  - component: {fileID: 65826576}
+  m_Layer: 2
+  m_Name: Player
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &65826576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65826575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c9869856ea4ab42ba520bfd83a6d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDownFireBolt: 10
+  coolDownMainSpell: 5
+  costFireBolt: 50
+  costMainSpell: 30
+  damageMainSpell: 30
+  damageFireBolt: 50
+  distanceMainSpell: 3
+  distanceFireBolt: 3
+  mana: 100
+  manaRegenerateSpeed: 10
+--- !u!114 &65826577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65826575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e972e619c7443409292ab5e29db3cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  jumpForce: 10
+--- !u!61 &65826578
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65826575}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.1829794, y: -0.21187073}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.6, y: 3.8}
+    newSize: {x: 3.6, y: 3.8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.9050337, y: 3.3762584}
+  m_EdgeRadius: 0
+--- !u!50 &65826579
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65826575}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!212 &65826580
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65826575}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 4b63374e378d20946b3fbbbc0c9acf5c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3.6, y: 3.8}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &65826581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65826575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16, y: -8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &87124351
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +736,7 @@ GameObject:
   - component: {fileID: 208569765}
   - component: {fileID: 208569767}
   - component: {fileID: 208569766}
+  - component: {fileID: 208569768}
   m_Layer: 5
   m_Name: UI_Skilltree
   m_TagString: Untagged
@@ -634,6 +804,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208569764}
   m_CullTransparentMesh: 1
+--- !u!114 &208569768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208569764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72dcdb70e4431a74c850c37fa6414ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BetterBlockingI_button: {fileID: 892549128}
+  BetterBlockingII_button: {fileID: 1542350844}
+  MeleeChargedAttackI_button: {fileID: 1923177274}
+  MeleeChargedAttackII_button: {fileID: 1362036412}
+  StaffChargedAttackI_button: {fileID: 1755827867}
+  StaffChargedAttackII_button: {fileID: 381606767}
+  ArcaneBolt_button: {fileID: 1969657415}
+  ArcaneBoltPlus_button: {fileID: 1960507700}
+  StunningSpell_button: {fileID: 1517364505}
+  EnchantWeapon_button: {fileID: 964067576}
+  Invincibility_button: {fileID: 1598329668}
+  EmpoweredAttack_button: {fileID: 1033250043}
+  ImprovedDashing_button: {fileID: 87124353}
+  AncientRecall_button: {fileID: 1517740385}
+  PotionAffinityI_button: {fileID: 551761108}
+  PotionAffinityII_button: {fileID: 1207896460}
+  PotionAffinityIII_button: {fileID: 1716368118}
 --- !u!1 &211442734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,7 +1598,7 @@ GameObject:
   - component: {fileID: 551761109}
   - component: {fileID: 551761108}
   m_Layer: 5
-  m_Name: PotionAffinity_button
+  m_Name: PotionAffinityI_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1750,7 +1949,7 @@ RectTransform:
   m_Children:
   - {fileID: 208569765}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2217,7 +2416,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &979041100
 GameObject:
@@ -3095,7 +3294,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1287967128
 GameObject:
@@ -5167,7 +5366,7 @@ GameObject:
   - component: {fileID: 1960507701}
   - component: {fileID: 1960507700}
   m_Layer: 5
-  m_Name: ArcaneBolt+_button
+  m_Name: ArcaneBoltPlus_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5541,7 +5740,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Potion Affinity
+  m_Text: Potion Affinity I
 --- !u!222 &2013535001
 CanvasRenderer:
   m_ObjectHideFlags: 0
