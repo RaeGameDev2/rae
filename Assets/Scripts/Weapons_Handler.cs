@@ -152,17 +152,6 @@ public class Weapons_Handler : MonoBehaviour
             Ancient_Staff.gameObject.SetActive(true);
             Basic_Staff.gameObject.SetActive(false);
         }
-        /* Weapon.gameObject.SetActive(true);
-        Debug.Log(Weapon.name);
-
-        foreach (Transform t in Player.transform)
-        {
-            if (!Weapon.name.Equals(t.name))
-            {
-                Debug.Log(t.name);
-                t.gameObject.SetActive(false);
-            }
-        }*/
     }
 }
 
