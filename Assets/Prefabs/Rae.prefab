@@ -467,7 +467,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759697387260978182}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.21, y: -0.41, z: 0}
+  m_LocalPosition: {x: 0.21, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5629721290677590413}
@@ -1047,6 +1047,7 @@ GameObject:
   - component: {fileID: 5096041691259329964}
   - component: {fileID: 4364041678963318559}
   - component: {fileID: 4671653230112870456}
+  - component: {fileID: -5153961561965808226}
   m_Layer: 7
   m_Name: Rae
   m_TagString: Player
@@ -1175,3 +1176,26 @@ MonoBehaviour:
   canJump: 0
   canDoubleJump: 0
   diagonalJump: 0
+  onIce: 0
+--- !u!114 &-5153961561965808226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8682229861489442588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c9869856ea4ab42ba520bfd83a6d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDownFireBolt: 10
+  coolDownMainSpell: 5
+  costFireBolt: 50
+  costMainSpell: 30
+  damageMainSpell: 30
+  damageFireBolt: 50
+  distanceMainSpell: 3
+  distanceFireBolt: 3
+  mana: 100
+  manaRegenerateSpeed: 10
