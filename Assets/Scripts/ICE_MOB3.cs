@@ -8,7 +8,7 @@ public class ICE_MOB3 : MonoBehaviour
     public Sprite idle;
     public Sprite active;
     public static int damage = 30;
-    private float delay_explosion = 2;
+    private float delay_explosion = 1;
     private float remainingdelay;
     private int initiate_explosion = 0;
     // Start is called before the first frame update
