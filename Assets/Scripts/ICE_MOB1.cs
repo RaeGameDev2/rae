@@ -43,7 +43,7 @@ public class ICE_MOB1 : MonoBehaviour
         else if (state_mob == Direction.DOWN)
             transform.position -= new Vector3(0, 1, 0) * Time.deltaTime * speedY;
 
-        Debug.Log(Health);
+        /*Debug.Log(Health);*/
 
         if (Health <= 0)
             Destroy(this.gameObject);
