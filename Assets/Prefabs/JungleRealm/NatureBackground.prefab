@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4252519483034457692}
-  - component: {fileID: 6779584356626064058}
   m_Layer: 0
   m_Name: NatureBackground
   m_TagString: Untagged
@@ -34,29 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6779584356626064058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523003503734458555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52eaf9e7827439546bfb7b358d1c7ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameCamera: {fileID: 0}
-  spritesList:
-  - spriteObj: {fileID: 7453932535469611007}
-    layer: -3
-    parallaxEffect: 0
-  - spriteObj: {fileID: 7453932533596598619}
-    layer: -2
-    parallaxEffect: 0
-  - spriteObj: {fileID: 7453932533505630034}
-    layer: -1
-    parallaxEffect: 0
 --- !u!1 &7453932533505630035
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,6 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7453932533505630045}
   - component: {fileID: 7453932533505630034}
+  - component: {fileID: 3874715590137328794}
   m_Layer: 0
   m_Name: Nature_Player_Level
   m_TagString: Untagged
@@ -133,12 +110,27 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 115.71694, y: 21.599998}
+  m_Size: {x: 170, y: 21.599998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3874715590137328794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453932533505630035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d58579710c9a44da1589e492357a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxFactor: {x: 0.8, y: 0}
+  infiniteHorizontal: 1
+  infiniteVertical: 0
 --- !u!1 &7453932533596598616
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7453932533596598618}
   - component: {fileID: 7453932533596598619}
+  - component: {fileID: 6430278477557170458}
   m_Layer: 0
   m_Name: Nature_Foreground
   m_TagString: Untagged
@@ -215,12 +208,27 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 115.71694, y: 21.599998}
+  m_Size: {x: 170, y: 21.599998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6430278477557170458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453932533596598616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d58579710c9a44da1589e492357a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxFactor: {x: 0.5, y: 0}
+  infiniteHorizontal: 1
+  infiniteVertical: 0
 --- !u!1 &7453932535469611004
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7453932535469611006}
   - component: {fileID: 7453932535469611007}
+  - component: {fileID: 2827111853228966932}
   m_Layer: 0
   m_Name: Nature_Background
   m_TagString: Untagged
@@ -297,9 +306,24 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 115.71694, y: 21.599998}
+  m_Size: {x: 170, y: 21.599998}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2827111853228966932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453932535469611004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d58579710c9a44da1589e492357a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxFactor: {x: 0.2, y: 0}
+  infiniteHorizontal: 1
+  infiniteVertical: 0
