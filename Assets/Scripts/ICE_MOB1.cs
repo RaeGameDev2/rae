@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ICE_MOB1 : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject hpBar;
 
     public float speedY = 5.5f;
-    public float Health = 100;
+    public float Health = 300;
     public enum Direction
     {
         UP,
@@ -74,6 +74,8 @@ public class ICE_MOB1 : MonoBehaviour
             {
                 Health -= 50;
             }
+
+            hpBar.transform.localScale = new Vector2(hpBar.transform.localScale.x * ((float) Health / 300.0f), hpBar.transform.localScale.y);
         }
     }
 }
