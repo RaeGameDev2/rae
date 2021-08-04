@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3997366098377478430}
   - component: {fileID: 3997366098377478429}
-  - component: {fileID: 2123955486809587830}
   m_Layer: 0
   m_Name: Fire_Background
   m_TagString: Untagged
@@ -71,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 87c50942d83e4bf4c9b7cfe5acc4b0c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -83,21 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2123955486809587830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3997366098377478428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d58579710c9a44da1589e492357a3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxFactor: {x: 0.2, y: 0}
-  infiniteHorizontal: 1
-  infiniteVertical: 0
 --- !u!1 &3997366098657661582
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +92,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3997366098657661568}
   - component: {fileID: 3997366098657661583}
-  - component: {fileID: 7049577657185942193}
   m_Layer: 0
   m_Name: Fire_Player_Level
   m_TagString: Untagged
@@ -169,7 +152,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d55d9a83578df7a4eb7706a1d57b9df4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -181,21 +164,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7049577657185942193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3997366098657661582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d58579710c9a44da1589e492357a3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxFactor: {x: 0.8, y: 0}
-  infiniteHorizontal: 1
-  infiniteVertical: 0
 --- !u!1 &3997366099154829746
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +174,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3997366099154829748}
   - component: {fileID: 3997366099154829747}
-  - component: {fileID: 6691191773671452577}
   m_Layer: 0
   m_Name: Fire_Foreground
   m_TagString: Untagged
@@ -267,7 +234,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5d6f69eb9ecec844291500757b76eb23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -279,21 +246,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6691191773671452577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3997366099154829746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d58579710c9a44da1589e492357a3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxFactor: {x: 0.5, y: 0}
-  infiniteHorizontal: 1
-  infiniteVertical: 0
 --- !u!1 &3997366099281860757
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3997366099281860759}
+  - component: {fileID: 3997366099281860758}
   m_Layer: 0
   m_Name: FireBackground
   m_TagString: Untagged
@@ -327,3 +280,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3997366099281860758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997366099281860757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52eaf9e7827439546bfb7b358d1c7ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCamera: {fileID: 0}
+  spritesList:
+  - spriteObj: {fileID: 3997366098377478429}
+    layer: -3
+    parallaxEffect: 0.724
+  - spriteObj: {fileID: 3997366099154829747}
+    layer: -2
+    parallaxEffect: 0.42
+  - spriteObj: {fileID: 3997366098657661583}
+    layer: -1
+    parallaxEffect: 0.196
