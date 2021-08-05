@@ -5,16 +5,56 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
+    public Image[] healthPoints;
 
-    public void SetHealth(int health)
+    public float health, maxHealth = 100;
+    
+
+    private void Start()
     {
-        slider.value = health;
+        health = maxHealth;
     }
 
-    public void SetMaxHealth(int health)
+    private void Update()
     {
-        slider.maxValue = health;
-        slider.value = health;
+        
+        if (health > maxHealth) health = maxHealth;
+
+
+        HealthBarFiller();
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            
+                Damage(20);
+            
+
+
+        }
+    }
+
+    void HealthBarFiller()
+    {
+
+        for (int i = 0; i < healthPoints.Length; i++)
+        {
+            healthPoints[i].enabled = !DisplayHealthPoint(health, i);
+        }
+    }
+
+    bool DisplayHealthPoint(float _health, int pointNumber)
+    {
+        return ((pointNumber * 20) >= _health);
+    }
+
+    public void Damage(float damagePoints)
+    {
+        if (health > 0)
+            health -= damagePoints;
+    }
+    public void Heal(float healingPoints)
+    {
+        if (health < maxHealth)
+            health += healingPoints;
     }
 }
