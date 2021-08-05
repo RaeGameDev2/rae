@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Resources : MonoBehaviour
 {
@@ -10,11 +7,11 @@ public class Resources : MonoBehaviour
     public float maxMana = 100;
     public float currentMana;
     public float manaAmount = 1f;
-   
+    public int skillPoints;
 
     public HealthBar healthBar;
     public ManaBar manaBar;
-
+    
     // Start is called before the first frame update
     void Start()
     {
