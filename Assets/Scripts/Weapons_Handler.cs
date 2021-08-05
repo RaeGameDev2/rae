@@ -85,43 +85,72 @@ public class Weapons_Handler : MonoBehaviour
         {
             case Weapons.SWORD:
                 current_melee_weapon = Weapons.SCYTHE;
-                EquipWeapon(Scythe);
+                EquipWeapon(Weapons.SCYTHE);
                 break;
 
             case Weapons.SCYTHE:
                 current_melee_weapon = Weapons.SPEAR;
-                EquipWeapon(Spear);
+                EquipWeapon(Weapons.SPEAR);
                 break;
 
             case Weapons.SPEAR:
                 current_melee_weapon = Weapons.ANCIENT_STAFF;
-                EquipWeapon(Ancient_Staff);
+                EquipWeapon(Weapons.ANCIENT_STAFF);
                 break;
 
             case Weapons.ANCIENT_STAFF:
                 current_melee_weapon = Weapons.BASIC_STAFF;
-                EquipWeapon(Basic_Staff);
+                EquipWeapon(Weapons.BASIC_STAFF);
                 break;
 
             case Weapons.BASIC_STAFF:
                 current_melee_weapon = Weapons.SWORD;
-                EquipWeapon(Sword);
+                EquipWeapon(Weapons.SWORD);
                 break;
         }
     }
 
-    void EquipWeapon(GameObject Weapon)
+    void EquipWeapon(Weapons Weapon)
     {
-        Weapon.gameObject.SetActive(true);
-        Debug.Log(Weapon.name);
-
-        foreach (Transform t in Player.transform)
+       if(Weapon == Weapons.SWORD)
+       {
+            Sword.gameObject.SetActive(true);
+            Scythe.gameObject.SetActive(false);
+            Spear.gameObject.SetActive(false);
+            Ancient_Staff.gameObject.SetActive(false);
+            Basic_Staff.gameObject.SetActive(false);
+       }
+       else if(Weapon == Weapons.SCYTHE)
+       {
+            Sword.gameObject.SetActive(false);
+            Scythe.gameObject.SetActive(true);
+            Spear.gameObject.SetActive(false);
+            Ancient_Staff.gameObject.SetActive(false);
+            Basic_Staff.gameObject.SetActive(false);
+        }
+        else if (Weapon == Weapons.SPEAR)
         {
-            if (!Weapon.name.Equals(t.name))
-            {
-                Debug.Log(t.name);
-                t.gameObject.SetActive(false);
-            }
+            Sword.gameObject.SetActive(false);
+            Scythe.gameObject.SetActive(false);
+            Spear.gameObject.SetActive(true);
+            Ancient_Staff.gameObject.SetActive(false);
+            Basic_Staff.gameObject.SetActive(false);
+        }
+        else if (Weapon == Weapons.BASIC_STAFF)
+        {
+            Sword.gameObject.SetActive(false);
+            Scythe.gameObject.SetActive(false);
+            Spear.gameObject.SetActive(false);
+            Ancient_Staff.gameObject.SetActive(false);
+            Basic_Staff.gameObject.SetActive(true);
+        }
+        else if (Weapon == Weapons.ANCIENT_STAFF)
+        {
+            Sword.gameObject.SetActive(false);
+            Scythe.gameObject.SetActive(false);
+            Spear.gameObject.SetActive(false);
+            Ancient_Staff.gameObject.SetActive(true);
+            Basic_Staff.gameObject.SetActive(false);
         }
     }
 }
