@@ -22,8 +22,33 @@ public class UI_SkillTree : MonoBehaviour
     public Button AttackSpeed_button;
     public Button Defense_button;
 
+    public Button Orb_button;
+    public Button Staff_button;
+    public Button Schyth_button;
+
+    GameObject Schyth_stats;
+    GameObject Orb_stats;
+    GameObject Staff_stats;
+
+    GameObject Schyth_panel;
+    GameObject Orb_panel;
+    GameObject Staff_panel;
+
     void Start()
     {
+        Schyth_stats = GameObject.Find("Schyth");
+        Orb_stats = GameObject.Find("Orb");
+        Staff_stats = GameObject.Find("Staff");
+
+        Schyth_panel = GameObject.Find("Schyth_panel");
+        Orb_panel = GameObject.Find("Orb_panel");
+        Staff_panel = GameObject.Find("Staff_panel");
+
+        Schyth_stats.SetActive(false);
+        Staff_stats.SetActive(false);
+        Orb_stats.SetActive(true);
+        Orb_panel.GetComponent<Image>().color = new Color(80f/255f, 80f/255f, 80f/255f);
+
         Button Parry_btn = Parry_button.GetComponent<Button>();
         Parry_btn.onClick.AddListener(Parry_Clicked);
 
@@ -56,6 +81,15 @@ public class UI_SkillTree : MonoBehaviour
 
         Button Defense_btn = Defense_button.GetComponent<Button>();
         Defense_btn.onClick.AddListener(Defense_Clicked);
+
+        Button Schyth_btn = Schyth_button.GetComponent<Button>();
+        Schyth_btn.onClick.AddListener(Schyth_Clicked);
+
+        Button Orb_btn = Orb_button.GetComponent<Button>();
+        Orb_btn.onClick.AddListener(Orb_Clicked);
+
+        Button Staff_btn = Staff_button.GetComponent<Button>();
+        Staff_btn.onClick.AddListener(Staff_Clicked);
     }
 
     public void UpdateUI()
@@ -131,6 +165,36 @@ public class UI_SkillTree : MonoBehaviour
     public void SetPlayerSkills(Skills playerSkills)
     {
         this.playerSkills = playerSkills;
+    }
+
+    void Orb_Clicked()
+    {
+        Schyth_stats.SetActive(false);
+        Staff_stats.SetActive(false);
+        Orb_stats.SetActive(true);
+        Orb_panel.GetComponent<Image>().color = new Color(80f / 255f, 80f / 255f, 80f / 255f);
+        Staff_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
+        Schyth_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
+    }
+
+    void Staff_Clicked()
+    {
+        Schyth_stats.SetActive(false);
+        Staff_stats.SetActive(true);
+        Orb_stats.SetActive(false);
+        Orb_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
+        Staff_panel.GetComponent<Image>().color = new Color(80f / 255f, 80f / 255f, 80f / 255f);
+        Schyth_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
+    }
+
+    void Schyth_Clicked()
+    {
+        Schyth_stats.SetActive(true);
+        Staff_stats.SetActive(false);
+        Orb_stats.SetActive(false);
+        Orb_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
+        Staff_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
+        Schyth_panel.GetComponent<Image>().color = new Color(80f / 255f, 80f / 255f, 80f / 255f);
     }
 
     void Parry_Clicked()
