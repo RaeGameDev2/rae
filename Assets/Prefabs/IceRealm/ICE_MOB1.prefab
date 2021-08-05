@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6219729224046773633}
   - component: {fileID: 6219729224046773662}
-  - component: {fileID: 6219729224046773632}
   - component: {fileID: 6219729224046773635}
+  - component: {fileID: 4966649782915659221}
   m_Layer: 0
   m_Name: ICE_MOB1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,9 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.01, y: 1.5120223, z: -0.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 8630686222073224970}
-  - {fileID: 7028415732327503310}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -86,24 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6219729224046773632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6219729224046773663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7e14750db027a7468fe6e294dc47fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpBar: {fileID: 6392446803143040192}
-  speedY: 5.5
-  Health: 100
-  state_mob: 0
-  treshHoldUP: 2
-  treshHoldDOWN: -5
 --- !u!61 &6219729224046773635
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -130,56 +110,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.26, y: 6.34}
   m_EdgeRadius: 0
---- !u!1001 &6219729224528997388
-PrefabInstance:
+--- !u!114 &4966649782915659221
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6219729224046773633}
-    m_Modifications:
-    - target: {fileID: 2420317163155026694, guid: 6ea77744b5a048145b03de0e50bee1b1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2420317163155026694, guid: 6ea77744b5a048145b03de0e50bee1b1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.05
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6ea77744b5a048145b03de0e50bee1b1, type: 3}
---- !u!4 &8630686222073224970 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2420317163155026694, guid: 6ea77744b5a048145b03de0e50bee1b1, type: 3}
-  m_PrefabInstance: {fileID: 6219729224528997388}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6219729225756581292
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6219729224046773633}
-    m_Modifications:
-    - target: {fileID: 4024274234186647650, guid: 4cf1568e3d553d640b54a88fdd7e56cb, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024274234186647650, guid: 4cf1568e3d553d640b54a88fdd7e56cb, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024274234186647650, guid: 4cf1568e3d553d640b54a88fdd7e56cb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.0499997
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4cf1568e3d553d640b54a88fdd7e56cb, type: 3}
---- !u!1 &6392446803143040192 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1073654109203726700, guid: 4cf1568e3d553d640b54a88fdd7e56cb, type: 3}
-  m_PrefabInstance: {fileID: 6219729225756581292}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7028415732327503310 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4024274234186647650, guid: 4cf1568e3d553d640b54a88fdd7e56cb, type: 3}
-  m_PrefabInstance: {fileID: 6219729225756581292}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6219729224046773663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e14750db027a7468fe6e294dc47fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  hpBar: {fileID: 0}
+  speedY: 5.5
+  state_mob: 0
+  treshHoldUP: 2
+  treshHoldDOWN: -5

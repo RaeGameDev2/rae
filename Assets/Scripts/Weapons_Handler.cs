@@ -5,152 +5,70 @@ using UnityEngine.UI;
 
 public class Weapons_Handler : MonoBehaviour
 {
-    public enum Weapons
+
+    public enum Weapon
     {
-        SWORD,
         SCYTHE,
-        SPEAR,
-        ANCIENT_STAFF,
-        BASIC_STAFF
+        ORB,
+        STAFF,
     }
 
-    public enum Directions
+    public enum AttackType
     {
-        LEFT,
-        RIGHT,
-        UP
+        NONE,
+        BASIC,
+        HEAVY
     }
-    public GameObject Player;
-    public GameObject Sword;
-    public GameObject Scythe;
-    public GameObject Spear;
-    public GameObject Ancient_Staff;
-    public GameObject Basic_Staff;
-    public static bool melee_weapon_equiped = true;
-    public static Weapons current_melee_weapon = Weapons.SWORD;
-    public static bool range_weapon_equiped = false;
-    public static Directions direction = Directions.RIGHT;
-    public static int weapon_rotate = 1;
-    public static bool is_attacking = false;
-    public static Directions melee_atack_direction;
 
+    // public bool melee_weapon_equiped = true;
+    //public bool range_weapon_equiped = false;
+    public Weapon currentWeapon;
+    public AttackType attackType;
+    public float[] initialDamages;
+    [HideInInspector] public float[] damages;
 
-    // Start is called before the first frame update
     void Start()
     {
-        Sword.gameObject.SetActive(true);
-        Scythe.gameObject.SetActive(false);
-        Spear.gameObject.SetActive(false);
-        Ancient_Staff.gameObject.SetActive(false);
-        Basic_Staff.gameObject.SetActive(false);
+        currentWeapon = Weapon.SCYTHE;
+        attackType = AttackType.NONE;
+        damages = new float[3];
+        damages[0] = initialDamages[0];
+        damages[1] = initialDamages[1];
+        damages[2] = initialDamages[2];
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.T) || Input.GetAxis("Mouse ScrollWheel") > 0f || (Input.GetAxis("Mouse ScrollWheel") < 0f)) && is_attacking == false)
+        if ((Input.GetKeyDown(KeyCode.T) || Input.GetAxis("Mouse ScrollWheel") > 0f || (Input.GetAxis("Mouse ScrollWheel") < 0f))
+        && attackType == AttackType.NONE)
         {
-            weapon_switch();
+            SwitchWeapon();
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetMouseButtonDown(0) && attackType == AttackType.NONE)
         {
-            if (direction == Directions.LEFT)
-                weapon_rotate = 0;
-            direction = Directions.RIGHT;
+            attackType = AttackType.BASIC;
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetMouseButtonDown(1) && attackType == AttackType.NONE)
         {
-            if (direction == Directions.RIGHT)
-                weapon_rotate = 0;
-            direction = Directions.LEFT;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) || (Input.GetKey(KeyCode.RightArrow)) || Input.GetKey(KeyCode.UpArrow))
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                melee_atack_direction = Directions.LEFT;
-
-            else if (Input.GetKey(KeyCode.RightArrow))
-                melee_atack_direction = Directions.RIGHT;
-            else if (Input.GetKey(KeyCode.UpArrow))
-                melee_atack_direction = Directions.UP;
-
-
-            if ((direction == melee_atack_direction || melee_atack_direction == Directions.UP) && is_attacking == false)
-                is_attacking = true;
-        }
-    }
-    void weapon_switch()
-    {
-        switch (current_melee_weapon)
-        {
-            case Weapons.SWORD:
-                current_melee_weapon = Weapons.SCYTHE;
-                EquipWeapon(Weapons.SCYTHE);
-                break;
-
-            case Weapons.SCYTHE:
-                current_melee_weapon = Weapons.SPEAR;
-                EquipWeapon(Weapons.SPEAR);
-                break;
-
-            case Weapons.SPEAR:
-                current_melee_weapon = Weapons.ANCIENT_STAFF;
-                EquipWeapon(Weapons.ANCIENT_STAFF);
-                break;
-
-            case Weapons.ANCIENT_STAFF:
-                current_melee_weapon = Weapons.BASIC_STAFF;
-                EquipWeapon(Weapons.BASIC_STAFF);
-                break;
-
-            case Weapons.BASIC_STAFF:
-                current_melee_weapon = Weapons.SWORD;
-                EquipWeapon(Weapons.SWORD);
-                break;
+            attackType = AttackType.HEAVY;
         }
     }
 
-    void EquipWeapon(Weapons Weapon)
+    void SwitchWeapon()
     {
-       if(Weapon == Weapons.SWORD)
-       {
-            Sword.gameObject.SetActive(true);
-            Scythe.gameObject.SetActive(false);
-            Spear.gameObject.SetActive(false);
-            Ancient_Staff.gameObject.SetActive(false);
-            Basic_Staff.gameObject.SetActive(false);
-       }
-       else if(Weapon == Weapons.SCYTHE)
-       {
-            Sword.gameObject.SetActive(false);
-            Scythe.gameObject.SetActive(true);
-            Spear.gameObject.SetActive(false);
-            Ancient_Staff.gameObject.SetActive(false);
-            Basic_Staff.gameObject.SetActive(false);
-        }
-        else if (Weapon == Weapons.SPEAR)
+        switch (currentWeapon)
         {
-            Sword.gameObject.SetActive(false);
-            Scythe.gameObject.SetActive(false);
-            Spear.gameObject.SetActive(true);
-            Ancient_Staff.gameObject.SetActive(false);
-            Basic_Staff.gameObject.SetActive(false);
-        }
-        else if (Weapon == Weapons.BASIC_STAFF)
-        {
-            Sword.gameObject.SetActive(false);
-            Scythe.gameObject.SetActive(false);
-            Spear.gameObject.SetActive(false);
-            Ancient_Staff.gameObject.SetActive(false);
-            Basic_Staff.gameObject.SetActive(true);
-        }
-        else if (Weapon == Weapons.ANCIENT_STAFF)
-        {
-            Sword.gameObject.SetActive(false);
-            Scythe.gameObject.SetActive(false);
-            Spear.gameObject.SetActive(false);
-            Ancient_Staff.gameObject.SetActive(true);
-            Basic_Staff.gameObject.SetActive(false);
+            case Weapon.SCYTHE:
+                currentWeapon = Weapon.ORB;
+                break;
+
+            case Weapon.ORB:
+                currentWeapon = Weapon.STAFF;
+                break;
+
+            case Weapon.STAFF:
+                currentWeapon = Weapon.SCYTHE;
+                break;
         }
     }
 }
