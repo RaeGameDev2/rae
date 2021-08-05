@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class Weapons_Handler : MonoBehaviour
 {
-    public enum Weapons
+    public enum Weapon
     {
-        SWORD,
         SCYTHE,
-        SPEAR,
-        ANCIENT_STAFF,
-        BASIC_STAFF
+        ORB,
+        STAFF,
     }
 
     public enum Directions
@@ -27,7 +25,7 @@ public class Weapons_Handler : MonoBehaviour
     public GameObject Ancient_Staff;
     public GameObject Basic_Staff;
     public static bool melee_weapon_equiped = true;
-    public static Weapons current_melee_weapon = Weapons.SWORD;
+    public Weapon currentWeapon;
     public static bool range_weapon_equiped = false;
     public static Directions direction = Directions.RIGHT;
     public static int weapon_rotate = 1;

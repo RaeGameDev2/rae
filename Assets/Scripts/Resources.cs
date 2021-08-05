@@ -7,7 +7,7 @@ public class Resources : MonoBehaviour
     public float maxMana = 100;
     public float currentMana;
     public float manaAmount = 1f;
-    public int skillPoints;
+    public int skillPoints = 10;
 
     public HealthBar healthBar;
     public ManaBar manaBar;
@@ -45,8 +45,19 @@ public class Resources : MonoBehaviour
             }
             else currentMana = 0;
         }
-       
-        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.attachedRigidbody.tag == "SkillPoint")
+        {
+            skillPoints++;
+        }
+
+        if (collision.attachedRigidbody.tag == "HealthPoints")
+        {
+
+        }
     }
 
     void TakeDamage(int damage)
