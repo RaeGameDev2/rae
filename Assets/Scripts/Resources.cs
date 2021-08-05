@@ -16,16 +16,16 @@ public class Resources : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        // healthBar.SetMaxHealth(maxHealth);
 
         currentMana = maxMana;
-        manaBar.SetMaxMana(maxMana);
+        // manaBar.SetMaxMana(maxMana);
     }
 
     // Update is called once per frame
     void Update()
     {
-        NormalizeMana();
+        // NormalizeMana();
 
         if(Input.GetKeyDown(KeyCode.Tab))
         {
@@ -71,13 +71,13 @@ public class Resources : MonoBehaviour
         currentMana -= mana;
         manaBar.SetMana(currentMana);
     }
-    void NormalizeMana()
-    {
-        if (currentMana < 100)
-        {
-            currentMana += manaAmount * Time.deltaTime;
-            manaBar.SetMana(currentMana);
-        }
-        else currentMana = 100;
-    }
+    // void NormalizeMana()
+    // {
+    //     if (currentMana < 100)
+    //     {
+    //         currentMana += manaAmount * Time.deltaTime;
+    //         manaBar.SetMana(currentMana);
+    //     }
+    //     else currentMana = 100;
+    // }
 }
