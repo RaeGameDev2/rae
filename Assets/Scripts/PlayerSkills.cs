@@ -54,19 +54,19 @@ public class PlayerSkills : MonoBehaviour
     {
         return playerSkills.IsSkillUnlocked(Skills.SkillType.Parry);
     }
-    public bool IsLifeQuickTpUnlocked()
+    public bool IsQuickTpUnlocked()
     {
         return playerSkills.IsSkillUnlocked(Skills.SkillType.QuickTP);
     }
-    public bool IsLifeShieldUnlocked()
+    public bool IsShieldUnlocked()
     {
         return playerSkills.IsSkillUnlocked(Skills.SkillType.Shield);
     }
-    public bool IsLifePhaseWalkUnlocked()
+    public bool IsPhaseWalkUnlocked()
     {
         return playerSkills.IsSkillUnlocked(Skills.SkillType.PhaseWalk);
     }
-    public bool IsLifeDebuffUnlocked()
+    public bool IsDebuffUnlocked()
     {
         return playerSkills.IsSkillUnlocked(Skills.SkillType.Debuff);
     }
