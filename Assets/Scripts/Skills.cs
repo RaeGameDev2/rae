@@ -6,40 +6,61 @@ public class Skills
 {
     public enum SkillType
     {
-        BetterBlockingI,
-        BetterBlockingII,
-        MeleeChargedAttackI,
-        MeleeChargedAttackII,
-        StaffChargedAttackI,
-        StaffChargedAttackII,
-        ArcaneBolt,
-        ArcaneBoltPlus,
-        StunningSpell,
-        EnchantWeapon,
-        Invincibility,
-        EmpoweredAttack,
-        ImprovedDashing,
-        AncientRecall,
-        PotionAffinityI,
-        PotionAffinityII,
-        PotionAffinityIII
+        Parry,
+        LifeDrain,
+        QuickTP,
+        Shield,
+        PhaseWalk,
+        Debuff,
+        Attack,
+        CritBonus,
+        CritRate,
+        AttackSpeed,
+        Defense,
+        Size
     }
 
-    private List<SkillType> unlockedSkillsList;
+    private int[] SkillLevel;
+    private int SkillPoints;
+    private const int MAX_LEVEL = 10;
 
     public Skills()
     {
-        unlockedSkillsList = new List<SkillType>();
+        SkillLevel = new int[(int)SkillType.Size];
+        SkillPoints = 200;
     }
 
-    public void UnlockSkill(SkillType skillType)
+    public void UpgradeSkill(SkillType skillType)
     {
-        unlockedSkillsList.Add(skillType);
+        if (SkillLevel[(int)skillType] == MAX_LEVEL) return;
+        if (SkillPoints == 0) return;
+        SkillLevel[(int)skillType]++;
+        SkillPoints--;
     }
 
     public bool IsSkillUnlocked(SkillType skillType)
     {
-        return unlockedSkillsList.Contains(skillType);
+        return SkillLevel[(int)skillType] > 0;
+    }
+
+    public int GetSkillLevel(SkillType skillType)
+    {
+        return SkillLevel[(int)skillType];
+    }
+
+    public int GetSkillPoints()
+    {
+        return SkillPoints;
+    }
+
+    public void SetSkillPoints(int sp)
+    {
+        SkillPoints = sp;
+    }
+
+    public int GetMaxLevel()
+    {
+        return MAX_LEVEL;
     }
 
 }
