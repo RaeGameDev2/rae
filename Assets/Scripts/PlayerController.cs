@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
     private Weapons_Handler weapons;
+    private PlayerSkills skills;
 
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool canJump;
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         weapons = GetComponent<Weapons_Handler>();
+        skills = GetComponent<PlayerSkills>();
         direction = Direction.right;
         canJump = false;
         diagonalJump = false;
@@ -251,9 +253,24 @@ public class PlayerController : MonoBehaviour
     public void OnAttackHit(Collider2D col)
     {
         var enemy = col.GetComponent<Enemy>();
-        enemy.OnDamageTaken(weapons.currWeapon.mainDamage);
+        var rng = Random.Range(0, 101);
+        var critRate = weapons.currWeapon.critRate + weapons.currWeapon.bonusCritRate * skills.GetLevelCritRate();
+        var critDmg = weapons.currWeapon.critDmg + weapons.currWeapon.bonusCritDmg * skills.GetLevelCritBonus();
+        var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
+        float attackDmg = 0;
+
+        if (weapons.currWeapon.attackType == Weapon.AttackType.BASIC)
+            attackDmg = weapons.currWeapon.mainDamage + weapons.currWeapon.bonusAttackDmg * skills.GetLevelAttack();
+        else if (weapons.currWeapon.attackType == Weapon.AttackType.HEAVY)
+            attackDmg = weapons.currWeapon.secondaryDamage + weapons.currWeapon.bonusAttackDmg * skills.GetLevelAttack();
+
+        if (rng <= weapons.currWeapon.critRate)
+        {
+            attackDmg += critDmg;
+        }
+
+        enemy.OnDamageTaken(attackDmg);
         var spells = GetComponent<PlayerSpells>();
-        var skills = GetComponent<PlayerSkills>();
         if (spells.LifeDrainActive)
             enemy.LifeDrain(skills.GetLevelLifeDrain());
     }

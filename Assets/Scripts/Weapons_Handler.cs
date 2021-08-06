@@ -9,6 +9,14 @@ public class Weapon
 {
     public float mainDamage;
     public float secondaryDamage;
+    public float attackSpeed;
+    public float critRate;
+    public float critDmg;
+
+    public float bonusAttackDmg;
+    public float bonusAttackSpeed;
+    public float bonusCritRate;
+    public float bonusCritDmg;
 
     public WeaponType type;
 

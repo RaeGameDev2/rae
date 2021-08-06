@@ -1255,19 +1255,47 @@ MonoBehaviour:
   weapons:
   - mainDamage: 100
     secondaryDamage: 300
+    attackSpeed: 0
+    critRate: 20
+    critDmg: 30
+    bonusAttackDmg: 10
+    bonusAttackSpeed: 5
+    bonusCritRate: 5
+    bonusCritDmg: 5
     type: 0
     attackType: 0
   - mainDamage: 100
     secondaryDamage: 200
+    attackSpeed: 0
+    critRate: 20
+    critDmg: 30
+    bonusAttackDmg: 10
+    bonusAttackSpeed: 5
+    bonusCritRate: 5
+    bonusCritDmg: 5
     type: 1
     attackType: 0
-  - mainDamage: 50
-    secondaryDamage: 500
+  - mainDamage: 100
+    secondaryDamage: 200
+    attackSpeed: 0
+    critRate: 20
+    critDmg: 30
+    bonusAttackDmg: 10
+    bonusAttackSpeed: 5
+    bonusCritRate: 5
+    bonusCritDmg: 5
     type: 2
     attackType: 0
   currWeapon:
     mainDamage: 0
     secondaryDamage: 0
+    attackSpeed: 0
+    critRate: 0
+    critDmg: 0
+    bonusAttackDmg: 0
+    bonusAttackSpeed: 0
+    bonusCritRate: 0
+    bonusCritDmg: 0
     type: 0
     attackType: 0
 --- !u!114 &777083066673384306
