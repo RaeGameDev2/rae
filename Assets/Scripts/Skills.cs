@@ -23,16 +23,18 @@ public class Skills
 
     private int[] SkillLevel;
     private const int MAX_LEVEL = 10;
+    private Resources resources;
 
     public Skills()
     {
         SkillLevel = new int[(int)SkillType.Size];
+        resources = GameObject.FindGameObjectWithTag("Player").GetComponent<Resources>();
     }
 
     public void UpgradeSkill(SkillType skillType)
     {
         if (SkillLevel[(int)skillType] == MAX_LEVEL) return;
-        if (GameObject.Find("Player").GetComponent<Resources>().skillPoints == 0) return;
+        if (resources.skillPoints == 0) return;
         if (skillType == SkillType.Parry && SkillLevel[(int)SkillType.LifeDrain] > 0) return;
         if (skillType == SkillType.LifeDrain && SkillLevel[(int)SkillType.Parry] > 0) return;
         if (skillType == SkillType.QuickTP && SkillLevel[(int)SkillType.Shield] > 0) return;
@@ -40,7 +42,7 @@ public class Skills
         if (skillType == SkillType.PhaseWalk && SkillLevel[(int)SkillType.Debuff] > 0) return;
         if (skillType == SkillType.Debuff && SkillLevel[(int)SkillType.PhaseWalk] > 0) return;
         SkillLevel[(int)skillType]++;
-        GameObject.Find("Player").GetComponent<Resources>().skillPoints--;
+        resources.skillPoints--;
     }
 
     public bool IsSkillUnlocked(SkillType skillType)
@@ -51,16 +53,6 @@ public class Skills
     public int GetSkillLevel(SkillType skillType)
     {
         return SkillLevel[(int)skillType];
-    }
-
-    public int GetSkillPoints()
-    {
-        return GameObject.Find("Player").GetComponent<Resources>().skillPoints;
-    }
-
-    public void SetSkillPoints(int sp)
-    {
-        GameObject.Find("Player").GetComponent<Resources>().skillPoints = sp;
     }
 
     public int GetMaxLevel()

@@ -4,19 +4,21 @@ using UnityEngine.UI;
 public class Resources : MonoBehaviour
 {
     public int maxHealth { get; private set; }
-    private int currentHealth;
+    public int currentHealth;
     public int maxMana { get; private set; }
-    private int currentMana;
+    public int currentMana { get; private set; }
     [SerializeField] private float manaRegenerationRate = 0.25f;
-    private float manaRegeneration;
+    [SerializeField] private float manaRegeneration;
     public int skillPoints = 10;
 
     private UI_Manager uiManager;
+    private PlayerSpells spells;
 
     private void Awake()
     {
         maxHealth = 3;
         maxMana = 3;
+        spells = GetComponent<PlayerSpells>();
     }
 
     private void Start()
@@ -34,8 +36,7 @@ public class Resources : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            currentHealth++;
-            uiManager.AddLife();
+            AddLife();
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
@@ -51,17 +52,8 @@ public class Resources : MonoBehaviour
         RegenerateMana();
     }
 
-    private void RegenerateMana()
-    {
-        manaRegeneration += manaRegenerationRate * Time.deltaTime;
-        if (manaRegeneration < 1) return;
-        manaRegeneration = 0;
-        currentMana++;
-    }
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        // Debug.Log("col");
         switch (collider.tag)
         {
             case "SkillPoint":
@@ -71,11 +63,19 @@ public class Resources : MonoBehaviour
             case "HealthPoint" when currentHealth == maxHealth:
                 return;
             case "HealthPoint":
-                currentHealth++;
-                uiManager.AddLife();
+                AddLife();
                 Destroy(collider.gameObject);
                 break;
         }
+    }
+
+    private void RegenerateMana()
+    {
+        manaRegeneration += manaRegenerationRate * Time.deltaTime;
+        if (manaRegeneration < 1) return;
+        manaRegeneration = 0;
+        currentMana++;
+        uiManager.AddMana();
     }
 
     public void IncreaseMaxMana()
@@ -90,11 +90,22 @@ public class Resources : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (spells.ParryActive)
+        {
+            spells.Shockwave();
+            return;
+        }
+
         if (damage > currentHealth) damage = currentHealth;
         currentHealth -= damage;
         uiManager.TakeLives(damage);
     }
 
+    public void AddLife()
+    {
+        currentHealth++;
+        uiManager.AddLife();
+    }
     public void UseMana() 
     {
         if (currentMana == 0)
