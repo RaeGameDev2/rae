@@ -198,14 +198,14 @@ public class PlayerController : MonoBehaviour
             case Weapon.AttackType.BASIC:
                 {
                     var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
-                    anim.SetFloat("attackSpeed", 1 + attackSpeed);
+                    anim.SetFloat("attackSpeed", attackSpeed / 100);
                     animState = State.ATTACK;
                     break;
                 }
             case Weapon.AttackType.HEAVY:
                 {
                     var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
-                    anim.SetFloat("attackSpeed", 1 + attackSpeed);
+                    anim.SetFloat("attackSpeed", attackSpeed / 100);
                     animState = State.ATTACK;
                     break;
                 }
