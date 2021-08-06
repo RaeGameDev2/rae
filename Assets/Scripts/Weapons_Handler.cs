@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Weapons_Handler : MonoBehaviour
 {
 
-    public enum Weapon
+    public enum WeaponType
     {
         SCYTHE,
         ORB,
@@ -22,14 +22,14 @@ public class Weapons_Handler : MonoBehaviour
 
     // public bool melee_weapon_equiped = true;
     //public bool range_weapon_equiped = false;
-    public Weapon currentWeapon;
+    public WeaponType currentWeapon;
     public AttackType attackType;
     public float[] initialDamages;
     [HideInInspector] public float[] damages;
 
     void Start()
     {
-        currentWeapon = Weapon.SCYTHE;
+        currentWeapon = WeaponType.SCYTHE;
         attackType = AttackType.NONE;
         damages = new float[3];
         damages[0] = initialDamages[0];
@@ -58,16 +58,16 @@ public class Weapons_Handler : MonoBehaviour
     {
         switch (currentWeapon)
         {
-            case Weapon.SCYTHE:
-                currentWeapon = Weapon.ORB;
+            case WeaponType.SCYTHE:
+                currentWeapon = WeaponType.ORB;
                 break;
 
-            case Weapon.ORB:
-                currentWeapon = Weapon.STAFF;
+            case WeaponType.ORB:
+                currentWeapon = WeaponType.STAFF;
                 break;
 
-            case Weapon.STAFF:
-                currentWeapon = Weapon.SCYTHE;
+            case WeaponType.STAFF:
+                currentWeapon = WeaponType.SCYTHE;
                 break;
         }
     }
