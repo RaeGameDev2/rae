@@ -1226,7 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fda64e52017284489d4ffe0c7cdff8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundSpeed: 30
+  groundSpeed: 20
   airSpeed: 15
   jumpHeight: 10
   jumpSpeed: 20
@@ -1252,13 +1252,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ec21a2bd55e5d469caf4177da22a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: 0
-  attackType: 0
-  initialDamages:
-  - 100
-  - 100
-  - 100
-  damages: []
+  weapons:
+  - mainDamage: 100
+    secondaryDamage: 300
+    attackSpeed: 100
+    critRate: 20
+    critDmg: 30
+    bonusAttackDmg: 10
+    bonusAttackSpeed: 5
+    bonusCritRate: 5
+    bonusCritDmg: 5
+    type: 0
+    attackType: 0
+  - mainDamage: 100
+    secondaryDamage: 200
+    attackSpeed: 100
+    critRate: 20
+    critDmg: 30
+    bonusAttackDmg: 10
+    bonusAttackSpeed: 5
+    bonusCritRate: 5
+    bonusCritDmg: 5
+    type: 1
+    attackType: 0
+  - mainDamage: 100
+    secondaryDamage: 200
+    attackSpeed: 100
+    critRate: 20
+    critDmg: 30
+    bonusAttackDmg: 10
+    bonusAttackSpeed: 5
+    bonusCritRate: 5
+    bonusCritDmg: 5
+    type: 2
+    attackType: 0
+  currWeapon:
+    mainDamage: 0
+    secondaryDamage: 0
+    attackSpeed: 0
+    critRate: 0
+    critDmg: 0
+    bonusAttackDmg: 0
+    bonusAttackSpeed: 0
+    bonusCritRate: 0
+    bonusCritDmg: 0
+    type: 0
+    attackType: 0
 --- !u!114 &777083066673384306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,6 +1312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   manaRegenerationRate: 0.25
+  manaRegeneration: 0
   skillPoints: 10
 --- !u!114 &673529493
 MonoBehaviour:

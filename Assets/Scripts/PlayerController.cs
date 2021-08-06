@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
     private Weapons_Handler weapons;
+    private PlayerSkills skills;
 
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool canJump;
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         weapons = GetComponent<Weapons_Handler>();
+        skills = GetComponent<PlayerSkills>();
         direction = Direction.right;
         canJump = false;
         diagonalJump = false;
@@ -70,6 +72,11 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         distanceTraveled = 0;
         timeSinceDash = dashCooldown;
+    }
+
+    private void Start()
+    {
+        anim.SetFloat("speed", groundSpeed / 7);
     }
 
     private void Update()
@@ -92,8 +99,6 @@ public class PlayerController : MonoBehaviour
         //If not in dash, handles jump
         if (!isDashing)
         {
-            // TODO: de scoc
-            animState = State.IDLE;
             if (animState != State.ATTACK)
             {
                 // Debug.Log(hInput);
@@ -176,22 +181,39 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        if (weapons.attackType != Weapons_Handler.AttackType.NONE)
-            animState = State.ATTACK;
-        else
+        switch (weapons.currWeapon.attackType)
         {
-            if (rb.velocity.x == 0)
-            {
-                animState = State.IDLE;
-            }
-            else
-            {
-                animState = State.RUN;
-            }
+            case Weapon.AttackType.NONE:
+                {
+                    if (rb.velocity.x == 0)
+                    {
+                        animState = State.IDLE;
+                    }
+                    else
+                    {
+                        animState = State.RUN;
+                    }
+                    break;
+                }
+            case Weapon.AttackType.BASIC:
+                {
+                    var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
+                    anim.SetFloat("attackSpeed", attackSpeed / 100);
+                    animState = State.ATTACK;
+                    break;
+                }
+            case Weapon.AttackType.HEAVY:
+                {
+                    var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
+                    anim.SetFloat("attackSpeed", attackSpeed / 100);
+                    animState = State.ATTACK;
+                    break;
+                }
         }
-        anim.SetInteger("weapon", (int)weapons.currentWeapon);
+
+        anim.SetInteger("weapon", (int)weapons.currWeapon.type);
         anim.SetInteger("state", (int)animState);
-        anim.SetInteger("type", (int)weapons.attackType);
+        anim.SetInteger("type", (int)weapons.currWeapon.attackType);
     }
 
     private void Jump()
@@ -243,7 +265,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackEnd()
     {
-        weapons.attackType = Weapons_Handler.AttackType.NONE;
+        weapons.currWeapon.attackType = Weapon.AttackType.NONE;
         animState = State.IDLE;
         //  Debug.Log("se terminat animatia!");
     }
@@ -251,9 +273,24 @@ public class PlayerController : MonoBehaviour
     public void OnAttackHit(Collider2D col)
     {
         var enemy = col.GetComponent<Enemy>();
-        enemy.OnDamageTaken(weapons.damages[(int)weapons.currentWeapon]);
+        var rng = Random.Range(0, 101);
+        var critRate = weapons.currWeapon.critRate + weapons.currWeapon.bonusCritRate * skills.GetLevelCritRate();
+        var critDmg = weapons.currWeapon.critDmg + weapons.currWeapon.bonusCritDmg * skills.GetLevelCritBonus();
+        var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
+        float attackDmg = 0;
+
+        if (weapons.currWeapon.attackType == Weapon.AttackType.BASIC)
+            attackDmg = weapons.currWeapon.mainDamage + weapons.currWeapon.bonusAttackDmg * skills.GetLevelAttack();
+        else if (weapons.currWeapon.attackType == Weapon.AttackType.HEAVY)
+            attackDmg = weapons.currWeapon.secondaryDamage + weapons.currWeapon.bonusAttackDmg * skills.GetLevelAttack();
+
+        if (rng <= weapons.currWeapon.critRate)
+        {
+            attackDmg += critDmg;
+        }
+
+        enemy.OnDamageTaken(attackDmg);
         var spells = GetComponent<PlayerSpells>();
-        var skills = GetComponent<PlayerSkills>();
         if (spells.LifeDrainActive)
             enemy.LifeDrain(skills.GetLevelLifeDrain());
     }
