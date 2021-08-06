@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        if (weapons.attackType != Weapons_Handler.AttackType.NONE)
+        if (weapons.currWeapon.attackType != Weapon.AttackType.NONE)
             animState = State.ATTACK;
         else
         {
@@ -189,9 +189,9 @@ public class PlayerController : MonoBehaviour
                 animState = State.RUN;
             }
         }
-        anim.SetInteger("weapon", (int)weapons.currentWeapon);
+        anim.SetInteger("weapon", (int)weapons.currWeapon.type);
         anim.SetInteger("state", (int)animState);
-        anim.SetInteger("type", (int)weapons.attackType);
+        anim.SetInteger("type", (int)weapons.currWeapon.attackType);
     }
 
     private void Jump()
@@ -243,7 +243,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackEnd()
     {
-        weapons.attackType = Weapons_Handler.AttackType.NONE;
+        weapons.currWeapon.attackType = Weapon.AttackType.NONE;
         animState = State.IDLE;
         //  Debug.Log("se terminat animatia!");
     }
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
     public void OnAttackHit(Collider2D col)
     {
         var enemy = col.GetComponent<Enemy>();
-        enemy.OnDamageTaken(weapons.damages[(int)weapons.currentWeapon]);
+        enemy.OnDamageTaken(weapons.currWeapon.mainDamage);
         var spells = GetComponent<PlayerSpells>();
         var skills = GetComponent<PlayerSkills>();
         if (spells.LifeDrainActive)

@@ -1252,13 +1252,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ec21a2bd55e5d469caf4177da22a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: 0
-  attackType: 0
-  initialDamages:
-  - 100
-  - 100
-  - 100
-  damages: []
+  weapons:
+  - mainDamage: 100
+    secondaryDamage: 300
+    type: 0
+    attackType: 0
+  - mainDamage: 100
+    secondaryDamage: 200
+    type: 1
+    attackType: 0
+  - mainDamage: 50
+    secondaryDamage: 500
+    type: 2
+    attackType: 0
+  currWeapon:
+    mainDamage: 0
+    secondaryDamage: 0
+    type: 0
+    attackType: 0
 --- !u!114 &777083066673384306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,6 +1284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   manaRegenerationRate: 0.25
+  manaRegeneration: 0
   skillPoints: 10
 --- !u!114 &673529493
 MonoBehaviour:
