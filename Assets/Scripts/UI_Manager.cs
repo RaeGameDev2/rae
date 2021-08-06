@@ -40,8 +40,7 @@ public class UI_Manager : MonoBehaviour
 
     public void AddLife()
     {
-        var instance = Instantiate(healthPoint, Vector3.zero, Quaternion.identity);
-        instance.rectTransform.SetParent(healthBar);
+        var instance = Instantiate(healthPoint, Vector3.zero, Quaternion.identity, healthBar);
         instance.rectTransform.anchoredPosition = new Vector2(offsetHealthSegments, 0);
         instance.rectTransform.localScale = Vector3.one;
         healthPointInstances.Add(instance);
@@ -61,8 +60,7 @@ public class UI_Manager : MonoBehaviour
     }
     public void AddMana()
     {
-        var instance = Instantiate(manaPoint, Vector3.zero, Quaternion.identity);
-        instance.rectTransform.SetParent(manaBar);
+        var instance = Instantiate(manaPoint, Vector3.zero, Quaternion.identity, manaBar);
         instance.rectTransform.anchoredPosition = new Vector2(offsetManaSegments, 0);
         instance.rectTransform.localScale = Vector3.one;
         manaPointInstances.Add(instance);

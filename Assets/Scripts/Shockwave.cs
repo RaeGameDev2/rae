@@ -45,7 +45,7 @@ public class Shockwave : MonoBehaviour
     {
         if (col.tag == "Enemy")
         {
-            col.GetComponent<Enemy>().OnDamageTaken(initialDamage + levelParry * damagePerLevel);
+            col.GetComponent<Enemy>().OnDamageTaken(initialDamage + levelParry * damagePerLevel, false);
         }
     }
 

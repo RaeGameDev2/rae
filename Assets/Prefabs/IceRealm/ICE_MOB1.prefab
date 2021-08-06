@@ -206,13 +206,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e14750db027a7468fe6e294dc47fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 150
   damageOnTouch: 1
   initialTimeLifeDrain: 4
   dpsLifeDrain: 30
+  initialAttackSpeed: 2
+  damageText: {fileID: 6594461456278833772, guid: 5199d62bbc918524f9a81c9eb9158894, type: 3}
   speedY: 5.5
-  state_mob: 0
-  treshHoldUP: 2
-  treshHoldDOWN: -5
+  thresholdUP: 2
+  thresholdDOWN: -5
+  thresholdDistance: 10
 --- !u!1 &6623465890509407832
 GameObject:
   m_ObjectHideFlags: 0

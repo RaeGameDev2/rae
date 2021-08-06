@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class ICE_MOB1 : Enemy
@@ -13,29 +11,33 @@ public class ICE_MOB1 : Enemy
         RIGHT
     }
     private Direction state_mob;
-
+    
     [SerializeField] private float speedY = 5.5f;
     [SerializeField] private float thresholdUP = 2f;
     [SerializeField] private float thresholdDOWN = -5f;
     [SerializeField] private float thresholdDistance = 10f;
+    
     private Resources playerResources;
 
     private bool isAttacking;
     private float timeAttack;
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         isAttacking = false;
         state_mob = Direction.UP;
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         playerResources = GameObject.FindGameObjectWithTag("Player").GetComponent<Resources>();
     }
 
-    void Update()
+    private new void Update()
     {
+        base.Update();
         if (transform.position.y >= thresholdUP && state_mob == Direction.UP)
             state_mob = Direction.DOWN;
         else
@@ -76,9 +78,9 @@ public class ICE_MOB1 : Enemy
 
     private void Attack()
     {
-        Debug.Log("Attack");
         isAttacking = true;
         timeAttack = Time.time + attackSpeed;
+        Debug.Log($"Attack {timeAttack} , {Time.time} , {attackSpeed}");
         StartCoroutine(AttackEnumerator());
     }
     

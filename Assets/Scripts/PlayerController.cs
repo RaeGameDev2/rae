@@ -284,12 +284,14 @@ public class PlayerController : MonoBehaviour
         else if (weapons.currWeapon.attackType == Weapon.AttackType.HEAVY)
             attackDmg = weapons.currWeapon.secondaryDamage + weapons.currWeapon.bonusAttackDmg * skills.GetLevelAttack();
 
+        var crit = false;
         if (rng <= weapons.currWeapon.critRate)
         {
+            crit = true;
             attackDmg += critDmg;
         }
 
-        enemy.OnDamageTaken(attackDmg);
+        enemy.OnDamageTaken(attackDmg, crit);
         var spells = GetComponent<PlayerSpells>();
         if (spells.LifeDrainActive)
             enemy.LifeDrain(skills.GetLevelLifeDrain());
