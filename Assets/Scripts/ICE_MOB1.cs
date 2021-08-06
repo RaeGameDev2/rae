@@ -40,4 +40,12 @@ public class ICE_MOB1 : Enemy
         else if (state_mob == Direction.DOWN)
             transform.position -= new Vector3(0, 1, 0) * Time.deltaTime * speedY;
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Player") == true)
+        {
+            col.GetComponent<Resources>().TakeDamage(damageOnTouch);
+        }
+    }
 }

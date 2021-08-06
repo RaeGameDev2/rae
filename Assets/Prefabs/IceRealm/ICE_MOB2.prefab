@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7979278381114749104}
   - component: {fileID: 7979278381114749103}
   - component: {fileID: 7979278381114749106}
+  - component: {fileID: 7825894064646614271}
   m_Layer: 0
   m_Name: ICE_MOB2
   m_TagString: Enemy
@@ -99,3 +100,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.8
+--- !u!114 &7825894064646614271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979278381114749102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e7e849f2e027249928a105f5ecfcac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 200
+  damageOnTouch: 1
+  attackSpeed: 0.5
+  patrolRange: 5
+  patrolSpeed: 10
+  spriteRenderer: {fileID: 0}
+  idleSprite: {fileID: 21300000, guid: e2702d46a3cb6854b98bf1914816ac3a, type: 3}
+  attackSprite: {fileID: 21300000, guid: a2446bc26775dcd4a8e4762171eb8282, type: 3}

@@ -10,7 +10,7 @@ public class Resources : MonoBehaviour
     public float maxMana = 100;
     public float currentMana;
     public float manaAmount = 1f;
-   
+
 
     public HealthBar healthBar;
     public ManaBar manaBar;
@@ -30,7 +30,7 @@ public class Resources : MonoBehaviour
     {
         NormalizeMana();
 
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (currentHealth > 0)
             {
@@ -48,11 +48,11 @@ public class Resources : MonoBehaviour
             }
             else currentMana = 0;
         }
-       
-        
+
+
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);

@@ -1106,6 +1106,7 @@ GameObject:
   - component: {fileID: 962213865683494916}
   - component: {fileID: 8585570239660285057}
   - component: {fileID: 3771020637437615822}
+  - component: {fileID: 777083066673384306}
   m_Layer: 7
   m_Name: Rae
   m_TagString: Player
@@ -1253,6 +1254,25 @@ MonoBehaviour:
   attackType: 0
   initialDamages: []
   damages: []
+--- !u!114 &777083066673384306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110051346772459724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d25d51ab49ba74b9e3c44ca5132b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  maxMana: 100
+  currentMana: 0
+  manaAmount: 1
+  healthBar: {fileID: 0}
+  manaBar: {fileID: 0}
 --- !u!1 &5272328901573663978
 GameObject:
   m_ObjectHideFlags: 0

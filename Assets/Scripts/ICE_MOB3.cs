@@ -8,7 +8,7 @@ public class ICE_MOB3 : MonoBehaviour
     public Sprite idle;
     public Sprite active;
     public ParticleSystem explosion;
-    public static int damage = 30;
+    public int damage = 2;
     private float time_until_dissapear = 1;
     private float remaining_time_until_dissapear;
     private float time_until_explosion_dissapear = 1;
@@ -67,11 +67,11 @@ public class ICE_MOB3 : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            //Debug.Log("DAAAA");
             if (explosion_active == 1 && player_damaged == false)
             {
                 player_damaged = true;
-                Debug.Log("ai luat damage!");
+                collision.GetComponent<Resources>().TakeDamage(damage);
+
             }
         }
     }
