@@ -7,17 +7,28 @@ using UnityEngine.PlayerLoop;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float hp = 100f;
-    public int damageOnTouch = 1;
+    [SerializeField] protected int damageOnTouch = 1;
+    
     private bool lifeDrain;
     private float timeLifeDrain;
     [SerializeField] private float initialTimeLifeDrain = 4;
     [SerializeField] private float dpsLifeDrain = 30;
     private Transform hpBar;
 
+    protected bool pause;
+
+    private float initialAttackSpeed = 2f;
+    [SerializeField] protected float attackSpeed;
+
     private void Awake()
     {
         var components = gameObject.GetComponentsInChildren<Transform>();
         hpBar = components.FirstOrDefault(component => component.tag == "HP");
+    }
+
+    private void Start()
+    {
+        attackSpeed = initialAttackSpeed;
     }
 
     private void Update()

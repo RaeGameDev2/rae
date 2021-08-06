@@ -11,7 +11,7 @@ enum Direction
 public class ICE_MOB2 : Enemy
 {
     // Hits/second
-    [SerializeField] private float attackSpeed;
+    // [SerializeField] private float attackSpeed;
 
     [SerializeField] private float patrolRange;
     [SerializeField] private float patrolSpeed;

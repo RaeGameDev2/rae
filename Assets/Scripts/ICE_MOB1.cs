@@ -5,46 +5,99 @@ using UnityEngine;
 
 public class ICE_MOB1 : Enemy
 {
-    public float speedY = 5.5f;
-    public enum Direction
+    private enum Direction
     {
         UP,
         DOWN,
         LEFT,
         RIGHT
-    };
-    public Direction state_mob;
+    }
+    private Direction state_mob;
 
+    [SerializeField] private float speedY = 5.5f;
+    [SerializeField] private float thresholdUP = 2f;
+    [SerializeField] private float thresholdDOWN = -5f;
+    [SerializeField] private float thresholdDistance = 10f;
+    private Resources playerResources;
 
-    public float treshHoldUP = 2f;
-    public float treshHoldDOWN = -5f;
+    private bool isAttacking;
+    private float timeAttack;
 
-    void Start()
+    private void Awake()
     {
+        isAttacking = false;
         state_mob = Direction.UP;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (transform.position.y >= treshHoldUP && state_mob == Direction.UP)
-            state_mob = Direction.DOWN;
-        else
-             if (transform.position.y <= treshHoldDOWN && state_mob == Direction.DOWN)
-            state_mob = Direction.UP;
-
-
-        if (state_mob == Direction.UP)
-            transform.position += new Vector3(0, 1, 0) * Time.deltaTime * speedY;
-        else if (state_mob == Direction.DOWN)
-            transform.position -= new Vector3(0, 1, 0) * Time.deltaTime * speedY;
+        playerResources = GameObject.FindGameObjectWithTag("Player").GetComponent<Resources>();
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    void Update()
     {
-        if (col.CompareTag("Player"))
+        if (transform.position.y >= thresholdUP && state_mob == Direction.UP)
+            state_mob = Direction.DOWN;
+        else
+             if (transform.position.y <= thresholdDOWN && state_mob == Direction.DOWN)
+            state_mob = Direction.UP;
+
+        if (isAttacking)
         {
-            col.GetComponent<Resources>().TakeDamage(damageOnTouch);
+            if (timeAttack <= Time.time)
+            {
+                if (GetDistanceFromPlayer() < 2 * thresholdDistance)
+                {
+                    playerResources.TakeDamage(1);
+                }
+
+                isAttacking = false;
+            }
+
+            if (pause)
+                timeAttack += Time.deltaTime;
         }
+        else
+        {
+            if (state_mob == Direction.UP)
+                transform.position += Vector3.up * Time.deltaTime * speedY;
+            else if (state_mob == Direction.DOWN)
+                transform.position += Vector3.down * Time.deltaTime * speedY;
+
+            if (GetDistanceFromPlayer() < thresholdDistance)
+                Attack();
+        }
+    }
+    // private void OnTriggerEnter2D(Collider2D col)
+    // {
+    //     if (col.CompareTag("Player"))
+    //         playerResources.TakeDamage(damageOnTouch);
+    // }
+
+    private void Attack()
+    {
+        Debug.Log("Attack");
+        isAttacking = true;
+        timeAttack = Time.time + attackSpeed;
+        StartCoroutine(AttackEnumerator());
+    }
+    
+    private IEnumerator AttackEnumerator()
+    {
+        var time = attackSpeed;
+        var initialLocalScale = transform.localScale;
+        while (time > 0)
+        {
+            transform.localScale *= 1.001f;
+            yield return new WaitForFixedUpdate();
+            time -= Time.fixedDeltaTime;
+        }
+
+        transform.localScale = initialLocalScale;
+    }
+
+    private float GetDistanceFromPlayer()
+    {
+        return (playerResources.transform.position - transform.position).magnitude;
     }
 }
