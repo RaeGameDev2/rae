@@ -61,7 +61,7 @@ public class Resources : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("col");
+        // Debug.Log("col");
         switch (collider.tag)
         {
             case "SkillPoint":

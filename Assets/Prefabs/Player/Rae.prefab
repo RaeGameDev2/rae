@@ -1103,8 +1103,8 @@ GameObject:
   - component: {fileID: 8107259741427270024}
   - component: {fileID: 245171679465722348}
   - component: {fileID: 1117076867141125118}
-  - component: {fileID: 962213865683494916}
   - component: {fileID: 8585570239660285057}
+  - component: {fileID: 962213865683494916}
   - component: {fileID: 3771020637437615822}
   - component: {fileID: 777083066673384306}
   m_Layer: 7
@@ -1186,32 +1186,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &962213865683494916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110051346772459724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fda64e52017284489d4ffe0c7cdff8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundSpeed: 30
-  airSpeed: 15
-  jumpHeight: 10
-  jumpSpeed: 20
-  fallSpeed: 20
-  gravity: 9
-  dashSpeed: 20
-  dashDistance: 20
-  dashCooldown: 4
-  isGrounded: 0
-  canJump: 0
-  canDoubleJump: 0
-  diagonalJump: 0
-  onIce: 0
 --- !u!61 &8585570239660285057
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1238,6 +1212,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7384925, y: 3.3269484}
   m_EdgeRadius: 0
+--- !u!114 &962213865683494916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110051346772459724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fda64e52017284489d4ffe0c7cdff8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundSpeed: 30
+  airSpeed: 15
+  jumpHeight: 10
+  jumpSpeed: 20
+  fallSpeed: 20
+  gravity: 9
+  dashSpeed: 20
+  dashDistance: 20
+  dashCooldown: 4
+  isGrounded: 0
+  canJump: 0
+  canDoubleJump: 0
+  diagonalJump: 0
+  onIce: 0
 --- !u!114 &3771020637437615822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1266,13 +1266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d25d51ab49ba74b9e3c44ca5132b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  maxMana: 100
-  currentMana: 0
-  manaAmount: 1
-  healthBar: {fileID: 0}
-  manaBar: {fileID: 0}
+  manaRegenerationRate: 0.25
+  skillPoints: 10
 --- !u!1 &5272328901573663978
 GameObject:
   m_ObjectHideFlags: 0
