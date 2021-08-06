@@ -74,6 +74,11 @@ public class PlayerController : MonoBehaviour
         timeSinceDash = dashCooldown;
     }
 
+    private void Start()
+    {
+        anim.SetFloat("speed", groundSpeed / 7);
+    }
+
     private void Update()
     {
         HandleInput();
@@ -94,8 +99,6 @@ public class PlayerController : MonoBehaviour
         //If not in dash, handles jump
         if (!isDashing)
         {
-            // TODO: de scoc
-            animState = State.IDLE;
             if (animState != State.ATTACK)
             {
                 // Debug.Log(hInput);
@@ -178,19 +181,36 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        if (weapons.currWeapon.attackType != Weapon.AttackType.NONE)
-            animState = State.ATTACK;
-        else
+        switch (weapons.currWeapon.attackType)
         {
-            if (rb.velocity.x == 0)
-            {
-                animState = State.IDLE;
-            }
-            else
-            {
-                animState = State.RUN;
-            }
+            case Weapon.AttackType.NONE:
+                {
+                    if (rb.velocity.x == 0)
+                    {
+                        animState = State.IDLE;
+                    }
+                    else
+                    {
+                        animState = State.RUN;
+                    }
+                    break;
+                }
+            case Weapon.AttackType.BASIC:
+                {
+                    var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
+                    anim.SetFloat("attackSpeed", 1 + attackSpeed);
+                    animState = State.ATTACK;
+                    break;
+                }
+            case Weapon.AttackType.HEAVY:
+                {
+                    var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
+                    anim.SetFloat("attackSpeed", 1 + attackSpeed);
+                    animState = State.ATTACK;
+                    break;
+                }
         }
+
         anim.SetInteger("weapon", (int)weapons.currWeapon.type);
         anim.SetInteger("state", (int)animState);
         anim.SetInteger("type", (int)weapons.currWeapon.attackType);
