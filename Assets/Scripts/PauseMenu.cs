@@ -4,16 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject pauseButton;
+    [SerializeField] GameObject Panel;
     // Start is called before the first frame update
     public void Pause() {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
+        Panel.SetActive(true);
+        pauseButton.SetActive(false);
+       // Time.timeScale = 0f;
 
     }
 
     public void Resume() {
-        pauseMenu.SetActive(false);
+        pauseButton.SetActive(true);
+        Panel.SetActive(false);
         Time.timeScale = 1f;
 
     }
@@ -21,5 +24,11 @@ public class PauseMenu : MonoBehaviour
     public void BackToHub(int sceneID) {
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneID);
+    }
+
+    public void Settings() {
+        pauseButton.SetActive(false);
+        Panel.SetActive(false);
+        // TO DO incarca meniul setari
     }
 }
