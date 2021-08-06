@@ -61,7 +61,7 @@ public class PlayerSpells : MonoBehaviour
         {
             switch (weaponsHandler.currentWeapon)
             {
-                case Weapons_Handler.Weapon.SCYTHE:
+                case Weapons_Handler.WeaponType.SCYTHE:
                     if (playerSkills.IsLifeDrainUnlocked())
                     {
                         LifeDrainActive = true;
@@ -73,7 +73,7 @@ public class PlayerSpells : MonoBehaviour
                         StartCoroutine("StopLifeDrain");
                     }
                     break;
-                case Weapons_Handler.Weapon.ORB:
+                case Weapons_Handler.WeaponType.ORB:
                     if (playerSkills.IsQuickTpUnlocked())
                     {
                         if (orbDropped)
@@ -91,7 +91,7 @@ public class PlayerSpells : MonoBehaviour
 
                     }
                     break;
-                case Weapons_Handler.Weapon.STAFF:
+                case Weapons_Handler.WeaponType.STAFF:
                     if (playerSkills.IsPhaseWalkUnlocked())
                     {
                         phaseWalkActive = true;

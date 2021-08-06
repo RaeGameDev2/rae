@@ -28,7 +28,7 @@ public class ParallaxBackground : MonoBehaviour
 
     {
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
-        transform.position += new Vector3(deltaMovement.x * parallaxFactor.x, deltaMovement.y * parallaxFactor.y);
+        transform.position -= new Vector3(deltaMovement.x * parallaxFactor.x, deltaMovement.y * parallaxFactor.y);
         lastCameraPosition = cameraTransform.position;
 
         if (infiniteHorizontal)
