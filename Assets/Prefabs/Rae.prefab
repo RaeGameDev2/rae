@@ -1048,6 +1048,8 @@ GameObject:
   - component: {fileID: 4364041678963318559}
   - component: {fileID: 4671653230112870456}
   - component: {fileID: -5153961561965808226}
+  - component: {fileID: 7899513580732487365}
+  - component: {fileID: 6236506097102099694}
   m_Layer: 7
   m_Name: Rae
   m_TagString: Player
@@ -1189,13 +1191,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c9869856ea4ab42ba520bfd83a6d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDownFireBolt: 10
-  coolDownMainSpell: 5
-  costFireBolt: 50
-  costMainSpell: 30
-  damageMainSpell: 30
-  damageFireBolt: 50
-  distanceMainSpell: 3
-  distanceFireBolt: 3
-  mana: 100
-  manaRegenerateSpeed: 10
+--- !u!114 &7899513580732487365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8682229861489442588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8434d28078f1e3448141faa544f9ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiSkillTree: {fileID: 0}
+--- !u!114 &6236506097102099694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8682229861489442588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d25d51ab49ba74b9e3c44ca5132b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaRegenerationRate: 0.25
+  skillPoints: 10

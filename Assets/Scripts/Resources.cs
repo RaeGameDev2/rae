@@ -1,83 +1,105 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Resources : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int currentHealth;
-    public float maxMana = 100;
-    public float currentMana;
-    public float manaAmount = 1f;
+    public int maxHealth { get; private set; }
+    private int currentHealth;
+    public int maxMana { get; private set; }
+    private int currentMana;
+    [SerializeField] private float manaRegenerationRate = 0.25f;
+    private float manaRegeneration;
     public int skillPoints = 10;
 
-    public HealthBar healthBar;
-    public ManaBar manaBar;
-    
-    // Start is called before the first frame update
-    void Start()
+    private UI_Manager uiManager;
+
+    private void Awake()
     {
+        maxHealth = 3;
+        maxMana = 3;
+    }
+
+    private void Start()
+    {
+        uiManager = FindObjectOfType<UI_Manager>();
         currentHealth = maxHealth;
-        // healthBar.SetMaxHealth(maxHealth);
-
         currentMana = maxMana;
-        // manaBar.SetMaxMana(maxMana);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        // NormalizeMana();
-
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (currentHealth > 0)
-            {
-                TakeDamage(20);
-            }
-            else currentHealth = 0;
-
-
+            TakeDamage(1);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if (currentMana > 0)
-            {
-                TakeMana(20);
-            }
-            else currentMana = 0;
+            currentHealth++;
+            uiManager.AddLife();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            UseMana();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            currentMana++;
+            uiManager.AddMana();
+        }
+
+        if (currentMana >= maxMana) return;
+        RegenerateMana();
+    }
+
+    private void RegenerateMana()
+    {
+        manaRegeneration += manaRegenerationRate * Time.deltaTime;
+        if (manaRegeneration < 1) return;
+        manaRegeneration = 0;
+        currentMana++;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("col");
+        switch (collider.tag)
+        {
+            case "SkillPoint":
+                skillPoints++;
+                Destroy(collider.gameObject);
+                break;
+            case "HealthPoint" when currentHealth == maxHealth:
+                return;
+            case "HealthPoint":
+                currentHealth++;
+                uiManager.AddLife();
+                Destroy(collider.gameObject);
+                break;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void IncreaseMaxMana()
     {
-        if (collision.attachedRigidbody.tag == "SkillPoint")
-        {
-            skillPoints++;
-        }
-
-        if (collision.attachedRigidbody.tag == "HealthPoints")
-        {
-
-        }
+        maxMana++;
     }
 
-    void TakeDamage(int damage)
+    public void IncreaseMaxHealth()
     {
+        maxHealth++;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (damage > currentHealth) damage = currentHealth;
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        uiManager.TakeLives(damage);
     }
 
-    void TakeMana(float mana)
+    public void UseMana() 
     {
-        currentMana -= mana;
-        manaBar.SetMana(currentMana);
+        if (currentMana == 0)
+            return;
+        currentMana--;
+        uiManager.UseMana();
     }
-    // void NormalizeMana()
-    // {
-    //     if (currentMana < 100)
-    //     {
-    //         currentMana += manaAmount * Time.deltaTime;
-    //         manaBar.SetMana(currentMana);
-    //     }
-    //     else currentMana = 100;
-    // }
 }

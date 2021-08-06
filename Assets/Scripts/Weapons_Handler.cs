@@ -9,7 +9,7 @@ public class Weapons_Handler : MonoBehaviour
     {
         SCYTHE,
         ORB,
-        STAFF,
+        STAFF
     }
 
     public enum Directions
