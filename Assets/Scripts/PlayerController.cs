@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float hInput;
 
+    private Animator anim;
+    private Weapons_Handler weapons;
+
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool canJump;
     [HideInInspector] public bool canDoubleJump;
@@ -41,11 +44,22 @@ public class PlayerController : MonoBehaviour
         left,
         right
     }
+
+    public enum State
+    {
+        IDLE,
+        RUN,
+        ATTACK
+    }
+
     private Direction direction;
+    private State animState;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        weapons = GetComponent<Weapons_Handler>();
         direction = Direction.right;
         canJump = false;
         diagonalJump = false;
@@ -58,13 +72,81 @@ public class PlayerController : MonoBehaviour
         timeSinceDash = dashCooldown;
     }
 
+    private void Update()
+    {
+        HandleInput();
+        ChangeDirection();
+        if (isDashing == false)
+        {
+            timeSinceDash += Time.deltaTime;
+        }
+        UpdateAnimation();
+    }
+
+    private void FixedUpdate()
+    {
+        //Reset gravity to default values
+        if (isGrounded || rb.velocity.y < 0)
+            currGravity = gravity;
+
+        //If not in dash, handles jump
+        if (!isDashing)
+        {
+            if (animState != State.ATTACK)
+            {
+                CheckJump();
+
+                if (isGrounded)
+                    rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
+                else
+                {
+                    float speed = hInput * airSpeed + rb.velocity.x;
+                    if (diagonalJump)
+                        speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
+                    else
+                        speed = Mathf.Clamp(speed, -airSpeed, airSpeed);
+                    if (rb.velocity.y == 0 || (rb.velocity.y < 0 && prevVelocityY > 0))
+                    {
+                        rb.velocity = new Vector2(speed, -fallSpeed);
+
+                    }
+                    rb.velocity = new Vector2(speed, rb.velocity.y);
+                }
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
+            //Add simulated gravity
+            rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
+        }
+
+        if (dashPressed && !isDashing && timeSinceDash >= dashCooldown)
+        {
+            dashPressed = false;
+            isDashing = true;
+            StartCoroutine("Dash");
+            if (direction == Direction.right)
+            {
+                rb.velocity = new Vector2(dashSpeed, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(-dashSpeed, 0);
+            }
+        }
+
+        //Save previous y-velocity for adding fallSpeed
+        prevVelocityY = rb.velocity.y;
+    }
+
     //Polls input every frame and updates flags accordingly
     private void HandleInput()
     {
         hInput = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && animState != State.ATTACK)
             jumpPressed = true;
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isDashing == false)
             dashPressed = true;
     }
 
@@ -90,14 +172,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void UpdateAnimation()
     {
-        HandleInput();
-        ChangeDirection();
-        if (isDashing == false)
+        if (weapons.attackType != Weapons_Handler.AttackType.NONE)
+            animState = State.ATTACK;
+        else
         {
-            timeSinceDash += Time.deltaTime;
+            if (rb.velocity.x == 0)
+            {
+                animState = State.IDLE;
+            }
+            else
+            {
+                animState = State.RUN;
+            }
         }
+        anim.SetInteger("weapon", (int)weapons.currentWeapon);
+        anim.SetInteger("state", (int)animState);
+        anim.SetInteger("type", (int)weapons.attackType);
     }
 
     private void Jump()
@@ -147,54 +239,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void OnAttackEnd()
     {
-        //Reset gravity to default values
-        if (isGrounded || rb.velocity.y < 0)
-            currGravity = gravity;
+        weapons.attackType = Weapons_Handler.AttackType.NONE;
+        animState = State.IDLE;
+        //  Debug.Log("se terminat animatia!");
+    }
 
-        //If not in dash, handles jump
-        if (!isDashing)
-        {
-            CheckJump();
-
-            if (isGrounded)
-                rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
-            else
-            {
-                float speed = hInput * airSpeed + rb.velocity.x;
-                if (diagonalJump)
-                    speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
-                else
-                    speed = Mathf.Clamp(speed, -airSpeed, airSpeed);
-                if (rb.velocity.y == 0 || (rb.velocity.y < 0 && prevVelocityY > 0))
-                {
-                    rb.velocity = new Vector2(speed, -fallSpeed);
-
-                }
-                rb.velocity = new Vector2(speed, rb.velocity.y);
-            }
-            //Add simulated gravity
-            rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
-        }
-
-        if (dashPressed && !isDashing && timeSinceDash >= dashCooldown)
-        {
-            dashPressed = false;
-            isDashing = true;
-            StartCoroutine("Dash");
-            if (direction == Direction.right)
-            {
-                rb.velocity = new Vector2(dashSpeed, 0);
-            }
-            else
-            {
-                rb.velocity = new Vector2(-dashSpeed, 0);
-            }
-        }
-
-        //Save previous y-velocity for adding fallSpeed
-        prevVelocityY = rb.velocity.y;
-        //  Debug.Log(rb.velocity);
+    public void OnAttackHit(Collider2D col)
+    {
+        col.GetComponent<Enemy>().OnDamageTaken(weapons.damages[(int)weapons.currentWeapon]);
     }
 }
