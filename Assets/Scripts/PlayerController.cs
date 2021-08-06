@@ -92,10 +92,12 @@ public class PlayerController : MonoBehaviour
         //If not in dash, handles jump
         if (!isDashing)
         {
+            // TODO: de scoc
+            animState = State.IDLE;
             if (animState != State.ATTACK)
             {
+                // Debug.Log(hInput);
                 CheckJump();
-
                 if (isGrounded)
                     rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
                 else

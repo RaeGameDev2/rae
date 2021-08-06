@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ICE_MOB1 : Enemy
@@ -20,9 +21,7 @@ public class ICE_MOB1 : Enemy
 
     void Start()
     {
-        //transform.position = new Vector3(3f, 0, 0);
         state_mob = Direction.UP;
-
     }
 
     // Update is called once per frame
@@ -43,7 +42,7 @@ public class ICE_MOB1 : Enemy
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player") == true)
+        if (col.CompareTag("Player"))
         {
             col.GetComponent<Resources>().TakeDamage(damageOnTouch);
         }

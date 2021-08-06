@@ -913,7 +913,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14662844, y: -0.2835977}
+  m_Offset: {x: 0, y: -0.55}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -924,7 +924,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2937697, y: 0.33280462}
+  m_Size: {x: 1.3, y: 0.3}
   m_EdgeRadius: 0
 --- !u!1 &4713400029817911140
 GameObject:
@@ -1103,10 +1103,12 @@ GameObject:
   - component: {fileID: 8107259741427270024}
   - component: {fileID: 245171679465722348}
   - component: {fileID: 1117076867141125118}
-  - component: {fileID: 962213865683494916}
   - component: {fileID: 8585570239660285057}
+  - component: {fileID: 962213865683494916}
   - component: {fileID: 3771020637437615822}
   - component: {fileID: 777083066673384306}
+  - component: {fileID: 673529493}
+  - component: {fileID: 6223945952256398333}
   m_Layer: 7
   m_Name: Rae
   m_TagString: Player
@@ -1186,6 +1188,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!61 &8585570239660285057
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110051346772459724}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.1, y: 1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.8, y: 3.4}
+  m_EdgeRadius: 0
 --- !u!114 &962213865683494916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1212,32 +1240,6 @@ MonoBehaviour:
   canDoubleJump: 0
   diagonalJump: 0
   onIce: 0
---- !u!61 &8585570239660285057
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5110051346772459724}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.034834385, y: 1.1634742}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.7384925, y: 3.3269484}
-  m_EdgeRadius: 0
 --- !u!114 &3771020637437615822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,7 +1254,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeapon: 0
   attackType: 0
-  initialDamages: []
+  initialDamages:
+  - 100
+  - 100
+  - 100
   damages: []
 --- !u!114 &777083066673384306
 MonoBehaviour:
@@ -1266,13 +1271,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d25d51ab49ba74b9e3c44ca5132b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   currentHealth: 0
-  maxMana: 100
-  currentMana: 0
-  manaAmount: 1
-  healthBar: {fileID: 0}
-  manaBar: {fileID: 0}
+  manaRegenerationRate: 0.25
+  skillPoints: 10
+--- !u!114 &673529493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110051346772459724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8434d28078f1e3448141faa544f9ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiSkillTree: {fileID: 0}
+--- !u!114 &6223945952256398333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110051346772459724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c9869856ea4ab42ba520bfd83a6d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shockwavePrefab: {fileID: 5044662247962228408, guid: 623b1a11324df034dbac560ae6167b43, type: 3}
+  timeLifeDrain: 5
+  timePhaseWalk: 5
+  timeParry: 1
 --- !u!1 &5272328901573663978
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,75 +1,116 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Resources : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth { get; private set; }
     public int currentHealth;
-    public float maxMana = 100;
-    public float currentMana;
-    public float manaAmount = 1f;
+    public int maxMana { get; private set; }
+    public int currentMana { get; private set; }
+    [SerializeField] private float manaRegenerationRate = 0.25f;
+    [SerializeField] private float manaRegeneration;
+    public int skillPoints = 10;
 
+    private UI_Manager uiManager;
+    private PlayerSpells spells;
 
-    public HealthBar healthBar;
-    public ManaBar manaBar;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
-
-        currentMana = maxMana;
-        manaBar.SetMaxMana(maxMana);
+        maxHealth = 3;
+        maxMana = 3;
+        spells = GetComponent<PlayerSpells>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        NormalizeMana();
+        uiManager = FindObjectOfType<UI_Manager>();
+        currentHealth = maxHealth;
+        currentMana = maxMana;
+    }
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (currentHealth > 0)
-            {
-                TakeDamage(20);
-            }
-            else currentHealth = 0;
-
-
+            TakeDamage(1);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if (currentMana > 0)
-            {
-                TakeMana(20);
-            }
-            else currentMana = 0;
+            AddLife();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            UseMana();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            currentMana++;
+            uiManager.AddMana();
         }
 
+        if (currentMana >= maxMana) return;
+        RegenerateMana();
+    }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        switch (collider.tag)
+        {
+            case "SkillPoint":
+                skillPoints++;
+                Destroy(collider.gameObject);
+                break;
+            case "HealthPoint" when currentHealth == maxHealth:
+                return;
+            case "HealthPoint":
+                AddLife();
+                Destroy(collider.gameObject);
+                break;
+        }
+    }
+
+    private void RegenerateMana()
+    {
+        manaRegeneration += manaRegenerationRate * Time.deltaTime;
+        if (manaRegeneration < 1) return;
+        manaRegeneration = 0;
+        currentMana++;
+        uiManager.AddMana();
+    }
+
+    public void IncreaseMaxMana()
+    {
+        maxMana++;
+    }
+
+    public void IncreaseMaxHealth()
+    {
+        maxHealth++;
     }
 
     public void TakeDamage(int damage)
     {
+        if (spells.ParryActive)
+        {
+            spells.Shockwave();
+            return;
+        }
+
+        if (damage > currentHealth) damage = currentHealth;
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        uiManager.TakeLives(damage);
     }
 
-    void TakeMana(float mana)
+    public void AddLife()
     {
-        currentMana -= mana;
-        manaBar.SetMana(currentMana);
+        currentHealth++;
+        uiManager.AddLife();
     }
-    void NormalizeMana()
+    public void UseMana() 
     {
-        if (currentMana < 100)
-        {
-            currentMana += manaAmount * Time.deltaTime;
-            manaBar.SetMana(currentMana);
-        }
-        else currentMana = 100;
+        if (currentMana == 0)
+            return;
+        currentMana--;
+        uiManager.UseMana();
     }
 }
