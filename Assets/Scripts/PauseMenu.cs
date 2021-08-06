@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseButton;
-    [SerializeField] GameObject Panel;
+    [SerializeField] GameObject pauseMenu;
+
+    [SerializeField] GameObject settingsMenu;
 
     public void Pause() {
-        Panel.SetActive(true);
+        pauseMenu.SetActive(true);
         pauseButton.SetActive(false);
         Time.timeScale = 0f;
 
@@ -16,7 +18,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume() {
         pauseButton.SetActive(true);
-        Panel.SetActive(false);
+        pauseMenu.SetActive(false);
         Time.timeScale = 1f;
 
     }
@@ -28,7 +30,12 @@ public class PauseMenu : MonoBehaviour
 
     public void Settings() {
         pauseButton.SetActive(false);
-        Panel.SetActive(false);
-        // TO DO incarca meniul setari
+        pauseMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+
+    public void Back() {
+        pauseMenu.SetActive(true);
+        settingsMenu.SetActive(false);
     }
 }
