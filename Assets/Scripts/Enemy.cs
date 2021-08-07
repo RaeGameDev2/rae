@@ -13,13 +13,14 @@ public class Enemy : MonoBehaviour
     private bool lifeDrain;
     private float timeLifeDrain;
 
-    private Transform hpBar;
-    protected bool pause;
 
     [SerializeField] private float initialAttackSpeed = 2f;
     protected float attackSpeed;
+    [SerializeField] protected float speed;
 
     [SerializeField] private GameObject damageText;
+    private Transform hpBar;
+    protected bool pause;
 
     protected void Awake()
     {
@@ -77,6 +78,7 @@ public class Enemy : MonoBehaviour
     {
         var instances = Instantiate(damageText, transform.position, Quaternion.identity, transform).GetComponent<TextMeshPro>();
         instances.text = damage.ToString("####");
+        instances.color = crit ? Color.blue : Color.red;
         var rectTransform = instances.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = new Vector2(1f, 3f);
 

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 enum Direction
@@ -10,83 +9,74 @@ enum Direction
 
 public class ICE_MOB2 : Enemy
 {
-    // Hits/second
-    // [SerializeField] private float attackSpeed;
-
     [SerializeField] private float patrolRange;
-    [SerializeField] private float patrolSpeed;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite idleSprite;
     [SerializeField] private Sprite attackSprite;
+    [SerializeField] private float thresholdDistance = 5f;
 
     private Vector3 spawnPosition;
     private Direction patrolDirection;
-    private Vector3 movementAxis;
-
+    private Resources playerResources;
     private bool isAttacking;
     // Attack rate: seconds till next hit
     private float attackTimer;
 
-    void Start()
+    private new void Start()
     {
-        patrolRange = 5;
-        patrolSpeed = 5;
+        base.Start();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         spawnPosition = transform.position;
         patrolDirection = Direction.LEFT;
-        // It moves only on X axis
-        movementAxis = new Vector3(1, 0, 0);
 
         // 1 hit per 2 seconds
-        attackSpeed = 0.5f;
         isAttacking = false;
-        attackTimer = 1f / attackSpeed;
+        attackTimer = attackSpeed;
+        playerResources = FindObjectOfType<Resources>();
     }
 
-    void Update()
+    private new void Update()
     {
+        base.Update();
         if (!isAttacking)
             Patrol();
         else
             Attack();
-
-        //Debug.Log(hp);
     }
 
-    void Patrol()
+    private void Patrol()
     {
-        if (patrolDirection == Direction.RIGHT)
-            transform.position += movementAxis * patrolSpeed * Time.deltaTime;
-        else if (patrolDirection == Direction.LEFT)
-            transform.position -= movementAxis * patrolSpeed * Time.deltaTime;
-
-        if (Mathf.Abs(transform.position.x - spawnPosition.x) >= patrolRange)
+        transform.position += patrolDirection switch
         {
-            // Switch direction
-            patrolDirection = 1 - patrolDirection;
-            spriteRenderer.flipX = patrolDirection == Direction.RIGHT;
-        }
+            Direction.RIGHT => Vector3.right * speed * Time.deltaTime,
+            Direction.LEFT => Vector3.left * speed * Time.deltaTime,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        if (Mathf.Abs(transform.position.x - spawnPosition.x) < patrolRange) return;
+        patrolDirection = 1 - patrolDirection;
+        spriteRenderer.flipX = patrolDirection == Direction.RIGHT;
     }
 
-    void Attack()
+    private void Attack()
     {
         attackTimer -= Time.deltaTime;
 
-        if (attackTimer <= 0)
-        {
-            Debug.Log(name + ": I attacked!");
-            attackTimer = 1f / attackSpeed;
-        }
+        if (attackTimer > 0) return;
+        Debug.Log("Mob2: I attacked!");
+        if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
+            playerResources.TakeDamage(damageOnTouch);
+        attackTimer = attackSpeed;
+        isAttacking = false;
+        transform.localScale /= 1.5f;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player") == true)
-        {
-            col.GetComponent<Resources>().TakeDamage(damageOnTouch);
-            isAttacking = true;
-        }
+        if (!col.CompareTag("Player")) return;
+        isAttacking = true;
+        transform.localScale *= 1.5f;
     }
 }

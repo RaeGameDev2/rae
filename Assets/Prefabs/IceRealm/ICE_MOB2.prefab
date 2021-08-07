@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e2702d46a3cb6854b98bf1914816ac3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -200,9 +200,10 @@ MonoBehaviour:
   damageOnTouch: 1
   initialTimeLifeDrain: 4
   dpsLifeDrain: 30
-  attackSpeed: 0.5
+  initialAttackSpeed: 2
+  speed: 3
+  damageText: {fileID: 6594461456278833772, guid: 5199d62bbc918524f9a81c9eb9158894, type: 3}
   patrolRange: 5
-  patrolSpeed: 10
   spriteRenderer: {fileID: 0}
   idleSprite: {fileID: 21300000, guid: e2702d46a3cb6854b98bf1914816ac3a, type: 3}
   attackSprite: {fileID: 21300000, guid: a2446bc26775dcd4a8e4762171eb8282, type: 3}

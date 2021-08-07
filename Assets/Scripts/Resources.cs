@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class Resources : MonoBehaviour
 
     private UI_Manager uiManager;
     private PlayerSpells spells;
+    [SerializeField] private GameObject damageRae;
 
     private void Awake()
     {
@@ -95,18 +97,42 @@ public class Resources : MonoBehaviour
             spells.Shockwave();
             return;
         }
-
+        StartCoroutine(DamageAnimation());
+        
         if (damage > currentHealth) damage = currentHealth;
         currentHealth -= damage;
         uiManager.TakeLives(damage);
     }
 
-    public void AddLife()
+    private IEnumerator DamageAnimation()
+    {
+        var instance = Instantiate(damageRae, transform.position + new Vector3(0, 1f), Quaternion.identity, transform);
+        var spriteRenderer = instance.GetComponent<SpriteRenderer>();
+        var color = spriteRenderer.color;
+        color.a = 0.5f;
+        spriteRenderer.color = color;
+        instance.transform.localScale *= 1.2f;
+
+        var time = 1f;
+        while (time > 0)
+        {
+            color.a -= Time.deltaTime / 2f;
+            spriteRenderer.color = color;
+            instance.transform.localScale *= 1.02f;
+
+            time -= Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+        Destroy(instance);
+    }
+
+    private void AddLife()
     {
         currentHealth++;
         uiManager.AddLife();
     }
-    public void UseMana() 
+
+    private void UseMana() 
     {
         if (currentMana == 0)
             return;

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ICE_MOB1 : Enemy
 {
@@ -10,23 +12,29 @@ public class ICE_MOB1 : Enemy
         LEFT,
         RIGHT
     }
-    private Direction state_mob;
-    
-    [SerializeField] private float speedY = 5.5f;
-    [SerializeField] private float thresholdUP = 2f;
-    [SerializeField] private float thresholdDOWN = -5f;
+
+    [SerializeField] private Direction state_mob;
+    private Vector3 initialPosition;
+
+    [SerializeField] private float thresholdUp = 5f;
+    [SerializeField] private float thresholdDown = -5f;
+    [SerializeField] private float thresholdLeft = -5f;
+    [SerializeField] private float thresholdRight = 5f;
     [SerializeField] private float thresholdDistance = 10f;
     
     private Resources playerResources;
 
     private bool isAttacking;
     private float timeAttack;
+    private float timeNextAttack;
 
     private new void Awake()
     {
         base.Awake();
         isAttacking = false;
         state_mob = Direction.UP;
+        speed = 5;
+        initialPosition = transform.position;
     }
 
     private new void Start()
@@ -38,11 +46,6 @@ public class ICE_MOB1 : Enemy
     private new void Update()
     {
         base.Update();
-        if (transform.position.y >= thresholdUP && state_mob == Direction.UP)
-            state_mob = Direction.DOWN;
-        else
-             if (transform.position.y <= thresholdDOWN && state_mob == Direction.DOWN)
-            state_mob = Direction.UP;
 
         if (isAttacking)
         {
@@ -61,14 +64,54 @@ public class ICE_MOB1 : Enemy
         }
         else
         {
-            if (state_mob == Direction.UP)
-                transform.position += Vector3.up * Time.deltaTime * speedY;
-            else if (state_mob == Direction.DOWN)
-                transform.position += Vector3.down * Time.deltaTime * speedY;
+            transform.position += state_mob switch
+            {
+                Direction.UP => Vector3.up * Time.deltaTime * speed,
+                Direction.DOWN => Vector3.down * Time.deltaTime * speed,
+                Direction.LEFT => Vector3.left * Time.deltaTime * speed,
+                Direction.RIGHT => Vector3.right * Time.deltaTime * speed,
+                _ => throw new ArgumentOutOfRangeException()
+            };
 
+            if (timeNextAttack > Time.time) return;
             if (GetDistanceFromPlayer() < thresholdDistance)
                 Attack();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (Random.Range(0f, 1f / Time.fixedDeltaTime) < 0.3f) {
+            state_mob = (Direction)Random.Range(0f, 3.99f);
+            // Debug.Log($"If: {state_mob}");
+        }
+
+        var i = 0;
+        while (!CheckDirection())
+        {
+            i++;
+            if (i > 10)
+            {
+                Debug.LogError("CheckDirection");
+                break;
+            }
+            state_mob = (Direction) Random.Range(0f, 3.99f);
+            // Debug.Log($"While:{i} {state_mob}");
+        }
+    }
+
+    private bool CheckDirection()
+    {
+        if (transform.position.y >= initialPosition.y + thresholdUp && state_mob == Direction.UP)
+            return false;
+        if (transform.position.y <= initialPosition.y + thresholdDown && state_mob == Direction.DOWN)
+            return false;
+        if (transform.position.x <= initialPosition.x + thresholdLeft && state_mob == Direction.LEFT)
+            return false;
+        if (transform.position.x >= initialPosition.x + thresholdRight && state_mob == Direction.RIGHT)
+            return false;
+
+        return true;
     }
     // private void OnTriggerEnter2D(Collider2D col)
     // {
@@ -80,21 +123,41 @@ public class ICE_MOB1 : Enemy
     {
         isAttacking = true;
         timeAttack = Time.time + attackSpeed;
-        Debug.Log($"Attack {timeAttack} , {Time.time} , {attackSpeed}");
-        StartCoroutine(AttackEnumerator());
+        timeNextAttack = Time.time + 3f * attackSpeed / 2f;
+        // Debug.Log($"Attack {timeAttack} , {Time.time} , {attackSpeed}");
+        StartCoroutine(AttackAnimation());
     }
     
-    private IEnumerator AttackEnumerator()
+    private IEnumerator AttackAnimation()
     {
-        var time = attackSpeed;
         var initialLocalScale = transform.localScale;
+        var initialPos = transform.position;
+        var playerInitialPosition = playerResources.transform.position;
+        yield return new WaitForSeconds(3f * attackSpeed / 4f);
+        if (GetDistanceFromPlayer() < 2 * thresholdDistance)
+            playerInitialPosition = playerResources.transform.position;
+
+        var time = attackSpeed / 4f;
         while (time > 0)
         {
-            transform.localScale *= 1.001f;
+            transform.localScale *= 0.99f;
+            transform.position = Vector2.MoveTowards(transform.position, playerInitialPosition,
+                thresholdDistance * attackSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
             time -= Time.fixedDeltaTime;
         }
 
+        time = attackSpeed / 4f;
+        while (time > 0)
+        {
+            transform.localScale *= 1.01f;
+            transform.position = Vector2.MoveTowards(transform.position, initialPos,
+                thresholdDistance * attackSpeed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+            time -= Time.deltaTime;
+        }
+
+        transform.position = initialPos;
         transform.localScale = initialLocalScale;
     }
 

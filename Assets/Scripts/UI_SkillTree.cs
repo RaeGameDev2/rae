@@ -318,11 +318,13 @@ public class UI_SkillTree : MonoBehaviour
     {
         playerSkills.UpgradeSkill(Skills.SkillType.Life);
         UpdateUI();
+        resources.IncreaseMaxHealth();
     }
     void Mana_Clicked()
     {
         playerSkills.UpgradeSkill(Skills.SkillType.Mana);
         UpdateUI();
+        resources.IncreaseMaxMana();
     }
 
 }

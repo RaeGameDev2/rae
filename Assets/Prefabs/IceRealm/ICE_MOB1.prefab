@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1710cbc34af111c48a1ad200adb84b83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -211,10 +211,13 @@ MonoBehaviour:
   initialTimeLifeDrain: 4
   dpsLifeDrain: 30
   initialAttackSpeed: 2
+  speed: 0
   damageText: {fileID: 6594461456278833772, guid: 5199d62bbc918524f9a81c9eb9158894, type: 3}
-  speedY: 5.5
-  thresholdUP: 2
-  thresholdDOWN: -5
+  state_mob: 0
+  thresholdUp: 5
+  thresholdDown: -5
+  thresholdLeft: -5
+  thresholdRight: 5
   thresholdDistance: 10
 --- !u!1 &6623465890509407832
 GameObject:
