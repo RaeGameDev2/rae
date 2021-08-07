@@ -25,6 +25,17 @@ public class GameManager : MonoBehaviour
         }
 
         // For Testing
-
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            playerResources.AddLife();
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            playerResources.AddMana();
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            playerResources.AddSkillPoint();
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            playerSpells.Shockwave();
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+            playerResources.TakeDamage(1);
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+            playerResources.UseMana();
     }
 }
