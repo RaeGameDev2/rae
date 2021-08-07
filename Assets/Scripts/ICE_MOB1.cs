@@ -53,7 +53,7 @@ public class ICE_MOB1 : Enemy
             {
                 if (GetDistanceFromPlayer() < 2 * thresholdDistance)
                 {
-                    playerResources.TakeDamage(1);
+                    playerResources.TakeDamage(1, transform.position);
                 }
 
                 isAttacking = false;

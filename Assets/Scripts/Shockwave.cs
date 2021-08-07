@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shockwave : MonoBehaviour
@@ -29,7 +27,7 @@ public class Shockwave : MonoBehaviour
         damagePerLevel = 20;
     }
 
-    void Update()
+    private void Update()
     {
         albedo -= initialAlbedo * Time.deltaTime / duration;
         scale += maxScale * Time.deltaTime / duration;
@@ -38,15 +36,13 @@ public class Shockwave : MonoBehaviour
         transform.localScale = scale * Vector3.one;
         transform.position = new Vector3(transform.position.x, initialPositionY + scale / 4);
         if (albedo <= 0)
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 0.2f);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Enemy")
-        {
-            col.GetComponent<Enemy>().OnDamageTaken(initialDamage + levelParry * damagePerLevel, false);
-        }
+        if (col.tag != "Enemy") return;
+        col.GetComponent<Enemy>()?.OnDamageTaken(initialDamage + levelParry * damagePerLevel, false);
     }
 
     public void SetLevelParry(int lvl)

@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha6))
             playerSpells.Shockwave();
         if (Input.GetKeyDown(KeyCode.Alpha7))
-            playerResources.TakeDamage(1);
+            playerResources.TakeDamage(1, Vector3.zero);
         if (Input.GetKeyDown(KeyCode.Alpha8))
             playerResources.UseMana();
     }

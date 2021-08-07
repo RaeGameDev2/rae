@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +6,8 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] private UI_SkillTree uiSkillTree;
     private Skills playerSkills;
 
-    GameObject Skilltree;
-    GameObject ShowButton;
+    private GameObject Skilltree;
+    private GameObject ShowButton;
 
     private void Start()
     {
@@ -30,16 +26,15 @@ public class PlayerSkills : MonoBehaviour
         Show_btn.onClick.AddListener(ShowUI);
 
         HideUI();
-
     }
 
-    public void HideUI()
+    private void HideUI()
     {
         ShowButton.SetActive(true);
         Skilltree.SetActive(false);
     }
 
-    public void ShowUI()
+    private void ShowUI()
     {
         Skilltree.SetActive(true);
         ShowButton.SetActive(false);

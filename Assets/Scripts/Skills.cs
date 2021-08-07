@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Versioning;
 using UnityEngine;
 
 public class Skills

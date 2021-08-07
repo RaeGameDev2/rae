@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float hp = 100f;
     [SerializeField] protected int damageOnTouch = 1;
 
-    [SerializeField] private float initialTimeLifeDrain = 4;
-    [SerializeField] private float dpsLifeDrain = 30;
+    [SerializeField] private float initialTimeLifeDrain = 4f;
+    [SerializeField] private float dpsLifeDrain = 5f;
     private bool lifeDrain;
     private float timeLifeDrain;
 
@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
     {
         var components = gameObject.GetComponentsInChildren<Transform>();
         hpBar = components.FirstOrDefault(component => component.tag == "HP");
+        lifeDrain = false;
+        pause = false;
     }
 
     protected void Start()
@@ -35,18 +37,16 @@ public class Enemy : MonoBehaviour
 
     protected void Update()
     {
-        if (lifeDrain)
+        if (!lifeDrain) return;
+        timeLifeDrain -= Time.deltaTime;
+        if (timeLifeDrain <= 0)
         {
-            timeLifeDrain -= Time.deltaTime;
-            if (timeLifeDrain <= 0)
-            {
-                lifeDrain = false;
-                timeLifeDrain = 0;
-            }
-            else
-            {
-                hp -= dpsLifeDrain * Time.deltaTime;
-            }
+            lifeDrain = false;
+            timeLifeDrain = 0;
+        }
+        else
+        {
+            hp -= dpsLifeDrain * Time.deltaTime;
         }
     }
 

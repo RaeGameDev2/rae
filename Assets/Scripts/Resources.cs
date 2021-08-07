@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Resources : MonoBehaviour
 {
@@ -62,13 +61,22 @@ public class Resources : MonoBehaviour
         uiManager.AddMana();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector3 enemyPosition)
     {
         if (spells.ParryActive)
         {
             spells.Shockwave();
             return;
         }
+
+        var direction = transform.position - enemyPosition;
+        direction = new Vector3(direction.x, 0f).normalized;
+        if (direction != Vector3.zero)
+        {
+            var rb = GetComponent<Rigidbody2D>();
+            rb.AddForce(2500f * direction, ForceMode2D.Force);
+        }
+
         StartCoroutine(DamageAnimation());
         
         if (damage > currentHealth) damage = currentHealth;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ICE_MOB3 : MonoBehaviour
@@ -43,7 +41,7 @@ public class ICE_MOB3 : MonoBehaviour
                 explosion_active = true;
                 remaining_time_until_dissapear = time_until_dissapear;
                 if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
-                    playerResources.TakeDamage(damage);
+                    playerResources.TakeDamage(damage, playerResources.transform.position);
             }
         }
 
@@ -53,7 +51,7 @@ public class ICE_MOB3 : MonoBehaviour
         if (remaining_time_until_explosion_dissapear > 0) return;
 
         if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
-            playerResources.TakeDamage(damage);
+            playerResources.TakeDamage(damage, transform.position);
         Destroy(explosion_instance.gameObject);
         Destroy(gameObject);
     }
