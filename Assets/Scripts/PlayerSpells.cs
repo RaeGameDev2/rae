@@ -48,10 +48,6 @@ public class PlayerSpells : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            Shockwave();
-        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
 

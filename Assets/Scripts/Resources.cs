@@ -32,24 +32,6 @@ public class Resources : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            TakeDamage(1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            AddLife();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            UseMana();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            currentMana++;
-            uiManager.AddMana();
-        }
-
         if (currentMana >= maxMana) return;
         RegenerateMana();
     }
@@ -78,16 +60,6 @@ public class Resources : MonoBehaviour
         manaRegeneration = 0;
         currentMana++;
         uiManager.AddMana();
-    }
-
-    public void IncreaseMaxMana()
-    {
-        maxMana++;
-    }
-
-    public void IncreaseMaxHealth()
-    {
-        maxHealth++;
     }
 
     public void TakeDamage(int damage)
@@ -125,18 +97,39 @@ public class Resources : MonoBehaviour
         }
         Destroy(instance);
     }
+    public void IncreaseMaxMana()
+    {
+        maxMana++;
+    }
 
-    private void AddLife()
+    public void IncreaseMaxHealth()
+    {
+        maxHealth++;
+    }
+
+
+    public void AddLife()
     {
         currentHealth++;
         uiManager.AddLife();
     }
 
-    private void UseMana() 
+    public void AddMana()
+    {
+        currentMana++;
+        uiManager.AddMana();
+    }
+
+    public void UseMana() 
     {
         if (currentMana == 0)
             return;
         currentMana--;
         uiManager.UseMana();
+    }
+
+    public void AddSkillPoint()
+    {
+        skillPoints++;
     }
 }
