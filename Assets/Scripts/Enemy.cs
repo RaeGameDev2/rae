@@ -50,14 +50,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnDamageTaken(float damage, bool crit)
+    public void OnDamageTaken(float damage, bool isCrit)
     {
         Debug.Log($"OnDamageTaken {damage}");
         hp -= damage;
         hp = Mathf.Clamp(hp, 0f, 100f);
         if (hpBar != null)
             hpBar.localScale = new Vector3(hp / 100, hpBar.localScale.y, hpBar.localScale.z);
-        StartCoroutine(DamageTextAnimation(damage, crit));
+        DamagePopup.Create(transform.position, (int)damage, isCrit);
         if (hp > 0) return;
         hp = 0;
         Destroy(gameObject, 0.5f);
