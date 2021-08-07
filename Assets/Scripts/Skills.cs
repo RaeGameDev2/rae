@@ -17,8 +17,8 @@ public class Skills
         CritBonus,
         CritRate,
         AttackSpeed,
-        Defense,
-        Size
+        Life,
+        Mana
     }
 
     private int[] SkillLevel;
@@ -27,7 +27,7 @@ public class Skills
 
     public Skills()
     {
-        SkillLevel = new int[(int)SkillType.Size];
+        SkillLevel = new int[(int)SkillType.Mana];
         resources = GameObject.FindGameObjectWithTag("Player").GetComponent<Resources>();
     }
 

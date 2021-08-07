@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 [System.Serializable]
 public class Weapon
@@ -34,8 +30,6 @@ public class Weapon
         BASIC,
         HEAVY
     }
-
-
 }
 
 public class Weapons_Handler : MonoBehaviour
@@ -43,8 +37,6 @@ public class Weapons_Handler : MonoBehaviour
 
     public Weapon[] weapons;
     public Weapon currWeapon;
-
-
 
     void Start()
     {

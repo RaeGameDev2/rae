@@ -44,8 +44,7 @@ public class PlayerSkills : MonoBehaviour
         Skilltree.SetActive(true);
         ShowButton.SetActive(false);
     }
-
-    //Exemplu:
+    
     public bool IsLifeDrainUnlocked()
     {
         return playerSkills.IsSkillUnlocked(Skills.SkillType.LifeDrain);
@@ -110,12 +109,12 @@ public class PlayerSkills : MonoBehaviour
     {
         return playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed);
     }
-    public int GetLevelDefense()
+    public int GetLevelLife()
     {
-        return playerSkills.GetSkillLevel(Skills.SkillType.Defense);
+        return playerSkills.GetSkillLevel(Skills.SkillType.Life);
     }
-    public int GetLevelSize()
+    public int GetLevelMana()
     {
-        return playerSkills.GetSkillLevel(Skills.SkillType.Size);
+        return playerSkills.GetSkillLevel(Skills.SkillType.Mana);
     }
 }
