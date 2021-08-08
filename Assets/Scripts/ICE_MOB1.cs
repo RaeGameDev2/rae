@@ -3,6 +3,11 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
+// Summary:
+//      Se muta semi random intre thresholdUp si thresholdDown pe Oy si intre thresholdLeft si thresholdRight pe Ox
+//      Cand se aproie la thresholdDistance (de setat din inspector) de player se opreste din miscre si dupa face o animatie de atac
+//      Player ul ia damage doar daca pana trece attackSpeed secunde este la mai putin de 2 * thresholdDistance de enemy
 public class ICE_MOB1 : Enemy
 {
     private enum Direction
@@ -83,7 +88,6 @@ public class ICE_MOB1 : Enemy
     {
         if (Random.Range(0f, 1f / Time.fixedDeltaTime) < 0.3f) {
             state_mob = (Direction)Random.Range(0f, 3.99f);
-            // Debug.Log($"If: {state_mob}");
         }
 
         var i = 0;
@@ -96,7 +100,6 @@ public class ICE_MOB1 : Enemy
                 break;
             }
             state_mob = (Direction) Random.Range(0f, 3.99f);
-            // Debug.Log($"While:{i} {state_mob}");
         }
     }
 
@@ -113,18 +116,12 @@ public class ICE_MOB1 : Enemy
 
         return true;
     }
-    // private void OnTriggerEnter2D(Collider2D col)
-    // {
-    //     if (col.CompareTag("Player"))
-    //         playerResources.TakeDamage(damageOnTouch);
-    // }
 
     private void Attack()
     {
         isAttacking = true;
         timeAttack = Time.time + attackSpeed;
         timeNextAttack = Time.time + 3f * attackSpeed / 2f;
-        // Debug.Log($"Attack {timeAttack} , {Time.time} , {attackSpeed}");
         StartCoroutine(AttackAnimation());
     }
     

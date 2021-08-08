@@ -61,6 +61,8 @@ public class Resources : MonoBehaviour
         uiManager.AddMana();
     }
 
+    // Summary:
+    //   daca enemyPosition este egal cu playerPosition nu se face pushBack
     public void TakeDamage(int damage, Vector3 enemyPosition)
     {
         if (spells.ParryActive)
