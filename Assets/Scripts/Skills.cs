@@ -15,16 +15,17 @@ public class Skills
         CritRate,
         AttackSpeed,
         Life,
-        Mana
+        Mana,
+        Size
     }
 
     private int[] SkillLevel;
-    private const int MAX_LEVEL = 10;
+    private const int MAX_LEVEL = 4;
     private Resources resources;
 
     public Skills()
     {
-        SkillLevel = new int[(int)SkillType.Mana];
+        SkillLevel = new int[(int)SkillType.Size];
         resources = GameObject.FindGameObjectWithTag("Player").GetComponent<Resources>();
     }
 
@@ -40,6 +41,11 @@ public class Skills
         if (skillType == SkillType.Debuff && SkillLevel[(int)SkillType.PhaseWalk] > 0) return;
         SkillLevel[(int)skillType]++;
         resources.skillPoints--;
+    }
+
+    public int GetSkillPoints()
+    {
+        return resources.skillPoints;
     }
 
     public bool IsSkillUnlocked(SkillType skillType)

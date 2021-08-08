@@ -1,12 +1,18 @@
 using System.Linq;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Globalization;
 
 public class UI_SkillTree : MonoBehaviour
 {
     private Skills playerSkills;
     private Weapons_Handler weaponsHandler;
     private Resources resources;
+
+    public Text SkillPointsNr;
+
 
     public Button Parry_button;
     public Button LifeDrain_button;
@@ -24,6 +30,21 @@ public class UI_SkillTree : MonoBehaviour
     public Button Orb_button;
     public Button Staff_button;
     public Button Scythe_button;
+
+
+    private const int arr_size = 5;
+    public Sprite[] SP_Parry = new Sprite[arr_size];
+    public Sprite[] SP_LifeDrain = new Sprite[arr_size];
+    public Sprite[] SP_QuickTP = new Sprite[arr_size];
+    public Sprite[] SP_Shield = new Sprite[arr_size];
+    public Sprite[] SP_Debuff = new Sprite[arr_size];
+    public Sprite[] SP_PhaseWalk = new Sprite[arr_size];
+    public Sprite[] SP_Attack = new Sprite[arr_size];
+    public Sprite[] SP_CritBonus = new Sprite[arr_size];
+    public Sprite[] SP_CritRate = new Sprite[arr_size];
+    public Sprite[] SP_AttackSpeed = new Sprite[arr_size];
+    public Sprite[] SP_Life = new Sprite[arr_size];
+    public Sprite[] SP_Mana = new Sprite[arr_size];
 
     private GameObject Scythe_stats;
     private GameObject Orb_stats;
@@ -127,78 +148,56 @@ public class UI_SkillTree : MonoBehaviour
     {
         resources = GameObject.FindGameObjectWithTag("Player").GetComponent<Resources>();
         weaponsHandler = FindObjectOfType<Weapons_Handler>();
-        UpdateStats();
+        UpdateUI();
+    }
+
+    private void Update()
+    {
+        SkillPointsNr.text = "SKILL POINTS: " + playerSkills.GetSkillPoints().ToString();
+
     }
 
     private void UpdateUI()
     {
-        if (playerSkills.GetSkillLevel(Skills.SkillType.Parry) > 0)
-        {
-            Parry_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            Parry_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Parry\n(" + playerSkills.GetSkillLevel(Skills.SkillType.Parry) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.LifeDrain) > 0)
-        {
-            LifeDrain_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            LifeDrain_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Life Drain\n(" + playerSkills.GetSkillLevel(Skills.SkillType.LifeDrain) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.QuickTP) > 0)
-        {
-            QuickTP_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            QuickTP_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Quick TP\n(" + playerSkills.GetSkillLevel(Skills.SkillType.QuickTP) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.Shield) > 0)
-        {
-            Shield_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            Shield_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Shield\n(" + playerSkills.GetSkillLevel(Skills.SkillType.Shield) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.Debuff) > 0)
-        {
-            Debuff_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            Debuff_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Debuff\n(" + playerSkills.GetSkillLevel(Skills.SkillType.Debuff) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.PhaseWalk) > 0)
-        {
-            PhaseWalk_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            PhaseWalk_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Phase Walk\n(" + playerSkills.GetSkillLevel(Skills.SkillType.PhaseWalk) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.Attack) > 0)
-        {
-            Attack_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            Attack_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Attack\n(" + playerSkills.GetSkillLevel(Skills.SkillType.Attack) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.CritRate) > 0)
-        {
-            CritRate_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            CritRate_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Critical Rate\n(" + playerSkills.GetSkillLevel(Skills.SkillType.CritRate) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.CritBonus) > 0)
-        {
-            CritBonus_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            CritBonus_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Critical Bonus\n(" + playerSkills.GetSkillLevel(Skills.SkillType.CritBonus) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed) > 0)
-        {
-            AttackSpeed_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            AttackSpeed_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Attack Speed\n(" + playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed) + ")";
-        }
-
-        if (playerSkills.GetSkillLevel(Skills.SkillType.Life) > 0)
-        {
-            Life_button.GetComponent<Button>().GetComponent<Image>().color = Color.green;
-            Life_button.GetComponent<Button>().GetComponentInChildren<Text>().text = "Life\n(" + playerSkills.GetSkillLevel(Skills.SkillType.Life) + ")";
-        }
-
         UpdateStats();
+
+        int lvl;
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.Parry);
+        Parry_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_Parry[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.LifeDrain);
+        LifeDrain_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_LifeDrain[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.QuickTP);
+        QuickTP_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_QuickTP[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.Shield);
+        Shield_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_Shield[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.Debuff);
+        Debuff_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_Debuff[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.PhaseWalk);
+        PhaseWalk_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_PhaseWalk[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.Attack);
+        Attack_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_Attack[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.CritRate);
+        CritRate_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_CritRate[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.CritBonus);
+        CritBonus_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_CritBonus[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed);
+        AttackSpeed_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_AttackSpeed[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.Life);
+        Life_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_Life[lvl];
+
+        lvl = playerSkills.GetSkillLevel(Skills.SkillType.Mana);
+        Mana_button.GetComponent<Button>().GetComponent<Image>().sprite = SP_Mana[lvl];
+
     }
 
     private void UpdateStats()

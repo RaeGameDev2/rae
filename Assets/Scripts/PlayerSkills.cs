@@ -7,7 +7,8 @@ public class PlayerSkills : MonoBehaviour
     private Skills playerSkills;
 
     private GameObject Skilltree;
-    private GameObject ShowButton;
+
+    bool stUI = false;
 
     private void Start()
     {
@@ -16,28 +17,37 @@ public class PlayerSkills : MonoBehaviour
         uiSkillTree.SetPlayerSkills(playerSkills);
 
         Skilltree = GameObject.Find("UI_Skilltree");
-        ShowButton = GameObject.Find("Show_button");
-
-        Button Exit_btn = GameObject.Find("Exit_button").GetComponent<Button>();
-        Exit_btn.onClick.AddListener(HideUI);
 
 
-        Button Show_btn = ShowButton.GetComponent<Button>();
-        Show_btn.onClick.AddListener(ShowUI);
 
         HideUI();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (stUI == false)
+            {
+                ShowUI();
+                stUI = true;
+            }
+            else
+            {
+                HideUI();
+                stUI = false;
+            }
+        }
+    }
+
     private void HideUI()
     {
-        ShowButton.SetActive(true);
         Skilltree.SetActive(false);
     }
 
     private void ShowUI()
     {
         Skilltree.SetActive(true);
-        ShowButton.SetActive(false);
     }
     
     public bool IsLifeDrainUnlocked()
