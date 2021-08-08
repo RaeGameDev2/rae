@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     private Resources playerResources;
     private PlayerSkills playerSkills;
     private PlayerSpells playerSpells;
+    private PlayerController playerController;
+    private Weapons_Handler weaponsHandler;
 
     private void Start()
     {
@@ -14,6 +16,8 @@ public class GameManager : MonoBehaviour
         playerResources = FindObjectOfType<Resources>();
         playerSkills = FindObjectOfType<PlayerSkills>();
         playerSpells = FindObjectOfType<PlayerSpells>();
+        playerController = FindObjectOfType<PlayerController>();
+        weaponsHandler = FindObjectOfType<Weapons_Handler>();
     }
     
     private void Update()
@@ -22,9 +26,15 @@ public class GameManager : MonoBehaviour
         {
             pause = !pause;
             uiManager.Pause();
+            playerResources.Pause();
+            playerSpells.Pause();
+            playerSkills.Pause();
+            playerController.Pause();
+            weaponsHandler.Pause();
         }
 
         // For Testing
+        if (pause) return;
         if (Input.GetKeyDown(KeyCode.Alpha3))
             playerResources.AddLife();
         if (Input.GetKeyDown(KeyCode.Alpha4))

@@ -192,6 +192,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 867366736}
     m_Modifications:
+    - target: {fileID: 840515044011643389, guid: 96929fd66405db04f81989baa3259581, type: 3}
+      propertyPath: parallaxFactor.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773277296103137093, guid: 96929fd66405db04f81989baa3259581, type: 3}
+      propertyPath: parallaxFactor.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997366098377478430, guid: 96929fd66405db04f81989baa3259581, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997366099154829748, guid: 96929fd66405db04f81989baa3259581, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3997366099281860757, guid: 96929fd66405db04f81989baa3259581, type: 3}
       propertyPath: m_Name
       value: FireBackground
@@ -239,6 +255,10 @@ PrefabInstance:
     - target: {fileID: 3997366099281860759, guid: 96929fd66405db04f81989baa3259581, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5228133044398085634, guid: 96929fd66405db04f81989baa3259581, type: 3}
+      propertyPath: parallaxFactor.y
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96929fd66405db04f81989baa3259581, type: 3}
@@ -1643,6 +1663,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rae
       objectReference: {fileID: 0}
+    - target: {fileID: 6223945952256398333, guid: c0b708aa8336b3b4ea6c219e99accb7c, type: 3}
+      propertyPath: shield
+      value: 
+      objectReference: {fileID: 7519047830857811773, guid: 022d19702eb0de34aaa1100e1764b2f6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0b708aa8336b3b4ea6c219e99accb7c, type: 3}
 --- !u!1001 &2098370566

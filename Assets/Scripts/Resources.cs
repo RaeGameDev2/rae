@@ -11,6 +11,8 @@ public class Resources : MonoBehaviour
     [SerializeField] private float manaRegeneration;
     public int skillPoints = 10;
 
+    private bool pause;
+
     private UI_Manager uiManager;
     private PlayerSpells spells;
     [SerializeField] private GameObject damageRae;
@@ -61,13 +63,24 @@ public class Resources : MonoBehaviour
         uiManager.AddMana();
     }
 
+    public void Pause()
+    {
+        pause = !pause;
+    }
+
     // Summary:
     //   daca enemyPosition este egal cu playerPosition nu se face pushBack
     public void TakeDamage(int damage, Vector3 enemyPosition)
     {
-        if (spells.ParryActive)
+        if (spells.parryActive)
         {
             spells.Shockwave();
+            return;
+        }
+
+        if (spells.shieldActive)
+        {
+            spells.shieldDamage--;
             return;
         }
 

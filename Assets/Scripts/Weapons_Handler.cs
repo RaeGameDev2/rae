@@ -37,19 +37,31 @@ public class Weapons_Handler : MonoBehaviour
 
     public Weapon[] weapons;
     public Weapon currWeapon;
+    private bool pause;
+    private PlayerSpells playerSpells;
 
-    void Start()
+    public void Pause()
     {
-        currWeapon = weapons[0];
+        pause = !pause;
     }
 
-    void Update()
+    private void Start()
     {
-        if ((Input.GetKeyDown(KeyCode.T) || Input.GetAxis("Mouse ScrollWheel") > 0f || (Input.GetAxis("Mouse ScrollWheel") < 0f))
-        && currWeapon.attackType == Weapon.AttackType.NONE)
+        currWeapon = weapons[0];
+        playerSpells = FindObjectOfType<PlayerSpells>();
+        pause = false;
+    }
+
+    private void Update()
+    {
+        if (pause) return;
+        if ((Input.GetKeyDown(KeyCode.T) || Input.GetAxis("Mouse ScrollWheel") != 0f) && currWeapon.attackType == Weapon.AttackType.NONE)
         {
             SwitchWeapon();
         }
+
+        if (playerSpells.phaseWalkActive || playerSpells.orbDropped) return;
+
         if (Input.GetMouseButtonDown(0) && currWeapon.attackType == Weapon.AttackType.NONE)
         {
             currWeapon.attackType = Weapon.AttackType.BASIC;
@@ -60,7 +72,7 @@ public class Weapons_Handler : MonoBehaviour
         }
     }
 
-    void SwitchWeapon()
+    private void SwitchWeapon()
     {
         switch (currWeapon.type)
         {

@@ -40,13 +40,13 @@ public class PlayerController : MonoBehaviour
 
     private bool isDashing;
 
-    public enum Direction
+    private enum Direction
     {
         left,
         right
     }
 
-    public enum State
+    private enum State
     {
         IDLE,
         RUN,
@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
 
     private Direction direction;
     private State animState;
+    private PlayerSpells playerSpells;
+    private bool pause;
 
     private void Awake()
     {
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         weapons = GetComponent<Weapons_Handler>();
         skills = GetComponent<PlayerSkills>();
+        playerSpells = GetComponent<PlayerSpells>();
         direction = Direction.right;
         canJump = false;
         diagonalJump = false;
@@ -133,14 +136,7 @@ public class PlayerController : MonoBehaviour
             dashPressed = false;
             isDashing = true;
             StartCoroutine("Dash");
-            if (direction == Direction.right)
-            {
-                rb.velocity = new Vector2(dashSpeed, 0);
-            }
-            else
-            {
-                rb.velocity = new Vector2(-dashSpeed, 0);
-            }
+            rb.velocity = direction == Direction.right ? new Vector2(dashSpeed, 0) : new Vector2(-dashSpeed, 0);
         }
 
         //Save previous y-velocity for adding fallSpeed
@@ -263,6 +259,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        pause = !pause;
+    }
+
     public void OnAttackEnd()
     {
         weapons.currWeapon.attackType = Weapon.AttackType.NONE;
@@ -277,23 +278,21 @@ public class PlayerController : MonoBehaviour
         var critRate = weapons.currWeapon.critRate + weapons.currWeapon.bonusCritRate * skills.GetLevelCritRate();
         var critDmg = weapons.currWeapon.critDmg + weapons.currWeapon.bonusCritDmg * skills.GetLevelCritBonus();
         var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
-        float attackDmg = 0;
 
-        if (weapons.currWeapon.attackType == Weapon.AttackType.BASIC)
-            attackDmg = weapons.currWeapon.mainDamage + weapons.currWeapon.bonusAttackDmg * skills.GetLevelAttack();
-        else if (weapons.currWeapon.attackType == Weapon.AttackType.HEAVY)
-            attackDmg = weapons.currWeapon.secondaryDamage + weapons.currWeapon.bonusAttackDmg * skills.GetLevelAttack();
-
-        var crit = false;
-        if (rng <= weapons.currWeapon.critRate)
+        var attackDmg = weapons.currWeapon.attackType switch
         {
-            crit = true;
+            Weapon.AttackType.BASIC => weapons.currWeapon.mainDamage + weapons.currWeapon.bonusAttackDmg * skills.GetLevelAttack(),
+            Weapon.AttackType.HEAVY => weapons.currWeapon.secondaryDamage + weapons.currWeapon.bonusAttackDmg * skills.GetLevelAttack(),
+            _ => 0
+        };
+
+        var crit = rng <= weapons.currWeapon.critRate;
+        if (crit)
             attackDmg += critDmg;
-        }
 
         enemy.OnDamageTaken(attackDmg, crit);
-        var spells = GetComponent<PlayerSpells>();
-        if (spells.LifeDrainActive)
+
+        if (playerSpells.lifeDrainActive)
             enemy.LifeDrain(skills.GetLevelLifeDrain());
     }
 }

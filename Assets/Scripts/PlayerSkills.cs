@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerSkills : MonoBehaviour
 {
@@ -8,7 +7,8 @@ public class PlayerSkills : MonoBehaviour
 
     private GameObject Skilltree;
 
-    bool stUI = false;
+    private bool stUI = false;
+    private bool pause;
 
     private void Start()
     {
@@ -18,25 +18,21 @@ public class PlayerSkills : MonoBehaviour
 
         Skilltree = GameObject.Find("UI_Skilltree");
 
-
-
         HideUI();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (!Input.GetKeyDown(KeyCode.Tab)) return;
+        if (stUI == false)
         {
-            if (stUI == false)
-            {
-                ShowUI();
-                stUI = true;
-            }
-            else
-            {
-                HideUI();
-                stUI = false;
-            }
+            ShowUI();
+            stUI = true;
+        }
+        else
+        {
+            HideUI();
+            stUI = false;
         }
     }
 
@@ -49,7 +45,10 @@ public class PlayerSkills : MonoBehaviour
     {
         Skilltree.SetActive(true);
     }
-    
+    public void Pause()
+    {
+        pause = !pause;
+    }
     public bool IsLifeDrainUnlocked()
     {
         return playerSkills.IsSkillUnlocked(Skills.SkillType.LifeDrain);

@@ -5,28 +5,27 @@ using UnityEngine;
 public class PlayerSpells : MonoBehaviour
 {
     public bool phaseWalkActive { get; private set; }
-    public bool LifeDrainActive { get; private set; }
-    public bool ParryActive { get; private set; }
+    public bool lifeDrainActive { get; private set; }
+    public bool parryActive { get; private set; }
+    public bool shieldActive { get; private set; }
+    public bool debuffActive { get; private set; }
+    public bool quickTeleportActive { get; private set; }
+
     private bool pause;
 
     private PlayerSkills playerSkills;
     private Weapons_Handler weaponsHandler;
 
     private Vector3 transportPosition;
-    private bool orbDropped;
+    public bool orbDropped;
+    public float shieldDamage;
 
     [SerializeField] private GameObject shockwavePrefab;
+    [SerializeField] private GameObject shield;
+    [SerializeField]  private GameObject instanceShield;
     [SerializeField] private float timeLifeDrain = 5;
     [SerializeField] private float timePhaseWalk = 5;
     [SerializeField] private float timeParry = 1;
-
-
-    public void ActivatePhaseWalk()
-    {
-        phaseWalkActive = false;
-        LifeDrainActive = false;
-        ParryActive = false;
-    }
 
     public void Pause()
     {
@@ -40,10 +39,17 @@ public class PlayerSpells : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         playerSkills = GetComponent<PlayerSkills>();
         weaponsHandler = GetComponent<Weapons_Handler>();
+        phaseWalkActive = false;
+        lifeDrainActive = false;
+        parryActive = false;
+        shieldActive = false;
+        debuffActive = false;
+        quickTeleportActive = false;
+        pause = false;
     }
 
     private void Update()
@@ -60,12 +66,12 @@ public class PlayerSpells : MonoBehaviour
                 case Weapon.WeaponType.SCYTHE:
                     if (playerSkills.IsLifeDrainUnlocked())
                     {
-                        LifeDrainActive = true;
+                        lifeDrainActive = true;
                         StartCoroutine("StopLifeDrain");
                     }
                     else if (playerSkills.IsParryUnlocked())
                     {
-                        ParryActive = true;
+                        parryActive = true;
                         StartCoroutine("StopLifeDrain");
                     }
                     break;
@@ -76,6 +82,7 @@ public class PlayerSpells : MonoBehaviour
                         {
                             transform.position = transportPosition;
                             // TODO: Local Damage;
+                            Shockwave();
                         }
                         else
                         {
@@ -84,7 +91,9 @@ public class PlayerSpells : MonoBehaviour
                     }
                     else if (playerSkills.IsShieldUnlocked())
                     {
-
+                        shieldActive = true;
+                        shieldDamage = playerSkills.GetLevelShield();
+                        instanceShield = Instantiate(shield, transform.position, Quaternion.identity, transform);
                     }
                     break;
                 case Weapon.WeaponType.STAFF:
@@ -95,18 +104,32 @@ public class PlayerSpells : MonoBehaviour
                     }
                     else if (playerSkills.IsDebuffUnlocked())
                     {
-
+                        debuffActive = true;
                     }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        CheckShield();
     }
+
+    public void StopDebuff()
+    {
+        debuffActive = false;
+    }
+
+    private void CheckShield()
+    {
+        if (shieldDamage != 0) return;
+        Destroy(instanceShield);
+        shieldActive = false;
+    } 
 
     public void Shockwave()
     {
-        ParryActive = false;
+        parryActive = false;
         var instance = Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
         instance.GetComponent<Shockwave>().SetLevelParry(playerSkills.GetLevelParry());
         instance.transform.parent = transform;
@@ -115,12 +138,12 @@ public class PlayerSpells : MonoBehaviour
     private IEnumerator StopLifeDrain()
     {
         yield return new WaitForSeconds(timeLifeDrain);
-        LifeDrainActive = false;
+        lifeDrainActive = false;
     }
     private IEnumerator StopParry()
     {
         yield return new WaitForSeconds(timeParry);
-        LifeDrainActive = false;
+        lifeDrainActive = false;
     }
     private IEnumerator StopPhaseWalk()
     {
