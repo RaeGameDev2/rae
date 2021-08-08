@@ -65,15 +65,15 @@ public class Weapons_Handler : MonoBehaviour
         switch (currWeapon.type)
         {
             case Weapon.WeaponType.SCYTHE:
-                currWeapon.type = Weapon.WeaponType.ORB;
+                currWeapon = weapons[(int)Weapon.WeaponType.ORB];
                 break;
 
             case Weapon.WeaponType.ORB:
-                currWeapon.type = Weapon.WeaponType.STAFF;
+                currWeapon = weapons[(int)Weapon.WeaponType.STAFF];
                 break;
 
             case Weapon.WeaponType.STAFF:
-                currWeapon.type = Weapon.WeaponType.SCYTHE;
+                currWeapon = weapons[(int)Weapon.WeaponType.SCYTHE];
                 break;
         }
     }
