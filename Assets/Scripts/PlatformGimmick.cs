@@ -10,6 +10,7 @@ using UnityEngine;
 //      Platformele din tramaul de foc odata atinse devin din ce in ce mai transparente pana dispar de tot (necesita animatie)
 //      Din platformele din taramul de padure dupa 2 secunde dupa ce sunt atinse incep sa creasca spini (animatie care dureaza 2 secunde)
 //      (necesita animatie noua) dupa care la fiecare secunda da damage jucatorului daca inca mai e pe platforma, nu se dejactiveaza niciodata
+//      NECESITA ca platforma sa aiba materialul Ice Physics Material in BoxCollider2D !
 public class PlatformGimmick : MonoBehaviour
 {
     public float timeAutoDestruction = 5f;

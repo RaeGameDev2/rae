@@ -1,75 +1,145 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Resources : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth { get; private set; }
     public int currentHealth;
-    public float maxMana = 100;
-    public float currentMana;
-    public float manaAmount = 1f;
-   
+    public int maxMana { get; private set; }
+    public int currentMana { get; private set; }
+    [SerializeField] private float manaRegenerationRate = 0.25f;
+    [SerializeField] private float manaRegeneration;
+    public int skillPoints = 10;
 
-    public HealthBar healthBar;
-    public ManaBar manaBar;
+    private UI_Manager uiManager;
+    private PlayerSpells spells;
+    [SerializeField] private GameObject damageRae;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        maxHealth = 3;
+        maxMana = 3;
+        spells = GetComponent<PlayerSpells>();
+    }
+
+    private void Start()
+    {
+        uiManager = FindObjectOfType<UI_Manager>();
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
-
         currentMana = maxMana;
-        manaBar.SetMaxMana(maxMana);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        NormalizeMana();
+        if (currentMana >= maxMana) return;
+        RegenerateMana();
+    }
 
-        if(Input.GetKeyDown(KeyCode.Tab))
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        switch (collider.tag)
         {
-            if (currentHealth > 0)
-            {
-                TakeDamage(20);
-            }
-            else currentHealth = 0;
-
-
+            case "SkillPoint":
+                skillPoints++;
+                Destroy(collider.gameObject);
+                break;
+            case "HealthPoint" when currentHealth == maxHealth:
+                return;
+            case "HealthPoint":
+                AddLife();
+                Destroy(collider.gameObject);
+                break;
         }
-        if (Input.GetKeyDown(KeyCode.S))
+    }
+
+    private void RegenerateMana()
+    {
+        manaRegeneration += manaRegenerationRate * Time.deltaTime;
+        if (manaRegeneration < 1) return;
+        manaRegeneration = 0;
+        currentMana++;
+        uiManager.AddMana();
+    }
+
+    // Summary:
+    //   daca enemyPosition este egal cu playerPosition nu se face pushBack
+    public void TakeDamage(int damage, Vector3 enemyPosition)
+    {
+        if (spells.ParryActive)
         {
-            if (currentMana > 0)
-            {
-                TakeMana(20);
-            }
-            else currentMana = 0;
+            spells.Shockwave();
+            return;
         }
-       
+
+        var direction = transform.position - enemyPosition;
+        direction = new Vector3(direction.x, 0f).normalized;
+        if (direction != Vector3.zero)
+        {
+            var rb = GetComponent<Rigidbody2D>();
+            rb.AddForce(2500f * direction, ForceMode2D.Force);
+        }
+
+        StartCoroutine(DamageAnimation());
         
-    }
-
-    void TakeDamage(int damage)
-    {
+        if (damage > currentHealth) damage = currentHealth;
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        uiManager.TakeLives(damage);
     }
 
-    void TakeMana(float mana)
+    private IEnumerator DamageAnimation()
     {
-        currentMana -= mana;
-        manaBar.SetMana(currentMana);
-    }
-    void NormalizeMana()
-    {
-        if (currentMana < 100)
+        var instance = Instantiate(damageRae, transform.position + new Vector3(0, 1f), Quaternion.identity, transform);
+        var spriteRenderer = instance.GetComponent<SpriteRenderer>();
+        var color = spriteRenderer.color;
+        color.a = 0.5f;
+        spriteRenderer.color = color;
+        instance.transform.localScale *= 1.2f;
+
+        var time = 1f;
+        while (time > 0)
         {
-            currentMana += manaAmount * Time.deltaTime;
-            manaBar.SetMana(currentMana);
+            color.a -= Time.deltaTime / 2f;
+            spriteRenderer.color = color;
+            instance.transform.localScale *= 1.02f;
+
+            time -= Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
         }
-        else currentMana = 100;
+        Destroy(instance);
+    }
+    public void IncreaseMaxMana()
+    {
+        maxMana++;
+    }
+
+    public void IncreaseMaxHealth()
+    {
+        maxHealth++;
+    }
+
+
+    public void AddLife()
+    {
+        currentHealth++;
+        uiManager.AddLife();
+    }
+
+    public void AddMana()
+    {
+        currentMana++;
+        uiManager.AddMana();
+    }
+
+    public void UseMana() 
+    {
+        if (currentMana == 0)
+            return;
+        currentMana--;
+        uiManager.UseMana();
+    }
+
+    public void AddSkillPoint()
+    {
+        skillPoints++;
     }
 }
