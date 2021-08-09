@@ -57,7 +57,7 @@ public class ICE_MOB2 : Enemy
 
         if (Mathf.Abs(transform.position.x - spawnPosition.x) < patrolRange) return;
         patrolDirection = 1 - patrolDirection;
-        spriteRenderer.flipX = patrolDirection == Direction.RIGHT;
+        // spriteRenderer.flipX = patrolDirection == Direction.RIGHT;
     }
 
     private void Attack()

@@ -3,16 +3,19 @@ using UnityEngine;
 public class PlayerSkills : MonoBehaviour
 {
     [SerializeField] private UI_SkillTree uiSkillTree;
-    private Skills playerSkills;
+    public Skills playerSkills;
 
     private GameObject Skilltree;
 
     private bool stUI = false;
     private bool pause;
 
-    private void Start()
+    private void Awake()
     {
         playerSkills = new Skills();
+    }
+    private void Start()
+    {
         uiSkillTree = GameObject.Find("UI_Skilltree").GetComponent<UI_SkillTree>();
         uiSkillTree.SetPlayerSkills(playerSkills);
 
@@ -24,15 +27,18 @@ public class PlayerSkills : MonoBehaviour
     private void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Tab)) return;
+
         if (stUI == false)
         {
             ShowUI();
             stUI = true;
+            Time.timeScale = 0f;
         }
         else
         {
             HideUI();
             stUI = false;
+            Time.timeScale = 1f;
         }
     }
 

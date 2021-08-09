@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool canDoubleJump;
     [HideInInspector] public bool diagonalJump;
     [HideInInspector] public bool onIce;
+    public float timeNextAttack;
 
     private bool jumpPressed;
     private bool dashPressed;
@@ -91,6 +92,22 @@ public class PlayerController : MonoBehaviour
             timeSinceDash += Time.deltaTime;
         }
         UpdateAnimation();
+
+        if (weapons.currWeapon.type != Weapon.WeaponType.SCYTHE && weapons.currWeapon.attackType != Weapon.AttackType.NONE)
+        {
+            for (var i = -4; i < 5; i++)
+            {
+                var start = new Vector2(transform.position.x, transform.position.y + i);
+                // LayerMask mask = LayerMask.GetMask("Enemy");
+                var hit = Physics2D.Raycast(start, direction == Direction.left ? Vector2.left : Vector2.right, 6f);
+                Debug.DrawLine(start, start + (direction == Direction.left ? Vector2.left : Vector2.right) * 6f, Color.red, 2f); 
+                var enemy = hit.transform?.GetComponent<Enemy>();
+                Debug.Log(hit.transform?.tag);
+                if (enemy == null) continue;
+                OnAttackHit(enemy.GetComponent<Collider2D>());
+                break;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -201,7 +218,7 @@ public class PlayerController : MonoBehaviour
             case Weapon.AttackType.HEAVY:
                 {
                     var attackSpeed = weapons.currWeapon.attackSpeed + weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
-                    anim.SetFloat("attackSpeed", attackSpeed / 100);
+                    anim.SetFloat("attackSpeed", attackSpeed / 200);
                     animState = State.ATTACK;
                     break;
                 }
@@ -286,7 +303,7 @@ public class PlayerController : MonoBehaviour
             _ => 0
         };
 
-        var crit = rng <= weapons.currWeapon.critRate;
+        var crit = rng <= critRate;
         if (crit)
             attackDmg += critDmg;
 
@@ -294,5 +311,10 @@ public class PlayerController : MonoBehaviour
 
         if (playerSpells.lifeDrainActive)
             enemy.LifeDrain(skills.GetLevelLifeDrain());
+
+        if (playerSpells.debuffActive) {
+            enemy.Debuff(skills.GetLevelDebuff());
+            playerSpells.StopDebuff();
+        }
     }
 }

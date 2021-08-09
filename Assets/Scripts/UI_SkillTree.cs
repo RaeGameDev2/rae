@@ -148,13 +148,13 @@ public class UI_SkillTree : MonoBehaviour
     {
         resources = GameObject.FindGameObjectWithTag("Player").GetComponent<Resources>();
         weaponsHandler = FindObjectOfType<Weapons_Handler>();
+        playerSkills = FindObjectOfType<PlayerSkills>().playerSkills;
         UpdateUI();
     }
 
     private void Update()
     {
         SkillPointsNr.text = "SKILL POINTS: " + playerSkills.GetSkillPoints().ToString();
-
     }
 
     private void UpdateUI()

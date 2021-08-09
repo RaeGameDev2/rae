@@ -39,6 +39,8 @@ public class Weapons_Handler : MonoBehaviour
     public Weapon currWeapon;
     private bool pause;
     private PlayerSpells playerSpells;
+    private PlayerController playerController;
+    private PlayerSkills playerSkills;
 
     public void Pause()
     {
@@ -49,6 +51,8 @@ public class Weapons_Handler : MonoBehaviour
     {
         currWeapon = weapons[0];
         playerSpells = FindObjectOfType<PlayerSpells>();
+        playerController = FindObjectOfType<PlayerController>();
+        playerSkills = FindObjectOfType<PlayerSkills>();
         pause = false;
     }
 
@@ -65,10 +69,12 @@ public class Weapons_Handler : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && currWeapon.attackType == Weapon.AttackType.NONE)
         {
             currWeapon.attackType = Weapon.AttackType.BASIC;
+            // playerController.timeNextAttack = Time.time + currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
         }
         if (Input.GetMouseButtonDown(1) && currWeapon.attackType == Weapon.AttackType.NONE)
         {
             currWeapon.attackType = Weapon.AttackType.HEAVY;
+            // playerController.timeNextAttack = Time.time + 2 * currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
         }
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3997366098377478429}
   - component: {fileID: 3773277296103137093}
   m_Layer: 0
-  m_Name: Fire_Background
+  m_Name: Ice_Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3997366098377478428}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 13.165867, y: 7.791892, z: 63.258595}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 3997366099281860759}
   m_RootOrder: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: 87c50942d83e4bf4c9b7cfe5acc4b0c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58578acb8c98faf43b840c2fab7891a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa8420c37aa3504397b1c47c08899bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxFactor: {x: 0.2, y: 0}
+  parallaxFactor: {x: 0.2, y: 0.2}
   infiniteHorizontal: 1
   infiniteVertical: 0
 --- !u!1 &3997366098657661582
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 3997366098657661583}
   - component: {fileID: 840515044011643389}
   m_Layer: 0
-  m_Name: Fire_Player_Level
+  m_Name: Ice_Player_Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: d55d9a83578df7a4eb7706a1d57b9df4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4848cdb9fd8d9d641a26152548bd0f65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa8420c37aa3504397b1c47c08899bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxFactor: {x: 0.8, y: 0}
+  parallaxFactor: {x: 0.8, y: 0.8}
   infiniteHorizontal: 1
   infiniteVertical: 0
 --- !u!1 &3997366099154829746
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 3997366099154829747}
   - component: {fileID: 5228133044398085634}
   m_Layer: 0
-  m_Name: Fire_Foreground
+  m_Name: ice_Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ Transform:
   m_GameObject: {fileID: 3997366099154829746}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 13.033367, y: 7.891892, z: 63.258595}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 3997366099281860759}
   m_RootOrder: 1
@@ -268,7 +268,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 5d6f69eb9ecec844291500757b76eb23, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4a8d2328b6e75840857536b644e0c41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa8420c37aa3504397b1c47c08899bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxFactor: {x: 0.5, y: 0}
+  parallaxFactor: {x: 0.5, y: 0.5}
   infiniteHorizontal: 1
   infiniteVertical: 0
 --- !u!1 &3997366099281860757

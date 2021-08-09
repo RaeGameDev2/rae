@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float hp = 100f;
+    [SerializeField] private float hp;
+    private float initialHP;
     [SerializeField] protected int damageOnTouch = 1;
 
     [SerializeField] private float initialTimeLifeDrain = 4f;
-    [SerializeField] private float dpsLifeDrain = 5f;
+    [SerializeField] private float dpsLifeDrain = 50f;
     private bool lifeDrain;
     private float timeLifeDrain;
 
@@ -33,6 +34,7 @@ public class Enemy : MonoBehaviour
     protected void Start()
     {
         attackSpeed = initialAttackSpeed;
+        initialHP = hp;
     }
 
     protected void Update()
@@ -50,13 +52,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private float timeNextHit;
     public void OnDamageTaken(float damage, bool isCrit)
     {
+        if (Time.time < timeNextHit) return;
+
+        timeNextHit = Time.time + 1f;
         Debug.Log($"OnDamageTaken {damage}");
         hp -= damage;
-        hp = Mathf.Clamp(hp, 0f, 100f);
+        hp = Mathf.Clamp(hp, 0f, initialHP);
         if (hpBar != null)
-            hpBar.localScale = new Vector3(hp / 100, hpBar.localScale.y, hpBar.localScale.z);
+            hpBar.localScale = new Vector3(hp / initialHP, hpBar.localScale.y, hpBar.localScale.z);
         DamagePopup.Create(transform.position, (int)damage, isCrit);
         if (hp > 0) return;
         hp = 0;
@@ -65,14 +71,18 @@ public class Enemy : MonoBehaviour
 
     public void LifeDrain(int lvl)
     {
-        if (lvl < 1) return;
+        // if (lvl < 1) return;
         lifeDrain = true;
         timeLifeDrain = initialTimeLifeDrain + lvl;
+        Debug.Log("Lifedrain: " + lvl);
     }
 
     public void Debuff(int lvl)
     {
-
+        var factor = 1f - 0.2f * lvl;
+        attackSpeed /= factor;
+        speed *= factor;
+        Debug.Log("debuff: "+ factor);
     }
 
     private IEnumerator DamageTextAnimation(float damage, bool crit)

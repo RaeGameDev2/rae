@@ -4,45 +4,36 @@ using UnityEngine;
 
 public class PlayerSpells : MonoBehaviour
 {
-    public bool phaseWalkActive { get; private set; }
-    public bool lifeDrainActive { get; private set; }
-    public bool parryActive { get; private set; }
-    public bool shieldActive { get; private set; }
-    public bool debuffActive { get; private set; }
-    public bool quickTeleportActive { get; private set; }
+    public bool phaseWalkActive;
+    public bool lifeDrainActive;
+    public bool parryActive;
+    public bool shieldActive;
+    public bool debuffActive;
+    public bool quickTeleportActive;
 
     private bool pause;
 
     private PlayerSkills playerSkills;
+    private Resources playerResources;
     private Weapons_Handler weaponsHandler;
 
-    private Vector3 transportPosition;
+    [SerializeField] private Vector3 transportPosition;
     public bool orbDropped;
     public float shieldDamage;
 
     [SerializeField] private GameObject shockwavePrefab;
     [SerializeField] private GameObject shield;
-    [SerializeField]  private GameObject instanceShield;
+    [SerializeField]  private GameObject damageRae;
+    private GameObject instanceShield;
     [SerializeField] private float timeLifeDrain = 5;
     [SerializeField] private float timePhaseWalk = 5;
     [SerializeField] private float timeParry = 1;
-
-    public void Pause()
-    {
-        if (pause)
-        {
-            pause = false;
-        }
-        else
-        {
-            pause = true;
-        }
-    }
 
     private void Awake()
     {
         playerSkills = GetComponent<PlayerSkills>();
         weaponsHandler = GetComponent<Weapons_Handler>();
+        playerResources = GetComponent<Resources>();
         phaseWalkActive = false;
         lifeDrainActive = false;
         parryActive = false;
@@ -68,11 +59,15 @@ public class PlayerSpells : MonoBehaviour
                     {
                         lifeDrainActive = true;
                         StartCoroutine("StopLifeDrain");
+                        StartCoroutine(SpellAnimation());
+                        playerResources.UseMana();
                     }
                     else if (playerSkills.IsParryUnlocked())
                     {
                         parryActive = true;
                         StartCoroutine("StopLifeDrain");
+                        StartCoroutine(SpellAnimation());
+                        playerResources.UseMana();
                     }
                     break;
                 case Weapon.WeaponType.ORB:
@@ -81,19 +76,22 @@ public class PlayerSpells : MonoBehaviour
                         if (orbDropped)
                         {
                             transform.position = transportPosition;
+                            StartCoroutine(SpellAnimation());
                             // TODO: Local Damage;
-                            Shockwave();
                         }
                         else
                         {
+                            orbDropped = true;
                             transportPosition = transform.position;
+                            playerResources.UseMana();
                         }
                     }
                     else if (playerSkills.IsShieldUnlocked())
                     {
                         shieldActive = true;
                         shieldDamage = playerSkills.GetLevelShield();
-                        instanceShield = Instantiate(shield, transform.position, Quaternion.identity, transform);
+                        instanceShield = Instantiate(shield, transform.position +  Vector3.up , Quaternion.identity, transform);
+                        playerResources.UseMana();
                     }
                     break;
                 case Weapon.WeaponType.STAFF:
@@ -101,10 +99,14 @@ public class PlayerSpells : MonoBehaviour
                     {
                         phaseWalkActive = true;
                         StartCoroutine("StopPhaseWalk");
+                        StartCoroutine(SpellAnimation());
+                        playerResources.UseMana();
                     }
                     else if (playerSkills.IsDebuffUnlocked())
                     {
                         debuffActive = true;
+                        StartCoroutine(SpellAnimation());
+                        playerResources.UseMana();
                     }
                     break;
                 default:
@@ -115,6 +117,10 @@ public class PlayerSpells : MonoBehaviour
         CheckShield();
     }
 
+    public void Pause()
+    {
+        pause = !pause;
+    }
     public void StopDebuff()
     {
         debuffActive = false;
@@ -149,6 +155,27 @@ public class PlayerSpells : MonoBehaviour
     {
         yield return new WaitForSeconds(timePhaseWalk);
         phaseWalkActive = false;
+    }
+    private IEnumerator SpellAnimation()
+    {
+        var instance = Instantiate(damageRae, transform.position + new Vector3(0, 1f), Quaternion.identity, transform);
+        var spriteRenderer = instance.GetComponent<SpriteRenderer>();
+        var color = Color.blue;
+        color.a = 0.5f;
+        spriteRenderer.color = color;
+        instance.transform.localScale *= 1.2f;
+
+        var time = 0.5f;
+        while (time > 0)
+        {
+            color.a -= Time.deltaTime / 2f;
+            spriteRenderer.color = color;
+            instance.transform.localScale *= 1.01f;
+
+            time -= Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+        Destroy(instance);
     }
 }
 //

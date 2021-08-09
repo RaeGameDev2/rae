@@ -10,7 +10,7 @@ public class ICE_MOB3 : MonoBehaviour
     [SerializeField] private float thresholdDistance = 10f;
     private float time_until_dissapear = 1;
     private float remaining_time_until_dissapear;
-    private float time_until_explosion_dissapear = 1;
+    private float time_until_explosion_dissapear = 5; // mod
     private float remaining_time_until_explosion_dissapear;
     private bool initiate_explosion;
     private bool explosion_active;
@@ -21,7 +21,7 @@ public class ICE_MOB3 : MonoBehaviour
     private void Start()
     {
         remaining_time_until_dissapear = time_until_dissapear;
-        remaining_time_until_explosion_dissapear = time_until_explosion_dissapear = 1;
+        remaining_time_until_explosion_dissapear = time_until_explosion_dissapear = 5; // mod
         Mob3_Sprite.sprite = idle;
         playerResources = FindObjectOfType<Resources>();
     }
