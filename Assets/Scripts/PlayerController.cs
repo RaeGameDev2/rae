@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private Weapons_Handler weapons;
     private PlayerSkills skills;
 
-    [HideInInspector] public bool isGrounded;
+    public bool isGrounded;
     [HideInInspector] public bool canJump;
     [HideInInspector] public bool canDoubleJump;
     [HideInInspector] public bool diagonalJump;
