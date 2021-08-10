@@ -10,8 +10,7 @@ enum Direction
 public class ICE_MOB2 : Enemy
 {
     [SerializeField] private float patrolRange;
-
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    
     [SerializeField] private Sprite idleSprite;
     [SerializeField] private Sprite attackSprite;
     [SerializeField] private float thresholdDistance = 5f;
@@ -26,8 +25,7 @@ public class ICE_MOB2 : Enemy
     private new void Start()
     {
         base.Start();
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        
         spawnPosition = transform.position;
         patrolDirection = Direction.LEFT;
 
@@ -57,7 +55,7 @@ public class ICE_MOB2 : Enemy
 
         if (Mathf.Abs(transform.position.x - spawnPosition.x) < patrolRange) return;
         patrolDirection = 1 - patrolDirection;
-        // spriteRenderer.flipX = patrolDirection == Direction.RIGHT;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);  // flip x
     }
 
     private void Attack()
