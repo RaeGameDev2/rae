@@ -2079,7 +2079,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.02845949, y: -0.7019986}
@@ -2436,7 +2436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundSpeed: 20
   airSpeed: 15
-  jumpHeight: 10
+  jumpHeight: 5
   jumpSpeed: 20
   fallSpeed: 20
   gravity: 9
@@ -2448,6 +2448,7 @@ MonoBehaviour:
   canDoubleJump: 0
   diagonalJump: 0
   onIce: 0
+  timeNextAttack: 0
 --- !u!114 &9216066548978391534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2548,11 +2549,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c9869856ea4ab42ba520bfd83a6d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phaseWalkActive: 0
+  lifeDrainActive: 0
+  parryActive: 0
+  shieldActive: 0
+  debuffActive: 0
+  quickTeleportActive: 0
+  transportPosition: {x: 0, y: 0, z: 0}
   orbDropped: 0
   shieldDamage: 0
   shockwavePrefab: {fileID: 5044662247962228408, guid: 623b1a11324df034dbac560ae6167b43, type: 3}
-  shield: {fileID: 7519047830857811773, guid: 022d19702eb0de34aaa1100e1764b2f6, type: 3}
-  instanceShield: {fileID: 0}
+  shield: {fileID: 1976252167293610119, guid: 9cfe6f0327f267b48a4b2b29532e5da1, type: 3}
+  damageRae: {fileID: 6193407600786716527, guid: 6feb5e7d9bcd15d44a1d5c30ca38fff1, type: 3}
   timeLifeDrain: 5
   timePhaseWalk: 5
   timeParry: 1

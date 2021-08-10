@@ -76,7 +76,7 @@ public class PlayerSpells : MonoBehaviour
                         if (orbDropped)
                         {
                             transform.position = transportPosition;
-                            StartCoroutine(SpellAnimation());
+                            orbDropped = false;
                             // TODO: Local Damage;
                         }
                         else
@@ -84,13 +84,14 @@ public class PlayerSpells : MonoBehaviour
                             orbDropped = true;
                             transportPosition = transform.position;
                             playerResources.UseMana();
+                            StartCoroutine(SpellAnimation());
                         }
                     }
                     else if (playerSkills.IsShieldUnlocked())
                     {
                         shieldActive = true;
                         shieldDamage = playerSkills.GetLevelShield();
-                        instanceShield = Instantiate(shield, transform.position +  Vector3.up , Quaternion.identity, transform);
+                        instanceShield = Instantiate(shield, transform.position + new Vector3(0f, 1f, -0.1f), Quaternion.identity, transform);
                         playerResources.UseMana();
                     }
                     break;

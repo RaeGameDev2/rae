@@ -72,6 +72,8 @@ public class Resources : MonoBehaviour
     //   daca enemyPosition este egal cu playerPosition nu se face pushBack
     public void TakeDamage(int damage, Vector3 enemyPosition)
     {
+        if (spells.phaseWalkActive)
+            return;
         if (spells.parryActive)
         {
             spells.Shockwave();
