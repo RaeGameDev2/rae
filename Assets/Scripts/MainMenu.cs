@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,20 +5,8 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] int hubSceneID;
     [SerializeField] int playSceneID;
-   [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
-
-    private void Awake()
-    {
-        Time.timeScale = 0f;
-    }
-    public void Play(int sceneID)
-    {
-
-        Time.timeScale = 1f;
-        mainMenu.SetActive(false);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    }
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject pauseButton;
@@ -31,7 +17,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject weaponsMenu;
 
     [SerializeField] GameObject noteMenu;
-     [SerializeField] GameObject noteMenu1;
+    [SerializeField] GameObject noteMenu1;
     [SerializeField] GameObject noteMenu2;
     [SerializeField] GameObject noteMenu3;
     [SerializeField] GameObject noteMenu4;
@@ -40,34 +26,40 @@ public class MainMenu : MonoBehaviour
 
     private bool isPaused = false;
     private bool isInfo = false;
- 
-    public void Play() {
+
+    public void Play()
+    {
         SceneManager.LoadScene(playSceneID);
     }
 
-    public void Quit() {
+    public void Quit()
+    {
         Application.Quit();
-
     }
 
-    public void SettingsMain() {
+    public void SettingsMain()
+    {
         mainMenu.SetActive(false);
         settingsMenu.SetActive(true);
     }
 
-    public void SettingPause() {
+    public void SettingPause()
+    {
         isPaused = true;
         settingsMenu.SetActive(true);
         pauseMenu.SetActive(false);
     }
 
-    public void Back() {
-        if (isPaused) {
+    public void Back()
+    {
+        if (isPaused)
+        {
             pauseMenu.SetActive(true);
             settingsMenu.SetActive(false);
             return;
         }
-        if (isInfo) {
+        if (isInfo)
+        {
             informationMenu.SetActive(true);
             weaponsMenu.SetActive(false);
             noteMenu.SetActive(false);
@@ -78,7 +70,8 @@ public class MainMenu : MonoBehaviour
         settingsMenu.SetActive(false);
     }
 
-    public void Pause() {
+    public void Pause()
+    {
         pauseMenu.SetActive(true);
         pauseButton.SetActive(false);
         informationButton.SetActive(false);
@@ -86,17 +79,19 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    public void Resume() {
+    public void Resume()
+    {
         pauseButton.SetActive(true);
         pauseMenu.SetActive(false);
         informationButton.SetActive(true);
         Time.timeScale = 1f;
-        
+
         isPaused = false;
         isInfo = false;
     }
-    
-    public void BackToHub() {
+
+    public void BackToHub()
+    {
         Time.timeScale = 1f;
         SceneManager.LoadScene(hubSceneID);
     }
@@ -130,7 +125,7 @@ public class MainMenu : MonoBehaviour
         informationButton.SetActive(false);
         pauseButton.SetActive(false);
         informationMenu.SetActive(false);
-        
+
         noteMenu1.SetActive(false);
         noteMenu2.SetActive(true);
         noteMenu3.SetActive(false);
@@ -143,7 +138,7 @@ public class MainMenu : MonoBehaviour
         informationButton.SetActive(false);
         pauseButton.SetActive(false);
         informationMenu.SetActive(false);
-        noteMenu1.SetActive(false) ;
+        noteMenu1.SetActive(false);
         noteMenu2.SetActive(false);
         noteMenu3.SetActive(true);
         noteMenu4.SetActive(false);
@@ -195,7 +190,7 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 1f;
 
     }
-     public void Weapons()
+    public void Weapons()
     {
         informationButton.SetActive(false);
         informationMenu.SetActive(false);
