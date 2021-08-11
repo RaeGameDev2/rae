@@ -11,9 +11,11 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 0f;
     }
     public void Play(int sceneID) {
-        // SceneManager.LoadScene(sceneID);
+        
         Time.timeScale = 1f;
-        mainMenu.SetActive(false);
+         mainMenu.SetActive(false);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+
     }
 
     public void Quit() {
