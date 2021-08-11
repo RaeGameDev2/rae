@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class PlayerSpells : MonoBehaviour
 {
@@ -9,21 +10,19 @@ public class PlayerSpells : MonoBehaviour
     public bool parryActive;
     public bool shieldActive;
     public bool debuffActive;
-    public bool quickTeleportActive;
-
+    private bool quickTeleportActive;
+    public bool orbDropped;
+    public float shieldDamage;
     private bool pause;
-
     private PlayerSkills playerSkills;
     private Resources playerResources;
     private Weapons_Handler weaponsHandler;
-
-    [SerializeField] private Vector3 transportPosition;
-    public bool orbDropped;
-    public float shieldDamage;
-
+    private Vector3 transportPosition;
+    [SerializeField] private GameObject damageRae;
     [SerializeField] private GameObject shockwavePrefab;
-    [SerializeField] private GameObject shield;
-    [SerializeField]  private GameObject damageRae;
+    [SerializeField] private GameObject shieldPrefab;
+    [SerializeField] private GameObject phaseWalkPrefab;
+    [SerializeField] private GameObject teleportPrefab;
     private GameObject instanceShield;
     [SerializeField] private float timeLifeDrain = 5;
     [SerializeField] private float timePhaseWalk = 5;
@@ -75,9 +74,8 @@ public class PlayerSpells : MonoBehaviour
                     {
                         if (orbDropped)
                         {
-                            transform.position = transportPosition;
                             orbDropped = false;
-                            // TODO: Local Damage;
+                            StartCoroutine(TeleportAnimation());
                         }
                         else
                         {
@@ -91,7 +89,7 @@ public class PlayerSpells : MonoBehaviour
                     {
                         shieldActive = true;
                         shieldDamage = playerSkills.GetLevelShield();
-                        instanceShield = Instantiate(shield, transform.position + new Vector3(0f, 1f, -0.1f), Quaternion.identity, transform);
+                        instanceShield = Instantiate(shieldPrefab, transform.position + new Vector3(0f, 1f, -0.1f), Quaternion.identity, transform);
                         playerResources.UseMana();
                     }
                     break;
@@ -100,7 +98,6 @@ public class PlayerSpells : MonoBehaviour
                     {
                         phaseWalkActive = true;
                         StartCoroutine("StopPhaseWalk");
-                        StartCoroutine(SpellAnimation());
                         playerResources.UseMana();
                     }
                     else if (playerSkills.IsDebuffUnlocked())
@@ -154,8 +151,83 @@ public class PlayerSpells : MonoBehaviour
     }
     private IEnumerator StopPhaseWalk()
     {
-        yield return new WaitForSeconds(timePhaseWalk);
+        var instance = Instantiate(phaseWalkPrefab,
+            transform.position + new Vector3(0f, 1f, -0.66f), Quaternion.identity, transform);
+        yield return new WaitForSeconds(timePhaseWalk - 1f);
         phaseWalkActive = false;
+        StartCoroutine(StopPhaseWalkAnimation(instance));
+    }
+    private IEnumerator StopPhaseWalkAnimation(GameObject instance)
+    {
+        var material = instance.GetComponent<Renderer>().material;
+        var spriteRenderer = instance.GetComponentInChildren<SpriteRenderer>();
+        var colorMaterial = material.color;
+        var colorRenderer = spriteRenderer.color;
+        var albedo = 1f;
+        while (albedo > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            albedo -= Time.fixedDeltaTime;
+            material.color = new Color(colorMaterial.r, colorMaterial.g, colorMaterial.b, albedo);
+            spriteRenderer.color = new Color(colorRenderer.r, colorRenderer.g, colorRenderer.b, albedo);
+            instance.transform.position -= Vector3.back * Time.fixedDeltaTime / 2f;
+        }
+        Destroy(instance);
+    }
+
+    private IEnumerator TeleportAnimation()
+    {
+        quickTeleportActive = true;
+        var instance = Instantiate(teleportPrefab,
+            transform.position + new Vector3(0f, 1f, -6f), Quaternion.identity, transform);
+        var collider  = instance.GetComponentInChildren<CircleCollider2D>().gameObject;
+        collider.SetActive(false);
+        var material = instance.GetComponent<Renderer>().material;
+        material.SetFloat("_FresnelPower", 0);
+        var initialLocalScale = transform.localScale;
+        // Time.timeScale = 0.1f;
+        
+        var time = 1f;
+        var fresnelPower = 0f;
+        while (time > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            time -= Time.fixedDeltaTime;
+            fresnelPower  = Mathf.Min(10f, fresnelPower + 7f * Time.fixedDeltaTime);
+            material.SetFloat("_FresnelPower", fresnelPower);
+        }
+        
+        collider.SetActive(true);
+        time = 0.5f;
+        while (time > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            time -= Time.fixedDeltaTime;
+            transform.localScale -= initialLocalScale * Time.fixedDeltaTime * 2f;
+        }
+
+        transform.position = transportPosition;
+        time = 0.5f;
+        while (time > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            time -= Time.fixedDeltaTime;
+            transform.localScale += initialLocalScale * Time.fixedDeltaTime * 2f;
+        }
+
+        transform.localScale = initialLocalScale;
+        collider.gameObject.SetActive(false);
+        time = 1f;
+        while (time > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            time -= Time.fixedDeltaTime;
+            fresnelPower = Mathf.Max(0f, fresnelPower - 7f * Time.fixedDeltaTime);
+            material.SetFloat("_FresnelPower", fresnelPower);
+        }
+
+        // Time.timeScale = 1f;
+        Destroy(instance);
     }
     private IEnumerator SpellAnimation()
     {
