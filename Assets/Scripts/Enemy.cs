@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float hp;
-    private float initialHP;
+    [SerializeField] private float initialHP;
     [SerializeField] protected int damageOnTouch = 1;
 
     [SerializeField] private float initialTimeLifeDrain = 4f;
@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private GameObject damageText;
     private Transform hpBar;
+    [SerializeField] private float initialScaleX;
     protected bool pause;
 
     protected void Awake()
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour
     {
         attackSpeed = initialAttackSpeed;
         initialHP = hp;
+        initialScaleX = hpBar.transform.localScale.x;
     }
 
     protected void Update()
@@ -61,8 +63,8 @@ public class Enemy : MonoBehaviour
         Debug.Log($"OnDamageTaken {damage}");
         hp -= damage;
         hp = Mathf.Clamp(hp, 0f, initialHP);
-        if (hpBar != null)
-            hpBar.localScale = new Vector3(hp / initialHP, hpBar.localScale.y, hpBar.localScale.z);
+        hpBar.localScale = new Vector3((hp / initialHP) * initialScaleX, hpBar.localScale.y, hpBar.localScale.z);
+
         DamagePopup.Create(transform.position, (int)damage, isCrit);
         if (hp > 0) return;
         hp = 0;
