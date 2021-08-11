@@ -35,7 +35,7 @@ public class ICE_MOB3 : MonoBehaviour
             if (remaining_time_until_dissapear <= 0)
             {
                 explosion_instance = Instantiate(explosion, transform.position, Quaternion.identity);
-                explosion.transform.localScale *= 5f;
+                explosion.transform.localScale *= 1f;
                 Mob3_Sprite.enabled = false;
                 initiate_explosion = false;
                 explosion_active = true;
