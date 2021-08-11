@@ -10,18 +10,18 @@ public class MainMenu : MonoBehaviour
    [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
 
-<<<<<<< HEAD
     private void Awake()
     {
         Time.timeScale = 0f;
     }
-    public void Play(int sceneID) {
-        
-        Time.timeScale = 1f;
-         mainMenu.SetActive(false);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    public void Play(int sceneID)
+    {
 
-=======
+        Time.timeScale = 1f;
+        mainMenu.SetActive(false);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject pauseButton;
 
@@ -43,7 +43,6 @@ public class MainMenu : MonoBehaviour
  
     public void Play() {
         SceneManager.LoadScene(playSceneID);
->>>>>>> 211fb106bdec3bebeadc5a592ec71425052009ed
     }
 
     public void Quit() {
