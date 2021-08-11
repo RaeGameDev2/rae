@@ -13,6 +13,7 @@ public class ICE_MOB3 : MonoBehaviour
     private float time_until_explosion_dissapear = 5; // mod
     private float remaining_time_until_explosion_dissapear;
     private bool initiate_explosion;
+    private bool exploded = false;
     private bool explosion_active;
     private ParticleSystem explosion_instance;
     private bool player_damaged = false;
@@ -25,7 +26,7 @@ public class ICE_MOB3 : MonoBehaviour
         Mob3_Sprite.sprite = idle;
         playerResources = FindObjectOfType<Resources>();
     }
-    
+
     private void Update()
     {
         if (initiate_explosion)
@@ -38,6 +39,7 @@ public class ICE_MOB3 : MonoBehaviour
                 explosion.transform.localScale *= 1f;
                 Mob3_Sprite.enabled = false;
                 initiate_explosion = false;
+                exploded = true;
                 explosion_active = true;
                 remaining_time_until_dissapear = time_until_dissapear;
                 if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
@@ -46,21 +48,30 @@ public class ICE_MOB3 : MonoBehaviour
         }
 
         if (!explosion_active) return;
-        
+
         remaining_time_until_explosion_dissapear -= Time.deltaTime;
         if (remaining_time_until_explosion_dissapear > 0) return;
 
         if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
+        {
+            Debug.Log("SALUT");
             playerResources.TakeDamage(damage, transform.position);
-        Destroy(explosion_instance.gameObject);
-        Destroy(gameObject);
+            Destroy(this.gameObject);
+            Destroy(explosion_instance.gameObject);
+        }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player") return;
-        Mob3_Sprite.sprite = active;
-        initiate_explosion = true;
+        if (collision.tag != "Player")
+            return;
+        else
+        {
+            Mob3_Sprite.sprite = active;
+            if (exploded == false)
+            {
+                initiate_explosion = true;
+            }
+        }
     }
 
     // private void OnTriggerStay2D(Collider2D collision)
