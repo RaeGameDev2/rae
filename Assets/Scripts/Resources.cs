@@ -120,7 +120,6 @@ public class Resources : MonoBehaviour
             time -= Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
         }
-        Debug.Log("PA");
         Destroy(instance);
     }
     public void IncreaseMaxMana()

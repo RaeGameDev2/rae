@@ -10,7 +10,7 @@ public class ICE_MOB3 : MonoBehaviour
     [SerializeField] private float thresholdDistance = 10f;
     private float time_until_dissapear = 1;
     private float remaining_time_until_dissapear;
-    private float time_until_explosion_dissapear = 5; // mod
+    private float time_until_explosion_dissapear = 1; // mod
     private float remaining_time_until_explosion_dissapear;
     private bool initiate_explosion;
     private bool exploded = false;
@@ -22,7 +22,7 @@ public class ICE_MOB3 : MonoBehaviour
     private void Start()
     {
         remaining_time_until_dissapear = time_until_dissapear;
-        remaining_time_until_explosion_dissapear = time_until_explosion_dissapear = 5; // mod
+        remaining_time_until_explosion_dissapear = time_until_explosion_dissapear = 1; // mod
         Mob3_Sprite.sprite = idle;
         playerResources = FindObjectOfType<Resources>();
     }
@@ -54,13 +54,13 @@ public class ICE_MOB3 : MonoBehaviour
 
         if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
         {
-            Debug.Log("SALUT");
+            //Debug.Log("SALUT");
             playerResources.TakeDamage(damage, transform.position);
             Destroy(this.gameObject);
             Destroy(explosion_instance.gameObject);
         }
     }
-        private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player")
             return;
@@ -73,16 +73,4 @@ public class ICE_MOB3 : MonoBehaviour
             }
         }
     }
-
-    // private void OnTriggerStay2D(Collider2D collision)
-    // {
-    //     if (collision.tag == "Player")
-    //     {
-    //         if (explosion_active && player_damaged == false)
-    //         {
-    //             player_damaged = true;
-    //             collision.GetComponent<Resources>().TakeDamage(damage);
-    //         }
-    //     }
-    // }
 }
