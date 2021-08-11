@@ -4,9 +4,9 @@ public class GroundCheck : MonoBehaviour
 {
     private PlayerController pc;
 
-    private void Awake()
+    private void Start()
     {
-        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        pc = FindObjectOfType<PlayerController>();
     }
     private void OnTriggerEnter2D(Collider2D col)
     {

@@ -2048,7 +2048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8682311611212240587}
   - component: {fileID: 5386230269212143096}
-  - component: {fileID: 1135487022667149714}
+  - component: {fileID: 354356298842150244}
   m_Layer: 6
   m_Name: GroundTrigger
   m_TagString: Untagged
@@ -2096,7 +2096,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3984314, y: 0.22210956}
   m_EdgeRadius: 0
---- !u!114 &1135487022667149714
+--- !u!114 &354356298842150244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2567,13 +2567,13 @@ MonoBehaviour:
   parryActive: 0
   shieldActive: 0
   debuffActive: 0
+  quickTeleportActive: 0
+  transportPosition: {x: 0, y: 0, z: 0}
   orbDropped: 0
   shieldDamage: 0
-  damageRae: {fileID: 6193407600786716527, guid: 6feb5e7d9bcd15d44a1d5c30ca38fff1, type: 3}
   shockwavePrefab: {fileID: 5044662247962228408, guid: 623b1a11324df034dbac560ae6167b43, type: 3}
-  shieldPrefab: {fileID: 1976252167293610119, guid: 9cfe6f0327f267b48a4b2b29532e5da1, type: 3}
-  phaseWalkPrefab: {fileID: 6266635232837095685, guid: 18d4ccc603129a443a126347c1c62213, type: 3}
-  teleportPrefab: {fileID: 235279382955879337, guid: b86cce03e4fe0fc4c859533134132f28, type: 3}
+  shield: {fileID: 7519047830857811773, guid: 022d19702eb0de34aaa1100e1764b2f6, type: 3}
+  damageRae: {fileID: 6193407600786716527, guid: 6feb5e7d9bcd15d44a1d5c30ca38fff1, type: 3}
   timeLifeDrain: 5
   timePhaseWalk: 5
   timeParry: 1
