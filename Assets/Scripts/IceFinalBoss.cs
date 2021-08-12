@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceFinalBoss : Enemy
 {
-    private enum AnimType
+    public enum AnimType
     {
         Idle,
         Attack,
@@ -14,14 +14,15 @@ public class IceFinalBoss : Enemy
     
     private Animator anim;
     private Resources playerResources;
-    [SerializeField] private AnimType animType;
+    [SerializeField] public AnimType animType;
     [SerializeField] private float thresholdDistance = 10f;
 
-    [SerializeField] public bool simpleAttack;
-    [SerializeField] public bool projectileAttack;
-    [SerializeField] public bool isDying;
+    [SerializeField] private bool simpleAttack;
+    [SerializeField] private bool projectileAttack;
+    [SerializeField] private bool isDying;
     [SerializeField] private float timeOfAttack;
     [SerializeField] private float timeOfProjectile;
+    [SerializeField] private GameObject projectile;
 
     private new void Awake()
     {
@@ -35,15 +36,17 @@ public class IceFinalBoss : Enemy
         base.Start();
         playerResources = FindObjectOfType<Resources>();
         anim.SetInteger("state", (int)animType);
-        hp = 5000f;
+        hp = 1000f;
+        initialHP = 1000f;
         isBoss = true;
     }
 
     private new void Update()
     {
         base.Update();
+        CheckCamera();
 
-        // anim.SetInteger("state", (int)animType);
+        anim.SetInteger("state", (int)animType);
         if (isDying) {
             animType = AnimType.Death; 
             return;
@@ -60,15 +63,29 @@ public class IceFinalBoss : Enemy
             switch (animType)
             {
                 case AnimType.Attack:
-                    StartCoroutine(StopAttacking());
+                    StartCoroutine(ActivateAttacking());
                     break;
                 case AnimType.Projectile:
-                    StartCoroutine(StopProjectile());
+                    StartCoroutine(ActivateProjectile());
                     break;
             }
         }
     }
 
+    private void CheckCamera()
+    {
+        if (GetDistanceToPlayer() < 40f)
+        {
+            var cam = Camera.main;
+            cam.orthographicSize = 15f;
+        }
+
+        if (GetDistanceToPlayer() > 50f)
+        {
+            var cam = Camera.main;
+            cam.orthographicSize = 10.8f;
+        }
+    }
     private float GetDistanceToPlayer()
     {
         return (playerResources.transform.position - transform.position).magnitude;
@@ -85,25 +102,33 @@ public class IceFinalBoss : Enemy
         Destroy(gameObject, 2f);
     }
 
-    private IEnumerator StopAttacking()
+    private IEnumerator ActivateAttacking()
     {
         simpleAttack = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         if (!isDying)
             animType = AnimType.Attack;
-        yield return new WaitForSeconds(2f);
+    }
+
+    public void AttackEnd()
+    {
         simpleAttack = false;
         if (!isDying)
             animType = AnimType.Idle;
     }
-
-    private IEnumerator StopProjectile()
+    private IEnumerator ActivateProjectile()
     {
         projectileAttack = true;
         yield return new WaitForSeconds(1f);
-        if (!isDying)
-            animType = AnimType.Projectile;
-        yield return new WaitForSeconds(2f);
+        
+        if (isDying) yield break;
+        animType = AnimType.Projectile;
+        Instantiate(projectile, transform.position, Quaternion.identity, transform);
+    }
+
+    public void ProjectileEnd()
+    {
+        // Debug.Log("ProjectileEnd");
         projectileAttack = false;
         if (!isDying)
             animType = AnimType.Idle;

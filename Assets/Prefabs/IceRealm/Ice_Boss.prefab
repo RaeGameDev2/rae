@@ -439,7 +439,7 @@ Transform:
   m_GameObject: {fileID: 3184471506493267501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 386.42, y: 106.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 2515429219929171931}
   - {fileID: 3484073844995154287}
@@ -493,13 +493,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  initialHP: 100
+  initialHP: 5000
   damageOnTouch: 1
   initialTimeLifeDrain: 4
   dpsLifeDrain: 50
   initialAttackSpeed: 2
   speed: 0
-  damageText: {fileID: 0}
+  damageText: {fileID: 5777892390895327323, guid: cc0835ce7ca8a864682b2136486b7040, type: 3}
   initialScaleX: 0
   animType: 0
   thresholdDistance: 10
@@ -508,6 +508,7 @@ MonoBehaviour:
   isDying: 0
   timeOfAttack: 0
   timeOfProjectile: 0
+  projectile: {fileID: 5777892390895327323, guid: cc0835ce7ca8a864682b2136486b7040, type: 3}
 --- !u!61 &3184471506493267499
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -803,6 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9eb50979998b854db0bf53145a3d4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeNextAttack: 0
 --- !u!1 &5020085240977146802
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected float hp;
-    [SerializeField] private float initialHP;
+    [SerializeField] protected float initialHP;
     [SerializeField] protected int damageOnTouch = 1;
 
     [SerializeField] private float initialTimeLifeDrain = 4f;

@@ -7,6 +7,7 @@ public class BossLegs : MonoBehaviour
     private IceFinalBoss parent;
 
     bool isAttacking;
+    [SerializeField] private float timeNextAttack;
 
     private void Start()
     {
@@ -16,18 +17,19 @@ public class BossLegs : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // Debug.Log("Colider");
         if (collision.tag != "Player") return;
         if (isAttacking) return;
-        
+
+        // Debug.Log("Attack");
         isAttacking = true;
-        if (parent.simpleAttack)
-            playerResources.TakeDamage(1, transform.position);
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            isAttacking = false;
-        }
+        
+        if (parent.animType != IceFinalBoss.AnimType.Attack) return;
+        // Debug.Log("animType");
+        if (Time.time < timeNextAttack) return;
+        // Debug.Log("damage");
+
+        playerResources.TakeDamage(1, transform.position);
+        timeNextAttack = Time.time + 1.5f;
     }
 }
