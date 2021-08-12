@@ -4,7 +4,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Globalization;
-using System.Collections.Specialized;
 
 public class UI_SkillTree : MonoBehaviour
 {
@@ -13,8 +12,7 @@ public class UI_SkillTree : MonoBehaviour
     private Resources resources;
 
     public Text SkillPointsNr;
-    public Text SkillNameText;
-    public Text SkillDescriptionText;
+
 
     public Button Parry_button;
     public Button LifeDrain_button;
@@ -51,41 +49,10 @@ public class UI_SkillTree : MonoBehaviour
     private GameObject Scythe_stats;
     private GameObject Orb_stats;
     private GameObject Staff_stats;
-    private GameObject Skill_stats;
-
-    private int activePanel = 0; // 0 - orb | 1 - scythe | 2 - staff
 
     private GameObject Scythe_panel;
     private GameObject Orb_panel;
     private GameObject Staff_panel;
-
-    string[] SkillNames = new string[] { 
-        "Attack",
-        "Attack Speed",
-        "Mana",
-        "Life",
-        "Critical Rate",
-        "Critical Bonus",
-        "Quick TP",
-        "Shield",
-        "Parry",
-        "Life Drain",
-        "Debuff",
-        "Phase Walk" };
-
-    string[] SkillDescription = new string[] {
-        "Attack -  Description - De adaugat",
-        "Attack Speed -  Description - De adaugat",
-        "Mana -  Description - De adaugat",
-        "Life -  Description - De adaugat",
-        "Critical Rate -  Description - De adaugat",
-        "Critical Bonus -  Description - De adaugat",
-        "Quick TP -  Description - De adaugat",
-        "Shield -  Description - De adaugat",
-        "Parry -  Description - De adaugat",
-        "Life Drain -  Description - De adaugat",
-        "Debuff -  Description - De adaugat",
-        "Phase Walk -  Description - De adaugat" };
 
     private Text ScytheAttackText;
     private Text ScytheCritRateText;
@@ -105,7 +72,6 @@ public class UI_SkillTree : MonoBehaviour
         Scythe_stats = GameObject.Find("Scythe_Stats");
         Orb_stats = GameObject.Find("Orb_Stats");
         Staff_stats = GameObject.Find("Staff_Stats");
-        Skill_stats = GameObject.Find("Skill_Stats");
 
         Scythe_panel = GameObject.Find("Scythe_panel");
         Orb_panel = GameObject.Find("Orb_panel");
@@ -127,7 +93,6 @@ public class UI_SkillTree : MonoBehaviour
         StaffCritBonusText = components.FirstOrDefault(component => component.name == "Staff_CritBonus_text");
         StaffAttackSpeedText = components.FirstOrDefault(component => component.name == "Staff_AttackSpeed_text");
 
-        Skill_stats.SetActive(false);
         Scythe_stats.SetActive(false);
         Staff_stats.SetActive(false);
         Orb_stats.SetActive(true);
@@ -258,207 +223,34 @@ public class UI_SkillTree : MonoBehaviour
         this.playerSkills = playerSkills;
     }
 
-
-    //Mouse Over
-    public void Attack_MouseOver()
-    {
-        Attack_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(1);
-    }
-
-    public void AttackSpeed_MouseOver()
-    {
-        AttackSpeed_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(2);
-    }
-
-    public void Mana_MouseOver()
-    {
-        Mana_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(3);
-    }
-
-    public void Life_MouseOver()
-    {
-        Life_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(4);
-    }
-
-    public void CritRate_MouseOver()
-    {
-        CritRate_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(5);
-    }
-
-    public void CritBonus_MouseOver()
-    {
-        CritBonus_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(6);
-    }
-
-    public void QuickTP_MouseOver()
-    {
-        QuickTP_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(7);
-    }
-
-    public void Shield_MouseOver()
-    {
-        Shield_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(8);
-    }
-
-    public void Parry_MouseOver()
-    {
-        Parry_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(9);
-    }
-
-    public void LifeDrain_MouseOver()
-    {
-        LifeDrain_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(10);
-    }
-
-    public void Debuff_MouseOver()
-    {
-        Debuff_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(11);
-    }
-
-    public void PhaseWalk_MouseOver()
-    {
-        PhaseWalk_button.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        SkillStats_Show(12);
-    }
-
-
-    //Mouse Exit
-    public void Attack_MouseExit()
-    {
-        Attack_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void AttackSpeed_MouseExit()
-    {
-        AttackSpeed_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void Mana_MouseExit()
-    {
-        Mana_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void Life_MouseExit()
-    {
-        Life_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void CritRate_MouseExit()
-    {
-        CritRate_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void CritBonus_MouseExit()
-    {
-        CritBonus_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void QuickTP_MouseExit()
-    {
-        QuickTP_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void Shield_MouseExit()
-    {
-        Shield_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void Parry_MouseExit()
-    {
-        Parry_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void LifeDrain_MouseExit()
-    {
-        LifeDrain_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void Debuff_MouseExit()
-    {
-        Debuff_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    public void PhaseWalk_MouseExit()
-    {
-        PhaseWalk_button.transform.localScale = new Vector3(1f, 1f, 1f);
-        SkillStats_Hide();
-    }
-
-    void SkillStats_Show(int skillid)
-    {
-        Skill_stats.SetActive(true);
-        Scythe_stats.SetActive(false);
-        Staff_stats.SetActive(false);
-        Orb_stats.SetActive(false);
-
-        SkillNameText.text = SkillNames[skillid - 1];
-        SkillDescriptionText.text = SkillDescription[skillid - 1];
-    }
-
-    void SkillStats_Hide()
-    {
-        Skill_stats.SetActive(false);
-        if (activePanel == 0) Orb_stats.SetActive(true);
-        else if (activePanel == 1) Scythe_stats.SetActive(true);
-        else if (activePanel == 2) Staff_stats.SetActive(true);
-    }
-
     void Orb_Clicked()
     {
-        Skill_stats.SetActive(false);
         Scythe_stats.SetActive(false);
         Staff_stats.SetActive(false);
         Orb_stats.SetActive(true);
         Orb_panel.GetComponent<Image>().color = new Color(80f / 255f, 80f / 255f, 80f / 255f);
         Staff_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
         Scythe_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
-        activePanel = 0;
     }
 
     void Staff_Clicked()
     {
-        Skill_stats.SetActive(false);
         Scythe_stats.SetActive(false);
         Staff_stats.SetActive(true);
         Orb_stats.SetActive(false);
         Orb_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
         Staff_panel.GetComponent<Image>().color = new Color(80f / 255f, 80f / 255f, 80f / 255f);
         Scythe_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
-        activePanel = 2;
     }
 
     void Scythe_Clicked()
     {
-        Skill_stats.SetActive(false);
         Scythe_stats.SetActive(true);
         Staff_stats.SetActive(false);
         Orb_stats.SetActive(false);
         Orb_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
         Staff_panel.GetComponent<Image>().color = new Color(48f / 255f, 48f / 255f, 48f / 255f);
         Scythe_panel.GetComponent<Image>().color = new Color(80f / 255f, 80f / 255f, 80f / 255f);
-        activePanel = 1;
     }
 
     void Parry_Clicked()
