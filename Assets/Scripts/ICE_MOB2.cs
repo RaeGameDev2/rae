@@ -10,38 +10,53 @@ enum Direction
 public class ICE_MOB2 : Enemy
 {
     [SerializeField] private float patrolRange;
-    
-    [SerializeField] private Sprite idleSprite;
-    [SerializeField] private Sprite attackSprite;
+
     [SerializeField] private float thresholdDistance = 5f;
 
     private Vector3 spawnPosition;
     private Direction patrolDirection;
     private Resources playerResources;
-    private bool isAttacking;
+    private Animator animator;
     // Attack rate: seconds till next hit
     private float attackTimer;
+
+    public enum State
+    {
+        IDLE,
+        ATTACK,
+        DEATH
+    }
+
+    private State animState = State.IDLE;
 
     private new void Start()
     {
         base.Start();
-        
+
         spawnPosition = transform.position;
         patrolDirection = Direction.LEFT;
 
         // 1 hit per 2 seconds
-        isAttacking = false;
         attackTimer = attackSpeed;
         playerResources = FindObjectOfType<Resources>();
+        animator = GetComponent<Animator>();
     }
 
     private new void Update()
     {
+        if (hp <= 0)
+            animState = State.DEATH;
         base.Update();
-        if (!isAttacking)
+        if (animState == State.IDLE)
             Patrol();
         else
             Attack();
+        UpdateAnimation();
+    }
+
+    private void UpdateAnimation()
+    {
+        animator.SetInteger("state", (int)animState);
     }
 
     private void Patrol()
@@ -67,14 +82,12 @@ public class ICE_MOB2 : Enemy
         if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
             playerResources.TakeDamage(damageOnTouch, transform.position);
         attackTimer = attackSpeed;
-        isAttacking = false;
-        transform.localScale /= 1.5f;
+        animState = State.IDLE;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (!col.CompareTag("Player")) return;
-        isAttacking = true;
-        transform.localScale *= 1.5f;
+        animState = State.ATTACK;
     }
 }

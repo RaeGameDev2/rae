@@ -235,6 +235,8 @@ public class PlayerController : MonoBehaviour
         currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
         if (rb.velocity.x != 0)
             diagonalJump = true;
+
+        SoundManagerScript.playJumpSound = true;
     }
 
     private IEnumerator Dash()

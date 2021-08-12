@@ -44,75 +44,74 @@ public class PlayerSpells : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            switch (weaponsHandler.currWeapon.type)
-            {
-                case Weapon.WeaponType.SCYTHE:
-                    if (playerSkills.IsLifeDrainUnlocked())
-                    {
-                        lifeDrainActive = true;
-                        StartCoroutine("StopLifeDrain");
-                        StartCoroutine(SpellAnimation());
-                        playerResources.UseMana();
-                    }
-                    else if (playerSkills.IsParryUnlocked())
-                    {
-                        parryActive = true;
-                        StartCoroutine("StopLifeDrain");
-                        StartCoroutine(SpellAnimation());
-                        playerResources.UseMana();
-                    }
-                    break;
-                case Weapon.WeaponType.ORB:
-                    if (playerSkills.IsQuickTpUnlocked())
-                    {
-                        if (orbDropped)
-                        {
-                            orbDropped = false;
-                            StartCoroutine(TeleportAnimation());
-                        }
-                        else
-                        {
-                            orbDropped = true;
-                            transportPosition = transform.position;
-                            playerResources.UseMana();
-                            StartCoroutine(SpellAnimation());
-                        }
-                    }
-                    else if (playerSkills.IsShieldUnlocked())
-                    {
-                        shieldActive = true;
-                        shieldDamage = playerSkills.GetLevelShield();
-                        instanceShield = Instantiate(shieldPrefab, transform.position + new Vector3(0f, 1f, -0.1f), Quaternion.identity, transform);
-                        playerResources.UseMana();
-                    }
-                    break;
-                case Weapon.WeaponType.STAFF:
-                    if (playerSkills.IsPhaseWalkUnlocked())
-                    {
-                        phaseWalkActive = true;
-                        StartCoroutine("StopPhaseWalk");
-                        playerResources.UseMana();
-                    }
-                    else if (playerSkills.IsDebuffUnlocked())
-                    {
-                        debuffActive = true;
-                        StartCoroutine(SpellAnimation());
-                        playerResources.UseMana();
-                    }
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
         CheckShield();
+
+        if (!Input.GetKeyDown(KeyCode.Alpha1)) return;
+        if (quickTeleportActive) return;
+        if (shieldActive) return;
+        if (lifeDrainActive) return;
+        if (parryActive) return;
+        if (phaseWalkActive) return;
+        switch (weaponsHandler.currWeapon.type)
+        {
+            case Weapon.WeaponType.SCYTHE:
+                if (playerSkills.IsLifeDrainUnlocked())
+                {
+                    lifeDrainActive = true;
+                    StartCoroutine("StopLifeDrain");
+                    StartCoroutine(SpellAnimation());
+                    playerResources.UseMana();
+                }
+                else if (playerSkills.IsParryUnlocked())
+                {
+                    parryActive = true;
+                    StartCoroutine("StopLifeDrain");
+                    StartCoroutine(SpellAnimation());
+                    playerResources.UseMana();
+                }
+                break;
+            case Weapon.WeaponType.ORB:
+                if (playerSkills.IsQuickTpUnlocked())
+                {
+                    if (orbDropped)
+                    {
+                        orbDropped = false;
+                        StartCoroutine(TeleportAnimation());
+                    }
+                    else
+                    {
+                        orbDropped = true;
+                        transportPosition = transform.position;
+                        playerResources.UseMana();
+                        StartCoroutine(SpellAnimation());
+                    }
+                }
+                else if (playerSkills.IsShieldUnlocked())
+                {
+                    shieldActive = true;
+                    shieldDamage = playerSkills.GetLevelShield();
+                    instanceShield = Instantiate(shieldPrefab, transform.position + new Vector3(0f, 1f, -0.1f), Quaternion.identity, transform);
+                    playerResources.UseMana();
+                }
+                break;
+            case Weapon.WeaponType.STAFF:
+                if (playerSkills.IsPhaseWalkUnlocked())
+                {
+                    phaseWalkActive = true;
+                    StartCoroutine("StopPhaseWalk");
+                    playerResources.UseMana();
+                }
+                else if (playerSkills.IsDebuffUnlocked())
+                {
+                    if (debuffActive) return;
+                    debuffActive = true;
+                    StartCoroutine(SpellAnimation());
+                    playerResources.UseMana();
+                }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public void Pause()
@@ -126,6 +125,7 @@ public class PlayerSpells : MonoBehaviour
 
     private void CheckShield()
     {
+        if (!shieldActive) return;
         if (shieldDamage != 0) return;
         Destroy(instanceShield);
         shieldActive = false;
@@ -185,7 +185,6 @@ public class PlayerSpells : MonoBehaviour
         var material = instance.GetComponent<Renderer>().material;
         material.SetFloat("_FresnelPower", 0);
         var initialLocalScale = transform.localScale;
-        // Time.timeScale = 0.1f;
         
         var time = 1f;
         var fresnelPower = 0f;
@@ -226,7 +225,7 @@ public class PlayerSpells : MonoBehaviour
             material.SetFloat("_FresnelPower", fresnelPower);
         }
 
-        // Time.timeScale = 1f;
+        quickTeleportActive = false;
         Destroy(instance);
     }
     private IEnumerator SpellAnimation()

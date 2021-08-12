@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] int playSceneID;
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
+    
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject pauseButton;
@@ -29,11 +30,14 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
+        hubSceneID = 1;
+        playSceneID = 1;
         SceneManager.LoadScene(playSceneID);
     }
 
     public void Quit()
     {
+        Debug.Log("Quit Game");
         Application.Quit();
     }
 
@@ -52,6 +56,7 @@ public class MainMenu : MonoBehaviour
 
     public void Back()
     {
+        
         if (isPaused)
         {
             pauseMenu.SetActive(true);
@@ -196,4 +201,5 @@ public class MainMenu : MonoBehaviour
         informationMenu.SetActive(false);
         weaponsMenu.SetActive(true);
     }
+
 }
