@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
                 var start = new Vector2(transform.position.x, transform.position.y + i);
                 // LayerMask mask = LayerMask.GetMask("Enemy");
                 var hit = Physics2D.Raycast(start, direction == Direction.left ? Vector2.left : Vector2.right, 6f);
-                Debug.DrawLine(start, start + (direction == Direction.left ? Vector2.left : Vector2.right) * 6f, Color.red, 2f); 
+                Debug.DrawLine(start, start + (direction == Direction.left ? Vector2.left : Vector2.right) * 6f, Color.red, 2f);
                 var enemy = hit.transform?.GetComponent<Enemy>();
                 // Debug.Log(hit.transform?.tag);
                 if (enemy == null) continue;
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
             currGravity = gravity;
 
         //If not in dash, handles jump
-        if (!isDashing)
+        if (!isDashing && !playerSpells.quickTeleportActive)
         {
             if (animState != State.ATTACK)
             {
@@ -173,6 +173,8 @@ public class PlayerController : MonoBehaviour
     //Flip player when changing direction
     private void ChangeDirection()
     {
+        if (playerSpells.quickTeleportActive)
+            return;
         if (hInput > 0.01f && rb.velocity.x > 0)
         {
             if (direction == Direction.left)
@@ -314,7 +316,8 @@ public class PlayerController : MonoBehaviour
         if (playerSpells.lifeDrainActive)
             enemy.LifeDrain(skills.GetLevelLifeDrain());
 
-        if (playerSpells.debuffActive) {
+        if (playerSpells.debuffActive)
+        {
             enemy.Debuff(skills.GetLevelDebuff());
             playerSpells.StopDebuff();
         }
