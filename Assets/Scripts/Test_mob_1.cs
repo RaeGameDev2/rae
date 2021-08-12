@@ -84,7 +84,6 @@ public class Test_mob_1 : Enemy
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
 
-        anim.SetFloat("Speed", speed);
     }
 
     
