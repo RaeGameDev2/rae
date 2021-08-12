@@ -8,15 +8,18 @@ public class ArmColliderScript : MonoBehaviour
     [SerializeField] private float attackDelay;
     [SerializeField] private float attackTimer;
 
+    private FIRE_MOB1 parent;
+
     bool isAttacking;
 
     // Start is called before the first frame update
     void Start()
     {
-        attackDelay = 1f;
+        attackDelay = 2f;
         attackTimer = attackDelay;
 
         playerResources = GameObject.FindGameObjectWithTag("Player").GetComponent<Resources>();
+        parent = transform.GetComponentInParent<FIRE_MOB1>();
 
         isAttacking = false;
     }
@@ -32,6 +35,9 @@ public class ArmColliderScript : MonoBehaviour
             {
                 attackTimer = attackDelay;
                 isAttacking = false;
+
+                parent.anim.SetInteger("state", (int) FIRE_MOB1.AttackType.Idle);
+                parent.isAttacking = false;
             }
         }
     }
@@ -45,7 +51,8 @@ public class ArmColliderScript : MonoBehaviour
             {
                 isAttacking = true;
                 Debug.Log("Player attacked");
-                playerResources.TakeDamage(1, transform.position);
+                if (parent.isAttacking)
+                    playerResources.TakeDamage(1, transform.position);
             }
         }
     }
