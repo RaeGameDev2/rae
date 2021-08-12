@@ -1,33 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FIRE_MOB3 : Enemy
 {
     // Start is called before the first frame update
     public static float speedY = 20f;
-    public bool up = true;
-    public bool down = false;
-    public float relative_y  = 0f;
+    public bool down;
     private Resources playerResources;
+    public float relative_y;
     public float treshholdHeight = 20f;
-    
+    public bool up = true;
 
-
-
-    void Start()
+    private void Start()
     {
+        base.Start();
         playerResources = FindObjectOfType<Resources>();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
+        base.Update();
         if (relative_y >= treshholdHeight)
         {
             up = false;
             down = true;
-        } else if (relative_y <= -5f)
+        }
+        else if (relative_y <= -5f)
         {
             down = false;
             up = true;
@@ -41,18 +38,16 @@ public class FIRE_MOB3 : Enemy
         else if (down)
         {
             relative_y -= speedY * Time.deltaTime;
-            transform.Translate(0, (-1)* speedY * Time.deltaTime, 0);
+            transform.Translate(0, -1 * speedY * Time.deltaTime, 0);
         }
-
     }
 
 
     private void OnTriggerEnter2D(Collider2D col)
-        {
-            if (!col.CompareTag("Player")) return;
-             playerResources.TakeDamage(damageOnTouch, transform.position);
+    {
+        if (!col.CompareTag("Player")) return;
+        if (FindObjectOfType<PlayerSpells>().phaseWalkActive) return;
+
+        playerResources.TakeDamage(damageOnTouch, transform.position);
     }
-
-
-
-    }
+}

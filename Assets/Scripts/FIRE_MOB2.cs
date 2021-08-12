@@ -1,38 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class FIRE_MOB2 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] private SpriteRenderer Mob2_Sprite;
+    [SerializeField] private readonly int damage = 1;
+    private bool exploded;
     [SerializeField] private ParticleSystem explosion;
-    [SerializeField] private int damage = 1;
-    [SerializeField] private float thresholdDistance = 10f;
-    private float time_until_dissapear = 1;
-    private float remaining_time_until_dissapear;
-    private float time_until_explosion_dissapear = 1; // mod
-    private float remaining_time_until_explosion_dissapear;
-    private bool initiate_explosion;
-    private bool exploded = false;
     private bool explosion_active;
     private ParticleSystem explosion_instance;
-    private bool player_damaged = false;
+
+    private bool initiate_explosion;
+
+    // Start is called before the first frame update
+    [SerializeField] private SpriteRenderer Mob2_Sprite;
     private Resources playerResources;
-    void Start()
+    private float remaining_time_until_dissapear;
+    private float remaining_time_until_explosion_dissapear;
+    [SerializeField] private readonly float thresholdDistance = 10f;
+    private readonly float time_until_dissapear = 1;
+
+    private void Start()
     {
         var components = gameObject.GetComponentsInChildren<Transform>();
-        Mob2_Sprite = components.FirstOrDefault(component => component.name == "FireMob2_Temp").GetComponent<SpriteRenderer>();
+        Mob2_Sprite = components.FirstOrDefault(component => component.name == "FireMob2_Temp")?
+            .GetComponent<SpriteRenderer>();
 
 
         remaining_time_until_dissapear = time_until_dissapear;
-        remaining_time_until_explosion_dissapear = time_until_explosion_dissapear = 1; // mod
+        remaining_time_until_explosion_dissapear = 1;
         playerResources = FindObjectOfType<Resources>();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         if (initiate_explosion)
         {
@@ -59,9 +58,8 @@ public class FIRE_MOB2 : MonoBehaviour
 
         if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
         {
-            //Debug.Log("SALUT");
             playerResources.TakeDamage(damage, transform.position);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             Destroy(explosion_instance.gameObject);
         }
     }
@@ -69,19 +67,10 @@ public class FIRE_MOB2 : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag != "Player") return;
+        if (FindObjectOfType<PlayerSpells>().phaseWalkActive) return;
 
-
-        if (collision.tag != "Player")
-            return;
-        else
-        {
-          
-            transform.localScale = new Vector3(1.5f, 1.5f, 1f);
-            if (exploded == false)
-            {
-                initiate_explosion = true;
-            }
-        }
-       
+        transform.localScale = new Vector3(1.5f, 1.5f, 1f);
+        if (exploded == false) initiate_explosion = true;
     }
 }

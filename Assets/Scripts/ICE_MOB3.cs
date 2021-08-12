@@ -52,26 +52,20 @@ public class ICE_MOB3 : MonoBehaviour
         remaining_time_until_explosion_dissapear -= Time.deltaTime;
         if (remaining_time_until_explosion_dissapear > 0) return;
 
-        if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
-        {
-            //Debug.Log("SALUT");
-            playerResources.TakeDamage(damage, transform.position);
-            Destroy(this.gameObject);
-            Destroy(explosion_instance.gameObject);
-        }
+        if ((playerResources.transform.position - transform.position).magnitude > thresholdDistance) return;
+        playerResources.TakeDamage(damage, transform.position);
+        Destroy(gameObject);
+        Destroy(explosion_instance.gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player")
-            return;
-        else
-        {
-            Mob3_Sprite.sprite = active;
-            if (exploded == false)
-            {
-                initiate_explosion = true;
-            }
-        }
+        if (collision.tag != "Player") return;
+        if (FindObjectOfType<PlayerSpells>().phaseWalkActive) return;
 
+        Mob3_Sprite.sprite = active;
+        if (exploded == false)
+        {
+            initiate_explosion = true;
+        }
     }
 }
