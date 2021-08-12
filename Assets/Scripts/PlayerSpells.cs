@@ -10,7 +10,7 @@ public class PlayerSpells : MonoBehaviour
     public bool parryActive;
     public bool shieldActive;
     public bool debuffActive;
-    private bool quickTeleportActive;
+    public bool quickTeleportActive;
     public bool orbDropped;
     public float shieldDamage;
     private bool pause;
@@ -129,7 +129,7 @@ public class PlayerSpells : MonoBehaviour
         if (shieldDamage != 0) return;
         Destroy(instanceShield);
         shieldActive = false;
-    } 
+    }
 
     public void Shockwave()
     {
@@ -180,22 +180,22 @@ public class PlayerSpells : MonoBehaviour
         quickTeleportActive = true;
         var instance = Instantiate(teleportPrefab,
             transform.position + new Vector3(0f, 1f, 2f), Quaternion.identity, transform);
-        var collider  = instance.GetComponentInChildren<CircleCollider2D>().gameObject;
+        var collider = instance.GetComponentInChildren<CircleCollider2D>().gameObject;
         collider.SetActive(false);
         var material = instance.GetComponent<Renderer>().material;
         material.SetFloat("_FresnelPower", 0);
         var initialLocalScale = transform.localScale;
-        
+
         var time = 1f;
         var fresnelPower = 0f;
         while (time > 0)
         {
             yield return new WaitForFixedUpdate();
             time -= Time.fixedDeltaTime;
-            fresnelPower  = Mathf.Min(10f, fresnelPower + 7f * Time.fixedDeltaTime);
+            fresnelPower = Mathf.Min(10f, fresnelPower + 7f * Time.fixedDeltaTime);
             material.SetFloat("_FresnelPower", fresnelPower);
         }
-        
+
         collider.SetActive(true);
         time = 0.5f;
         while (time > 0)
