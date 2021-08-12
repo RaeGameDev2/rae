@@ -44,6 +44,8 @@ public class ICE_MOB2 : Enemy
 
     private new void Update()
     {
+        if (hp <= 0)
+            animState = State.DEATH;
         base.Update();
         if (animState == State.IDLE)
             Patrol();
@@ -54,8 +56,6 @@ public class ICE_MOB2 : Enemy
 
     private void UpdateAnimation()
     {
-        if (hp <= 0)
-            animState = State.DEATH;
         animator.SetInteger("state", (int)animState);
     }
 

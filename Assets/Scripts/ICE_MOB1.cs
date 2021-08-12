@@ -26,26 +26,20 @@ public class ICE_MOB1 : Enemy
     [SerializeField] private float thresholdLeft = -5f;
     [SerializeField] private float thresholdRight = 5f;
     [SerializeField] private float thresholdDistance = 10f;
-
+    
     private Resources playerResources;
-    public enum State
-    {
-        IDLE,
-        ATTACK,
-        DEATH
-    }
-    private State animState = State.IDLE;
+
+    private bool isAttacking;
     private float timeAttack;
     private float timeNextAttack;
-    private Animator anim;
 
     private new void Awake()
     {
         base.Awake();
+        isAttacking = false;
         state_mob = Direction.UP;
         speed = 5;
         initialPosition = transform.position;
-        anim = GetComponent<Animator>();
     }
 
     private new void Start()
@@ -58,7 +52,7 @@ public class ICE_MOB1 : Enemy
     {
         base.Update();
 
-        if (animState == State.ATTACK)
+        if (isAttacking)
         {
             if (timeAttack <= Time.time)
             {
@@ -67,7 +61,7 @@ public class ICE_MOB1 : Enemy
                     playerResources.TakeDamage(1, transform.position);
                 }
 
-                animState = State.IDLE;
+                isAttacking = false;
             }
 
             if (pause)
@@ -88,20 +82,11 @@ public class ICE_MOB1 : Enemy
             if (GetDistanceFromPlayer() < thresholdDistance)
                 Attack();
         }
-        UpdateAnimation();
-    }
-
-    private void UpdateAnimation()
-    {
-        if (hp <= 0)
-            animState = State.DEATH;
-        anim.SetInteger("state", (int)animState);
     }
 
     private void FixedUpdate()
     {
-        if (Random.Range(0f, 1f / Time.fixedDeltaTime) < 0.3f)
-        {
+        if (Random.Range(0f, 1f / Time.fixedDeltaTime) < 0.3f) {
             state_mob = (Direction)Random.Range(0f, 3.99f);
         }
 
@@ -114,7 +99,7 @@ public class ICE_MOB1 : Enemy
                 Debug.LogError("CheckDirection");
                 break;
             }
-            state_mob = (Direction)Random.Range(0f, 3.99f);
+            state_mob = (Direction) Random.Range(0f, 3.99f);
         }
     }
 
@@ -134,12 +119,12 @@ public class ICE_MOB1 : Enemy
 
     private void Attack()
     {
-        animState = State.ATTACK;
+        isAttacking = true;
         timeAttack = Time.time + attackSpeed;
         timeNextAttack = Time.time + 3f * attackSpeed / 2f;
         StartCoroutine(AttackAnimation());
     }
-
+    
     private IEnumerator AttackAnimation()
     {
         var initialLocalScale = transform.localScale;
