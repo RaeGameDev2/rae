@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Resources : MonoBehaviour
 {
@@ -99,8 +101,20 @@ public class Resources : MonoBehaviour
         if (damage > currentHealth) damage = currentHealth;
         currentHealth -= damage;
         uiManager.TakeLives(damage);
+        if  (currentHealth <= 0)
+        {
+            StartCoroutine(my_delay());
+           
+        }
     }
 
+
+    private IEnumerator my_delay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(1);
+
+    }
     private IEnumerator DamageAnimation()
     {
         var instance = Instantiate(damageRae, transform.position + new Vector3(0, 1f), Quaternion.identity, transform);
