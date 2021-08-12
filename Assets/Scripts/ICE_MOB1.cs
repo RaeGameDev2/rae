@@ -18,6 +18,16 @@ public class ICE_MOB1 : Enemy
         RIGHT
     }
 
+    public enum AnimType
+    {
+        Idle,
+        Attack,
+        Damage,
+        Death
+    }
+
+    public AnimType animType;
+
     [SerializeField] private Direction state_mob;
     private Vector3 initialPosition;
 
@@ -33,9 +43,14 @@ public class ICE_MOB1 : Enemy
     private float timeAttack;
     private float timeNextAttack;
 
+    [SerializeField] private Animator anim;
+    [SerializeField] private bool damageAnimation;
+    [SerializeField] private float oldHp;
+
     private new void Awake()
     {
         base.Awake();
+        anim = GetComponent<Animator>();
         isAttacking = false;
         state_mob = Direction.UP;
         speed = 5;
@@ -45,12 +60,18 @@ public class ICE_MOB1 : Enemy
     private new void Start()
     {
         base.Start();
-        playerResources = GameObject.FindGameObjectWithTag("Player").GetComponent<Resources>();
+        playerResources = FindObjectOfType<Resources>();
+        animType = AnimType.Idle;
+        oldHp = hp;
     }
 
     private new void Update()
     {
+        if (hp <= 0) return;
+
         base.Update();
+
+        if (damageAnimation) return;
 
         if (isAttacking)
         {
@@ -86,6 +107,25 @@ public class ICE_MOB1 : Enemy
 
     private void FixedUpdate()
     {
+        anim.SetFloat("speed", attackSpeed / 3.5f);
+        anim.SetInteger("state", (int)animType);
+        if (hp <= 0)
+        {
+            animType = AnimType.Death;
+            return;
+        }
+
+        if (damageAnimation) return;
+        
+        if (Math.Abs(oldHp - hp) > 0.1f)
+        {
+            DamageAnimation();
+            return;
+        }
+        oldHp = hp;
+
+        transform.localScale = new Vector3(Mathf.Sign(transform.position.x - playerResources.transform.position.x),transform.localScale.y, transform.localScale.z);
+
         if (Random.Range(0f, 1f / Time.fixedDeltaTime) < 0.3f) {
             state_mob = (Direction)Random.Range(0f, 3.99f);
         }
@@ -95,12 +135,23 @@ public class ICE_MOB1 : Enemy
         {
             i++;
             if (i > 10)
-            {
-                Debug.LogError("CheckDirection");
                 break;
-            }
             state_mob = (Direction) Random.Range(0f, 3.99f);
         }
+    }
+    private void DamageAnimation()
+    {
+        damageAnimation = true;
+        animType = AnimType.Damage;
+    }
+
+    public void DamageEnd()
+    {
+        Debug.Log("DamageEnd");
+        damageAnimation = false;
+        oldHp = hp;
+        if (hp > 0)
+            animType = AnimType.Idle;
     }
 
     private bool CheckDirection()
@@ -119,6 +170,8 @@ public class ICE_MOB1 : Enemy
 
     private void Attack()
     {
+        anim.SetFloat("speed", attackSpeed / 2.5f);
+        animType = AnimType.Attack;
         isAttacking = true;
         timeAttack = Time.time + attackSpeed;
         timeNextAttack = Time.time + 3f * attackSpeed / 2f;
@@ -133,7 +186,7 @@ public class ICE_MOB1 : Enemy
         yield return new WaitForSeconds(3f * attackSpeed / 4f);
         if (GetDistanceFromPlayer() < 2 * thresholdDistance)
             playerInitialPosition = playerResources.transform.position;
-
+        
         var time = attackSpeed / 4f;
         while (time > 0)
         {
@@ -154,6 +207,8 @@ public class ICE_MOB1 : Enemy
             time -= Time.deltaTime;
         }
 
+        anim.SetFloat("speed", attackSpeed / 3.5f);
+        animType = AnimType.Idle;
         transform.position = initialPos;
         transform.localScale = initialLocalScale;
     }

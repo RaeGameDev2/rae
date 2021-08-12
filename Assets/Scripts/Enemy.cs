@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float initialScaleX;
     protected bool pause;
     private float timeNextHit;
-    protected bool isBoss;
+    [SerializeField] protected bool isBoss;
 
     protected void Awake()
     {
