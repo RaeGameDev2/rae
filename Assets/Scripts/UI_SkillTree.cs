@@ -1,10 +1,10 @@
-using System.Linq;
 using System;
 using System.Collections;
+using System.Collections.Specialized;
+using System.Globalization;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Globalization;
-using System.Collections.Specialized;
 
 public class UI_SkillTree : MonoBehaviour
 {
@@ -59,7 +59,7 @@ public class UI_SkillTree : MonoBehaviour
     private GameObject Orb_panel;
     private GameObject Staff_panel;
 
-    string[] SkillNames = new string[] { 
+    string[] SkillNames = new string[] {
         "Attack",
         "Attack Speed",
         "Mana",
@@ -74,18 +74,18 @@ public class UI_SkillTree : MonoBehaviour
         "Phase Walk" };
 
     string[] SkillDescription = new string[] {
-        "Attack -  Description - De adaugat",
-        "Attack Speed -  Description - De adaugat",
-        "Mana -  Description - De adaugat",
-        "Life -  Description - De adaugat",
-        "Critical Rate -  Description - De adaugat",
-        "Critical Bonus -  Description - De adaugat",
-        "Quick TP -  Description - De adaugat",
-        "Shield -  Description - De adaugat",
-        "Parry -  Description - De adaugat",
-        "Life Drain -  Description - De adaugat",
-        "Debuff -  Description - De adaugat",
-        "Phase Walk -  Description - De adaugat" };
+        "Attack - Increases Rae’s attack damage",
+        "Attack Speed - Increases Rae’s attack speed",
+        "Mana - Increases Rae’s maximum mana points",
+        "Life - Increases Rae’s maximum health points",
+        "Critical Rate - Raises the probability that an attack will be a critical hit, dealing increased damage",
+        "Critical Bonus - Increases the amount of additional damage an enemy receives by a critical hit",
+        "Quick TP - When the spell is first cast, Rae leaves their orb at the current position. When cast again, they teleport back to their orb, summoning a shock sphere that deals damage to enemies in the surrounding area",
+        "Shield - Rae surrounds themselves with a magic shield, blocking a few enemy hits",
+        "Parry - Rae attempts to use their scythe’s snath to parry an enemy attack. If they do it on time, right before a strike is about to hit them, they nullify the damage and deal a seismic blow on enemies around them",
+        "Life Drain - Rae’s next attack pierces their enemy, dealing moderate immediate damage and making it bleed. For a few seconds, it continues to take damage over time",
+        "Debuff - Rae’s next attack is a spell that disorders their enemy’s mind, lowering its movement speed and attack damage",
+        "Phase Walk - For a few seconds, Rae becomes invisible, and immune to their enemies, but while in this state they are unable to attack" };
 
     private Text ScytheAttackText;
     private Text ScytheCritRateText;
@@ -237,20 +237,20 @@ public class UI_SkillTree : MonoBehaviour
 
     private void UpdateStats()
     {
-        ScytheAttackText.text = $"Attack: {weaponsHandler.weapons[(int) Weapon.WeaponType.SCYTHE].mainDamage + playerSkills.GetSkillLevel(Skills.SkillType.Attack) * weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].bonusAttackDmg}";
-        ScytheAttackSpeedText.text = $"Attack Speed: {weaponsHandler.weapons[(int) Weapon.WeaponType.SCYTHE].attackSpeed + playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed) * weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].bonusAttackSpeed}";
-        ScytheCritRateText.text = $"Critical Rate: {weaponsHandler.weapons[(int) Weapon.WeaponType.SCYTHE].critRate + playerSkills.GetSkillLevel(Skills.SkillType.CritRate) * weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].bonusCritRate}";
-        ScytheCritBonusText.text = $"Critical Bonus: {weaponsHandler.weapons[(int) Weapon.WeaponType.SCYTHE].critDmg + playerSkills.GetSkillLevel(Skills.SkillType.CritBonus) * weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].bonusCritDmg}";
+        ScytheAttackText.text = $"Attack: {weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].mainDamage + playerSkills.GetSkillLevel(Skills.SkillType.Attack) * weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].bonusAttackDmg}";
+        ScytheAttackSpeedText.text = $"Attack Speed: {weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].attackSpeed + playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed) * weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].bonusAttackSpeed}";
+        ScytheCritRateText.text = $"Critical Rate: {weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].critRate + playerSkills.GetSkillLevel(Skills.SkillType.CritRate) * weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].bonusCritRate}";
+        ScytheCritBonusText.text = $"Critical Bonus: {weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].critDmg + playerSkills.GetSkillLevel(Skills.SkillType.CritBonus) * weaponsHandler.weapons[(int)Weapon.WeaponType.SCYTHE].bonusCritDmg}";
 
-        OrbAttackText.text = $"Attack: {weaponsHandler.weapons[(int) Weapon.WeaponType.ORB].mainDamage + playerSkills.GetSkillLevel(Skills.SkillType.Attack) * weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].bonusAttackDmg}";
-        OrbAttackSpeedText.text = $"Attack Speed: {weaponsHandler.weapons[(int) Weapon.WeaponType.ORB].attackSpeed + playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed) * weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].bonusAttackSpeed}";
-        OrbCritRateText.text = $"Critical Rate: {weaponsHandler.weapons[(int) Weapon.WeaponType.ORB].critRate + playerSkills.GetSkillLevel(Skills.SkillType.CritRate) * weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].bonusCritRate}";
-        OrbCritBonusText.text = $"Critical Bonus: {weaponsHandler.weapons[(int) Weapon.WeaponType.ORB].critDmg + playerSkills.GetSkillLevel(Skills.SkillType.CritBonus) * weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].bonusCritDmg}";
+        OrbAttackText.text = $"Attack: {weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].mainDamage + playerSkills.GetSkillLevel(Skills.SkillType.Attack) * weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].bonusAttackDmg}";
+        OrbAttackSpeedText.text = $"Attack Speed: {weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].attackSpeed + playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed) * weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].bonusAttackSpeed}";
+        OrbCritRateText.text = $"Critical Rate: {weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].critRate + playerSkills.GetSkillLevel(Skills.SkillType.CritRate) * weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].bonusCritRate}";
+        OrbCritBonusText.text = $"Critical Bonus: {weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].critDmg + playerSkills.GetSkillLevel(Skills.SkillType.CritBonus) * weaponsHandler.weapons[(int)Weapon.WeaponType.ORB].bonusCritDmg}";
 
-        StaffAttackText.text = $"Attack: {weaponsHandler.weapons[(int) Weapon.WeaponType.STAFF].mainDamage + playerSkills.GetSkillLevel(Skills.SkillType.Attack) * weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].bonusAttackDmg}";
-        StaffAttackSpeedText.text = $"Attack Speed: {weaponsHandler.weapons[(int) Weapon.WeaponType.STAFF].attackSpeed + playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed) * weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].bonusAttackSpeed}";
-        StaffCritRateText.text = $"Critical Rate: {weaponsHandler.weapons[(int) Weapon.WeaponType.STAFF].critRate + playerSkills.GetSkillLevel(Skills.SkillType.CritRate) * weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].bonusCritRate}";
-        StaffCritBonusText.text = $"Critical Bonus: {weaponsHandler.weapons[(int) Weapon.WeaponType.STAFF].critDmg + playerSkills.GetSkillLevel(Skills.SkillType.CritBonus) * weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].bonusCritDmg}";
+        StaffAttackText.text = $"Attack: {weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].mainDamage + playerSkills.GetSkillLevel(Skills.SkillType.Attack) * weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].bonusAttackDmg}";
+        StaffAttackSpeedText.text = $"Attack Speed: {weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].attackSpeed + playerSkills.GetSkillLevel(Skills.SkillType.AttackSpeed) * weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].bonusAttackSpeed}";
+        StaffCritRateText.text = $"Critical Rate: {weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].critRate + playerSkills.GetSkillLevel(Skills.SkillType.CritRate) * weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].bonusCritRate}";
+        StaffCritBonusText.text = $"Critical Bonus: {weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].critDmg + playerSkills.GetSkillLevel(Skills.SkillType.CritBonus) * weaponsHandler.weapons[(int)Weapon.WeaponType.STAFF].bonusCritDmg}";
     }
 
     public void SetPlayerSkills(Skills playerSkills)
