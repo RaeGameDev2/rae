@@ -25,9 +25,9 @@ public class PauseMenu : MonoBehaviour
 
     }
     
-    public void BackToHub(int sceneID) {
+    public void BackToHub() {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(sceneID);
+        SceneManager.LoadScene(1);
     }
 
     public void Settings() {

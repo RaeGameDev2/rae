@@ -19,12 +19,12 @@ public class Portal : MonoBehaviour
 
     public void Fire_Load()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void Ice_Load()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

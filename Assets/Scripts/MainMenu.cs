@@ -30,7 +30,8 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        
+        hubSceneID = 1;
+        playSceneID = 1;
         SceneManager.LoadScene(playSceneID);
     }
 

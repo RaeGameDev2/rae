@@ -26372,6 +26372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5150832794df5ff45860ca861862cef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSound: {fileID: 8300000, guid: 50a5a531baee3b74485f635faeacd24d, type: 3}
+  attackSound: {fileID: 8300000, guid: c2f3d4bb0a73ba245bec81d7545f5a8f, type: 3}
 --- !u!82 &1977731961
 AudioSource:
   m_ObjectHideFlags: 0
@@ -26480,7 +26482,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1978170849
 PrefabInstance:
