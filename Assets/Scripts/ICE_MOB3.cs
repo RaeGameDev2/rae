@@ -2,27 +2,25 @@ using UnityEngine;
 
 public class ICE_MOB3 : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer Mob3_Sprite;
-    [SerializeField] private Sprite idle;
     [SerializeField] private Sprite active;
+    [SerializeField] private readonly int damage = 1;
+    private bool exploded;
     [SerializeField] private ParticleSystem explosion;
-    [SerializeField] private int damage = 1;
-    [SerializeField] private float thresholdDistance = 10f;
-    private float time_until_dissapear = 1;
-    private float remaining_time_until_dissapear;
-    private float time_until_explosion_dissapear = 1; // mod
-    private float remaining_time_until_explosion_dissapear;
-    private bool initiate_explosion;
-    private bool exploded = false;
     private bool explosion_active;
     private ParticleSystem explosion_instance;
-    private bool player_damaged = false;
+    [SerializeField] private Sprite idle;
+    private bool initiate_explosion;
+    [SerializeField] private SpriteRenderer Mob3_Sprite;
     private Resources playerResources;
-    
+    private float remaining_time_until_dissapear;
+    private float remaining_time_until_explosion_dissapear;
+    [SerializeField] private readonly float thresholdDistance = 10f;
+    private readonly float time_until_dissapear = 1;
+
     private void Start()
     {
         remaining_time_until_dissapear = time_until_dissapear;
-        remaining_time_until_explosion_dissapear = time_until_explosion_dissapear = 1; // mod
+        remaining_time_until_explosion_dissapear = 1;
         Mob3_Sprite.sprite = idle;
         playerResources = FindObjectOfType<Resources>();
     }
@@ -57,15 +55,13 @@ public class ICE_MOB3 : MonoBehaviour
         Destroy(gameObject);
         Destroy(explosion_instance.gameObject);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
         if (FindObjectOfType<PlayerSpells>().phaseWalkActive) return;
 
         Mob3_Sprite.sprite = active;
-        if (exploded == false)
-        {
-            initiate_explosion = true;
-        }
+        if (exploded == false) initiate_explosion = true;
     }
 }
