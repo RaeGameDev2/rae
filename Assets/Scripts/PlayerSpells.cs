@@ -58,14 +58,14 @@ public class PlayerSpells : MonoBehaviour
                 if (playerSkills.IsLifeDrainUnlocked())
                 {
                     lifeDrainActive = true;
-                    StartCoroutine("StopLifeDrain");
+                    StartCoroutine(StopLifeDrain());
                     StartCoroutine(SpellAnimation());
                     playerResources.UseMana();
                 }
                 else if (playerSkills.IsParryUnlocked())
                 {
                     parryActive = true;
-                    StartCoroutine("StopLifeDrain");
+                    StartCoroutine(StopParry());
                     StartCoroutine(SpellAnimation());
                     playerResources.UseMana();
                 }
@@ -90,7 +90,7 @@ public class PlayerSpells : MonoBehaviour
                 {
                     shieldActive = true;
                     shieldDamage = playerSkills.GetLevelShield();
-                    instanceShield = Instantiate(shieldPrefab, transform.position + new Vector3(0f, 1f, -0.1f), Quaternion.identity, transform);
+                    instanceShield = Instantiate(shieldPrefab, transform.position + new Vector3(0f, 1f, 2f), Quaternion.identity, transform);
                     playerResources.UseMana();
                 }
                 break;
@@ -98,7 +98,7 @@ public class PlayerSpells : MonoBehaviour
                 if (playerSkills.IsPhaseWalkUnlocked())
                 {
                     phaseWalkActive = true;
-                    StartCoroutine("StopPhaseWalk");
+                    StartCoroutine(StopPhaseWalk());
                     playerResources.UseMana();
                 }
                 else if (playerSkills.IsDebuffUnlocked())
@@ -152,7 +152,7 @@ public class PlayerSpells : MonoBehaviour
     private IEnumerator StopPhaseWalk()
     {
         var instance = Instantiate(phaseWalkPrefab,
-            transform.position + new Vector3(0f, 1f, -0.66f), Quaternion.identity, transform);
+            transform.position + new Vector3(0f, 1f, 2f), Quaternion.identity, transform);
         yield return new WaitForSeconds(timePhaseWalk - 1f);
         phaseWalkActive = false;
         StartCoroutine(StopPhaseWalkAnimation(instance));
@@ -179,7 +179,7 @@ public class PlayerSpells : MonoBehaviour
     {
         quickTeleportActive = true;
         var instance = Instantiate(teleportPrefab,
-            transform.position + new Vector3(0f, 1f, -6f), Quaternion.identity, transform);
+            transform.position + new Vector3(0f, 1f, 2f), Quaternion.identity, transform);
         var collider  = instance.GetComponentInChildren<CircleCollider2D>().gameObject;
         collider.SetActive(false);
         var material = instance.GetComponent<Renderer>().material;

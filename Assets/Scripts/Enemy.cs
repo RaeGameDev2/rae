@@ -53,12 +53,19 @@ public class Enemy : MonoBehaviour
         else
         {
             hp -= dpsLifeDrain * Time.deltaTime;
+            hp = Mathf.Clamp(hp, 0f, initialHP);
+            hpBar.localScale = new Vector3((hp / initialHP) * initialScaleX, hpBar.localScale.y, hpBar.localScale.z);
+            
+            if (hp > 0) return;
+            hp = 0;
+            if (!isBoss)
+                Destroy(gameObject, 1.5f);
         }
     }
 
     public void OnDamageTaken(float damage, bool isCrit)
     {
-        Debug.Log("Damage Enemy");
+        // Debug.Log("Damage Enemy");
         if (Time.time < timeNextHit) return;
 
         timeNextHit = Time.time + 1f;
@@ -76,7 +83,6 @@ public class Enemy : MonoBehaviour
 
     public void LifeDrain(int lvl)
     {
-        // if (lvl < 1) return;
         lifeDrain = true;
         timeLifeDrain = initialTimeLifeDrain + lvl;
         Debug.Log("Lifedrain: " + lvl);

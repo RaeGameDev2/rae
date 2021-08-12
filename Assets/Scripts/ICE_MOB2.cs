@@ -78,7 +78,7 @@ public class ICE_MOB2 : Enemy
         attackTimer -= Time.deltaTime;
 
         if (attackTimer > 0) return;
-        Debug.Log("Mob2: I attacked!");
+        // Debug.Log("Mob2: I attacked!");
         if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
             playerResources.TakeDamage(damageOnTouch, transform.position);
         attackTimer = attackSpeed;

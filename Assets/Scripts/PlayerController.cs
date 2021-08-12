@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
                 var hit = Physics2D.Raycast(start, direction == Direction.left ? Vector2.left : Vector2.right, 6f);
                 Debug.DrawLine(start, start + (direction == Direction.left ? Vector2.left : Vector2.right) * 6f, Color.red, 2f); 
                 var enemy = hit.transform?.GetComponent<Enemy>();
-                Debug.Log(hit.transform?.tag);
+                // Debug.Log(hit.transform?.tag);
                 if (enemy == null) continue;
                 OnAttackHit(enemy.GetComponent<Collider2D>());
                 break;
