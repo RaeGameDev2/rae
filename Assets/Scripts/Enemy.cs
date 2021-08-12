@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float hp;
+    [SerializeField] protected float hp;
     [SerializeField] private float initialHP;
     [SerializeField] protected int damageOnTouch = 1;
 
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
         DamagePopup.Create(transform.position, (int)damage, isCrit);
         if (hp > 0) return;
         hp = 0;
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 1.5f);
     }
 
     public void LifeDrain(int lvl)
@@ -84,7 +84,7 @@ public class Enemy : MonoBehaviour
         var factor = 1f - 0.2f * lvl;
         attackSpeed /= factor;
         speed *= factor;
-        Debug.Log("debuff: "+ factor);
+        Debug.Log("debuff: " + factor);
     }
 
     private IEnumerator DamageTextAnimation(float damage, bool crit)

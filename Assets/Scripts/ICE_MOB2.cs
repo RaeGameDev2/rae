@@ -44,6 +44,8 @@ public class ICE_MOB2 : Enemy
 
     private new void Update()
     {
+        if (hp <= 0)
+            animState = State.DEATH;
         base.Update();
         if (animState == State.IDLE)
             Patrol();
@@ -81,13 +83,11 @@ public class ICE_MOB2 : Enemy
             playerResources.TakeDamage(damageOnTouch, transform.position);
         attackTimer = attackSpeed;
         animState = State.IDLE;
-        transform.localScale /= 1.5f;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (!col.CompareTag("Player")) return;
         animState = State.ATTACK;
-        transform.localScale *= 1.5f;
     }
 }
