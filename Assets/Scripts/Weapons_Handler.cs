@@ -70,11 +70,15 @@ public class Weapons_Handler : MonoBehaviour
         {
             currWeapon.attackType = Weapon.AttackType.BASIC;
             // playerController.timeNextAttack = Time.time + currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
+
+            SoundManagerScript.playAttackSound = true;
         }
         if (Input.GetMouseButtonDown(1) && currWeapon.attackType == Weapon.AttackType.NONE)
         {
             currWeapon.attackType = Weapon.AttackType.HEAVY;
             // playerController.timeNextAttack = Time.time + 2 * currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
+
+            SoundManagerScript.playAttackSound = true;
         }
     }
 
