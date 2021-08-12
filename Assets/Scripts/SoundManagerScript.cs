@@ -42,7 +42,7 @@ public class SoundManagerScript : MonoBehaviour
 
     public void PlaySound(int sound)
     {
-        Debug.Log("Sound started!");
+        // Debug.Log("Sound started!");
         switch (sound)
         {
             case jump:

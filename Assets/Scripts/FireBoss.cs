@@ -1,27 +1,32 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class IceFinalBoss : Enemy
+public class FireBoss : Enemy
 {
     public enum AnimType
     {
         Idle,
-        Attack,
         Projectile,
+        Attack,
+        Damage,
         Death
     }
-    
+
     private Animator anim;
     private Resources playerResources;
     [SerializeField] public AnimType animType;
-    [SerializeField] private float thresholdDistance = 10f;
+    [SerializeField] private float thresholdDistance;
+    [SerializeField] private float oldHp;
 
     [SerializeField] private bool simpleAttack;
     [SerializeField] private bool projectileAttack;
+    [SerializeField] private bool damageAnimation;
     [SerializeField] private bool isDying;
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private AudioClip iceRealm;
+
+    [SerializeField] private AudioClip fireRealm;
     [SerializeField] private AudioClip bossFight;
 
     private new void Awake()
@@ -39,6 +44,7 @@ public class IceFinalBoss : Enemy
         hp = 1000f;
         initialHP = 1000f;
         isBoss = true;
+        oldHp = 1000f;
     }
 
     private new void Update()
@@ -47,16 +53,24 @@ public class IceFinalBoss : Enemy
         CheckCamera();
 
         anim.SetInteger("state", (int)animType);
-        if (isDying) {
-            animType = AnimType.Death; 
+        if (isDying)
+        {
+            animType = AnimType.Death;
             return;
         }
         if (simpleAttack) return;
         if (projectileAttack) return;
+        if (damageAnimation) return;
+
+        if (Math.Abs(oldHp - hp) > 0.1f)
+        {
+            DamageAnimation();
+            return;
+        }
+        oldHp = hp;
 
         if (hp <= 0)
             Die();
-
         if (GetDistanceToPlayer() < thresholdDistance)
         {
             animType = Random.Range(0f, 2f) < 1f ? AnimType.Attack : AnimType.Projectile;
@@ -77,7 +91,7 @@ public class IceFinalBoss : Enemy
         if (GetDistanceToPlayer() < 40f)
         {
             var cam = Camera.main;
-            cam.orthographicSize = 15f;
+            cam.orthographicSize = 18f;
             cam.GetComponent<AudioSource>().clip = bossFight;
         }
 
@@ -85,7 +99,7 @@ public class IceFinalBoss : Enemy
         {
             var cam = Camera.main;
             cam.orthographicSize = 10.8f;
-            cam.GetComponent<AudioSource>().clip = iceRealm;
+            cam.GetComponent<AudioSource>().clip = fireRealm;
         }
     }
     private float GetDistanceToPlayer()
@@ -122,15 +136,28 @@ public class IceFinalBoss : Enemy
     {
         projectileAttack = true;
         yield return new WaitForSeconds(2f);
-        
+
         if (isDying) yield break;
         animType = AnimType.Projectile;
-        Instantiate(projectile, transform.position, Quaternion.identity, transform);
     }
 
     public void ProjectileEnd()
     {
         projectileAttack = false;
+        if (!isDying)
+            animType = AnimType.Idle;
+    }
+
+    private void DamageAnimation()
+    {
+        damageAnimation = true;
+        animType = AnimType.Damage;
+    }
+
+    public void DamageEnd()
+    {
+        damageAnimation = false;
+        oldHp = hp;
         if (!isDying)
             animType = AnimType.Idle;
     }
