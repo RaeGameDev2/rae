@@ -20,9 +20,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed;
 
     [SerializeField] private GameObject damageText;
-    private Transform hpBar;
+    protected Transform hpBar;
     [SerializeField] private float initialScaleX;
     protected bool pause;
+    private float timeNextHit;
+    protected bool isBoss;
 
     protected void Awake()
     {
@@ -54,13 +56,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private float timeNextHit;
     public void OnDamageTaken(float damage, bool isCrit)
     {
+        Debug.Log("Damage Enemy");
         if (Time.time < timeNextHit) return;
 
         timeNextHit = Time.time + 1f;
-        Debug.Log($"OnDamageTaken {damage}");
+        // Debug.Log($"OnDamageTaken {damage}");
         hp -= damage;
         hp = Mathf.Clamp(hp, 0f, initialHP);
         hpBar.localScale = new Vector3((hp / initialHP) * initialScaleX, hpBar.localScale.y, hpBar.localScale.z);
@@ -68,7 +70,8 @@ public class Enemy : MonoBehaviour
         DamagePopup.Create(transform.position, (int)damage, isCrit);
         if (hp > 0) return;
         hp = 0;
-        Destroy(gameObject, 1.5f);
+        if (!isBoss)
+            Destroy(gameObject, 1.5f);
     }
 
     public void LifeDrain(int lvl)
