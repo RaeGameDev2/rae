@@ -17,9 +17,9 @@ public class IceFinalBoss : Enemy
     [SerializeField] private AnimType animType;
     [SerializeField] private float thresholdDistance = 10f;
 
-    [SerializeField] private bool simpleAttack;
-    [SerializeField] private bool projectileAttack;
-    [SerializeField] private bool isDying;
+    [SerializeField] public bool simpleAttack;
+    [SerializeField] public bool projectileAttack;
+    [SerializeField] public bool isDying;
     [SerializeField] private float timeOfAttack;
     [SerializeField] private float timeOfProjectile;
 
