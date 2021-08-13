@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class IceFinalBoss : Enemy
 {
@@ -77,15 +79,21 @@ public class IceFinalBoss : Enemy
         if (GetDistanceToPlayer() < 40f)
         {
             var cam = Camera.main;
+            if(Math.Abs(cam.orthographicSize - 15f) < 0.1f)
+                return;
             cam.orthographicSize = 15f;
             cam.GetComponent<AudioSource>().clip = bossFight;
+            cam.GetComponent<AudioSource>().Play();
         }
 
         if (GetDistanceToPlayer() > 50f)
         {
             var cam = Camera.main;
+            if (Math.Abs(cam.orthographicSize - 10.8f) < 0.1f)
+                return;
             cam.orthographicSize = 10.8f;
             cam.GetComponent<AudioSource>().clip = iceRealm;
+            cam.GetComponent<AudioSource>().Play();
         }
     }
     private float GetDistanceToPlayer()

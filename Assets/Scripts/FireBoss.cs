@@ -91,15 +91,21 @@ public class FireBoss : Enemy
         if (GetDistanceToPlayer() < 40f)
         {
             var cam = Camera.main;
+            if (Math.Abs(cam.orthographicSize - 18f) < 0.1f)
+                return;
             cam.orthographicSize = 18f;
             cam.GetComponent<AudioSource>().clip = bossFight;
+            cam.GetComponent<AudioSource>().Play();
         }
 
         if (GetDistanceToPlayer() > 50f)
         {
             var cam = Camera.main;
+            if (Math.Abs(cam.orthographicSize - 10.8f) < 0.1f)
+                return;
             cam.orthographicSize = 10.8f;
             cam.GetComponent<AudioSource>().clip = fireRealm;
+            cam.GetComponent<AudioSource>().Play();
         }
     }
     private float GetDistanceToPlayer()
