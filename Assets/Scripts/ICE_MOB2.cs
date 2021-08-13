@@ -11,7 +11,7 @@ public class ICE_MOB2 : Enemy
 {
     [SerializeField] private float patrolRange;
 
-    [SerializeField] private float thresholdDistance = 5f;
+    [SerializeField] private float thresholdDistance;
 
     private Vector3 spawnPosition;
     private Direction patrolDirection;
@@ -19,11 +19,14 @@ public class ICE_MOB2 : Enemy
     private Animator animator;
     // Attack rate: seconds till next hit
     private float attackTimer;
+    [SerializeField] private bool damageAnimation;
+    [SerializeField] private float oldHp;
 
-    public enum State
+    private enum State
     {
         IDLE,
         ATTACK,
+        DAMAGE,
         DEATH
     }
 
@@ -40,23 +43,51 @@ public class ICE_MOB2 : Enemy
         attackTimer = attackSpeed;
         playerResources = FindObjectOfType<Resources>();
         animator = GetComponent<Animator>();
+        oldHp = hp;
     }
 
     private new void Update()
     {
+        UpdateAnimation();
+
         if (hp <= 0)
+        {
             animState = State.DEATH;
+            return;
+        }
+
+        if (damageAnimation) return;
         base.Update();
+        if (Math.Abs(oldHp - hp) > 0.1f)
+        {
+            DamageAnimation();
+            return;
+        }
+        oldHp = hp;
         if (animState == State.IDLE)
             Patrol();
         else
             Attack();
-        UpdateAnimation();
+    }
+    private void DamageAnimation()
+    {
+        damageAnimation = true;
+        animState = State.DAMAGE;
+    }
+
+    public void DamageEnd()
+    {
+        Debug.Log("DamageEnd");
+        damageAnimation = false;
+        oldHp = hp;
+        if (hp > 0)
+            animState = State.IDLE;
     }
 
     private void UpdateAnimation()
     {
         animator.SetInteger("state", (int)animState);
+        animator.SetFloat("speed", attackSpeed / 3.5f);
     }
 
     private void Patrol()
@@ -78,7 +109,6 @@ public class ICE_MOB2 : Enemy
         attackTimer -= Time.deltaTime;
 
         if (attackTimer > 0) return;
-        // Debug.Log("Mob2: I attacked!");
         if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
             playerResources.TakeDamage(damageOnTouch, transform.position);
         attackTimer = attackSpeed;

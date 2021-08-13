@@ -18,7 +18,7 @@ public class ICE_MOB1 : Enemy
         RIGHT
     }
 
-    public enum AnimType
+    private enum AnimType
     {
         Idle,
         Attack,
@@ -26,7 +26,7 @@ public class ICE_MOB1 : Enemy
         Death
     }
 
-    public AnimType animType;
+    private AnimType animType;
 
     [SerializeField] private Direction state_mob;
     private Vector3 initialPosition;

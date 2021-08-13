@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: -192777503372589260}
   - component: {fileID: -6346623775518126110}
   m_Layer: 0
-  m_Name: ICE_MOB2
+  m_Name: Old ICE_MOB2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -971,8 +971,11 @@ MonoBehaviour:
   speed: 3
   damageText: {fileID: 6594461456278833772, guid: 5199d62bbc918524f9a81c9eb9158894, type: 3}
   initialScaleX: 0
+  isBoss: 0
   patrolRange: 5
   thresholdDistance: 5
+  damageAnimation: 0
+  oldHp: 0
 --- !u!58 &-6346623775518126110
 CircleCollider2D:
   m_ObjectHideFlags: 0
