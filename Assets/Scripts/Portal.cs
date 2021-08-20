@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections;
 
 public class Portal : MonoBehaviour
 {
     private GameObject fireButton;
     private GameObject iceButton;
     private GameObject interiorPortal;
+    public Animator transition;
+    public float transitionTime = 1f;
 
     private void Start()
     {
@@ -19,12 +23,13 @@ public class Portal : MonoBehaviour
 
     public void Fire_Load()
     {
-        SceneManager.LoadScene(2);
+
+        LoadNextLevel(2);
     }
 
     public void Ice_Load()
     {
-        SceneManager.LoadScene(3);
+        LoadNextLevel(3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,5 +46,19 @@ public class Portal : MonoBehaviour
         fireButton.SetActive(false);
         iceButton.SetActive(false);
         interiorPortal.SetActive(false);
+    }
+
+    public void LoadNextLevel(int index)
+    {
+        StartCoroutine(LoadlLevel(index));
+    }
+
+    IEnumerator LoadLevel(int levelIndex)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1);
+
+        SceneManager.LoadScene(levelIndex);
     }
 }
