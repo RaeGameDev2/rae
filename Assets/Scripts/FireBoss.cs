@@ -28,6 +28,7 @@ public class FireBoss : Enemy
 
     [SerializeField] private AudioClip fireRealm;
     [SerializeField] private AudioClip bossFight;
+    private float initialLocalScaleX;
 
     private new void Awake()
     {
@@ -45,12 +46,14 @@ public class FireBoss : Enemy
         initialHP = 1000f;
         isBoss = true;
         oldHp = 1000f;
+        initialLocalScaleX = transform.localScale.x;
     }
 
     private new void Update()
     {
         base.Update();
         CheckCamera();
+        CheckOrientation();
 
         anim.SetInteger("state", (int)animType);
         if (isDying)
@@ -84,6 +87,16 @@ public class FireBoss : Enemy
                     break;
             }
         }
+    }
+
+    private void CheckOrientation()
+    {
+        var deltaX = transform.position.x - playerResources.transform.position.x;
+        const float threshold = 6f;
+        if (deltaX > threshold)
+            transform.localScale = new Vector3(initialLocalScaleX, transform.localScale.y, transform.localScale.z);
+        if (deltaX < -threshold)
+            transform.localScale = new Vector3(-initialLocalScaleX, transform.localScale.y, transform.localScale.z);
     }
 
     private void CheckCamera()

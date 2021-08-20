@@ -25,12 +25,14 @@ public class IceFinalBoss : Enemy
     [SerializeField] private GameObject projectile;
     [SerializeField] private AudioClip iceRealm;
     [SerializeField] private AudioClip bossFight;
+    private float initialLocalScaleX;
 
     private new void Awake()
     {
         base.Awake();
         anim = GetComponent<Animator>();
         animType = AnimType.Idle;
+        initialLocalScaleX = transform.localScale.x;
     }
 
     private new void Start()
@@ -47,6 +49,7 @@ public class IceFinalBoss : Enemy
     {
         base.Update();
         CheckCamera();
+        CheckOrientation();
 
         anim.SetInteger("state", (int)animType);
         if (isDying) {
@@ -72,6 +75,16 @@ public class IceFinalBoss : Enemy
                     break;
             }
         }
+    }
+
+    private void CheckOrientation()
+    {
+        var deltaX = transform.position.x - playerResources.transform.position.x;
+        const float threshold = 6f;
+        if (deltaX > threshold)
+            transform.localScale = new Vector3(initialLocalScaleX, transform.localScale.y, transform.localScale.z);
+        if (deltaX < -threshold)
+            transform.localScale = new Vector3(-initialLocalScaleX, transform.localScale.y, transform.localScale.z);
     }
 
     private void CheckCamera()
