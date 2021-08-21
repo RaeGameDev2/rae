@@ -30,6 +30,21 @@ public class CheckPoint_System : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Player.transform.position = new Vector3(IcePortal_1.transform.position.x, IcePortal_1.transform.position.y, IcePortal_1.transform.position.z);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Player.transform.position = new Vector3(IcePortal_2.transform.position.x, IcePortal_2.transform.position.y, IcePortal_2.transform.position.z);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Player.transform.position = new Vector3(IcePortal_3.transform.position.x, IcePortal_3.transform.position.y, IcePortal_3.transform.position.z);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Player.transform.position = new Vector3(IcePortal_4.transform.position.x, IcePortal_4.transform.position.y, IcePortal_4.transform.position.z);
+        }
     }
 }
