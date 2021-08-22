@@ -50,15 +50,16 @@ public class Portal : MonoBehaviour
 
     public void LoadNextLevel(int index)
     {
-        StartCoroutine(LoadlLevel(index));
+        StartCoroutine(LoadLevel(index));
     }
 
     IEnumerator LoadLevel(int levelIndex)
     {
         transition.SetTrigger("Start");
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(levelIndex);
     }
+    
 }
