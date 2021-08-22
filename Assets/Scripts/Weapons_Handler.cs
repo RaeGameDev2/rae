@@ -66,20 +66,20 @@ public class Weapons_Handler : MonoBehaviour
 
         if (playerSpells.phaseWalkActive || playerSpells.orbDropped) return;
 
-        //if (Input.GetMouseButtonDown(0) && currWeapon.attackType == Weapon.AttackType.NONE)
-        //{
-            //currWeapon.attackType = Weapon.AttackType.BASIC;
-            //playerController.timeNextAttack = Time.time + currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
+        if (Input.GetMouseButtonDown(0) && currWeapon.attackType == Weapon.AttackType.NONE)
+        {
+            currWeapon.attackType = Weapon.AttackType.BASIC;
+            // playerController.timeNextAttack = Time.time + currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
 
-            //SoundManagerScript.playAttackSound = true;
-        //}
-        //if (Input.GetMouseButtonDown(1) && currWeapon.attackType == Weapon.AttackType.NONE)
-        //{
-            //currWeapon.attackType = Weapon.AttackType.HEAVY;
-            //playerController.timeNextAttack = Time.time + 2 * currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
+            SoundManagerScript.playAttackSound = true;
+        }
+        if (Input.GetMouseButtonDown(1) && currWeapon.attackType == Weapon.AttackType.NONE)
+        {
+            currWeapon.attackType = Weapon.AttackType.HEAVY;
+            // playerController.timeNextAttack = Time.time + 2 * currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
 
-            //SoundManagerScript.playAttackSound = true;
-        //}
+            SoundManagerScript.playAttackSound = true;
+        }
     }
 
     private void SwitchWeapon()
