@@ -10696,7 +10696,7 @@ GameObject:
   - component: {fileID: 804471882}
   - component: {fileID: 804471881}
   m_Layer: 0
-  m_Name: Ice_Checkpoint_4
+  m_Name: Ice Checkpoint 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11343,7 +11343,7 @@ GameObject:
   - component: {fileID: 855673436}
   - component: {fileID: 855673435}
   m_Layer: 0
-  m_Name: Ice_Checkpoint_3
+  m_Name: Ice Checkpoint 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15354,7 +15354,7 @@ GameObject:
   - component: {fileID: 1123318924}
   - component: {fileID: 1123318923}
   m_Layer: 0
-  m_Name: Ice_Checkpoint_2
+  m_Name: Ice Checkpoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24382,7 +24382,7 @@ GameObject:
   - component: {fileID: 1798624961}
   - component: {fileID: 1798624960}
   m_Layer: 5
-  m_Name: Hub_Button
+  m_Name: Hub Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29709,14 +29709,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1693354215}
+    - target: {fileID: 995391151983857926, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_Name
+      value: Button Portal 3
+      objectReference: {fileID: 0}
     - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1693354215}
+    - target: {fileID: 995391152579152015, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_Name
+      value: Button Portal 4
+      objectReference: {fileID: 0}
     - target: {fileID: 995391153115794580, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1693354215}
+    - target: {fileID: 995391153115794582, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_Name
+      value: Button Portal 1
+      objectReference: {fileID: 0}
     - target: {fileID: 995391153298357785, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -29805,11 +29817,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoints_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 995391153395704304, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_Name
+      value: Button Portal 2
+      objectReference: {fileID: 0}
     - target: {fileID: 995391153395704310, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1693354215}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 995391153115794569, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
 --- !u!224 &995391152783403708 stripped
 RectTransform:
@@ -29947,7 +29964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017507, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_Name
-      value: Ice_Checkpoint_1
+      value: Ice Checkpoint 1
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017511, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: Teleport_Menu
@@ -30155,7 +30172,7 @@ PrefabInstance:
       objectReference: {fileID: 804471880}
     - target: {fileID: 3204861755828768007, guid: 0a886e932636a864a984698246fc4880, type: 3}
       propertyPath: m_Name
-      value: Checkpoint_System
+      value: Checkpoint System
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a886e932636a864a984698246fc4880, type: 3}

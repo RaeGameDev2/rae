@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Portal_Checkpoint : MonoBehaviour
-{
+{   
     public int portal_id;
-    public string portal_type;
+    public CheckPoint_System.Realm portal_type;
     public GameObject Teleport_Menu;
     // Start is called before the first frame update
     void Start()
@@ -24,15 +24,15 @@ public class Portal_Checkpoint : MonoBehaviour
             return;
         else
         {
-            if (portal_type == "Ice")
+            if (portal_type == CheckPoint_System.Realm.Ice)
             {
                 Teleport_Menu.SetActive(true);
-                CheckPoint_System.IceRealm_Portals[portal_id] = 1;
+                CheckPoint_System.realms_Portals[CheckPoint_System.Realm.Ice][portal_id] = 1;
             }
-            else if (portal_type == "Fire")
+            else if (portal_type == CheckPoint_System.Realm.Fire)
             {
                 Teleport_Menu.SetActive(true);
-                CheckPoint_System.FireRealm_Portals[portal_id] = 1;
+                CheckPoint_System.realms_Portals[CheckPoint_System.Realm.Fire][portal_id] = 1;
             }
         }
     }
@@ -43,11 +43,11 @@ public class Portal_Checkpoint : MonoBehaviour
             return;
         else
         {
-            if (portal_type == "Ice")
+            if (portal_type == CheckPoint_System.Realm.Ice)
             {
                 Teleport_Menu.SetActive(false);
             }
-            else if (portal_type == "Fire")
+            else if (portal_type == CheckPoint_System.Realm.Fire)
             {
                 Teleport_Menu.SetActive(false);
             }
