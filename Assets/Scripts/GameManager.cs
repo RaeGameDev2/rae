@@ -1,25 +1,49 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public enum Realm
+    {
+        Ice,
+        Fire,
+        Jungle
+    }
+
+    public Dictionary<Realm, List<bool>> checkpoints = new Dictionary<Realm, List<bool>>();
     private bool pause;
-    private UI_Manager uiManager;
-    private Resources playerResources;
+    private PlayerController playerController;
+    private PlayerResources playerResources;
     private PlayerSkills playerSkills;
     private PlayerSpells playerSpells;
-    private PlayerController playerController;
-    private Weapons_Handler weaponsHandler;
+    private UI_Manager uiManager;
+    private WeaponsHandler weaponsHandler;
+
+    private void Awake()
+    {
+        checkpoints.Add(Realm.Ice, new List<bool>());
+        checkpoints[Realm.Ice].Add(true);
+        checkpoints[Realm.Ice].Add(false);
+        checkpoints[Realm.Ice].Add(false);
+        checkpoints[Realm.Ice].Add(false);
+
+        checkpoints.Add(Realm.Fire, new List<bool>());
+        checkpoints[Realm.Fire].Add(true);
+        checkpoints[Realm.Fire].Add(false);
+        checkpoints[Realm.Fire].Add(false);
+        checkpoints[Realm.Fire].Add(false);
+    }
 
     private void Start()
     {
         uiManager = FindObjectOfType<UI_Manager>();
-        playerResources = FindObjectOfType<Resources>();
+        playerResources = FindObjectOfType<PlayerResources>();
         playerSkills = FindObjectOfType<PlayerSkills>();
         playerSpells = FindObjectOfType<PlayerSpells>();
         playerController = FindObjectOfType<PlayerController>();
-        weaponsHandler = FindObjectOfType<Weapons_Handler>();
+        weaponsHandler = FindObjectOfType<WeaponsHandler>();
     }
-    
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))

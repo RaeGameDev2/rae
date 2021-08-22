@@ -1,14 +1,13 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections;
 
 public class Portal : MonoBehaviour
 {
+    public Animator animator;
     private GameObject fireButton;
     private GameObject iceButton;
     private GameObject interiorPortal;
-    public Animator animator;
     public float transitionTime = 1f;
 
     private void Start()
@@ -23,7 +22,6 @@ public class Portal : MonoBehaviour
 
     public void Fire_Load()
     {
-
         LoadNextLevel(2);
     }
 
@@ -53,7 +51,7 @@ public class Portal : MonoBehaviour
         StartCoroutine(LoadLevel(index));
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    private IEnumerator LoadLevel(int levelIndex)
     {
         animator.SetTrigger("Start");
 
@@ -61,5 +59,4 @@ public class Portal : MonoBehaviour
 
         SceneManager.LoadScene(levelIndex);
     }
-    
 }
