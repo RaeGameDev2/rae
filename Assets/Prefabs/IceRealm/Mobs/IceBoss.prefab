@@ -438,8 +438,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3184471506493267501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 386.42, y: 106.52, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2515429219929171931}
   - {fileID: 3484073844995154287}
@@ -492,24 +492,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf9beb246858b84d8dd56d235c3ac48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  initialHP: 5000
   damageOnTouch: 1
-  initialTimeLifeDrain: 4
-  dpsLifeDrain: 50
-  initialAttackSpeed: 2
-  speed: 0
   damageText: {fileID: 5777892390895327323, guid: cc0835ce7ca8a864682b2136486b7040, type: 3}
+  dpsLifeDrain: 50
+  hp: 100
+  initialAttackSpeed: 2
+  initialHP: 5000
   initialScaleX: 0
+  initialTimeLifeDrain: 4
   isBoss: 0
+  speed: 0
   animType: 0
-  thresholdDistance: 10
-  simpleAttack: 0
-  projectileAttack: 0
+  bossFight: {fileID: 8300000, guid: 5dbbd5a1093898e41bc2795b2debe570, type: 3}
+  iceRealm: {fileID: 8300000, guid: b771be66d556a7043a66bf130b714304, type: 3}
   isDying: 0
   projectile: {fileID: 5777892390895327323, guid: cc0835ce7ca8a864682b2136486b7040, type: 3}
-  iceRealm: {fileID: 8300000, guid: b771be66d556a7043a66bf130b714304, type: 3}
-  bossFight: {fileID: 8300000, guid: 5dbbd5a1093898e41bc2795b2debe570, type: 3}
+  projectileAttack: 0
+  simpleAttack: 0
+  thresholdDistance: 10
 --- !u!61 &3184471506493267499
 BoxCollider2D:
   m_ObjectHideFlags: 0

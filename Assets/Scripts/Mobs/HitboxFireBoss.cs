@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class HitboxFireBoss : MonoBehaviour
 {
-    private bool isAttacking;
-
     private FireBoss parent;
     private PlayerResources playerResources;
     [SerializeField] private float timeNextAttack;
@@ -11,7 +9,6 @@ public class HitboxFireBoss : MonoBehaviour
 
     private void Start()
     {
-        isAttacking = false;
         parent = FindObjectOfType<FireBoss>();
         playerResources = FindObjectOfType<PlayerResources>();
     }

@@ -10,13 +10,13 @@ public class FireMob3 : Enemy
     public float treshholdHeight = 20f;
     public bool up = true;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
         playerResources = FindObjectOfType<PlayerResources>();
     }
 
-    private void Update()
+    private new void Update()
     {
         base.Update();
         if (relative_y >= treshholdHeight)

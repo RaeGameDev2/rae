@@ -1248,8 +1248,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5493312859713354066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 157.03, y: 61.86, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3872668993832585581}
   - {fileID: 1253029282183427486}
@@ -1330,25 +1330,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb1abdfbdb078c4d98ed4b0879c4980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
-  initialHP: 0
   damageOnTouch: 1
-  initialTimeLifeDrain: 4
-  dpsLifeDrain: 50
-  initialAttackSpeed: 2
-  speed: 0
   damageText: {fileID: 0}
+  dpsLifeDrain: 50
+  hp: 0
+  initialAttackSpeed: 2
+  initialHP: 0
   initialScaleX: 0
+  initialTimeLifeDrain: 4
   isBoss: 0
+  speed: 0
   animType: 0
-  thresholdDistance: 20
-  oldHp: 0
-  simpleAttack: 0
-  projectileAttack: 0
-  damageAnimation: 0
-  isDying: 0
-  fireRealm: {fileID: 8300000, guid: e631075da3a887646bee51722ff035fb, type: 3}
   bossFight: {fileID: 8300000, guid: 5dbbd5a1093898e41bc2795b2debe570, type: 3}
+  damageAnimation: 0
+  fireRealm: {fileID: 8300000, guid: e631075da3a887646bee51722ff035fb, type: 3}
+  isDying: 0
+  oldHp: 0
+  projectileAttack: 0
+  simpleAttack: 0
+  thresholdDistance: 20
 --- !u!1 &5502870306571544953
 GameObject:
   m_ObjectHideFlags: 0
