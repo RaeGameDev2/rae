@@ -4,6 +4,7 @@ public class BasicController : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
+    [SerializeField] private float speed;
 
     private enum AnimState
     {
@@ -24,7 +25,7 @@ public class BasicController : MonoBehaviour
     private void Update()
     {
         var x = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(x * 7.5f, rb.velocity.y);
+        rb.velocity = new Vector2(x * speed, rb.velocity.y);
         if (x == 0f)
         {
             anim.SetInteger("state", (int)AnimState.Idle);

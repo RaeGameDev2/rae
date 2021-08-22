@@ -8,7 +8,7 @@ public class Portal : MonoBehaviour
     private GameObject fireButton;
     private GameObject iceButton;
     private GameObject interiorPortal;
-    public Animator transition;
+    public Animator animator;
     public float transitionTime = 1f;
 
     private void Start()
@@ -55,7 +55,7 @@ public class Portal : MonoBehaviour
 
     IEnumerator LoadLevel(int levelIndex)
     {
-        transition.SetTrigger("Start");
+        animator.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
 
