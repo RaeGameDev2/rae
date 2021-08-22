@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Teleport_Menu : MonoBehaviour
 {
@@ -38,5 +39,10 @@ public class Teleport_Menu : MonoBehaviour
     public void Portal4()
     {
         Player.transform.position = new Vector3(IcePortal_4.transform.position.x, IcePortal_4.transform.position.y, IcePortal_4.transform.position.z);
+    }
+
+    public void Hub()
+    {
+        SceneManager.LoadScene(1);
     }
 }
