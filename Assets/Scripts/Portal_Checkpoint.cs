@@ -31,6 +31,7 @@ public class Portal_Checkpoint : MonoBehaviour
             }
             else if (portal_type == "Fire")
             {
+                Teleport_Menu.SetActive(true);
                 CheckPoint_System.FireRealm_Portals[portal_id] = 1;
             }
         }
@@ -43,6 +44,10 @@ public class Portal_Checkpoint : MonoBehaviour
         else
         {
             if (portal_type == "Ice")
+            {
+                Teleport_Menu.SetActive(false);
+            }
+            else if (portal_type == "Fire")
             {
                 Teleport_Menu.SetActive(false);
             }
