@@ -6,10 +6,11 @@ public class Portal_Checkpoint : MonoBehaviour
 {
     public int portal_id;
     public string portal_type;
+    public GameObject Teleport_Menu;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Teleport_Menu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,10 +24,28 @@ public class Portal_Checkpoint : MonoBehaviour
             return;
         else
         {
-            if (portal_type == "Ice") 
+            if (portal_type == "Ice")
+            {
+                Teleport_Menu.SetActive(true);
                 CheckPoint_System.IceRealm_Portals[portal_id] = 1;
+            }
             else if (portal_type == "Fire")
+            {
                 CheckPoint_System.FireRealm_Portals[portal_id] = 1;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag != "Player")
+            return;
+        else
+        {
+            if (portal_type == "Ice")
+            {
+                Teleport_Menu.SetActive(false);
+            }
         }
     }
 }

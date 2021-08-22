@@ -23,8 +23,6 @@ public class CheckPoint_System : MonoBehaviour
         FireRealm_Portals.Add(2,0);
         FireRealm_Portals.Add(3,0);
         FireRealm_Portals.Add(4,0);
-
-        Player.transform.position = new Vector3(IcePortal_3.transform.position.x, IcePortal_3.transform.position.y, IcePortal_3.transform.position.z);
     }
 
     // Update is called once per frame
