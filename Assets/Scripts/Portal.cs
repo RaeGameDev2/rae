@@ -4,10 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    public Animator animator;
     private GameObject fireButton;
     private GameObject iceButton;
     private GameObject interiorPortal;
+    public Animator animator;
     public float transitionTime = 1f;
 
     private void Start()
