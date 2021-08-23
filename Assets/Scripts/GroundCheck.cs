@@ -13,14 +13,19 @@ public class GroundCheck : MonoBehaviour
 
     private void Update()
     {
-        pc.isGrounded = false;
-        foreach (Transform child in transform)
+        if (pc)
         {
-            pc.isGrounded |= Physics2D.Raycast(child.position, Vector2.down, distance, groundMask);
-            if (pc.isGrounded)
-                Debug.DrawRay(child.position, Vector2.down * distance, Color.green);
-            else
-                Debug.DrawRay(child.position, Vector2.down * distance, Color.red);
+            pc.isGrounded = false;
+            foreach (Transform child in transform)
+            {
+                pc.isGrounded |= Physics2D.Raycast(child.position, Vector2.down, distance, groundMask);
+                if (pc.isGrounded)
+                    Debug.DrawRay(child.position, Vector2.down * distance, Color.green);
+                else
+                    Debug.DrawRay(child.position, Vector2.down * distance, Color.red);
+            }
         }
+        else
+            pc = FindObjectOfType<PlayerController>();
     }
 }
