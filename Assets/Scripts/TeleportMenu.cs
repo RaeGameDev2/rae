@@ -15,7 +15,14 @@ public class TeleportMenu : MonoBehaviour
 
     public void OpenMeniuPortal()
     {
-        if(icePortal1Button != null && icePortal2Button != null && icePortal3Button != null && icePortal4Button != null)
+        if(icePortal1Button.activeInHierarchy == true && icePortal2Button.activeInHierarchy == true && icePortal3Button.activeInHierarchy == true && icePortal4Button.activeInHierarchy == true)
+        {
+            icePortal1Button.SetActive(false);
+            icePortal2Button.SetActive(false);
+            icePortal3Button.SetActive(false);
+            icePortal4Button.SetActive(false);
+        }
+        else
         {
             icePortal1Button.SetActive(true);
             icePortal2Button.SetActive(true);
