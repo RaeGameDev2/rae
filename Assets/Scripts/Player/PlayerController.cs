@@ -10,11 +10,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool canDoubleJump;
 
     private float currGravity;
-    [SerializeField] private float dashCooldown;
-    [SerializeField] private float dashDistance;
-    private bool dashPressed;
-
-    [SerializeField] private float dashSpeed;
     [HideInInspector] public bool diagonalJump;
 
     private Direction direction;
@@ -59,7 +54,6 @@ public class PlayerController : MonoBehaviour
         prevVelocityY = 0;
         isDashing = false;
         distanceTraveled = 0;
-        timeSinceDash = dashCooldown;
     }
 
     private void Start()
@@ -129,14 +123,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
         }
 
-        if (dashPressed && !isDashing && timeSinceDash >= dashCooldown)
-        {
-            dashPressed = false;
-            isDashing = true;
-            StartCoroutine("Dash");
-            rb.velocity = direction == Direction.right ? new Vector2(dashSpeed, 0) : new Vector2(-dashSpeed, 0);
-        }
-
         //Save previous y-velocity for adding fallSpeed
         prevVelocityY = rb.velocity.y;
     }
@@ -147,8 +133,6 @@ public class PlayerController : MonoBehaviour
         hInput = Input.GetAxisRaw("Horizontal");
         if (Input.GetKeyDown(KeyCode.Space) && animState != State.ATTACK)
             jumpPressed = true;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && isDashing == false)
-            dashPressed = true;
     }
 
     //Flip player when changing direction
@@ -181,34 +165,34 @@ public class PlayerController : MonoBehaviour
         switch (weapons.currWeapon.attackType)
         {
             case Weapon.AttackType.None:
-            {
-                if (rb.velocity.x == 0)
-                    animState = State.IDLE;
-                else
-                    animState = State.RUN;
-                break;
-            }
+                {
+                    if (rb.velocity.x == 0)
+                        animState = State.IDLE;
+                    else
+                        animState = State.RUN;
+                    break;
+                }
             case Weapon.AttackType.Basic:
-            {
-                var attackSpeed = weapons.currWeapon.attackSpeed +
-                                  weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
-                anim.SetFloat("attackSpeed", attackSpeed / 100);
-                animState = State.ATTACK;
-                break;
-            }
+                {
+                    var attackSpeed = weapons.currWeapon.attackSpeed +
+                                      weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
+                    anim.SetFloat("attackSpeed", attackSpeed / 100);
+                    animState = State.ATTACK;
+                    break;
+                }
             case Weapon.AttackType.Heavy:
-            {
-                var attackSpeed = weapons.currWeapon.attackSpeed +
-                                  weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
-                anim.SetFloat("attackSpeed", attackSpeed / 200);
-                animState = State.ATTACK;
-                break;
-            }
+                {
+                    var attackSpeed = weapons.currWeapon.attackSpeed +
+                                      weapons.currWeapon.bonusAttackSpeed * skills.GetLevelAttackSpeed();
+                    anim.SetFloat("attackSpeed", attackSpeed / 200);
+                    animState = State.ATTACK;
+                    break;
+                }
         }
 
-        anim.SetInteger("weapon", (int) weapons.currWeapon.type);
-        anim.SetInteger("state", (int) animState);
-        anim.SetInteger("type", (int) weapons.currWeapon.attackType);
+        anim.SetInteger("weapon", (int)weapons.currWeapon.type);
+        anim.SetInteger("state", (int)animState);
+        anim.SetInteger("type", (int)weapons.currWeapon.attackType);
     }
 
     private void Jump()
@@ -219,26 +203,6 @@ public class PlayerController : MonoBehaviour
             diagonalJump = true;
 
         SoundManagerScript.playJumpSound = true;
-    }
-
-    private IEnumerator Dash()
-    {
-        var initPos = rb.position;
-        distanceTraveled = 0;
-
-        while (distanceTraveled < dashDistance)
-        {
-            distanceTraveled += dashSpeed * Time.fixedDeltaTime;
-            Debug.Log(distanceTraveled);
-            yield return new WaitForFixedUpdate();
-        }
-
-        if (direction == Direction.right)
-            rb.position = new Vector2(initPos.x + dashDistance, initPos.y);
-        else
-            rb.position = new Vector2(initPos.x - dashDistance, initPos.y);
-        isDashing = false;
-        timeSinceDash = 0;
     }
 
     private void CheckJump()
