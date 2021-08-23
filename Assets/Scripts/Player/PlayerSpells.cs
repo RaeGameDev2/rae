@@ -46,6 +46,7 @@ public class PlayerSpells : MonoBehaviour
         CheckShield();
 
         if (!Input.GetKeyDown(KeyCode.Alpha1)) return;
+        if (playerResources.currentMana <= 0) return;
         if (quickTeleportActive) return;
         if (shieldActive) return;
         if (lifeDrainActive) return;
@@ -56,17 +57,11 @@ public class PlayerSpells : MonoBehaviour
             case Weapon.WeaponType.Scythe:
                 if (playerSkills.IsLifeDrainUnlocked())
                 {
-                    lifeDrainActive = true;
-                    StartCoroutine(StopLifeDrain());
-                    StartCoroutine(SpellAnimation());
-                    playerResources.UseMana();
+                    LifeDrain();
                 }
                 else if (playerSkills.IsParryUnlocked())
                 {
-                    parryActive = true;
-                    StartCoroutine(StopParry());
-                    StartCoroutine(SpellAnimation());
-                    playerResources.UseMana();
+                    Parry();
                 }
 
                 break;
@@ -117,30 +112,19 @@ public class PlayerSpells : MonoBehaviour
         }
     }
 
-    public void Pause()
+    private void LifeDrain()
     {
-        pause = !pause;
+        lifeDrainActive = true;
+        StartCoroutine(StopLifeDrain());
+        StartCoroutine(SpellAnimation());
+        playerResources.UseMana();
     }
-
-    public void StopDebuff()
+    private void Parry()
     {
-        debuffActive = false;
-    }
-
-    private void CheckShield()
-    {
-        if (!shieldActive) return;
-        if (shieldDamage != 0) return;
-        Destroy(instanceShield);
-        shieldActive = false;
-    }
-
-    public void Shockwave()
-    {
-        parryActive = false;
-        var instance = Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
-        instance.GetComponent<Shockwave>().SetLevelParry(playerSkills.GetLevelParry());
-        instance.transform.parent = transform;
+        parryActive = true;
+        StartCoroutine(StopParry());
+        StartCoroutine(SpellAnimation());
+        playerResources.UseMana();
     }
 
     private IEnumerator StopLifeDrain()
@@ -152,7 +136,7 @@ public class PlayerSpells : MonoBehaviour
     private IEnumerator StopParry()
     {
         yield return new WaitForSeconds(timeParry);
-        lifeDrainActive = false;
+        parryActive = false;
     }
 
     private IEnumerator StopPhaseWalk()
@@ -258,6 +242,31 @@ public class PlayerSpells : MonoBehaviour
         }
 
         Destroy(instance);
+    }
+    public void Pause()
+    {
+        pause = !pause;
+    }
+
+    public void StopDebuff()
+    {
+        debuffActive = false;
+    }
+
+    private void CheckShield()
+    {
+        if (!shieldActive) return;
+        if (shieldDamage != 0) return;
+        shieldActive = false;
+        Destroy(instanceShield);
+    }
+
+    public void Shockwave()
+    {
+        parryActive = false;
+        var instance = Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
+        instance.GetComponent<Shockwave>().SetLevelParry(playerSkills.GetLevelParry());
+        instance.transform.parent = transform;
     }
 }
 //
