@@ -24,12 +24,10 @@ public class TweenText : MonoBehaviour
         var fadeoutcolor = color;
         color.a = 0f;
         LeanTween.value(gameObject, updateValueExampleCallback, fadeoutcolor, color, 0.5f).setEase(LeanTweenType.linear);
-
     }
 
     void updateValueExampleCallback(Color val)
     {
         text.color = val;
     }
-
 }
