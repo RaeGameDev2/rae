@@ -5251,7 +5251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d6369d3c6cd454a97c3f8ca59cb2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalId: 0
+  portalId: 3
   portalType: 0
   teleportMenu: {fileID: 584225950}
 --- !u!212 &804471883
@@ -5571,7 +5571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d6369d3c6cd454a97c3f8ca59cb2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalId: 0
+  portalId: 2
   portalType: 0
   teleportMenu: {fileID: 584225950}
 --- !u!212 &855673437
@@ -7801,7 +7801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d6369d3c6cd454a97c3f8ca59cb2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalId: 0
+  portalId: 1
   portalType: 0
   teleportMenu: {fileID: 584225950}
 --- !u!212 &1123318925
@@ -49735,6 +49735,26 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1692593552}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1692593552}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal1
+      value: 
+      objectReference: {fileID: 1496330065}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal2
+      value: 
+      objectReference: {fileID: 1123318922}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal3
+      value: 
+      objectReference: {fileID: 855673434}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal4
+      value: 
+      objectReference: {fileID: 804471880}
     - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
       propertyPath: IcePortal_1
       value: 

@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class TeleportMenu : MonoBehaviour
 {
-    private GameObject icePortal1;
-    private GameObject icePortal2;
-    private GameObject icePortal3;
-    private GameObject icePortal4;
-    private GameObject player;
+    [SerializeField] private GameObject icePortal1;
+    [SerializeField] private GameObject icePortal2;
+    [SerializeField] private GameObject icePortal3;
+    [SerializeField] private GameObject icePortal4;
+    [SerializeField] private GameObject player;
 
     public void Portal1()
     {
