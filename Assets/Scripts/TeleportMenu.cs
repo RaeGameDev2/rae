@@ -8,6 +8,21 @@ public class TeleportMenu : MonoBehaviour
     private GameObject icePortal3;
     private GameObject icePortal4;
     private GameObject player;
+    [SerializeField]private GameObject icePortal1Button;
+    [SerializeField]private GameObject icePortal2Button;
+    [SerializeField]private GameObject icePortal3Button;
+    [SerializeField]private GameObject icePortal4Button;
+
+    public void OpenMeniuPortal()
+    {
+        if(icePortal1Button != null && icePortal2Button != null && icePortal3Button != null && icePortal4Button != null)
+        {
+            icePortal1Button.SetActive(true);
+            icePortal2Button.SetActive(true);
+            icePortal3Button.SetActive(true);
+            icePortal4Button.SetActive(true);
+        }
+    }
 
     public void Portal1()
     {
