@@ -1,36 +1,35 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TeleportMenu : MonoBehaviour
 {
-    private GameObject icePortal1;
-    private GameObject icePortal2;
-    private GameObject icePortal3;
-    private GameObject icePortal4;
-    private GameObject player;
+    private GameManager gameManager;
 
-    public void Portal1()
+    private void Start()
     {
-        player.transform.position = icePortal1.transform.position;
+        gameManager = FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad);
     }
 
-    public void Portal2()
+    public void FireCheckpoint(int id)
     {
-        player.transform.position = icePortal2.transform.position;
+        // Debug.Log($"IceCheckpoint called id: {id}");
+        gameManager.ChangeCheckpointId(id, 2);
     }
-
-    public void Portal3()
+    public void IceCheckpoint(int id)
     {
-        player.transform.position = icePortal3.transform.position;
+        // Debug.Log($"IceCheckpoint called id: {id}");
+        gameManager.ChangeCheckpointId(id, 3);
     }
-
-    public void Portal4()
+    public void JungleCheckpoint(int id)
     {
-        player.transform.position = icePortal4.transform.position;
+        // Debug.Log($"IceCheckpoint called id: {id}");
+        gameManager.ChangeCheckpointId(id, 4);
     }
 
     public void Hub()
     {
-        SceneManager.LoadScene(1);
+        gameManager.ChangeCheckpointId(0, 1);
     }
 }
