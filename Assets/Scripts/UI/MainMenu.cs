@@ -47,7 +47,6 @@ public class MainMenu : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.7f);
                 Destroy(GameObject.FindObjectOfType<AudioListener>());
-                Destroy(GameObject.FindObjectOfType<UnityEngine.EventSystems.EventSystem>());
                 asyncOperation.allowSceneActivation = true;
             }
 
