@@ -100,6 +100,8 @@ public class GameManager : MonoBehaviour
             weaponsHandler.Pause();
         }
 
+        
+
         // For Testing
         if (pause) return;
         if (Input.GetKeyDown(KeyCode.Alpha3))

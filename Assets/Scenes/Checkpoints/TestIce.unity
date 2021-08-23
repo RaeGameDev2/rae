@@ -3949,6 +3949,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 995391151983857924, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391151983857924, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391151983857924, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 124350631}
+    - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153115794580, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153115794580, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
     - target: {fileID: 995391153298357785, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4037,8 +4077,83 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckpointsCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 995391153395704310, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153395704310, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153395704310, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872056213150856830, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872056213150856830, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872056213150856830, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 124350631}
+    - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572386321083535175, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572386321083535175, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7930326682233181410, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7930326682233181410, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7930326682233181410, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+--- !u!114 &124350631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 168008090, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+  m_PrefabInstance: {fileID: 124350630}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604250676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93f6605118d1334a80076d73376a662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &125184225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11359,7 +11474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalId: 1
   portalType: 0
-  teleportMenu: {fileID: 0}
+  teleportMenu: {fileID: 604250676}
 --- !u!212 &445290286
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11419,7 +11534,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445290283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 98.9, y: 10.3, z: 0}
+  m_LocalPosition: {x: 8.2, y: 4.4, z: 0}
   m_LocalScale: {x: 0.71172, y: 0.71172, z: 0.71172}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15798,6 +15913,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &604250676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 995391153298357797, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+  m_PrefabInstance: {fileID: 124350630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &604360776
 GameObject:
   m_ObjectHideFlags: 0
@@ -30507,7 +30627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalId: 3
   portalType: 0
-  teleportMenu: {fileID: 0}
+  teleportMenu: {fileID: 604250676}
 --- !u!212 &1276155762
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -30567,7 +30687,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276155759}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 188.31, y: -24.5, z: 0}
+  m_LocalPosition: {x: 22.7, y: 16.1, z: 0}
   m_LocalScale: {x: 0.71172, y: 0.71172, z: 0.71172}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39200,7 +39320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalId: 2
   portalType: 0
-  teleportMenu: {fileID: 0}
+  teleportMenu: {fileID: 604250676}
 --- !u!212 &1685701057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -39260,7 +39380,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685701054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 190.9, y: 101.8, z: 0}
+  m_LocalPosition: {x: -3.87, y: 11.77, z: 0}
   m_LocalScale: {x: 0.71172, y: 0.71172, z: 0.71172}
   m_Children: []
   m_Father: {fileID: 0}
@@ -48481,7 +48601,7 @@ PrefabInstance:
     - target: {fileID: 2629936234594017511, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: teleportMenu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 604250676}
     - target: {fileID: 2629936234594017511, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: Teleport_Menu
       value: 

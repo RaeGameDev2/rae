@@ -16,6 +16,7 @@ public class PortalCheckpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+       
         if (collision.tag != "Player")
             return;
 
@@ -35,6 +36,7 @@ public class PortalCheckpoint : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        Debug.Log(gameManager.checkpoints[GameManager.Realm.Ice][1]);
     }
 
     private void OnTriggerExit2D(Collider2D collision)

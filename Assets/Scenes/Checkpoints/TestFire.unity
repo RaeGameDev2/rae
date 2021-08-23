@@ -2320,9 +2320,45 @@ PrefabInstance:
       propertyPath: icePortal4
       value: 
       objectReference: {fileID: 1266951824}
+    - target: {fileID: 995391151983857924, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391151983857924, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391151983857924, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 168008089}
+    - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391152579152013, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153115794580, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153115794580, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
       objectReference: {fileID: 0}
     - target: {fileID: 995391153298357785, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_Pivot.x
@@ -2412,13 +2448,77 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckpointsCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 995391153395704310, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153395704310, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153395704310, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872056213150856830, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872056213150856830, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872056213150856830, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 168008089}
+    - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267882966274588330, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4736573295765803571, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 168008089}
+    - target: {fileID: 4736573295765803571, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IceCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572386321083535175, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572386321083535175, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7930326682233181410, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7930326682233181410, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 7930326682233181410, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
@@ -2427,6 +2527,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 995391153298357797, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
   m_PrefabInstance: {fileID: 168008087}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &168008089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 168008090, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+  m_PrefabInstance: {fileID: 168008087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168008088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93f6605118d1334a80076d73376a662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &198409320
 GameObject:
   m_ObjectHideFlags: 0
@@ -12233,11 +12344,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017505, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.1
+      value: -53
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017505, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30.7
+      value: 25.5
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017505, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14330,11 +14441,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017505, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 118.9
+      value: -71.9
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017505, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.6
+      value: 19.8
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017505, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26211,11 +26322,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017505, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 119.4
+      value: -45.5
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017505, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.8
+      value: -20.4
       objectReference: {fileID: 0}
     - target: {fileID: 2629936234594017505, guid: 189a97df69f9a0c40a0a1ecca0ed0eee, type: 3}
       propertyPath: m_LocalPosition.z
