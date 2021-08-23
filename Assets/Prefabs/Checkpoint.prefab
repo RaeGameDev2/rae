@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2629936234594017510}
   m_Layer: 0
   m_Name: Checkpoint
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,9 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d6369d3c6cd454a97c3f8ca59cb2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portal_id: 1
-  portal_type: 0
-  Teleport_Menu: {fileID: 0}
+  portalId: 0
+  portalType: 0
+  teleportMenu: {fileID: 0}
 --- !u!61 &2629936234594017510
 BoxCollider2D:
   m_ObjectHideFlags: 0

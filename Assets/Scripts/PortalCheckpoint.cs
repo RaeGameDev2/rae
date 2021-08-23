@@ -4,7 +4,7 @@ using UnityEngine;
 public class PortalCheckpoint : MonoBehaviour
 {
     private GameManager gameManager;
-    [SerializeField] private int portalId;
+    public int portalId;
     [SerializeField] private GameManager.Realm portalType;
     [SerializeField] private GameObject teleportMenu;
 
@@ -19,17 +19,17 @@ public class PortalCheckpoint : MonoBehaviour
         if (collision.tag != "Player")
             return;
 
+        teleportMenu.SetActive(true);
         switch (portalType)
         {
             case GameManager.Realm.Ice:
-                teleportMenu.SetActive(true);
                 gameManager.checkpoints[GameManager.Realm.Ice][portalId] = true;
                 break;
             case GameManager.Realm.Fire:
-                teleportMenu.SetActive(true);
                 gameManager.checkpoints[GameManager.Realm.Fire][portalId] = true;
                 break;
             case GameManager.Realm.Jungle:
+                gameManager.checkpoints[GameManager.Realm.Jungle][portalId] = true;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
