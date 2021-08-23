@@ -6,6 +6,8 @@ public class PlayerSkills : MonoBehaviour
     public Skills playerSkills;
 
     private GameObject Skilltree;
+    private GameObject UIBars;
+    private GameObject SkillHUDCanvas;
 
     private bool stUI;
     [SerializeField] private UI_SkillTree uiSkillTree;
@@ -21,6 +23,8 @@ public class PlayerSkills : MonoBehaviour
         uiSkillTree.SetPlayerSkills(playerSkills);
 
         Skilltree = GameObject.Find("UI_Skilltree");
+        UIBars = GameObject.Find("UI Bars");
+        SkillHUDCanvas = GameObject.Find("SkillHUDCanvas");
 
         HideUI();
     }
@@ -33,24 +37,28 @@ public class PlayerSkills : MonoBehaviour
         {
             ShowUI();
             stUI = true;
-            Time.timeScale = 0f;
+            GameManager.instance.Pause();
         }
         else
         {
             HideUI();
             stUI = false;
-            Time.timeScale = 1f;
+            GameManager.instance.Pause();
         }
     }
 
     private void HideUI()
     {
         Skilltree.SetActive(false);
+        UIBars.SetActive(true);
+        SkillHUDCanvas.SetActive(true);
     }
 
     private void ShowUI()
     {
         Skilltree.SetActive(true);
+        UIBars.SetActive(false);
+        SkillHUDCanvas.SetActive(false);
     }
 
     public void Pause()

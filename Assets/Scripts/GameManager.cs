@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     private int checkpointId;
     public bool isDontDestroyOnLoad;
 
+    public static GameManager instance;
     private void Awake()
     {
         checkpoints.Add(Realm.Ice, new List<bool>());
@@ -49,15 +50,16 @@ public class GameManager : MonoBehaviour
 
         checkpointId = 0;
 
-        var managers = GameObject.FindGameObjectsWithTag("GameManger");
-        if (managers.Length == 1)
+        if (instance == null)
         {
+            instance = this;
             DontDestroyOnLoad(gameObject);
             isDontDestroyOnLoad = true;
         }
         else
+        {
             Destroy(gameObject);
-
+        }
     }
 
     private void OnEnable()
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        // For Testing
         if (Input.GetKeyDown(KeyCode.P))
         {
             pause = !pause;
@@ -100,9 +103,6 @@ public class GameManager : MonoBehaviour
             weaponsHandler.Pause();
         }
 
-        
-
-        // For Testing
         if (pause) return;
         if (Input.GetKeyDown(KeyCode.Alpha3))
             playerResources.AddLife();
@@ -121,6 +121,16 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    public void Pause()
+    {
+        pause = !pause;
+        uiManager.Pause();
+        playerResources.Pause();
+        playerSpells.Pause();
+        playerSkills.Pause();
+        playerController.Pause();
+        weaponsHandler.Pause();
     }
 
     public void ChangeCheckpointId(int id, int scene)
