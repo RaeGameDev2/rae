@@ -141,4 +141,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(scene);
     }
+
+    // TODO: method for changing and saving checkpoints data
+    // TODO: method for changing and saving volume
+    // TODO: method for changing and saving checkpoints data
+    // TODO: read for file all data
 }

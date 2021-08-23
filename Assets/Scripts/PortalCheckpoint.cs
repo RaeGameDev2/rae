@@ -24,6 +24,7 @@ public class PortalCheckpoint : MonoBehaviour
         {
             case GameManager.Realm.Ice:
                 gameManager.checkpoints[GameManager.Realm.Ice][portalId] = true;
+                // TODO: Save in file
                 break;
             case GameManager.Realm.Fire:
                 gameManager.checkpoints[GameManager.Realm.Fire][portalId] = true;
