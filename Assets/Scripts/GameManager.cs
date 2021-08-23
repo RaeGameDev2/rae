@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
         Fire,
         Jungle
     }
-
+    public static GameManager instance;
     public Dictionary<Realm, List<bool>> checkpoints = new Dictionary<Realm, List<bool>>();
     private bool pause;
     private PlayerController playerController;
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
         checkpoints.Add(Realm.Ice, new List<bool>());
         checkpoints[Realm.Ice].Add(true);
         checkpoints[Realm.Ice].Add(false);
@@ -71,5 +73,16 @@ public class GameManager : MonoBehaviour
             playerResources.TakeDamage(1, Vector3.zero);
         if (Input.GetKeyDown(KeyCode.Alpha8))
             playerResources.UseMana();
+    }
+
+    public void Pause()
+    {
+        pause = !pause;
+        uiManager.Pause();
+        playerResources.Pause();
+        playerSpells.Pause();
+        playerSkills.Pause();
+        playerController.Pause();
+        weaponsHandler.Pause();
     }
 }
