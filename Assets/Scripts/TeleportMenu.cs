@@ -29,6 +29,11 @@ public class TeleportMenu : MonoBehaviour
         player.transform.position = icePortal4.transform.position;
     }
 
+    public void IceCheckpoint1()
+    {
+        SceneManager.LoadScene(3); //ice
+    }
+
     public void Hub()
     {
         SceneManager.LoadScene(1);

@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour
         checkpoints[Realm.Fire].Add(false);
         checkpoints[Realm.Fire].Add(false);
         checkpoints[Realm.Fire].Add(false);
+        var managers = GameObject.FindGameObjectsWithTag("GameManger");
+        
+        if (managers.Length == 1)
+            DontDestroyOnLoad(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     private void Start()
