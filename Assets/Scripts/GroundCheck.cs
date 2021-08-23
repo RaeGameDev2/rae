@@ -3,32 +3,24 @@ using UnityEngine;
 public class GroundCheck : MonoBehaviour
 {
     private PlayerController pc;
+    [SerializeField] private float distance;
+    [SerializeField] private LayerMask groundMask;
 
     private void Start()
     {
         pc = FindObjectOfType<PlayerController>();
     }
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        // Debug.Log("enter");
-        if (!col.CompareTag("Ground")) return;
-        pc.isGrounded = true;
-        pc.canDoubleJump = false;
-        pc.diagonalJump = false;
-    }
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        // Debug.Log("stay");
-        if (!col.CompareTag("Ground")) return;
-        pc.isGrounded = true;
-        pc.canDoubleJump = false;
-        pc.diagonalJump = false;
-    }
 
-    private void OnTriggerExit2D(Collider2D col)
+    private void Update()
     {
-        // Debug.Log("exit");
-        if (col.CompareTag("Ground"))
-            pc.isGrounded = false;
+        pc.isGrounded = false;
+        foreach (Transform child in transform)
+        {
+            pc.isGrounded |= Physics2D.Raycast(child.position, Vector2.down, distance, groundMask);
+            if (pc.isGrounded)
+                Debug.DrawRay(child.position, Vector2.down * distance, Color.green);
+            else
+                Debug.DrawRay(child.position, Vector2.down * distance, Color.red);
+        }
     }
 }
