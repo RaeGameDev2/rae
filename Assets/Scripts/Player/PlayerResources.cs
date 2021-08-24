@@ -98,6 +98,7 @@ public class PlayerResources : MonoBehaviour
         StartCoroutine(DamageAnimation());
 
         if (damage > currentHealth) damage = currentHealth;
+        // TODO GameManager.Die
         currentHealth -= damage;
         uiManager.TakeLives(damage);
         if (currentHealth <= 0) StartCoroutine(my_delay());
