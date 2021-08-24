@@ -29,8 +29,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("awake!");
-
         checkpoints.Add(Realm.Ice, new List<bool>());
         checkpoints[Realm.Ice].Add(true);
         checkpoints[Realm.Ice].Add(false);
@@ -157,11 +155,13 @@ public class GameManager : MonoBehaviour
             case 4 when !checkpoints[Realm.Jungle][id]:
                 return;
         }
-
-        Debug.Log("Scene index: " + SceneManager.GetActiveScene().buildIndex);
+        
 
         if (SceneManager.GetActiveScene().buildIndex == scene) {
+            var loader = GameObject.Find("Crossfade");
+            loader.GetComponent<Animator>().SetTrigger("Start");
             playerController.transform.position = getCheckpointBySceneAndId(id, scene).transform.position;
+            loader.GetComponent<Animator>().SetTrigger("End");
         } else {  
             checkpointId = id;
             StartCoroutine(ChangeScene(scene));
