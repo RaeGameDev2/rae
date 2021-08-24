@@ -16,7 +16,6 @@ public class PortalCheckpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       
         if (collision.tag != "Player")
             return;
 
@@ -25,6 +24,7 @@ public class PortalCheckpoint : MonoBehaviour
         {
             case GameManager.Realm.Ice:
                 gameManager.checkpoints[GameManager.Realm.Ice][portalId] = true;
+                Debug.Log("Portal made TRUE!!: " + portalType);
                 // TODO: Save in file
                 break;
             case GameManager.Realm.Fire:

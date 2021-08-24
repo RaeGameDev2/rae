@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("awake!");
+
         checkpoints.Add(Realm.Ice, new List<bool>());
         checkpoints[Realm.Ice].Add(true);
         checkpoints[Realm.Ice].Add(false);
@@ -123,6 +125,29 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    public GameObject getCheckpointBySceneAndId(int id, int scene)
+    {
+        string sceneName = "";
+
+        switch (scene)
+        {
+            case 2 :
+                sceneName += "Fire";
+                break;
+            case 3 :
+                sceneName += "Ice";
+                break;
+            case 4 :
+                sceneName += "Jungle";
+                break;
+        }
+
+        Debug.Log(sceneName + " Checkpoint " + (id + 1));
+        var checkpoint = GameObject.Find(sceneName + " Checkpoint " + (id + 1));
+
+        return checkpoint;
+    }
+
     public void ChangeCheckpointId(int id, int scene)
     {
         switch (scene)
@@ -132,9 +157,17 @@ public class GameManager : MonoBehaviour
             case 4 when !checkpoints[Realm.Jungle][id]:
                 return;
         }
-        checkpointId = id;
-        StartCoroutine(ChangeScene(scene));
-        Debug.Log(checkpointId + " " + transform.position);
+
+        Debug.Log("Scene index: " + SceneManager.GetActiveScene().buildIndex);
+
+        if (SceneManager.GetActiveScene().buildIndex == scene) {
+            playerController.transform.position = getCheckpointBySceneAndId(id, scene).transform.position;
+        } else {  
+            checkpointId = id;
+            StartCoroutine(ChangeScene(scene));
+            Debug.Log(checkpointId + " " + transform.position);
+        }
+
     }
     private IEnumerator ChangeScene(int scene)
     {
