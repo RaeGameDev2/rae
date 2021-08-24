@@ -160,8 +160,8 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == scene) {
             var loader = GameObject.Find("Crossfade");
             loader.GetComponent<Animator>().SetTrigger("Start");
-            playerController.transform.position = getCheckpointBySceneAndId(id, scene).transform.position;
-            loader.GetComponent<Animator>().SetTrigger("End");
+            crossfadeStartAnimation = true;
+            StartCoroutine(MovePlayer(loader, id, scene));
         } else {  
             checkpointId = id;
             StartCoroutine(ChangeScene(scene));
@@ -169,6 +169,18 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    public bool crossfadeStartAnimation;
+    public bool crossfadeEndAnimation;
+    private IEnumerator MovePlayer(GameObject loader, int id, int scene)
+    {
+        while (crossfadeStartAnimation)
+            yield return new WaitForFixedUpdate();
+        playerController.transform.position = getCheckpointBySceneAndId(id, scene).transform.position;
+        crossfadeEndAnimation = true;
+        loader.GetComponent<Animator>().SetTrigger("End");
+    }
+
     private IEnumerator ChangeScene(int scene)
     {
         var loader = GameObject.Find("Crossfade");
