@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour
         checkpoints[Realm.Fire].Add(false);
         checkpoints[Realm.Fire].Add(false);
         checkpoints[Realm.Fire].Add(false);
+
+        checkpoints.Add(Realm.Jungle, new List<bool>());
+        checkpoints[Realm.Jungle].Add(true);
+        checkpoints[Realm.Jungle].Add(false);
+        checkpoints[Realm.Jungle].Add(false);
+        checkpoints[Realm.Jungle].Add(false);
     }
 
     private void Start()

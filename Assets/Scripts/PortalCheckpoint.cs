@@ -24,6 +24,7 @@ public class PortalCheckpoint : MonoBehaviour
             case GameManager.Realm.Ice:
                 teleportMenu.SetActive(true);
                 gameManager.checkpoints[GameManager.Realm.Ice][portalId] = true;
+               
                 break;
             case GameManager.Realm.Fire:
                 teleportMenu.SetActive(true);

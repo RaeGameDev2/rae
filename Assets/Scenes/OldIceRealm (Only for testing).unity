@@ -480,6 +480,138 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4539151482824794143, guid: 744497a1d92dbbb4bb981b97022b489a, type: 3}
   m_PrefabInstance: {fileID: 1403354157}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &64205848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64205852}
+  - component: {fileID: 64205851}
+  - component: {fileID: 64205850}
+  - component: {fileID: 64205849}
+  m_Layer: 5
+  m_Name: IcePortal2Blocked
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &64205849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64205848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 64205850}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1693354215}
+        m_TargetAssemblyTypeName: Teleport_Menu, Assembly-CSharp
+        m_MethodName: Portal2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &64205850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64205848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 06c8621e8dedf844fb4b30efd417b1bc, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &64205851
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64205848}
+  m_CullTransparentMesh: 1
+--- !u!224 &64205852
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64205848}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 995391152783403708}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -217.3, y: 55}
+  m_SizeDelta: {x: 25, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &70972946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,6 +1248,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4418055906503595011, guid: 76fa5bc6a6ebd294588c51f39612c662, type: 3}
   m_PrefabInstance: {fileID: 1095722859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &198440983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7639839691345339821, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+  m_PrefabInstance: {fileID: 7639839691813891403}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &204544856 stripped
 Transform:
@@ -5386,7 +5523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d6369d3c6cd454a97c3f8ca59cb2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalId: 0
+  portalId: 3
   portalType: 0
   teleportMenu: {fileID: 584225950}
 --- !u!212 &804471883
@@ -5706,7 +5843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d6369d3c6cd454a97c3f8ca59cb2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalId: 0
+  portalId: 2
   portalType: 0
   teleportMenu: {fileID: 584225950}
 --- !u!212 &855673437
@@ -5811,7 +5948,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 995391152783403708}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5928,6 +6065,9 @@ MonoBehaviour:
   icePortal2Button: {fileID: 1324760602}
   icePortal3Button: {fileID: 73607323}
   icePortal4Button: {fileID: 1714802502}
+  icePortal2Blocked: {fileID: 64205848}
+  icePortal3Blocked: {fileID: 1058420610}
+  icePortal4Blocked: {fileID: 2029204136}
   firePortal1Button: {fileID: 1839867446}
   firePortal2Button: {fileID: 958684874}
   firePortal3Button: {fileID: 1057792417}
@@ -7955,6 +8095,138 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057792417}
   m_CullTransparentMesh: 1
+--- !u!1 &1058420610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1058420614}
+  - component: {fileID: 1058420613}
+  - component: {fileID: 1058420612}
+  - component: {fileID: 1058420611}
+  m_Layer: 5
+  m_Name: IcePortal3Blocked
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1058420611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058420610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1058420612}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1693354215}
+        m_TargetAssemblyTypeName: Teleport_Menu, Assembly-CSharp
+        m_MethodName: Portal3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1058420612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058420610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 23b1dccd47a755440871f341d928fe48, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1058420613
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058420610}
+  m_CullTransparentMesh: 1
+--- !u!224 &1058420614
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058420610}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 995391152783403708}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -190.3, y: 55}
+  m_SizeDelta: {x: 25, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1065543956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8489,7 +8761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d6369d3c6cd454a97c3f8ca59cb2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalId: 0
+  portalId: 1
   portalType: 0
   teleportMenu: {fileID: 584225950}
 --- !u!212 &1123318925
@@ -9716,6 +9988,10 @@ PrefabInstance:
     - target: {fileID: 4935903680554839064, guid: 6c33e765a75a3144a9926fb5b6f3ccc4, type: 3}
       propertyPath: m_Name
       value: SkillTree
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935903680554839064, guid: 6c33e765a75a3144a9926fb5b6f3ccc4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4935903680554839068, guid: 6c33e765a75a3144a9926fb5b6f3ccc4, type: 3}
       propertyPath: m_Pivot.x
@@ -13384,7 +13660,7 @@ RectTransform:
   - {fileID: 1057792418}
   - {fileID: 1099900059}
   m_Father: {fileID: 995391152783403708}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13501,6 +13777,9 @@ MonoBehaviour:
   icePortal2Button: {fileID: 1324760602}
   icePortal3Button: {fileID: 73607323}
   icePortal4Button: {fileID: 1714802502}
+  icePortal2Blocked: {fileID: 64205848}
+  icePortal3Blocked: {fileID: 1058420610}
+  icePortal4Blocked: {fileID: 2029204136}
   firePortal1Button: {fileID: 1839867446}
   firePortal2Button: {fileID: 958684874}
   firePortal3Button: {fileID: 1057792417}
@@ -13514,7 +13793,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
   m_PrefabInstance: {fileID: 7639839691813891403}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 198440983}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f93f6605118d1334a80076d73376a662, type: 3}
@@ -14385,7 +14664,7 @@ RectTransform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_Children: []
   m_Father: {fileID: 995391152783403708}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15756,7 +16035,7 @@ RectTransform:
   - {fileID: 544125894}
   - {fileID: 254555057}
   m_Father: {fileID: 995391152783403708}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15873,6 +16152,9 @@ MonoBehaviour:
   icePortal2Button: {fileID: 1324760602}
   icePortal3Button: {fileID: 73607323}
   icePortal4Button: {fileID: 1714802502}
+  icePortal2Blocked: {fileID: 64205848}
+  icePortal3Blocked: {fileID: 1058420610}
+  icePortal4Blocked: {fileID: 2029204136}
   firePortal1Button: {fileID: 1839867446}
   firePortal2Button: {fileID: 958684874}
   firePortal3Button: {fileID: 1057792417}
@@ -16376,6 +16658,138 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4418055906503595011, guid: 76fa5bc6a6ebd294588c51f39612c662, type: 3}
   m_PrefabInstance: {fileID: 1336874016}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2029204136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2029204140}
+  - component: {fileID: 2029204139}
+  - component: {fileID: 2029204138}
+  - component: {fileID: 2029204137}
+  m_Layer: 5
+  m_Name: IcePortal4Blocked
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2029204137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029204136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2029204138}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1693354215}
+        m_TargetAssemblyTypeName: Teleport_Menu, Assembly-CSharp
+        m_MethodName: Portal4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2029204138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029204136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b7d0dd91b7c734e4db5849e6794462d7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2029204139
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029204136}
+  m_CullTransparentMesh: 1
+--- !u!224 &2029204140
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029204136}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 995391152783403708}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -163.3, y: 55}
+  m_SizeDelta: {x: 25, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &2034353741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20052,7 +20466,11 @@ PrefabInstance:
     - target: {fileID: 995391153395704310, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1693354215}
+      objectReference: {fileID: 198440983}
+    - target: {fileID: 995391153395704310, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 995391153395704311, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -218
@@ -51280,6 +51698,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1692593552}
     - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: portalId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
       propertyPath: IcePortal_1
       value: 
       objectReference: {fileID: 1496330065}
@@ -51295,6 +51717,34 @@ PrefabInstance:
       propertyPath: IcePortal_4
       value: 
       objectReference: {fileID: 804471880}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal1Button
+      value: 
+      objectReference: {fileID: 1366231771}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal2Button
+      value: 
+      objectReference: {fileID: 1324760602}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal3Button
+      value: 
+      objectReference: {fileID: 73607323}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal4Button
+      value: 
+      objectReference: {fileID: 1714802502}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal2Blocked
+      value: 
+      objectReference: {fileID: 64205848}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal3Blocked
+      value: 
+      objectReference: {fileID: 1058420610}
+    - target: {fileID: 7639839691345339820, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
+      propertyPath: icePortal4Blocked
+      value: 
+      objectReference: {fileID: 2029204136}
     - target: {fileID: 7639839691345339821, guid: 252f00f7446ce0347b037218dccd0cec, type: 3}
       propertyPath: m_Name
       value: Checkpoint_Menu
