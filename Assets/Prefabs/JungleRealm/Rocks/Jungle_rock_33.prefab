@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &91592007889211071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4626196204689513377}
+  - component: {fileID: 3142346082878135655}
+  - component: {fileID: 6035602448442431480}
+  m_Layer: 0
+  m_Name: Jungle_rock_33
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4626196204689513377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91592007889211071}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -34.16814, y: -42.321774, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &3142346082878135655
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91592007889211071}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: bcf186dd2ddf4ff408d3ec51a89413d8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.19, y: 2.77}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!68 &6035602448442431480
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91592007889211071}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.63489413, y: -1.1582451}
+  - {x: -0.8598442, y: -1.0343246}
+  - {x: -1.0866585, y: -0.93504333}
+  - {x: -1.3686714, y: -0.7205658}
+  - {x: -1.6113701, y: -0.61275864}
+  - {x: -1.911129, y: -0.44530487}
+  - {x: -2.4258118, y: -0.18496704}
+  - {x: -2.5406837, y: 0.11866379}
+  - {x: -2.6053085, y: 0.57622147}
+  - {x: -2.4297562, y: 1.046627}
+  - {x: -2.0702019, y: 1.260849}
+  - {x: -1.6736794, y: 1.3369637}
+  - {x: -1.1997185, y: 1.3090134}
+  - {x: -0.3629799, y: 1.3542557}
+  - {x: -0.02441597, y: 1.3542557}
+  - {x: 0.24287033, y: 1.4077148}
+  - {x: 0.527977, y: 1.3898926}
+  - {x: 0.9119568, y: 1.3608818}
+  - {x: 1.1664848, y: 1.292202}
+  - {x: 1.6151314, y: 1.2674866}
+  - {x: 1.9483566, y: 1.302124}
+  - {x: 2.17173, y: 1.3120613}
+  - {x: 2.375412, y: 1.2515221}
+  - {x: 2.5763054, y: 0.9462166}
+  - {x: 2.6052055, y: 0.6756592}
+  - {x: 2.5595818, y: 0.40694046}
+  - {x: 2.4606, y: 0.21966934}
+  - {x: 2.221218, y: 0.0771904}
+  - {x: 2.0934258, y: 0.11897659}
+  - {x: 1.9286919, y: -0.14414978}
+  - {x: 1.8211136, y: -0.41887665}
+  - {x: 1.2668533, y: -0.61532974}
+  - {x: 1.0895538, y: -0.7315445}
+  - {x: 1.0074196, y: -0.9355049}
+  - {x: 0.8761673, y: -0.9888916}
+  - {x: 0.78367233, y: -1.0670052}
+  - {x: 0.63726425, y: -1.1818466}
+  - {x: 0.45479965, y: -1.3601913}
+  - {x: 0.21377182, y: -1.3571663}
+  - {x: 0.064956665, y: -1.3318367}
+  - {x: -0.12352753, y: -1.1909866}
+  - {x: -0.310215, y: -1.1062431}
+  - {x: -0.4332161, y: -1.2006683}
+  - {x: -0.5768063, y: -1.1760635}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
