@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerSpells.quickTeleportActive)
             return;
-        if (hInput > 0.01f)
+        if (hInput > 0.01f && rb.velocity.x > 0)
         {
             if (direction == Direction.left)
             {
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
                 direction = Direction.right;
             }
         }
-        else if (hInput < -0.01f)
+        else if (hInput < -0.01f && rb.velocity.x < 0)
         {
             if (direction == Direction.right)
             {
