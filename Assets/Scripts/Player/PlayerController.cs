@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerSpells.quickTeleportActive)
             return;
-        if (hInput > 0.01f && rb.velocity.x > 0)
+        if (hInput > 0.01f)
         {
             if (direction == Direction.left)
             {
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
                 direction = Direction.right;
             }
         }
-        else if (hInput < -0.01f && rb.velocity.x < 0)
+        else if (hInput < -0.01f)
         {
             if (direction == Direction.right)
             {
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
         {
             case Weapon.AttackType.None:
                 {
-                    if (Mathf.Abs(rb.velocity.x) <= 0.1)
+                    if (Mathf.Abs(rb.velocity.x) < groundSpeed)
                         animState = State.IDLE;
                     else
                         animState = State.RUN;
