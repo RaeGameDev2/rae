@@ -9,19 +9,17 @@ public class PlayerController : MonoBehaviour
     private State animState;
     [HideInInspector] public bool canDoubleJump;
 
-    private float currGravity;
+    [SerializeField] private float currGravity;
     [HideInInspector] public bool diagonalJump;
 
     private Direction direction;
     private float distanceTraveled;
     [SerializeField] private float fallSpeed;
     [SerializeField] private float gravity;
+    [SerializeField] private float jumpGravity;
 
     [SerializeField] private float groundSpeed;
     private float hInput;
-
-    private bool isDashing;
-
     public bool isGrounded;
 
     [SerializeField] private float jumpHeight;
@@ -52,20 +50,19 @@ public class PlayerController : MonoBehaviour
         currGravity = gravity;
         canDoubleJump = false;
         prevVelocityY = 0;
-        isDashing = false;
         distanceTraveled = 0;
     }
 
     private void Start()
     {
         anim.SetFloat("speed", groundSpeed / 7);
+        jumpGravity = (jumpSpeed * jumpSpeed) / (2 * jumpHeight);
     }
 
     private void Update()
     {
         HandleInput();
         ChangeDirection();
-        if (isDashing == false) timeSinceDash += Time.deltaTime;
         UpdateAnimation();
 
         if (weapons.currWeapon.type != Weapon.WeaponType.Scythe &&
@@ -87,12 +84,15 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Reset gravity to default values
-        if (isGrounded || rb.velocity.y < 0)
+        if (rb.velocity.y > 0)
+            currGravity = jumpGravity;
+
+        //Reset gravity to falling gravity
+        if (rb.velocity.y < 0)
             currGravity = gravity;
 
         //If not in dash, handles jump
-        if (!isDashing && !playerSpells.quickTeleportActive)
+        if (!playerSpells.quickTeleportActive)
         {
             if (animState != State.ATTACK)
             {
@@ -109,8 +109,11 @@ public class PlayerController : MonoBehaviour
                         speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
                     else
                         speed = Mathf.Clamp(speed, -airSpeed, airSpeed);
-                    if (rb.velocity.y == 0 || rb.velocity.y < 0 && prevVelocityY > 0)
+                    if (rb.velocity.y * prevVelocityY <= 0)
+                    {
                         rb.velocity = new Vector2(speed, -fallSpeed);
+                        Debug.Log(rb.velocity);
+                    }
                     rb.velocity = new Vector2(speed, rb.velocity.y);
                 }
             }
@@ -166,7 +169,7 @@ public class PlayerController : MonoBehaviour
         {
             case Weapon.AttackType.None:
                 {
-                    if (rb.velocity.x == 0)
+                    if (Mathf.Abs(rb.velocity.x) <= 0.1)
                         animState = State.IDLE;
                     else
                         animState = State.RUN;
@@ -198,7 +201,6 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-        currGravity = jumpSpeed * jumpSpeed / (2 * jumpHeight);
         if (rb.velocity.x != 0)
             diagonalJump = true;
 

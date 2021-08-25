@@ -3052,18 +3052,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fda64e52017284489d4ffe0c7cdff8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airSpeed: 15
+  airSpeed: 20
   canDoubleJump: 0
-  dashCooldown: 4
-  dashDistance: 20
-  dashSpeed: 20
+  currGravity: 0
   diagonalJump: 0
-  fallSpeed: 20
-  gravity: 9
+  fallSpeed: 25
+  gravity: 20
+  jumpGravity: 0
   groundSpeed: 20
   isGrounded: 0
   jumpHeight: 10
-  jumpSpeed: 20
+  jumpSpeed: 50
   onIce: 0
 --- !u!114 &658857872126851909
 MonoBehaviour:
