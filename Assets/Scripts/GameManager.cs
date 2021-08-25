@@ -52,8 +52,6 @@ public class GameManager : MonoBehaviour
         checkpoints[Realm.Jungle].Add(false);
         checkpoints[Realm.Jungle].Add(false);
 
-        LoadAllData();
-
         checkpointId = 0;
 
         if (instance == null)
@@ -93,6 +91,8 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        LoadAllData();
     }
 
     private void Update()
@@ -215,8 +215,6 @@ public class GameManager : MonoBehaviour
 
     public void SaveCheckpoints()
     {
-        Debug.Log("Checkpoints SAVED!!");
-
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/checkpoints.data";
 
@@ -230,8 +228,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadCheckpoints()
     {
-        Debug.Log("Checkpoints LOADED!!");
-
         string path = Application.persistentDataPath + "/checkpoints.data";
 
         if (File.Exists(path))
@@ -250,7 +246,6 @@ public class GameManager : MonoBehaviour
 
     public void SaveVolume()
     {
-        Debug.Log("Volume SAVED!!");
         string fileName = Application.persistentDataPath + "/volume.data";
 
         StreamWriter stream = new StreamWriter(fileName);
@@ -261,8 +256,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadVolume()
     {
-        Debug.Log("Volume LOADED!!");
-
         string path = Application.persistentDataPath + "/volume.data";
         if (File.Exists(path))
         {
@@ -277,10 +270,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SaveSkillPoints()
+    {
+        string fileName = Application.persistentDataPath + "/skillpoints.data";
+
+        StreamWriter stream = new StreamWriter(fileName);
+
+        stream.WriteLine(playerSkills.playerSkills.GetSkillPoints());
+
+        stream.Close();
+    }
+
+    public void LoadSkillPoints()
+    {
+        string path = Application.persistentDataPath + "/skillpoints.data";
+        if (File.Exists(path))
+        {
+            StreamReader readStream = new StreamReader(path);
+
+            int skillPoints = int.Parse(readStream.ReadLine());
+
+            playerSkills.playerSkills.SetSkillPoints(skillPoints);
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+        }
+    }
+
     public void SaveSkillLevel()
     {
-        Debug.Log("Skill SAVED!!");
-
         string fileName = Application.persistentDataPath + "/skill.data";
 
         StreamWriter stream = new StreamWriter(fileName);
@@ -290,13 +309,12 @@ public class GameManager : MonoBehaviour
         {
             stream.WriteLine(i);
         }
+
         stream.Close();
     }
 
     public void LoadSkillLevel()
     {
-        Debug.Log("Skill LOADED!!");
-
         string path = Application.persistentDataPath + "/skill.data";
         if (File.Exists(path))
         {
@@ -308,6 +326,8 @@ public class GameManager : MonoBehaviour
             {
                 skillLevel[i] = int.Parse(readStream.ReadLine());
             }
+
+            playerSkills.playerSkills.SetSkillLevel();
         }
         else
         {
@@ -326,6 +346,7 @@ public class GameManager : MonoBehaviour
     {
         LoadCheckpoints();
         LoadVolume();
+        LoadSkillPoints();
         LoadSkillLevel();
     }
 }
