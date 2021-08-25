@@ -6565,6 +6565,8 @@ GameObject:
   m_Component:
   - component: {fileID: 330888855}
   - component: {fileID: 330888856}
+  - component: {fileID: 330888858}
+  - component: {fileID: 330888857}
   m_Layer: 0
   m_Name: lava_mid (1)
   m_TagString: Untagged
@@ -6637,6 +6639,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &330888857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330888854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5ad0cbab1edb640a476b7c9d839eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &330888858
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330888854}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.6629753}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 2}
+    newSize: {x: 5.12, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.12, y: 0.6740494}
+  m_EdgeRadius: 0
 --- !u!1 &345166051
 GameObject:
   m_ObjectHideFlags: 0
@@ -25301,6 +25341,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 294684817452424088, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391151983857925, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -183
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391152579152014, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -183
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153115794581, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -183
+      objectReference: {fileID: 0}
     - target: {fileID: 995391153298357785, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -25388,6 +25444,38 @@ PrefabInstance:
     - target: {fileID: 995391153298357797, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
       propertyPath: m_Name
       value: CheckpointsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 995391153395704311, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -183
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906115594476470435, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775407656295998767, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154172139084147638, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099580405496699209, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304638267195840744, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 127
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622317687299245733, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508209871069676007, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1caf9c89d585a364885b346b947b5b97, type: 3}
@@ -39353,6 +39441,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2006398277}
   - component: {fileID: 2006398278}
+  - component: {fileID: 2006398280}
+  - component: {fileID: 2006398279}
   m_Layer: 0
   m_Name: lava_mid (2)
   m_TagString: Untagged
@@ -39425,6 +39515,44 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2006398279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006398276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5ad0cbab1edb640a476b7c9d839eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &2006398280
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006398276}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.6690302}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 2}
+    newSize: {x: 5.12, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.12, y: 0.6619396}
+  m_EdgeRadius: 0
 --- !u!1 &2017143022
 GameObject:
   m_ObjectHideFlags: 0

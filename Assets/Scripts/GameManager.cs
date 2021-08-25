@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,7 +29,9 @@ public class GameManager : MonoBehaviour
     private int checkpointId;
     public bool isDontDestroyOnLoad;
 
+    public int lastCheckpointId = 0;
     public static GameManager instance;
+
     private void Awake()
     {
         checkpoints.Add(Realm.Ice, new List<bool>());
@@ -47,6 +51,8 @@ public class GameManager : MonoBehaviour
         checkpoints[Realm.Jungle].Add(false);
         checkpoints[Realm.Jungle].Add(false);
         checkpoints[Realm.Jungle].Add(false);
+
+        LoadAllData();
 
         checkpointId = 0;
 
@@ -91,7 +97,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // For Testing
         if (Input.GetKeyDown(KeyCode.P))
         {
             pause = !pause;
@@ -103,6 +108,9 @@ public class GameManager : MonoBehaviour
             weaponsHandler.Pause();
         }
 
+
+
+        // For Testing
         if (pause) return;
         if (Input.GetKeyDown(KeyCode.Alpha3))
             playerResources.AddLife();
@@ -122,6 +130,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
     public void Pause()
     {
         pause = !pause;
@@ -133,6 +142,29 @@ public class GameManager : MonoBehaviour
         weaponsHandler.Pause();
     }
 
+    public GameObject getCheckpointBySceneAndId(int id, int scene)
+    {
+        string sceneName = "";
+
+        switch (scene)
+        {
+            case 2:
+                sceneName += "Fire";
+                break;
+            case 3:
+                sceneName += "Ice";
+                break;
+            case 4:
+                sceneName += "Jungle";
+                break;
+        }
+
+        Debug.Log(sceneName + " Checkpoint " + (id + 1));
+        var checkpoint = GameObject.Find(sceneName + " Checkpoint " + (id + 1));
+
+        return checkpoint;
+    }
+
     public void ChangeCheckpointId(int id, int scene)
     {
         switch (scene)
@@ -142,10 +174,37 @@ public class GameManager : MonoBehaviour
             case 4 when !checkpoints[Realm.Jungle][id]:
                 return;
         }
-        checkpointId = id;
-        StartCoroutine(ChangeScene(scene));
-        Debug.Log(checkpointId + " " + transform.position);
+
+
+        if (SceneManager.GetActiveScene().buildIndex == scene)
+        {
+
+            var loader = GameObject.Find("Crossfade");
+            loader.GetComponent<Animator>().SetTrigger("Start");
+            crossfadeStartAnimation = true;
+            StartCoroutine(MovePlayer(loader, id, scene));
+        }
+        else
+        {
+
+            checkpointId = id;
+            StartCoroutine(ChangeScene(scene));
+            Debug.Log(checkpointId + " " + transform.position);
+        }
+
     }
+
+    public bool crossfadeStartAnimation;
+    public bool crossfadeEndAnimation;
+    private IEnumerator MovePlayer(GameObject loader, int id, int scene)
+    {
+        while (crossfadeStartAnimation)
+            yield return new WaitForFixedUpdate();
+        playerController.transform.position = getCheckpointBySceneAndId(id, scene).transform.position;
+        crossfadeEndAnimation = true;
+        loader.GetComponent<Animator>().SetTrigger("End");
+    }
+
     private IEnumerator ChangeScene(int scene)
     {
         var loader = GameObject.Find("Crossfade");
@@ -154,8 +213,119 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
-    // TODO: method for changing and saving checkpoints data
-    // TODO: method for changing and saving volume
-    // TODO: method for changing and saving checkpoints data
-    // TODO: read for file all data
+    public void SaveCheckpoints()
+    {
+        Debug.Log("Checkpoints SAVED!!");
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/checkpoints.data";
+
+
+        Debug.Log(Application.persistentDataPath + "/checkpoints.data");
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, checkpoints);
+        stream.Close();
+    }
+
+    public void LoadCheckpoints()
+    {
+        Debug.Log("Checkpoints LOADED!!");
+
+        string path = Application.persistentDataPath + "/checkpoints.data";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            this.checkpoints = formatter.Deserialize(stream) as Dictionary<Realm, List<bool>>;
+            stream.Close();
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+        }
+    }
+
+    public void SaveVolume()
+    {
+        Debug.Log("Volume SAVED!!");
+        string fileName = Application.persistentDataPath + "/volume.data";
+
+        StreamWriter stream = new StreamWriter(fileName);
+
+        stream.WriteLine(volume);
+        stream.Close();
+    }
+
+    public void LoadVolume()
+    {
+        Debug.Log("Volume LOADED!!");
+
+        string path = Application.persistentDataPath + "/volume.data";
+        if (File.Exists(path))
+        {
+            StreamReader readStream = new StreamReader(path);
+
+            var floatString = readStream.ReadLine();
+            volume = float.Parse(floatString);
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+        }
+    }
+
+    public void SaveSkillLevel()
+    {
+        Debug.Log("Skill SAVED!!");
+
+        string fileName = Application.persistentDataPath + "/skill.data";
+
+        StreamWriter stream = new StreamWriter(fileName);
+
+        stream.WriteLine(skillLevel.Length);
+        foreach (int i in skillLevel)
+        {
+            stream.WriteLine(i);
+        }
+        stream.Close();
+    }
+
+    public void LoadSkillLevel()
+    {
+        Debug.Log("Skill LOADED!!");
+
+        string path = Application.persistentDataPath + "/skill.data";
+        if (File.Exists(path))
+        {
+            StreamReader readStream = new StreamReader(path);
+
+            int size = int.Parse(readStream.ReadLine());
+
+            for (int i = 0; i < size; i++)
+            {
+                skillLevel[i] = int.Parse(readStream.ReadLine());
+            }
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+        }
+    }
+
+    public void Die()
+    {
+        var loader = GameObject.Find("Crossfade");
+        StartCoroutine(MovePlayer(loader, lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
+        //TODO: DEATH ANIM
+    }
+
+    public void LoadAllData()
+    {
+        LoadCheckpoints();
+        LoadVolume();
+        LoadSkillLevel();
+    }
 }

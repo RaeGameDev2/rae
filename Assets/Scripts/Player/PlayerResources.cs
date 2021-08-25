@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class PlayerResources : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerResources : MonoBehaviour
     public int maxMana { get; private set; }
     public int currentMana { get; private set; }
 
+    private GameManager gameManager;
+
     private void Awake()
     {
         maxHealth = 3;
@@ -30,6 +33,8 @@ public class PlayerResources : MonoBehaviour
         uiManager = FindObjectOfType<UI_Manager>();
         currentHealth = maxHealth;
         currentMana = maxMana;
+
+        gameManager = FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad);
     }
 
     private void Update()
@@ -98,9 +103,30 @@ public class PlayerResources : MonoBehaviour
         StartCoroutine(DamageAnimation());
 
         if (damage > currentHealth) damage = currentHealth;
-        currentHealth -= damage;
-        uiManager.TakeLives(damage);
-        if (currentHealth <= 0) StartCoroutine(my_delay());
+
+        if (damage == currentHealth)
+        {
+            uiManager.TakeLives(currentHealth);
+
+            for (int i = 0; i < currentMana; i++)
+                uiManager.UseMana();
+
+            currentHealth = maxHealth;
+            currentMana = maxMana;
+            gameManager.Die();
+
+            for (int i = 0; i < maxHealth; i++)
+            {
+                uiManager.AddMana();
+                uiManager.AddLife();
+            }
+
+        } else
+        {
+            currentHealth -= damage;
+            uiManager.TakeLives(damage);
+            if (currentHealth <= 0) StartCoroutine(my_delay());
+        }
     }
 
 

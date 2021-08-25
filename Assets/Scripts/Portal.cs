@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -56,6 +57,15 @@ public class Portal : MonoBehaviour
     public void LoadNextLevel(int index)
     {
         StartCoroutine(LoadLevel(index));
+    }
+
+    public void StopEndAnimation()
+    {
+        FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad).crossfadeEndAnimation = false;
+    }
+    public void StopStartAnimation()
+    {
+        FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad).crossfadeStartAnimation = false;
     }
 
     private IEnumerator LoadLevel(int levelIndex)

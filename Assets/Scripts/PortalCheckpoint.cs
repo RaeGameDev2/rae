@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Linq;
 
 public class PortalCheckpoint : MonoBehaviour
 {
@@ -10,13 +11,12 @@ public class PortalCheckpoint : MonoBehaviour
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad);
         teleportMenu.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       
         if (collision.tag != "Player")
             return;
 
@@ -24,14 +24,34 @@ public class PortalCheckpoint : MonoBehaviour
         switch (portalType)
         {
             case GameManager.Realm.Ice:
-                gameManager.checkpoints[GameManager.Realm.Ice][portalId] = true;
-                // TODO: Save in file
+                if (!gameManager.checkpoints[GameManager.Realm.Ice][portalId])
+                {
+                    gameManager.checkpoints[GameManager.Realm.Ice][portalId] = true;
+                    // TODO: Save in file
+                    gameManager.SaveCheckpoints();
+                }
+
+                gameManager.lastCheckpointId = portalId;
                 break;
             case GameManager.Realm.Fire:
-                gameManager.checkpoints[GameManager.Realm.Fire][portalId] = true;
+                if (!gameManager.checkpoints[GameManager.Realm.Fire][portalId])
+                {
+                    gameManager.checkpoints[GameManager.Realm.Fire][portalId] = true;
+                    // TODO: Save in file
+                    gameManager.SaveCheckpoints();
+                }
+
+                gameManager.lastCheckpointId = portalId;
                 break;
             case GameManager.Realm.Jungle:
-                gameManager.checkpoints[GameManager.Realm.Jungle][portalId] = true;
+                if (!gameManager.checkpoints[GameManager.Realm.Jungle][portalId])
+                {
+                    gameManager.checkpoints[GameManager.Realm.Jungle][portalId] = true;
+                    // TODO: Save in file
+                    gameManager.SaveCheckpoints();
+                }
+
+                gameManager.lastCheckpointId = portalId;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
