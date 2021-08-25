@@ -36,17 +36,22 @@ public class TeleportMenu : MonoBehaviour
 
     public void ResetCheckpoints()
     {
-        string checkpoints_file = Application.persistentDataPath + "/checkpoints.data";
-        if (File.Exists(checkpoints_file))
+        string skil_file_path = Application.persistentDataPath + "/skill.data";
+        string checkpoints_file_path = Application.persistentDataPath + "/checkpoints.data";
+        if(File.Exists(checkpoints_file_path))
         {
-            File.Delete(checkpoints_file);
-            #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-            #elif UNITY_WEBPLAYER
-                Application.OpenURL(webplayerQuitURL);
-            #else
-                Application.Quit();
-            #endif
+            File.Delete(checkpoints_file_path);
         }
+        if (File.Exists(skil_file_path))
+        {
+            File.Delete(skil_file_path);
+        }
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_WEBPLAYER
+            Application.OpenURL(webplayerQuitURL);
+        #else
+            Application.Quit();
+        #endif
     }
 }
