@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
         currGravity = gravity;
         canDoubleJump = false;
         prevVelocityY = 0;
-        distanceTraveled = 0;
     }
 
     private void Start()
