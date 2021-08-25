@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool diagonalJump;
 
     private Direction direction;
-    private float distanceTraveled;
     [SerializeField] private float fallSpeed;
     [SerializeField] private float gravity;
     [SerializeField] private float jumpGravity;
@@ -34,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerSkills skills;
-    private float timeSinceDash;
     private WeaponsHandler weapons;
 
     private void Awake()
