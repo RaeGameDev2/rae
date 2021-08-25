@@ -19,7 +19,7 @@ public class InformationMenu : MonoBehaviour
     {
         InformationnMenu.SetActive(true);
         InformationButton.SetActive(false);
-         PauseButton.SetActive(false);
+        PauseButton.SetActive(false);
         Time.timeScale = 0f;
 
     }

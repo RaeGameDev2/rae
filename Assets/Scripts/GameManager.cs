@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public bool isDontDestroyOnLoad;
 
     public int lastCheckpointId = 0;
+    public static GameManager instance;
 
     private void Awake()
     {
@@ -51,19 +52,18 @@ public class GameManager : MonoBehaviour
         checkpoints[Realm.Jungle].Add(false);
         checkpoints[Realm.Jungle].Add(false);
 
-        LoadAllData();
-
         checkpointId = 0;
 
-        var managers = GameObject.FindGameObjectsWithTag("GameManger");
-        if (managers.Length == 1)
+        if (instance == null)
         {
+            instance = this;
             DontDestroyOnLoad(gameObject);
             isDontDestroyOnLoad = true;
         }
         else
+        {
             Destroy(gameObject);
-
+        }
     }
 
     private void OnEnable()
@@ -91,6 +91,8 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        LoadAllData();
     }
 
     private void Update()
@@ -106,7 +108,7 @@ public class GameManager : MonoBehaviour
             weaponsHandler.Pause();
         }
 
-        
+
 
         // For Testing
         if (pause) return;
@@ -129,19 +131,30 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    public void Pause()
+    {
+        pause = !pause;
+        uiManager.Pause();
+        playerResources.Pause();
+        playerSpells.Pause();
+        playerSkills.Pause();
+        playerController.Pause();
+        weaponsHandler.Pause();
+    }
+
     public GameObject getCheckpointBySceneAndId(int id, int scene)
     {
         string sceneName = "";
 
         switch (scene)
         {
-            case 2 :
+            case 2:
                 sceneName += "Fire";
                 break;
-            case 3 :
+            case 3:
                 sceneName += "Ice";
                 break;
-            case 4 :
+            case 4:
                 sceneName += "Jungle";
                 break;
         }
@@ -161,15 +174,18 @@ public class GameManager : MonoBehaviour
             case 4 when !checkpoints[Realm.Jungle][id]:
                 return;
         }
-        
 
-        if (SceneManager.GetActiveScene().buildIndex == scene) {
+
+        if (SceneManager.GetActiveScene().buildIndex == scene)
+        {
 
             var loader = GameObject.Find("Crossfade");
             loader.GetComponent<Animator>().SetTrigger("Start");
             crossfadeStartAnimation = true;
             StartCoroutine(MovePlayer(loader, id, scene));
-        } else {
+        }
+        else
+        {
 
             checkpointId = id;
             StartCoroutine(ChangeScene(scene));
@@ -199,8 +215,6 @@ public class GameManager : MonoBehaviour
 
     public void SaveCheckpoints()
     {
-        Debug.Log("Checkpoints SAVED!!");
-
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/checkpoints.data";
 
@@ -214,8 +228,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadCheckpoints()
     {
-        Debug.Log("Checkpoints LOADED!!");
-
         string path = Application.persistentDataPath + "/checkpoints.data";
 
         if (File.Exists(path))
@@ -225,7 +237,8 @@ public class GameManager : MonoBehaviour
 
             this.checkpoints = formatter.Deserialize(stream) as Dictionary<Realm, List<bool>>;
             stream.Close();
-        } else
+        }
+        else
         {
             Debug.LogError("Save file not found in " + path);
         }
@@ -233,7 +246,6 @@ public class GameManager : MonoBehaviour
 
     public void SaveVolume()
     {
-        Debug.Log("Volume SAVED!!");
         string fileName = Application.persistentDataPath + "/volume.data";
 
         StreamWriter stream = new StreamWriter(fileName);
@@ -244,8 +256,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadVolume()
     {
-        Debug.Log("Volume LOADED!!");
-
         string path = Application.persistentDataPath + "/volume.data";
         if (File.Exists(path))
         {
@@ -260,10 +270,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SaveSkillPoints()
+    {
+        string fileName = Application.persistentDataPath + "/skillpoints.data";
+
+        StreamWriter stream = new StreamWriter(fileName);
+
+        stream.WriteLine(playerSkills.playerSkills.GetSkillPoints());
+
+        stream.Close();
+    }
+
+    public void LoadSkillPoints()
+    {
+        string path = Application.persistentDataPath + "/skillpoints.data";
+        if (File.Exists(path))
+        {
+            StreamReader readStream = new StreamReader(path);
+
+            int skillPoints = int.Parse(readStream.ReadLine());
+
+            playerSkills.playerSkills.SetSkillPoints(skillPoints);
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+        }
+    }
+
     public void SaveSkillLevel()
     {
-        Debug.Log("Skill SAVED!!");
-
         string fileName = Application.persistentDataPath + "/skill.data";
 
         StreamWriter stream = new StreamWriter(fileName);
@@ -273,13 +309,12 @@ public class GameManager : MonoBehaviour
         {
             stream.WriteLine(i);
         }
+
         stream.Close();
     }
 
     public void LoadSkillLevel()
     {
-        Debug.Log("Skill LOADED!!");
-
         string path = Application.persistentDataPath + "/skill.data";
         if (File.Exists(path))
         {
@@ -291,6 +326,8 @@ public class GameManager : MonoBehaviour
             {
                 skillLevel[i] = int.Parse(readStream.ReadLine());
             }
+
+            playerSkills.playerSkills.SetSkillLevel();
         }
         else
         {
@@ -302,12 +339,14 @@ public class GameManager : MonoBehaviour
     {
         var loader = GameObject.Find("Crossfade");
         StartCoroutine(MovePlayer(loader, lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
+        //TODO: DEATH ANIM
     }
 
     public void LoadAllData()
     {
         LoadCheckpoints();
         LoadVolume();
+        LoadSkillPoints();
         LoadSkillLevel();
     }
 }
