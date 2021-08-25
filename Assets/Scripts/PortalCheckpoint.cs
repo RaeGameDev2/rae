@@ -24,14 +24,28 @@ public class PortalCheckpoint : MonoBehaviour
         switch (portalType)
         {
             case GameManager.Realm.Ice:
-                gameManager.checkpoints[GameManager.Realm.Ice][portalId] = true;
-                // TODO: Save in file
+                if (!gameManager.checkpoints[GameManager.Realm.Ice][portalId])
+                {
+                    gameManager.checkpoints[GameManager.Realm.Ice][portalId] = true;
+                    // TODO: Save in file
+                    gameManager.SaveCheckpoints();
+                }
                 break;
             case GameManager.Realm.Fire:
-                gameManager.checkpoints[GameManager.Realm.Fire][portalId] = true;
+                if (!gameManager.checkpoints[GameManager.Realm.Fire][portalId])
+                {
+                    gameManager.checkpoints[GameManager.Realm.Fire][portalId] = true;
+                    // TODO: Save in file
+                    gameManager.SaveCheckpoints();
+                }
                 break;
             case GameManager.Realm.Jungle:
-                gameManager.checkpoints[GameManager.Realm.Jungle][portalId] = true;
+                if (!gameManager.checkpoints[GameManager.Realm.Jungle][portalId])
+                {
+                    gameManager.checkpoints[GameManager.Realm.Jungle][portalId] = true;
+                    // TODO: Save in file
+                    gameManager.SaveCheckpoints();
+                }
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour
 {
@@ -46,6 +48,8 @@ public class GameManager : MonoBehaviour
         checkpoints[Realm.Jungle].Add(false);
         checkpoints[Realm.Jungle].Add(false);
         checkpoints[Realm.Jungle].Add(false);
+
+        LoadAllData();
 
         checkpointId = 0;
 
@@ -189,8 +193,111 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
-    // TODO: method for changing and saving checkpoints data
-    // TODO: method for changing and saving volume
-    // TODO: method for changing and saving checkpoints data
-    // TODO: read for file all data
+    public void SaveCheckpoints()
+    {
+        Debug.Log("Checkpoints SAVED!!");
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/checkpoints.data";
+
+
+        Debug.Log(Application.persistentDataPath + "/checkpoints.data");
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, checkpoints);
+        stream.Close();
+    }
+
+    public void LoadCheckpoints()
+    {
+        Debug.Log("Checkpoints LOADED!!");
+
+        string path = Application.persistentDataPath + "/checkpoints.data";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            this.checkpoints = formatter.Deserialize(stream) as Dictionary<Realm, List<bool>>;
+            stream.Close();
+        } else
+        {
+            Debug.LogError("Save file not found in " + path);
+        }
+    }
+
+    public void SaveVolume()
+    {
+        Debug.Log("Volume SAVED!!");
+        string fileName = Application.persistentDataPath + "/volume.data";
+
+        StreamWriter stream = new StreamWriter(fileName);
+
+        stream.WriteLine(volume);
+        stream.Close();
+    }
+
+    public void LoadVolume()
+    {
+        Debug.Log("Volume LOADED!!");
+
+        string path = Application.persistentDataPath + "/volume.data";
+        if (File.Exists(path))
+        {
+            StreamReader readStream = new StreamReader(path);
+
+            var floatString = readStream.ReadLine();
+            volume = float.Parse(floatString);
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+        }
+    }
+
+    public void SaveSkillLevel()
+    {
+        Debug.Log("Skill SAVED!!");
+
+        string fileName = Application.persistentDataPath + "/skill.data";
+
+        StreamWriter stream = new StreamWriter(fileName);
+
+        stream.WriteLine(skillLevel.Length);
+        foreach (int i in skillLevel)
+        {
+            stream.WriteLine(i);
+        }
+        stream.Close();
+    }
+
+    public void LoadSkillLevel()
+    {
+        Debug.Log("Skill LOADED!!");
+
+        string path = Application.persistentDataPath + "/skill.data";
+        if (File.Exists(path))
+        {
+            StreamReader readStream = new StreamReader(path);
+
+            int size = int.Parse(readStream.ReadLine());
+
+            for (int i = 0; i < size; i++)
+            {
+                skillLevel[i] = int.Parse(readStream.ReadLine());
+            }
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+        }
+    }
+
+    public void LoadAllData()
+    {
+        LoadCheckpoints();
+        LoadVolume();
+        LoadSkillLevel();
+    }
 }
