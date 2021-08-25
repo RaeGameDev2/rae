@@ -30,6 +30,8 @@ public class PortalCheckpoint : MonoBehaviour
                     // TODO: Save in file
                     gameManager.SaveCheckpoints();
                 }
+
+                gameManager.lastCheckpointId = portalId;
                 break;
             case GameManager.Realm.Fire:
                 if (!gameManager.checkpoints[GameManager.Realm.Fire][portalId])
@@ -38,6 +40,8 @@ public class PortalCheckpoint : MonoBehaviour
                     // TODO: Save in file
                     gameManager.SaveCheckpoints();
                 }
+
+                gameManager.lastCheckpointId = portalId;
                 break;
             case GameManager.Realm.Jungle:
                 if (!gameManager.checkpoints[GameManager.Realm.Jungle][portalId])
@@ -46,6 +50,8 @@ public class PortalCheckpoint : MonoBehaviour
                     // TODO: Save in file
                     gameManager.SaveCheckpoints();
                 }
+
+                gameManager.lastCheckpointId = portalId;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

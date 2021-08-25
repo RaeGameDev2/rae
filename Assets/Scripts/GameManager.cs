@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     private int checkpointId;
     public bool isDontDestroyOnLoad;
 
+    public int lastCheckpointId = 0;
+
     private void Awake()
     {
         checkpoints.Add(Realm.Ice, new List<bool>());
@@ -162,11 +164,13 @@ public class GameManager : MonoBehaviour
         
 
         if (SceneManager.GetActiveScene().buildIndex == scene) {
+
             var loader = GameObject.Find("Crossfade");
             loader.GetComponent<Animator>().SetTrigger("Start");
             crossfadeStartAnimation = true;
             StartCoroutine(MovePlayer(loader, id, scene));
-        } else {  
+        } else {
+
             checkpointId = id;
             StartCoroutine(ChangeScene(scene));
             Debug.Log(checkpointId + " " + transform.position);
@@ -292,6 +296,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Save file not found in " + path);
         }
+    }
+
+    public void Die()
+    {
+        var loader = GameObject.Find("Crossfade");
+        StartCoroutine(MovePlayer(loader, lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
     }
 
     public void LoadAllData()
