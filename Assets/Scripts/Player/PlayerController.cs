@@ -125,7 +125,8 @@ public class PlayerController : MonoBehaviour
             //Add simulated gravity
             rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
         }
-
+        if (rb.velocity.y < 0 && rb.velocity.y > -fallSpeed)
+            rb.velocity = new Vector2(rb.velocity.x, -fallSpeed);
         //Save previous y-velocity for adding fallSpeed
         prevVelocityY = rb.velocity.y;
     }
