@@ -72,6 +72,7 @@ public class PortalCheckpoint : MonoBehaviour
                 teleportMenu.SetActive(false);
                 break;
             case GameManager.Realm.Jungle:
+                teleportMenu.SetActive(false);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

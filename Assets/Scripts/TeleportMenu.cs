@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,5 +32,26 @@ public class TeleportMenu : MonoBehaviour
     public void Hub()
     {
         gameManager.ChangeCheckpointId(0, 1);
+    }
+
+    public void ResetCheckpoints()
+    {
+        string skil_file_path = Application.persistentDataPath + "/skill.data";
+        string checkpoints_file_path = Application.persistentDataPath + "/checkpoints.data";
+        if(File.Exists(checkpoints_file_path))
+        {
+            File.Delete(checkpoints_file_path);
+        }
+        if (File.Exists(skil_file_path))
+        {
+            File.Delete(skil_file_path);
+        }
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_WEBPLAYER
+            Application.OpenURL(webplayerQuitURL);
+        #else
+            Application.Quit();
+        #endif
     }
 }
