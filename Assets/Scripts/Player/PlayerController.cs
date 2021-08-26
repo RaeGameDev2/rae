@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     private PlayerSkills skills;
     private WeaponsHandler weapons;
 
+    private bool canDamage;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
         currGravity = gravity;
         canDoubleJump = false;
         prevVelocityY = 0;
+        canDamage = true;
     }
 
     private void Start()
@@ -225,11 +228,13 @@ public class PlayerController : MonoBehaviour
     {
         weapons.currWeapon.attackType = Weapon.AttackType.None;
         animState = State.IDLE;
+        canDamage = true;
         //  Debug.Log("se terminat animatia!");
     }
 
     public void OnAttackHit(Collider2D col)
     {
+        if (!canDamage) return;
         var enemy = col.GetComponent<Enemy>();
         var rng = Random.Range(0, 101);
         var critRate = weapons.currWeapon.critRate + weapons.currWeapon.bonusCritRate * skills.GetLevelCritRate();
@@ -260,6 +265,7 @@ public class PlayerController : MonoBehaviour
             enemy.Debuff(skills.GetLevelDebuff());
             playerSpells.StopDebuff();
         }
+        canDamage = false;
     }
 
     private enum Direction

@@ -25,7 +25,6 @@ public class FireBoss : Enemy
     [SerializeField] private bool isDying;
     [SerializeField] private float oldHp;
     private PlayerResources playerResources;
-    private PlayerSpells playerSpells;
     [SerializeField] private bool projectileAttack;
 
     [SerializeField] private bool simpleAttack;
@@ -42,8 +41,7 @@ public class FireBoss : Enemy
     {
         base.Start();
         playerResources = FindObjectOfType<PlayerResources>();
-        playerSpells = FindObjectOfType<PlayerSpells>();
-        anim.SetInteger("state", (int) animType);
+        anim.SetInteger("state", (int)animType);
         initialHP = hp;
         isBoss = true;
         oldHp = hp;
@@ -56,7 +54,7 @@ public class FireBoss : Enemy
         CheckCamera();
         CheckOrientation();
 
-        anim.SetInteger("state", (int) animType);
+        anim.SetInteger("state", (int)animType);
         if (isDying)
         {
             animType = AnimType.Death;
@@ -134,7 +132,7 @@ public class FireBoss : Enemy
     {
         isDying = true;
         animType = AnimType.Death;
-        anim.SetInteger("state", (int) animType);
+        anim.SetInteger("state", (int)animType);
 
         Destroy(hpBar.gameObject, 1f);
         Destroy(
