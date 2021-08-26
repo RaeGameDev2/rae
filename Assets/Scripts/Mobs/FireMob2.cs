@@ -67,7 +67,7 @@ public class FireMob2 : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
-        if (FindObjectOfType<PlayerSpells>().phaseWalkActive) return;
+        if (collision.GetComponent<PlayerSpells>().phaseWalkActive) return;
 
         transform.localScale = new Vector3(1.5f, 1.5f, 1f);
         if (exploded == false) initiate_explosion = true;

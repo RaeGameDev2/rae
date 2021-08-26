@@ -15,6 +15,7 @@ public class IceMob1 : Enemy
     [SerializeField] private float oldHp;
 
     private PlayerResources playerResources;
+    private PlayerSpells playerSpells;
 
     [SerializeField] private Direction state_mob;
     [SerializeField] private float thresholdDistance = 10f;
@@ -40,6 +41,7 @@ public class IceMob1 : Enemy
     {
         base.Start();
         playerResources = FindObjectOfType<PlayerResources>();
+        playerSpells = FindObjectOfType<PlayerSpells>();
         animType = AnimType.Idle;
         oldHp = hp;
     }
@@ -76,7 +78,7 @@ public class IceMob1 : Enemy
             };
 
             if (timeNextAttack > Time.time) return;
-            if (GetDistanceFromPlayer() < thresholdDistance)
+            if (GetDistanceFromPlayer() < thresholdDistance && !playerSpells.phaseWalkActive)
                 Attack();
         }
     }
