@@ -34,7 +34,7 @@ public class TeleportMenu : MonoBehaviour
         gameManager.ChangeCheckpointId(0, 1);
     }
 
-    public void ResetCheckpoints()
+    /*public void ResetCheckpoints()
     {
         string skil_file_path = Application.persistentDataPath + "/skill.data";
         string checkpoints_file_path = Application.persistentDataPath + "/checkpoints.data";
@@ -53,5 +53,5 @@ public class TeleportMenu : MonoBehaviour
         #else
             Application.Quit();
         #endif
-    }
+    }*/
 }
