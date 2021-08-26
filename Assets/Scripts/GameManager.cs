@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     public int lastCheckpointId = 0;
     public static GameManager instance;
 
+    [SerializeField] GameObject IceHealthpointsPrefab;
+    [SerializeField] GameObject FireHealthpointsPrefab;
+    [SerializeField] GameObject JungleHealthpointsPrefab;
+
     private void Awake()
     {
         checkpoints.Add(Realm.Ice, new List<bool>());
@@ -92,6 +96,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        // Load the data from save files
         LoadAllData();
     }
 
@@ -319,11 +324,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RespawnHealthpoints()
+    {
+        string name;
+
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            case 2:
+                Debug.Log("Fire hpoints instantiated");
+                name = FireHealthpointsPrefab.name;
+                Destroy(GameObject.Find(name));
+                Instantiate(FireHealthpointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
+                break;
+            case 3:
+                Debug.Log("Ice hpoints instantiated");
+                name = IceHealthpointsPrefab.name;
+                Destroy(GameObject.Find(name));
+                Instantiate(IceHealthpointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
+                break;
+            case 4:
+                Debug.Log("Jungle hpoints instantiated");
+                name = JungleHealthpointsPrefab.name;
+                Destroy(GameObject.Find(name));
+                Instantiate(JungleHealthpointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
+                break;
+        }
+    }
+
     public void Die()
     {
         var loader = GameObject.Find("Crossfade");
         StartCoroutine(MovePlayer(loader, lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
-        //TODO: DEATH ANIM
+        // TODO : Play player's death animation
+        RespawnHealthpoints();
     }
 
     public void LoadAllData()
