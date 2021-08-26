@@ -41,14 +41,13 @@ public class FireMob1 : Enemy
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         else
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-
-        anim.SetFloat("speed", speed / 3);
-        anim.SetFloat("attackSpeed", attackSpeed / 100);
     }
 
     private new void Update()
     {
         base.Update();
+        anim.SetFloat("speed", speed / 3);
+        anim.SetFloat("attackSpeed", attackSpeed / 100);
 
         if (hp <= 0)
         {

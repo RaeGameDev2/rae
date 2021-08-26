@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    protected float attackSpeed;
+    [SerializeField] protected float attackSpeed;
 
     [SerializeField] private float dpsLifeDrain = 50f;
     [SerializeField] protected float hp;
