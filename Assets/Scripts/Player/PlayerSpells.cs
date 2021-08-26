@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerSpells : MonoBehaviour
@@ -21,9 +22,9 @@ public class PlayerSpells : MonoBehaviour
     [SerializeField] private GameObject shieldPrefab;
     [SerializeField] private GameObject shockwavePrefab;
     [SerializeField] private GameObject teleportPrefab;
-    [SerializeField] private float timeLifeDrain = 5;
-    [SerializeField] private float timeParry = 1;
-    [SerializeField] private float timePhaseWalk = 5;
+    [SerializeField] private float timeLifeDrain = 5f;
+    [SerializeField] private float timeParry = 1f;
+    [SerializeField] private float timePhaseWalk = 5f;
     private Vector3 transportPosition;
     private WeaponsHandler weaponsHandler;
 
@@ -43,9 +44,12 @@ public class PlayerSpells : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q)) 
+            PhaseWalk();
         CheckShield();
 
         if (!Input.GetKeyDown(KeyCode.Alpha1)) return;
+        if (playerResources.currentMana <= 0) return;
         if (quickTeleportActive) return;
         if (shieldActive) return;
         if (lifeDrainActive) return;
@@ -56,59 +60,33 @@ public class PlayerSpells : MonoBehaviour
             case Weapon.WeaponType.Scythe:
                 if (playerSkills.IsLifeDrainUnlocked())
                 {
-                    lifeDrainActive = true;
-                    StartCoroutine(StopLifeDrain());
-                    StartCoroutine(SpellAnimation());
-                    playerResources.UseMana();
+                    LifeDrain();
                 }
                 else if (playerSkills.IsParryUnlocked())
                 {
-                    parryActive = true;
-                    StartCoroutine(StopParry());
-                    StartCoroutine(SpellAnimation());
-                    playerResources.UseMana();
+                    Parry();
                 }
 
                 break;
             case Weapon.WeaponType.Orb:
                 if (playerSkills.IsQuickTpUnlocked())
                 {
-                    if (orbDropped)
-                    {
-                        orbDropped = false;
-                        StartCoroutine(TeleportAnimation());
-                    }
-                    else
-                    {
-                        orbDropped = true;
-                        transportPosition = transform.position;
-                        playerResources.UseMana();
-                        StartCoroutine(SpellAnimation());
-                    }
+                    QuickTp();
                 }
                 else if (playerSkills.IsShieldUnlocked())
                 {
-                    shieldActive = true;
-                    shieldDamage = playerSkills.GetLevelShield();
-                    instanceShield = Instantiate(shieldPrefab, transform.position + new Vector3(0f, 1f, 2f),
-                        Quaternion.identity, transform);
-                    playerResources.UseMana();
+                    Shield();
                 }
 
                 break;
             case Weapon.WeaponType.Staff:
                 if (playerSkills.IsPhaseWalkUnlocked())
                 {
-                    phaseWalkActive = true;
-                    StartCoroutine(StopPhaseWalk());
-                    playerResources.UseMana();
+                    PhaseWalk();
                 }
                 else if (playerSkills.IsDebuffUnlocked())
                 {
-                    if (debuffActive) return;
-                    debuffActive = true;
-                    StartCoroutine(SpellAnimation());
-                    playerResources.UseMana();
+                    Debuff();
                 }
 
                 break;
@@ -117,30 +95,66 @@ public class PlayerSpells : MonoBehaviour
         }
     }
 
-    public void Pause()
+    private void LifeDrain()
     {
-        pause = !pause;
+        lifeDrainActive = true;
+        StartCoroutine(StopLifeDrain());
+        StartCoroutine(SpellAnimation());
+        playerResources.UseMana();
+    }
+    private void Parry()
+    {
+        parryActive = true;
+        StartCoroutine(StopParry());
+        StartCoroutine(SpellAnimation());
+        playerResources.UseMana();
     }
 
-    public void StopDebuff()
+    private void QuickTp()
     {
-        debuffActive = false;
+        if (orbDropped)
+        {
+            orbDropped = false;
+            StartCoroutine(TeleportAnimation());
+        }
+        else
+        {
+            orbDropped = true;
+            transportPosition = transform.position;
+            playerResources.UseMana();
+            StartCoroutine(SpellAnimation());
+        }
     }
 
+    private void Shield()
+    {
+        shieldActive = true;
+        shieldDamage = playerSkills.GetLevelShield();
+        instanceShield = Instantiate(shieldPrefab, transform.position + new Vector3(0f, 1f, 2f),
+            Quaternion.identity, transform);
+        playerResources.UseMana();
+    }
+
+    private void PhaseWalk()
+    {
+        phaseWalkActive = true;
+        StartCoroutine(StopPhaseWalk());
+        playerResources.UseMana();
+    }
+
+    private void Debuff()
+    {
+        if (debuffActive) return;
+        debuffActive = true;
+        StartCoroutine(SpellAnimation());
+        playerResources.UseMana();
+    }
     private void CheckShield()
     {
         if (!shieldActive) return;
         if (shieldDamage != 0) return;
-        Destroy(instanceShield);
         shieldActive = false;
-    }
-
-    public void Shockwave()
-    {
-        parryActive = false;
-        var instance = Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
-        instance.GetComponent<Shockwave>().SetLevelParry(playerSkills.GetLevelParry());
-        instance.transform.parent = transform;
+        Destroy(instanceShield);
     }
 
     private IEnumerator StopLifeDrain()
@@ -152,35 +166,54 @@ public class PlayerSpells : MonoBehaviour
     private IEnumerator StopParry()
     {
         yield return new WaitForSeconds(timeParry);
-        lifeDrainActive = false;
+        parryActive = false;
     }
-
+    
     private IEnumerator StopPhaseWalk()
     {
-        var instance = Instantiate(phaseWalkPrefab,
-            transform.position + new Vector3(0f, 1f, 2f), Quaternion.identity, transform);
-        yield return new WaitForSeconds(timePhaseWalk - 1f);
-        phaseWalkActive = false;
-        StartCoroutine(StopPhaseWalkAnimation(instance));
-    }
-
-    private IEnumerator StopPhaseWalkAnimation(GameObject instance)
-    {
-        var material = instance.GetComponent<Renderer>().material;
-        var spriteRenderer = instance.GetComponentInChildren<SpriteRenderer>();
-        var colorMaterial = material.color;
-        var colorRenderer = spriteRenderer.color;
+        var spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        var colors = spriteRenderers.Select(spriteRenderer => spriteRenderer.color).ToArray();
         var albedo = 1f;
-        while (albedo > 0)
+        const float initialTime = 1f;
+        var time = initialTime;
+        phaseWalkActive = true;
+
+        while (time > 0)
         {
+            albedo -= Time.fixedDeltaTime / (1.5f * initialTime);
+            for (var i = 0; i < spriteRenderers.Length; i++)
+            {
+                colors[i].a = albedo;
+                spriteRenderers[i].color = colors[i];
+            }
+
+            time -= Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
-            albedo -= Time.fixedDeltaTime;
-            material.color = new Color(colorMaterial.r, colorMaterial.g, colorMaterial.b, albedo);
-            spriteRenderer.color = new Color(colorRenderer.r, colorRenderer.g, colorRenderer.b, albedo);
-            instance.transform.position -= Vector3.back * Time.fixedDeltaTime / 2f;
         }
 
-        Destroy(instance);
+        yield return new WaitForSeconds(timePhaseWalk - 2 * initialTime);
+
+        time = 1f;
+        while (time > 0)
+        {
+            albedo += Time.fixedDeltaTime /(2 * initialTime);
+            for (var i = 0; i < spriteRenderers.Length; i++)
+            {
+                colors[i].a = albedo;
+                spriteRenderers[i].color = colors[i];
+            }
+
+            time -= Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        for (var i = 0; i < spriteRenderers.Length; i++)
+        {
+            colors[i].a = 1f;
+            spriteRenderers[i].color = colors[i];
+        }
+
+        phaseWalkActive = false;
     }
 
     private IEnumerator TeleportAnimation()
@@ -258,6 +291,24 @@ public class PlayerSpells : MonoBehaviour
         }
 
         Destroy(instance);
+    }
+
+    public void Pause()
+    {
+        pause = !pause;
+    }
+
+    public void StopDebuff()
+    {
+        debuffActive = false;
+    }
+
+    public void Shockwave()
+    {
+        parryActive = false;
+        var instance = Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
+        instance.GetComponent<Shockwave>().SetLevelParry(playerSkills.GetLevelParry());
+        instance.transform.parent = transform;
     }
 }
 //
