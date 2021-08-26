@@ -1,7 +1,7 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Linq;
 
 public class PlayerResources : MonoBehaviour
 {
@@ -96,8 +96,7 @@ public class PlayerResources : MonoBehaviour
         direction = new Vector3(direction.x, 0f).normalized;
         if (direction != Vector3.zero)
         {
-            var rb = GetComponent<Rigidbody2D>();
-            rb.AddForce(2500f * direction, ForceMode2D.Force);
+            StartCoroutine(DamageKnockback(direction));
         }
 
         StartCoroutine(DamageAnimation());
@@ -121,7 +120,8 @@ public class PlayerResources : MonoBehaviour
                 uiManager.AddLife();
             }
 
-        } else
+        }
+        else
         {
             currentHealth -= damage;
             uiManager.TakeLives(damage);
@@ -134,6 +134,18 @@ public class PlayerResources : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(1);
+    }
+
+    private IEnumerator DamageKnockback(Vector3 dir)
+    {
+        var rb = GetComponent<Rigidbody2D>();
+        var time = 0.40f;
+        while (time > 0)
+        {
+            rb.AddForce(1000f * dir, ForceMode2D.Force);
+            time -= Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     private IEnumerator DamageAnimation()
@@ -152,8 +164,8 @@ public class PlayerResources : MonoBehaviour
             spriteRenderer.color = color;
             instance.transform.localScale *= 1.02f;
 
-            time -= Time.fixedDeltaTime;
-            yield return new WaitForFixedUpdate();
+            time -= Time.deltaTime;
+            yield return null;
         }
 
         Destroy(instance);

@@ -21,7 +21,7 @@ public class HitboxFireMob1 : MonoBehaviour
         {
             if (parent.isAttacking)
             {
-                playerResources.TakeDamage(1, parent.transform.position);
+                playerResources.TakeDamage(1, transform.position);
                 parent.isAttacking = false;
             }
         }
@@ -33,7 +33,7 @@ public class HitboxFireMob1 : MonoBehaviour
         {
             if (parent.isAttacking)
             {
-                playerResources.TakeDamage(1, parent.transform.position);
+                playerResources.TakeDamage(1, transform.position);
                 parent.isAttacking = false;
             }
         }
