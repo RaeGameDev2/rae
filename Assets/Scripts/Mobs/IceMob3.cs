@@ -52,8 +52,8 @@ public class IceMob3 : MonoBehaviour
 
         if ((playerResources.transform.position - transform.position).magnitude > thresholdDistance) return;
         playerResources.TakeDamage(damage, transform.position);
-        Destroy(gameObject);
         Destroy(explosion_instance.gameObject);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -55,12 +55,10 @@ public class FireMob2 : MonoBehaviour
         remaining_time_until_explosion_dissapear -= Time.deltaTime;
         if (remaining_time_until_explosion_dissapear > 0) return;
 
-        if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
-        {
-            playerResources.TakeDamage(damage, transform.position);
-            Destroy(gameObject);
-            Destroy(explosion_instance.gameObject);
-        }
+        if (!((playerResources.transform.position - transform.position).magnitude < thresholdDistance)) return;
+        playerResources.TakeDamage(damage, transform.position);
+        Destroy(explosion_instance.gameObject);
+        Destroy(gameObject);
     }
 
 
