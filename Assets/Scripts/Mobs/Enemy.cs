@@ -66,11 +66,9 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnDamageTaken(float damage, bool isCrit)
     {
-        // Debug.Log("Damage Enemy");
         if (Time.time < timeNextHit) return;
 
         timeNextHit = Time.time + 1f;
-        // Debug.Log($"OnDamageTaken {damage}");
         hp -= damage;
         hp = Mathf.Clamp(hp, 0f, initialHP);
         hpBar.localScale = new Vector3(hp / initialHP * initialScaleX, hpBar.localScale.y, hpBar.localScale.z);
