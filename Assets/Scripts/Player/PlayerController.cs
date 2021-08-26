@@ -81,9 +81,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (rb.velocity.y > 0)
-            currGravity = jumpGravity;
-
         //Reset gravity to falling gravity
         if (rb.velocity.y < 0)
             currGravity = gravity;
@@ -106,10 +103,6 @@ public class PlayerController : MonoBehaviour
                         speed = Mathf.Clamp(speed, -groundSpeed, groundSpeed);
                     else
                         speed = Mathf.Clamp(speed, -airSpeed, airSpeed);
-                    if (rb.velocity.y * prevVelocityY <= 0)
-                    {
-                        rb.velocity = new Vector2(speed, -fallSpeed);
-                    }
                     rb.velocity = new Vector2(speed, rb.velocity.y);
                 }
             }
@@ -200,7 +193,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         if (rb.velocity.x != 0)
             diagonalJump = true;
-
+        currGravity = jumpGravity;
         SoundManagerScript.playJumpSound = true;
     }
 
