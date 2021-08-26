@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+
+    [SerializeField]  GameObject atStaffHeavyAttack;
+    [SerializeField] GameObject atStaffBasicAttack;
+    GameObject atHeavyAttack;
     protected float attackSpeed;
     [SerializeField] protected int damageOnTouch = 1;
 
@@ -65,6 +69,35 @@ public class Enemy : MonoBehaviour
 
     public void OnDamageTaken(float damage, bool isCrit)
     {
+
+
+        // check in Weapon , two enums weapons type, attack type 
+        // if weapon_type=staff si attack_type = basic
+        // instatiem obiect 
+        // else if weapon_type=staff si attack_type = heavy
+        // instatiem alt obiect 
+        // retinem instanta ca sa le distug dupa un delay
+
+        WeaponsHandler currWeaponHandler =(WeaponsHandler)FindObjectOfType(typeof(WeaponsHandler));
+
+        if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
+            currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Basic)
+        {
+            GameObject instBasic = Instantiate(atStaffBasicAttack, transform.position, Quaternion.identity, transform);
+            Destroy(instBasic, 1f);
+        }
+        else if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
+            currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Heavy)
+        {
+            GameObject instHeavy = Instantiate(atStaffHeavyAttack, transform.position, Quaternion.identity, transform);
+            Destroy(instHeavy, 1f);
+        }
+        
+       
+
+
+
+
         // Debug.Log("Damage Enemy");
         if (Time.time < timeNextHit) return;
 
