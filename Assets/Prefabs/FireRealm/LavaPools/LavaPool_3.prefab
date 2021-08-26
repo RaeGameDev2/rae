@@ -369,9 +369,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6828401204925197335}
+  - component: {fileID: 3005596123525775995}
   m_Layer: 0
   m_Name: Lava
-  m_TagString: Untagged
+  m_TagString: Lava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,6 +392,32 @@ Transform:
   m_Father: {fileID: 6828401204496034820}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &3005596123525775995
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6828401204925197334}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -29.63379, y: -3.235443}
+  - {x: -29.63086, y: -2.861847}
+  - {x: -29.614136, y: -0.71151733}
+  - {x: 29.54602, y: -0.6852722}
+  - {x: 27.35437, y: -2.7427979}
+  - {x: -29.483032, y: -3.1461182}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &6828401205108218497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,7 +1466,7 @@ GameObject:
   - component: {fileID: 6828401206246885686}
   m_Layer: 0
   m_Name: lava_mid (2)
-  m_TagString: Untagged
+  m_TagString: Lava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
