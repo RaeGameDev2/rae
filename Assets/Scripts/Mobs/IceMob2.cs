@@ -8,12 +8,17 @@ internal enum Direction
 }
 
 public class IceMob2 : Enemy
-{
+{ 
+    private enum State
+    {
+        Idle,
+        Attack,
+        Damage,
+        Death
+    }
+    private State animState = State.Idle;
+
     private Animator animator;
-
-    private State animState = State.IDLE;
-
-    // Attack rate: seconds till next hit
     private float attackTimer;
     [SerializeField] private bool damageAnimation;
     [SerializeField] private float oldHp;
@@ -31,8 +36,7 @@ public class IceMob2 : Enemy
 
         spawnPosition = transform.position;
         patrolDirection = Direction.LEFT;
-
-        // 1 hit per 2 seconds
+        
         attackTimer = attackSpeed;
         playerResources = FindObjectOfType<PlayerResources>();
         animator = GetComponent<Animator>();
@@ -45,7 +49,7 @@ public class IceMob2 : Enemy
 
         if (hp <= 0)
         {
-            animState = State.DEATH;
+            animState = State.Death;
             return;
         }
 
@@ -58,7 +62,7 @@ public class IceMob2 : Enemy
         }
 
         oldHp = hp;
-        if (animState == State.IDLE)
+        if (animState == State.Idle)
             Patrol();
         else
             Attack();
@@ -67,21 +71,20 @@ public class IceMob2 : Enemy
     private void DamageAnimation()
     {
         damageAnimation = true;
-        animState = State.DAMAGE;
+        animState = State.Damage;
     }
 
     public void DamageEnd()
     {
-        Debug.Log("DamageEnd");
         damageAnimation = false;
         oldHp = hp;
         if (hp > 0)
-            animState = State.IDLE;
+            animState = State.Idle;
     }
 
     private void UpdateAnimation()
     {
-        animator.SetInteger("state", (int) animState);
+        animator.SetInteger("state", (int)animState);
         animator.SetFloat("speed", attackSpeed / 3.5f);
     }
 
@@ -106,22 +109,15 @@ public class IceMob2 : Enemy
 
         if (attackTimer > 0) return;
         if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
-            playerResources.TakeDamage(damageOnTouch, transform.position);
+            playerResources.TakeDamage(1, transform.position);
         attackTimer = attackSpeed;
-        animState = State.IDLE;
+        animState = State.Idle;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (!col.CompareTag("Player")) return;
-        animState = State.ATTACK;
-    }
-
-    private enum State
-    {
-        IDLE,
-        ATTACK,
-        DAMAGE,
-        DEATH
+        if (col.GetComponent<PlayerSpells>().phaseWalkActive) return;
+        animState = State.Attack;
     }
 }

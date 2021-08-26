@@ -2176,6 +2176,36 @@ Transform:
   m_Father: {fileID: 1874360369235890445}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6559430609549538425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3572802632494874326}
+  m_Layer: 6
+  m_Name: RaycastOrigin1
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3572802632494874326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6559430609549538425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.722, y: -0.78, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5064113236464674921}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6641429424388091809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,6 +2452,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7897364043983728893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 634645370539524351}
+  m_Layer: 6
+  m_Name: RaycastOrigin2
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &634645370539524351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897364043983728893}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.524, y: -0.761, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5064113236464674921}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8033347827997977878
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,7 +2756,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3572802632494874326}
+  - {fileID: 634645370539524351}
   m_Father: {fileID: 4498439798160370845}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2738,6 +2800,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c4f4e61a25bd649b4583adf4b72403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distance: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &8375652402009629899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2863,7 +2929,7 @@ GameObject:
   - component: {fileID: 4498439798160370845}
   - component: {fileID: 210292893161954501}
   - component: {fileID: 5701191909888413392}
-  - component: {fileID: 8808285944926043894}
+  - component: {fileID: 836547905500400191}
   - component: {fileID: 6938081245096840680}
   - component: {fileID: 459485562945564412}
   - component: {fileID: 658857872126851909}
@@ -2937,8 +3003,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingOrder: 1
   applySpriterZOrder: 0
---- !u!61 &8808285944926043894
-BoxCollider2D:
+--- !u!70 &836547905500400191
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2946,23 +3012,13 @@ BoxCollider2D:
   m_GameObject: {fileID: 8667544546280959276}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1ff29ef16e50dd242bbb65ff2a97d3dc, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1, y: 1}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.8, y: 3.4}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.1333127, y: 1.0017486}
+  m_Size: {x: 1.6502972, y: 3.4910402}
+  m_Direction: 0
 --- !u!50 &6938081245096840680
 Rigidbody2D:
   serializedVersion: 4
@@ -2996,21 +3052,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fda64e52017284489d4ffe0c7cdff8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundSpeed: 20
-  airSpeed: 15
-  jumpHeight: 10
-  jumpSpeed: 20
-  fallSpeed: 20
-  gravity: 9
-  dashSpeed: 20
-  dashDistance: 20
-  dashCooldown: 4
-  isGrounded: 0
-  canJump: 0
+  airSpeed: 20
   canDoubleJump: 0
+  currGravity: 0
   diagonalJump: 0
+  fallSpeed: 25
+  gravity: 20
+  jumpGravity: 0
+  groundSpeed: 20
+  isGrounded: 0
+  jumpHeight: 10
+  jumpSpeed: 50
   onIce: 0
-  timeNextAttack: 0
 --- !u!114 &658857872126851909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3023,52 +3076,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ec21a2bd55e5d469caf4177da22a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - mainDamage: 100
-    secondaryDamage: 300
-    attackSpeed: 100
-    critRate: 20
-    critDmg: 30
-    bonusAttackDmg: 10
-    bonusAttackSpeed: 5
-    bonusCritRate: 5
-    bonusCritDmg: 5
-    type: 0
-    attackType: 0
-  - mainDamage: 100
-    secondaryDamage: 200
-    attackSpeed: 100
-    critRate: 20
-    critDmg: 30
-    bonusAttackDmg: 10
-    bonusAttackSpeed: 5
-    bonusCritRate: 5
-    bonusCritDmg: 5
-    type: 1
-    attackType: 0
-  - mainDamage: 100
-    secondaryDamage: 200
-    attackSpeed: 100
-    critRate: 20
-    critDmg: 30
-    bonusAttackDmg: 10
-    bonusAttackSpeed: 5
-    bonusCritRate: 5
-    bonusCritDmg: 5
-    type: 2
-    attackType: 0
   currWeapon:
-    mainDamage: 0
-    secondaryDamage: 0
     attackSpeed: 0
-    critRate: 0
-    critDmg: 0
+    attackType: 0
     bonusAttackDmg: 0
     bonusAttackSpeed: 0
-    bonusCritRate: 0
     bonusCritDmg: 0
+    bonusCritRate: 0
+    critDmg: 0
+    critRate: 0
+    mainDamage: 0
+    secondaryDamage: 0
     type: 0
+  weapons:
+  - attackSpeed: 100
     attackType: 0
+    bonusAttackDmg: 10
+    bonusAttackSpeed: 5
+    bonusCritDmg: 5
+    bonusCritRate: 5
+    critDmg: 30
+    critRate: 20
+    mainDamage: 100
+    secondaryDamage: 300
+    type: 0
+  - attackSpeed: 100
+    attackType: 0
+    bonusAttackDmg: 10
+    bonusAttackSpeed: 5
+    bonusCritDmg: 5
+    bonusCritRate: 5
+    critDmg: 30
+    critRate: 20
+    mainDamage: 100
+    secondaryDamage: 200
+    type: 1
+  - attackSpeed: 100
+    attackType: 0
+    bonusAttackDmg: 10
+    bonusAttackSpeed: 5
+    bonusCritDmg: 5
+    bonusCritRate: 5
+    critDmg: 30
+    critRate: 20
+    mainDamage: 100
+    secondaryDamage: 200
+    type: 2
 --- !u!114 &2994541827344140143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3082,10 +3135,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  manaRegenerationRate: 0.25
-  manaRegeneration: 0
-  skillPoints: 10
   damageRae: {fileID: 6193407600786716527, guid: 6feb5e7d9bcd15d44a1d5c30ca38fff1, type: 3}
+  manaRegeneration: 0
+  manaRegenerationRate: 0.25
+  skillPoints: 10
 --- !u!114 &-2675584603468446428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3111,21 +3164,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c9869856ea4ab42ba520bfd83a6d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phaseWalkActive: 0
-  lifeDrainActive: 0
-  parryActive: 0
-  shieldActive: 0
-  debuffActive: 0
-  orbDropped: 0
-  shieldDamage: 0
   damageRae: {fileID: 6193407600786716527, guid: 6feb5e7d9bcd15d44a1d5c30ca38fff1, type: 3}
-  shockwavePrefab: {fileID: 5044662247962228408, guid: 623b1a11324df034dbac560ae6167b43, type: 3}
-  shieldPrefab: {fileID: 1976252167293610119, guid: 9cfe6f0327f267b48a4b2b29532e5da1, type: 3}
+  debuffActive: 0
+  lifeDrainActive: 0
+  orbDropped: 0
+  parryActive: 0
+  phaseWalkActive: 0
   phaseWalkPrefab: {fileID: 6266635232837095685, guid: 18d4ccc603129a443a126347c1c62213, type: 3}
+  quickTeleportActive: 0
+  shieldActive: 0
+  shieldDamage: 0
+  shieldPrefab: {fileID: 1976252167293610119, guid: 9cfe6f0327f267b48a4b2b29532e5da1, type: 3}
+  shockwavePrefab: {fileID: 5044662247962228408, guid: 623b1a11324df034dbac560ae6167b43, type: 3}
   teleportPrefab: {fileID: 235279382955879337, guid: b86cce03e4fe0fc4c859533134132f28, type: 3}
   timeLifeDrain: 5
-  timePhaseWalk: 5
   timeParry: 1
+  timePhaseWalk: 5
 --- !u!1 &8820359854043090371
 GameObject:
   m_ObjectHideFlags: 0

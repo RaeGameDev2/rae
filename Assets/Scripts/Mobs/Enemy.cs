@@ -6,9 +6,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     protected float attackSpeed;
-    [SerializeField] protected int damageOnTouch = 1;
 
-    [SerializeField] private GameObject damageText;
+    [SerializeField] GameObject atStaffHeavyAttack;
+    [SerializeField] GameObject atStaffBasicAttack;
+    GameObject atHeavyAttack;
+
     [SerializeField] private float dpsLifeDrain = 50f;
     [SerializeField] protected float hp;
     protected Transform hpBar;
@@ -17,6 +19,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float initialAttackSpeed = 2f;
     [SerializeField] protected float initialHP;
     [SerializeField] private float initialScaleX;
+    [SerializeField] protected float attackCooldown;
+    [HideInInspector] protected float timeSinceAttack;
 
     [SerializeField] private float initialTimeLifeDrain = 4f;
     [SerializeField] protected bool isBoss;
@@ -25,6 +29,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed;
     private float timeLifeDrain;
     private float timeNextHit;
+    protected GameObject player;
+    protected PlayerSpells playerSpells;
 
     protected void Awake()
     {
@@ -32,6 +38,8 @@ public class Enemy : MonoBehaviour
         hpBar = components.FirstOrDefault(component => component.tag == "HP");
         lifeDrain = false;
         pause = false;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerSpells = FindObjectOfType<PlayerSpells>().GetComponent<PlayerSpells>();
     }
 
     protected void Start()
@@ -39,6 +47,7 @@ public class Enemy : MonoBehaviour
         attackSpeed = initialAttackSpeed;
         initialHP = hp;
         initialScaleX = hpBar.transform.localScale.x;
+        timeSinceAttack = attackCooldown;
     }
 
     protected void Update()
@@ -63,18 +72,38 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnDamageTaken(float damage, bool isCrit)
+    public virtual void OnDamageTaken(float damage, bool isCrit)
     {
-        // Debug.Log("Damage Enemy");
+        // check in Weapon , two enums weapons type, attack type 
+        // if weapon_type=staff si attack_type = basic
+        // instatiem obiect 
+        // else if weapon_type=staff si attack_type = heavy
+        // instatiem alt obiect 
+        // retinem instanta ca sa le distug dupa un delay
+
         if (Time.time < timeNextHit) return;
 
+        WeaponsHandler currWeaponHandler = (WeaponsHandler)FindObjectOfType(typeof(WeaponsHandler));
+
+        if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
+            currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Basic)
+        {
+            GameObject instBasic = Instantiate(atStaffBasicAttack, transform.position, Quaternion.identity, transform);
+            Destroy(instBasic, 1f);
+        }
+        else if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
+            currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Heavy)
+        {
+            GameObject instHeavy = Instantiate(atStaffHeavyAttack, transform.position, Quaternion.identity, transform);
+            Destroy(instHeavy, 1f);
+        }
+
         timeNextHit = Time.time + 1f;
-        // Debug.Log($"OnDamageTaken {damage}");
         hp -= damage;
         hp = Mathf.Clamp(hp, 0f, initialHP);
         hpBar.localScale = new Vector3(hp / initialHP * initialScaleX, hpBar.localScale.y, hpBar.localScale.z);
 
-        DamagePopup.Create(transform.position, (int) damage, isCrit);
+        DamagePopup.Create(transform.position, (int)damage, isCrit);
         if (hp > 0) return;
         hp = 0;
         if (!isBoss)
@@ -91,33 +120,13 @@ public class Enemy : MonoBehaviour
     public void Debuff(int lvl)
     {
         var factor = 1f - 0.2f * lvl;
-        attackSpeed /= factor;
+        attackSpeed *= factor;
         speed *= factor;
         Debug.Log("debuff: " + factor);
     }
 
-    private IEnumerator DamageTextAnimation(float damage, bool crit)
+    protected float GetDistanceFromPlayer()
     {
-        var instances = Instantiate(damageText, transform.position, Quaternion.identity, transform)
-            .GetComponent<TextMeshPro>();
-        instances.text = damage.ToString("####");
-        instances.color = crit ? Color.blue : Color.red;
-        var rectTransform = instances.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = new Vector2(1f, 3f);
-
-        var time = 2f;
-        var rotation = 0f;
-        while (time > 0f)
-        {
-            yield return new WaitForFixedUpdate();
-            time -= Time.fixedDeltaTime;
-            rotation -= 0.4f;
-            rectTransform.sizeDelta *= 1.003f;
-            rectTransform.anchoredPosition += 0.02f * new Vector2(-Mathf.Sin(Mathf.Deg2Rad * rotation),
-                Mathf.Cos(Mathf.Deg2Rad * rotation));
-            rectTransform.rotation = Quaternion.Euler(0, 0, rotation);
-        }
-
-        Destroy(instances.gameObject);
+        return (player.transform.position - transform.position).magnitude;
     }
 }

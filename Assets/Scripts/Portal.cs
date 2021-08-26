@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,7 @@ public class Portal : MonoBehaviour
 {
     private GameObject fireButton;
     private GameObject iceButton;
+    private GameObject natureButton;
     private GameObject interiorPortal;
     public Animator animator;
     public float transitionTime = 1f;
@@ -14,20 +16,24 @@ public class Portal : MonoBehaviour
     {
         fireButton = GameObject.Find("Fire_Button");
         iceButton = GameObject.Find("Ice_Button");
+        natureButton = GameObject.Find("Nature_Button");
         interiorPortal = GameObject.Find("Interior Portal");
         fireButton.SetActive(false);
         iceButton.SetActive(false);
+        natureButton.SetActive(false);
         interiorPortal.SetActive(false);
     }
 
     public void Fire_Load()
     {
-        LoadNextLevel(2);
+        SceneManager.LoadScene(2);
+        /*LoadNextLevel(2);*/
     }
 
     public void Ice_Load()
     {
-        LoadNextLevel(3);
+        SceneManager.LoadScene(3);
+        //LoadNextLevel(3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,6 +41,7 @@ public class Portal : MonoBehaviour
         if (collision.tag != "Player") return;
         fireButton.SetActive(true);
         iceButton.SetActive(true);
+        natureButton.SetActive(true);
         interiorPortal.SetActive(true);
     }
 
@@ -43,12 +50,22 @@ public class Portal : MonoBehaviour
         if (collision.tag != "Player") return;
         fireButton.SetActive(false);
         iceButton.SetActive(false);
+        natureButton.SetActive(false);
         interiorPortal.SetActive(false);
     }
 
     public void LoadNextLevel(int index)
     {
         StartCoroutine(LoadLevel(index));
+    }
+
+    public void StopEndAnimation()
+    {
+        FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad).crossfadeEndAnimation = false;
+    }
+    public void StopStartAnimation()
+    {
+        FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad).crossfadeStartAnimation = false;
     }
 
     private IEnumerator LoadLevel(int levelIndex)

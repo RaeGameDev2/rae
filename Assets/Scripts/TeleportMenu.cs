@@ -1,10 +1,13 @@
+using System.Collections;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TeleportMenu : MonoBehaviour
 {
     private GameManager gameManager;
-    
+
     private GameObject icePortal1;
     private GameObject icePortal2;
     private GameObject icePortal3;
@@ -40,7 +43,7 @@ public class TeleportMenu : MonoBehaviour
 
     public void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
     }
 
     public void OpenMeniuPortalIce()
@@ -242,32 +245,42 @@ public class TeleportMenu : MonoBehaviour
         }
     }
 
-
-
-    public void Portal1()
+    public void FireCheckpoint(int id)
     {
-        player.transform.position = icePortal1.transform.position;
+        gameManager.ChangeCheckpointId(id, 2);
     }
-
-    public void Portal2()
+    public void IceCheckpoint(int id)
     {
-        player.transform.position = icePortal2.transform.position;
+        gameManager.ChangeCheckpointId(id, 3);
     }
-
-    public void Portal3()
+    public void JungleCheckpoint(int id)
     {
-        player.transform.position = icePortal3.transform.position;
-    }
-
-    public void Portal4()
-    {
-        player.transform.position = icePortal4.transform.position;
+        gameManager.ChangeCheckpointId(id, 4);
     }
 
     public void Hub()
     {
-        SceneManager.LoadScene(1);
+        gameManager.ChangeCheckpointId(0, 1);
     }
 
-
+    /*public void ResetCheckpoints()
+    {
+        string skil_file_path = Application.persistentDataPath + "/skill.data";
+        string checkpoints_file_path = Application.persistentDataPath + "/checkpoints.data";
+        if(File.Exists(checkpoints_file_path))
+        {
+            File.Delete(checkpoints_file_path);
+        }
+        if (File.Exists(skil_file_path))
+        {
+            File.Delete(skil_file_path);
+        }
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_WEBPLAYER
+            Application.OpenURL(webplayerQuitURL);
+        #else
+            Application.Quit();
+        #endif
+    }*/
 }

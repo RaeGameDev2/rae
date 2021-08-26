@@ -1,34 +1,44 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
     private PlayerController pc;
+    [SerializeField] private float distance;
+    [SerializeField] private LayerMask groundMask;
+    ContactFilter2D filter2D;
+    List<RaycastHit2D> results;
 
     private void Start()
     {
         pc = FindObjectOfType<PlayerController>();
-    }
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        // Debug.Log("enter");
-        if (!col.CompareTag("Ground")) return;
-        pc.isGrounded = true;
-        pc.canDoubleJump = false;
-        pc.diagonalJump = false;
-    }
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        // Debug.Log("stay");
-        if (!col.CompareTag("Ground")) return;
-        pc.isGrounded = true;
-        pc.canDoubleJump = false;
-        pc.diagonalJump = false;
+        filter2D = filter2D.NoFilter();
+        results = new List<RaycastHit2D>();
     }
 
-    private void OnTriggerExit2D(Collider2D col)
+    private void Update()
     {
-        // Debug.Log("exit");
-        if (col.CompareTag("Ground"))
+        if (pc)
+        {
             pc.isGrounded = false;
+            foreach (Transform child in transform)
+            {
+                Physics2D.Raycast(child.position, Vector2.down, filter2D, results, distance);
+                foreach (RaycastHit2D hit in results)
+                {
+                    if (hit.collider.tag == "Ground")
+                    {
+                        pc.isGrounded = true;
+                        break;
+                    }
+                }
+                if (pc.isGrounded)
+                    Debug.DrawRay(child.position, Vector2.down * distance, Color.green);
+                else
+                    Debug.DrawRay(child.position, Vector2.down * distance, Color.red);
+            }
+        }
+        else
+            pc = FindObjectOfType<PlayerController>();
     }
 }

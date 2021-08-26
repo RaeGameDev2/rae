@@ -492,13 +492,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf9beb246858b84d8dd56d235c3ac48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSpeed: 0
+  atStaffHeavyAttack: {fileID: 6036975801974468197, guid: 46938152a5352cd4583ef3dc38261579, type: 3}
+  atStaffBasicAttack: {fileID: 5368235276387312648, guid: 2ba27f9370fe5fa4dabe34b74b48ec33, type: 3}
   damageOnTouch: 1
-  damageText: {fileID: 5777892390895327323, guid: cc0835ce7ca8a864682b2136486b7040, type: 3}
   dpsLifeDrain: 50
-  hp: 100
+  hp: 5000
   initialAttackSpeed: 2
   initialHP: 5000
   initialScaleX: 0
+  attackCooldown: 0
   initialTimeLifeDrain: 4
   isBoss: 0
   speed: 0

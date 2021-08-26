@@ -21,6 +21,7 @@ public class IceFinalBoss : Enemy
     private float initialLocalScaleX;
     [SerializeField] private bool isDying;
     private PlayerResources playerResources;
+    private PlayerSpells playerSpells;
     [SerializeField] private GameObject projectile;
     [SerializeField] private bool projectileAttack;
 
@@ -39,9 +40,9 @@ public class IceFinalBoss : Enemy
     {
         base.Start();
         playerResources = FindObjectOfType<PlayerResources>();
+        playerSpells = FindObjectOfType<PlayerSpells>();
         anim.SetInteger("state", (int) animType);
-        hp = 1000f;
-        initialHP = 1000f;
+        initialHP = hp;
         isBoss = true;
     }
 
@@ -64,7 +65,7 @@ public class IceFinalBoss : Enemy
         if (hp <= 0)
             Die();
 
-        if (GetDistanceToPlayer() < thresholdDistance)
+        if (GetDistanceToPlayer() < thresholdDistance && !playerSpells.phaseWalkActive)
         {
             animType = Random.Range(0f, 2f) < 1f ? AnimType.Attack : AnimType.Projectile;
             switch (animType)

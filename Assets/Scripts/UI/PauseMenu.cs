@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
 
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject resetdataButton;
 
     public void Pause()
     {
@@ -20,6 +22,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseButton.SetActive(true);
         pauseMenu.SetActive(false);
+        resetdataButton.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
@@ -42,8 +45,30 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         isPaused = true;
         settingsMenu.SetActive(false);
+        resetdataButton.SetActive(true);
     }
 
+    public void ResetPersistentData()
+    {
+        string skil_file_path = Application.persistentDataPath + "/skill.data";
+        string checkpoints_file_path = Application.persistentDataPath + "/checkpoints.data";
+        if (File.Exists(checkpoints_file_path))
+        {
+            File.Delete(checkpoints_file_path);
+        }
+        if (File.Exists(skil_file_path))
+        {
+            File.Delete(skil_file_path);
+        }
+        SceneManager.LoadScene(1);
+        /*#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_WEBPLAYER
+                            Application.OpenURL(webplayerQuitURL);
+        #else
+                            Application.Quit();
+        #endif*/
+    }
     private void Update()
     {
         if (!Input.GetKeyDown("escape")) return;

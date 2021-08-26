@@ -767,20 +767,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547ae3e422f80104eaa68fb748308138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSpeed: 0
+  atStaffHeavyAttack: {fileID: 0}
+  atStaffBasicAttack: {fileID: 0}
   damageOnTouch: 1
-  damageText: {fileID: 0}
   dpsLifeDrain: 50
-  hp: 0
-  initialAttackSpeed: 2
+  hp: 300
+  initialAttackSpeed: 100
   initialHP: 0
   initialScaleX: 0
+  attackCooldown: 0.5
   initialTimeLifeDrain: 4
   isBoss: 0
-  speed: 0
-  anim: {fileID: 0}
+  speed: 5
+  patrolDirection: 1
+  patrolRange: 7
+  attackDistance: 2
   isAttacking: 0
-  patrolRange: 0
-  thresholdDistance: 5
 --- !u!61 &4591965405723241139
 BoxCollider2D:
   m_ObjectHideFlags: 0

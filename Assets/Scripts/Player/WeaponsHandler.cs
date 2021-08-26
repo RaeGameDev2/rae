@@ -69,35 +69,24 @@ public class WeaponsHandler : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && currWeapon.attackType == Weapon.AttackType.None)
         {
             currWeapon.attackType = Weapon.AttackType.Basic;
-            // playerController.timeNextAttack = Time.time + currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
-
             SoundManagerScript.playAttackSound = true;
         }
 
         if (Input.GetMouseButtonDown(1) && currWeapon.attackType == Weapon.AttackType.None)
         {
             currWeapon.attackType = Weapon.AttackType.Heavy;
-            // playerController.timeNextAttack = Time.time + 2 * currWeapon.attackSpeed + currWeapon.bonusAttackSpeed * playerSkills.GetLevelAttackSpeed();
-
             SoundManagerScript.playAttackSound = true;
         }
     }
 
     private void SwitchWeapon()
     {
-        switch (currWeapon.type)
+        currWeapon = currWeapon.type switch
         {
-            case Weapon.WeaponType.Scythe:
-                currWeapon = weapons[(int) Weapon.WeaponType.Orb];
-                break;
-
-            case Weapon.WeaponType.Orb:
-                currWeapon = weapons[(int) Weapon.WeaponType.Staff];
-                break;
-
-            case Weapon.WeaponType.Staff:
-                currWeapon = weapons[(int) Weapon.WeaponType.Scythe];
-                break;
-        }
+            Weapon.WeaponType.Scythe => weapons[(int) Weapon.WeaponType.Orb],
+            Weapon.WeaponType.Orb => weapons[(int) Weapon.WeaponType.Staff],
+            Weapon.WeaponType.Staff => weapons[(int) Weapon.WeaponType.Scythe],
+            _ => currWeapon
+        };
     }
 }

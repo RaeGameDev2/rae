@@ -25,6 +25,7 @@ public class FireBoss : Enemy
     [SerializeField] private bool isDying;
     [SerializeField] private float oldHp;
     private PlayerResources playerResources;
+    private PlayerSpells playerSpells;
     [SerializeField] private bool projectileAttack;
 
     [SerializeField] private bool simpleAttack;
@@ -41,11 +42,11 @@ public class FireBoss : Enemy
     {
         base.Start();
         playerResources = FindObjectOfType<PlayerResources>();
+        playerSpells = FindObjectOfType<PlayerSpells>();
         anim.SetInteger("state", (int) animType);
-        hp = 1000f;
-        initialHP = 1000f;
+        initialHP = hp;
         isBoss = true;
-        oldHp = 1000f;
+        oldHp = hp;
         initialLocalScaleX = transform.localScale.x;
     }
 
@@ -76,7 +77,7 @@ public class FireBoss : Enemy
 
         if (hp <= 0)
             Die();
-        if (GetDistanceToPlayer() < thresholdDistance)
+        if (GetDistanceToPlayer() < thresholdDistance && !playerSpells.phaseWalkActive)
         {
             animType = Random.Range(0f, 2f) < 1f ? AnimType.Attack : AnimType.Projectile;
             switch (animType)

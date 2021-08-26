@@ -41,12 +41,24 @@ public class Skills
         if (skillType == SkillType.PhaseWalk && skillLevel[(int) SkillType.Debuff] > 0) return;
         if (skillType == SkillType.Debuff && skillLevel[(int) SkillType.PhaseWalk] > 0) return;
         skillLevel[(int) skillType]++;
+
+        var gameManager = GameManager.instance;
+        System.Array.Copy(skillLevel, GameManager.instance.skillLevel, skillLevel.Length);
+        gameManager.SaveSkillLevel();
+        
         playerResources.skillPoints--;
+
+        gameManager.SaveSkillPoints();
     }
 
     public int GetSkillPoints()
     {
         return playerResources.skillPoints;
+    }
+
+    public void SetSkillPoints(int skillPoints)
+    {
+        playerResources.skillPoints = skillPoints;
     }
 
     public bool IsSkillUnlocked(SkillType skillType)
@@ -62,5 +74,10 @@ public class Skills
     public int GetMaxLevel()
     {
         return MAX_LEVEL;
+    }
+
+    public void SetSkillLevel()
+    {
+        System.Array.Copy(GameManager.instance.skillLevel, skillLevel, GameManager.instance.skillLevel.Length);
     }
 }

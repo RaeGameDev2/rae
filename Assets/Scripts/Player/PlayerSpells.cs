@@ -71,7 +71,7 @@ public class PlayerSpells : MonoBehaviour
             case Weapon.WeaponType.Orb:
                 if (playerSkills.IsQuickTpUnlocked())
                 {
-                    QuickTp();
+                    QuickTP();
                 }
                 else if (playerSkills.IsShieldUnlocked())
                 {
@@ -110,7 +110,7 @@ public class PlayerSpells : MonoBehaviour
         playerResources.UseMana();
     }
 
-    private void QuickTp()
+    private void QuickTP()
     {
         if (orbDropped)
         {

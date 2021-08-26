@@ -8,6 +8,7 @@ public class DamagePopup : MonoBehaviour
     private float disappearTimer;
     private Vector3 moveVector;
     private Color textColor;
+    private float rotation = 0f;
 
     private TextMeshPro textMesh;
 
@@ -32,11 +33,13 @@ public class DamagePopup : MonoBehaviour
         {
             var increaseScaleAmount = 1f;
             transform.localScale += Vector3.one * increaseScaleAmount * Time.deltaTime;
+            rotation -= 0.4f;
         }
         else
         {
             var decreaseScaleAmount = 1f;
             transform.localScale -= Vector3.one * decreaseScaleAmount * Time.deltaTime;
+            rotation += 0.8f;
         }
 
         disappearTimer -= Time.deltaTime;
@@ -47,6 +50,7 @@ public class DamagePopup : MonoBehaviour
             textMesh.color = textColor;
             Destroy(gameObject, .5f);
         }
+        transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
 
     public void Setup(int damageAmount, bool isCrit)

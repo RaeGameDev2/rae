@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,8 @@ public class PlayerResources : MonoBehaviour
     public int maxMana { get; private set; }
     public int currentMana { get; private set; }
 
+    private GameManager gameManager;
+
     private void Awake()
     {
         maxHealth = 3;
@@ -30,6 +33,8 @@ public class PlayerResources : MonoBehaviour
         uiManager = FindObjectOfType<UI_Manager>();
         currentHealth = maxHealth;
         currentMana = maxMana;
+
+        gameManager = FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad);
     }
 
     private void Update()
@@ -91,16 +96,37 @@ public class PlayerResources : MonoBehaviour
         direction = new Vector3(direction.x, 0f).normalized;
         if (direction != Vector3.zero)
         {
-            var rb = GetComponent<Rigidbody2D>();
-            rb.AddForce(2500f * direction, ForceMode2D.Force);
+            StartCoroutine(DamageKnockback(direction));
         }
 
         StartCoroutine(DamageAnimation());
 
         if (damage > currentHealth) damage = currentHealth;
-        currentHealth -= damage;
-        uiManager.TakeLives(damage);
-        if (currentHealth <= 0) StartCoroutine(my_delay());
+
+        if (damage == currentHealth)
+        {
+            uiManager.TakeLives(currentHealth);
+
+            for (int i = 0; i < currentMana; i++)
+                uiManager.UseMana();
+
+            currentHealth = maxHealth;
+            currentMana = maxMana;
+            gameManager.Die();
+
+            for (int i = 0; i < maxHealth; i++)
+            {
+                uiManager.AddMana();
+                uiManager.AddLife();
+            }
+
+        }
+        else
+        {
+            currentHealth -= damage;
+            uiManager.TakeLives(damage);
+            if (currentHealth <= 0) StartCoroutine(my_delay());
+        }
     }
 
 
@@ -108,6 +134,18 @@ public class PlayerResources : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(1);
+    }
+
+    private IEnumerator DamageKnockback(Vector3 dir)
+    {
+        var rb = GetComponent<Rigidbody2D>();
+        var time = 0.40f;
+        while (time > 0)
+        {
+            rb.AddForce(1000f * dir, ForceMode2D.Force);
+            time -= Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     private IEnumerator DamageAnimation()
@@ -126,8 +164,8 @@ public class PlayerResources : MonoBehaviour
             spriteRenderer.color = color;
             instance.transform.localScale *= 1.02f;
 
-            time -= Time.fixedDeltaTime;
-            yield return new WaitForFixedUpdate();
+            time -= Time.deltaTime;
+            yield return null;
         }
 
         Destroy(instance);
