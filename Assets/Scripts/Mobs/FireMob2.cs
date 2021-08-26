@@ -79,7 +79,7 @@ public class FireMob2 : Enemy
         }
         else
         {
-            if (!isAttacking)
+            if (!canDamage)
             {
                 Patrol();
                 timeSinceAttack -= Time.deltaTime;
@@ -115,13 +115,16 @@ public class FireMob2 : Enemy
     private void Patrol()
     {
         //anim.SetInteger("state", (int)AttackType.Idle);
-
         if (patrolDirection == Direction.Right)
             transform.position += Vector3.right * speed * Time.deltaTime;
         else if (patrolDirection == Direction.Left)
             transform.position += Vector3.left * speed * Time.deltaTime;
         if (Mathf.Abs(transform.position.x - spawnPosition.x) >= patrolRange)
         {
+            // if (patrolDirection == Direction.Right)
+            //     transform.position = new Vector3(spawnPosition.x + patrolRange - 0.1f, transform.position.y, transform.position.z);
+            // else
+            //     transform.position = new Vector3(spawnPosition.x - patrolRange + 0.1f, transform.position.y, transform.position.z);
             patrolDirection = 1 - patrolDirection;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }

@@ -86,9 +86,12 @@ public class FireMob1 : Enemy
             transform.position += Vector3.right * speed * Time.deltaTime;
         else if (patrolDirection == Direction.Left)
             transform.position += Vector3.left * speed * Time.deltaTime;
-
         if (Mathf.Abs(transform.position.x - spawnPosition.x) >= patrolRange)
         {
+            if (patrolDirection == Direction.Right)
+                transform.position = new Vector3(spawnPosition.x + patrolRange - 0.1f, transform.position.y, transform.position.z);
+            else
+                transform.position = new Vector3(spawnPosition.x - patrolRange + 0.1f, transform.position.y, transform.position.z);
             patrolDirection = 1 - patrolDirection;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
