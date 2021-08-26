@@ -40,7 +40,6 @@ public class FireMob1 : Enemy
         playerSpells = FindObjectOfType<PlayerSpells>().GetComponent<PlayerSpells>();
     }
 
-    // Update is called once per frame
     private new void Update()
     {
         base.Update();
@@ -102,7 +101,6 @@ public class FireMob1 : Enemy
     public override void OnDamageTaken(float damage, bool isCritical)
     {
         base.OnDamageTaken(damage, isCritical);
-        //Debug.Log("sex");
         anim.SetInteger("state", (int)AttackType.Damage);
     }
 
