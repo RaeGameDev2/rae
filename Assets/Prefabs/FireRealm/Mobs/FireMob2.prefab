@@ -92,7 +92,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6960814847362043136}
   - component: {fileID: 6960814847362043138}
-  - component: {fileID: 6960814847362043139}
+  - component: {fileID: 7764734177253253860}
+  - component: {fileID: 5960566743610570510}
   m_Layer: 0
   m_Name: FireMob2
   m_TagString: Enemy
@@ -131,21 +132,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atStaffHeavyAttack: {fileID: 0}
   atStaffBasicAttack: {fileID: 0}
-  damageOnTouch: 1
   dpsLifeDrain: 50
   hp: 300
   initialAttackSpeed: 100
   initialHP: 0
   initialScaleX: 0
-  attackCooldown: 0
+  attackCooldown: 2
   initialTimeLifeDrain: 4
   isBoss: 0
   speed: 3
   patrolDirection: 0
   patrolRange: 10
-  attackDistance: 2
+  attackDistance: 6
   isAttacking: 0
---- !u!61 &6960814847362043139
+  isGrounded: 0
+  rb: {fileID: 0}
+--- !u!61 &7764734177253253860
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +160,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.7816849, y: 0.011011124}
+  m_Offset: {x: -0.7075268, y: -0.032160282}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -169,8 +171,29 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.0698166, y: 2.1670265}
+  m_Size: {x: 3.4441836, y: 2.565135}
   m_EdgeRadius: 0
+--- !u!50 &5960566743610570510
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960814847362043137}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &8011673518793019088
 GameObject:
   m_ObjectHideFlags: 0

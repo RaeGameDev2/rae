@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
         attackSpeed = initialAttackSpeed;
         initialHP = hp;
         initialScaleX = hpBar.transform.localScale.x;
-        timeSinceAttack = attackCooldown;
+        timeSinceAttack = 0;
     }
 
     protected void Update()
