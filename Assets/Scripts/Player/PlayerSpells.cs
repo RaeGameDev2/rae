@@ -149,6 +149,13 @@ public class PlayerSpells : MonoBehaviour
         StartCoroutine(SpellAnimation());
         playerResources.UseMana();
     }
+    private void CheckShield()
+    {
+        if (!shieldActive) return;
+        if (shieldDamage != 0) return;
+        shieldActive = false;
+        Destroy(instanceShield);
+    }
 
     private IEnumerator StopLifeDrain()
     {
@@ -285,6 +292,7 @@ public class PlayerSpells : MonoBehaviour
 
         Destroy(instance);
     }
+
     public void Pause()
     {
         pause = !pause;
@@ -293,14 +301,6 @@ public class PlayerSpells : MonoBehaviour
     public void StopDebuff()
     {
         debuffActive = false;
-    }
-
-    private void CheckShield()
-    {
-        if (!shieldActive) return;
-        if (shieldDamage != 0) return;
-        shieldActive = false;
-        Destroy(instanceShield);
     }
 
     public void Shockwave()
