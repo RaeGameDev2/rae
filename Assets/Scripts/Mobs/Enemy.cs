@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float initialAttackSpeed = 2f;
     [SerializeField] protected float initialHP;
     [SerializeField] private float initialScaleX;
+    [SerializeField] protected float attackCooldown;
+    [HideInInspector] protected float timeSinceAttack;
 
     [SerializeField] private float initialTimeLifeDrain = 4f;
     [SerializeField] protected bool isBoss;
@@ -37,6 +39,7 @@ public class Enemy : MonoBehaviour
         attackSpeed = initialAttackSpeed;
         initialHP = hp;
         initialScaleX = hpBar.transform.localScale.x;
+        timeSinceAttack = attackCooldown;
     }
 
     protected void Update()

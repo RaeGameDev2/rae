@@ -772,12 +772,13 @@ MonoBehaviour:
   initialAttackSpeed: 2
   initialHP: 0
   initialScaleX: 0
+  attackCooldown: 0.5
   initialTimeLifeDrain: 4
   isBoss: 0
   speed: 0
   isAttacking: 0
   patrolRange: 0
-  thresholdDistance: 5
+  attackDistance: 5
 --- !u!61 &4591965405723241139
 BoxCollider2D:
   m_ObjectHideFlags: 0

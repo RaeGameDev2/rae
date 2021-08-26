@@ -10,7 +10,6 @@ public class FireMob1 : Enemy
         Death
     }
 
-
     public bool isAttacking;
     private Directions patrolDirection;
 
@@ -18,7 +17,7 @@ public class FireMob1 : Enemy
     private PlayerResources playerResources;
 
     private Vector3 spawnPosition;
-    [SerializeField] private float thresholdDistance = 5f;
+    [SerializeField] private float attackDistance = 5f;
 
     private PlayerSpells playerSpells;
     private Animator anim;
@@ -54,10 +53,9 @@ public class FireMob1 : Enemy
         if (anim.GetInteger("state") == (int)AttackType.Damage) return;
         if (anim.GetInteger("state") == (int)AttackType.Attack) return;
 
-        if (GetDistanceFromPlayer() < thresholdDistance && !playerSpells.phaseWalkActive)
+        if (GetDistanceFromPlayer() < attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0)
         {
-            isAttacking = true;
-
+            anim.SetInteger("state", (int)AttackType.Attack);
             if (playerResources.transform.position.x < transform.position.x && patrolDirection == Directions.Right)
             {
                 transform.localScale =
@@ -73,13 +71,11 @@ public class FireMob1 : Enemy
         }
         else
         {
-            isAttacking = false;
-        }
-
-        if (!isAttacking)
             Patrol();
-        else
-            Attack();
+            timeSinceAttack -= Time.deltaTime;
+            if (timeSinceAttack < 0)
+                timeSinceAttack = 0;
+        }
     }
 
     private void Patrol()
@@ -96,11 +92,6 @@ public class FireMob1 : Enemy
             patrolDirection = 1 - patrolDirection;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
-    }
-
-    private void Attack()
-    {
-        anim.SetInteger("state", (int)AttackType.Attack);
     }
 
     private float GetDistanceFromPlayer()
@@ -123,7 +114,7 @@ public class FireMob1 : Enemy
     public void OnAttackEnd()
     {
         anim.SetInteger("state", (int)AttackType.Idle);
-        Debug.Log("se termina atacul");
+        timeSinceAttack = attackCooldown;
     }
 
     private enum Directions
