@@ -19,6 +19,7 @@ public class FireMob2 : Enemy
     [SerializeField] private Direction patrolDirection;
     [SerializeField] private float patrolRange;
     [SerializeField] private float attackDistance;
+    [HideInInspector] public bool isAttacking = false;
 
     private Vector3 spawnPosition;
 
@@ -37,11 +38,40 @@ public class FireMob2 : Enemy
     private new void Update()
     {
         base.Update();
-        if (GetDistanceFromPlayer() < attackDistance)
-            player.GetComponent<PlayerResources>().TakeDamage(1, transform.position);
+        // anim.SetFloat("speed", speed / 3);
+        // anim.SetFloat("attackSpeed", attackSpeed / 100);
+
+        if (hp <= 0)
+        {
+            //anim.SetInteger("state", (int)AttackType.Death);
+            return;
+        }
+        // if (anim.GetInteger("state") == (int)AttackType.Damage) return;
+        // if (anim.GetInteger("state") == (int)AttackType.Attack) return;
+        if (GetDistanceFromPlayer() <= attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0)
+        {
+            // anim.SetInteger("state", (int)AttackType.Attack);
+            if (player.transform.position.x < transform.position.x && patrolDirection == Direction.Right)
+            {
+                transform.localScale =
+                    new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                patrolDirection = Direction.Left;
+            }
+            else if (player.transform.position.x > transform.position.x && patrolDirection == Direction.Left)
+            {
+                transform.localScale =
+                    new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                patrolDirection = Direction.Right;
+            }
+            isAttacking = true;
+        }
         else
         {
             Patrol();
+            timeSinceAttack -= Time.deltaTime;
+            if (timeSinceAttack < 0)
+                timeSinceAttack = 0;
+            isAttacking = false;
         }
     }
 
@@ -65,5 +95,21 @@ public class FireMob2 : Enemy
     {
         if (collision.tag != "Player") return;
         if (collision.GetComponent<PlayerSpells>().phaseWalkActive) return;
+    }
+    public override void OnDamageTaken(float damage, bool isCritical)
+    {
+        base.OnDamageTaken(damage, isCritical);
+        // anim.SetInteger("state", (int)AttackType.Damage);
+    }
+
+    public void OnDamageTakenEnd()
+    {
+        //anim.SetInteger("state", (int)AttackType.Idle);
+    }
+
+    public void OnAttackEnd()
+    {
+        // anim.SetInteger("state", (int)AttackType.Idle);
+        timeSinceAttack = attackCooldown;
     }
 }

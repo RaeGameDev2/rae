@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected float attackSpeed;
+    protected float attackSpeed;
 
     [SerializeField] GameObject atStaffHeavyAttack;
     [SerializeField] GameObject atStaffBasicAttack;
     GameObject atHeavyAttack;
-    [SerializeField] protected int damageOnTouch = 1;
 
     [SerializeField] private float dpsLifeDrain = 50f;
     [SerializeField] protected float hp;
@@ -31,6 +30,7 @@ public class Enemy : MonoBehaviour
     private float timeLifeDrain;
     private float timeNextHit;
     protected GameObject player;
+    protected PlayerSpells playerSpells;
 
     protected void Awake()
     {
@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
         lifeDrain = false;
         pause = false;
         player = GameObject.FindGameObjectWithTag("Player");
+        playerSpells = FindObjectOfType<PlayerSpells>().GetComponent<PlayerSpells>();
     }
 
     protected void Start()

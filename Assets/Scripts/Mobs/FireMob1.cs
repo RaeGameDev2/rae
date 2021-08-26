@@ -20,7 +20,6 @@ public class FireMob1 : Enemy
     [SerializeField] private float attackDistance;
 
     private Vector3 spawnPosition;
-    private PlayerSpells playerSpells;
     private Animator anim;
     [HideInInspector] public bool isAttacking = false;
 
@@ -31,7 +30,6 @@ public class FireMob1 : Enemy
         spawnPosition = transform.position;
 
         anim = GetComponent<Animator>();
-        playerSpells = FindObjectOfType<PlayerSpells>().GetComponent<PlayerSpells>();
 
         if (patrolDirection == Direction.Left)
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -53,7 +51,7 @@ public class FireMob1 : Enemy
         if (anim.GetInteger("state") == (int)AttackType.Damage) return;
         if (anim.GetInteger("state") == (int)AttackType.Attack) return;
 
-        if (GetDistanceFromPlayer() < attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0)
+        if (GetDistanceFromPlayer() <= attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0)
         {
             anim.SetInteger("state", (int)AttackType.Attack);
             if (player.transform.position.x < transform.position.x && patrolDirection == Direction.Right)
