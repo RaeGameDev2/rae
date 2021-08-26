@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class HitboxFireMob1 : MonoBehaviour
 {
-    [SerializeField] private float attackDelay;
-    [SerializeField] private float attackTimer;
-
     private bool isAttacking;
 
     private FireMob1 parent;
@@ -12,9 +9,6 @@ public class HitboxFireMob1 : MonoBehaviour
 
     private void Start()
     {
-        attackDelay = 2f;
-        attackTimer = attackDelay;
-
         playerResources = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerResources>();
         parent = transform.GetComponentInParent<FireMob1>();
 
@@ -27,7 +21,7 @@ public class HitboxFireMob1 : MonoBehaviour
         {
             if (parent.isAttacking)
             {
-                playerResources.TakeDamage(1, transform.position);
+                playerResources.TakeDamage(1, parent.transform.position);
                 parent.isAttacking = false;
             }
         }
@@ -39,7 +33,7 @@ public class HitboxFireMob1 : MonoBehaviour
         {
             if (parent.isAttacking)
             {
-                playerResources.TakeDamage(1, transform.position);
+                playerResources.TakeDamage(1, parent.transform.position);
                 parent.isAttacking = false;
             }
         }

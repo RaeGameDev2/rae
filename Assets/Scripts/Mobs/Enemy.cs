@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected float attackSpeed;
 
-    [SerializeField]  GameObject atStaffHeavyAttack;
+    [SerializeField] GameObject atStaffHeavyAttack;
     [SerializeField] GameObject atStaffBasicAttack;
     GameObject atHeavyAttack;
     [SerializeField] protected int damageOnTouch = 1;
@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed;
     private float timeLifeDrain;
     private float timeNextHit;
+    protected GameObject player;
 
     protected void Awake()
     {
@@ -37,6 +38,7 @@ public class Enemy : MonoBehaviour
         hpBar = components.FirstOrDefault(component => component.tag == "HP");
         lifeDrain = false;
         pause = false;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     protected void Start()
@@ -80,7 +82,7 @@ public class Enemy : MonoBehaviour
 
         if (Time.time < timeNextHit) return;
 
-        WeaponsHandler currWeaponHandler =(WeaponsHandler)FindObjectOfType(typeof(WeaponsHandler));
+        WeaponsHandler currWeaponHandler = (WeaponsHandler)FindObjectOfType(typeof(WeaponsHandler));
 
         if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
             currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Basic)
@@ -120,5 +122,10 @@ public class Enemy : MonoBehaviour
         attackSpeed *= factor;
         speed *= factor;
         Debug.Log("debuff: " + factor);
+    }
+
+    protected float GetDistanceFromPlayer()
+    {
+        return (player.transform.position - transform.position).magnitude;
     }
 }

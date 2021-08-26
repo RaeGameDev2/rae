@@ -1,73 +1,69 @@
 using System.Linq;
 using UnityEngine;
 
-public class FireMob2 : MonoBehaviour
+public class FireMob2 : Enemy
 {
-    [SerializeField] private int damage = 1;
-    private bool exploded;
-    [SerializeField] private ParticleSystem explosion;
-    private bool explosion_active;
-    private ParticleSystem explosion_instance;
-
-    private bool initiate_explosion;
-
-    [SerializeField] private SpriteRenderer Mob2_Sprite;
-    private PlayerResources playerResources;
-    private float remaining_time_until_dissapear;
-    private float remaining_time_until_explosion_dissapear;
-    [SerializeField] private float thresholdDistance = 10f;
-    private float time_until_dissapear = 1;
-
-    private void Start()
+    public enum AttackType
     {
-        var components = gameObject.GetComponentsInChildren<Transform>();
-        Mob2_Sprite = components.FirstOrDefault(component => component.name == "FireMob2_Temp")?
-            .GetComponent<SpriteRenderer>();
-
-
-        remaining_time_until_dissapear = time_until_dissapear;
-        remaining_time_until_explosion_dissapear = 1;
-        playerResources = FindObjectOfType<PlayerResources>();
+        Idle,
+        Attack,
+        Damage,
+        Death
     }
 
-    private void Update()
+    public enum Direction
     {
-        if (initiate_explosion)
+        Left,
+        Right
+    }
+    [SerializeField] private Direction patrolDirection;
+    [SerializeField] private float patrolRange;
+    [SerializeField] private float attackDistance;
+
+    private Vector3 spawnPosition;
+
+    private new void Start()
+    {
+        base.Start();
+
+        spawnPosition = transform.position;
+
+        if (patrolDirection == Direction.Left)
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        else
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
+
+    private new void Update()
+    {
+        base.Update();
+        if (GetDistanceFromPlayer() < attackDistance)
+            player.GetComponent<PlayerResources>().TakeDamage(1, transform.position);
+        else
         {
-            remaining_time_until_dissapear -= Time.deltaTime;
-
-            if (remaining_time_until_dissapear <= 0)
-            {
-                explosion_instance = Instantiate(explosion, transform.position, Quaternion.identity);
-                explosion.transform.localScale *= 1f;
-                Mob2_Sprite.enabled = false;
-                initiate_explosion = false;
-                exploded = true;
-                explosion_active = true;
-                remaining_time_until_dissapear = time_until_dissapear;
-                if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
-                    playerResources.TakeDamage(damage, playerResources.transform.position);
-            }
+            Patrol();
         }
-
-        if (!explosion_active) return;
-
-        remaining_time_until_explosion_dissapear -= Time.deltaTime;
-        if (remaining_time_until_explosion_dissapear > 0) return;
-
-        if (!((playerResources.transform.position - transform.position).magnitude < thresholdDistance)) return;
-        playerResources.TakeDamage(damage, transform.position);
-        Destroy(explosion_instance.gameObject);
-        Destroy(gameObject);
     }
 
+    private void Patrol()
+    {
+        //anim.SetInteger("state", (int)AttackType.Idle);
+
+        if (patrolDirection == Direction.Right)
+            transform.position += Vector3.right * speed * Time.deltaTime;
+        else if (patrolDirection == Direction.Left)
+            transform.position += Vector3.left * speed * Time.deltaTime;
+
+        if (Mathf.Abs(transform.position.x - spawnPosition.x) >= patrolRange)
+        {
+            patrolDirection = 1 - patrolDirection;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
         if (collision.GetComponent<PlayerSpells>().phaseWalkActive) return;
-
-        transform.localScale = new Vector3(1.5f, 1.5f, 1f);
-        if (exploded == false) initiate_explosion = true;
     }
 }

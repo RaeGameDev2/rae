@@ -15,14 +15,11 @@ public class FireMob1 : Enemy
         Left,
         Right
     }
-    public Direction patrolDirection;
-
+    [SerializeField] private Direction patrolDirection;
     [SerializeField] private float patrolRange;
-    private GameObject player;
+    [SerializeField] private float attackDistance;
 
     private Vector3 spawnPosition;
-    [SerializeField] private float attackDistance = 5f;
-
     private PlayerSpells playerSpells;
     private Animator anim;
     [HideInInspector] public bool isAttacking = false;
@@ -35,7 +32,6 @@ public class FireMob1 : Enemy
 
         anim = GetComponent<Animator>();
         playerSpells = FindObjectOfType<PlayerSpells>().GetComponent<PlayerSpells>();
-        player = GameObject.FindGameObjectWithTag("Player");
 
         if (patrolDirection == Direction.Left)
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -98,11 +94,6 @@ public class FireMob1 : Enemy
             patrolDirection = 1 - patrolDirection;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
-    }
-
-    private float GetDistanceFromPlayer()
-    {
-        return (player.transform.position - transform.position).magnitude;
     }
 
     public override void OnDamageTaken(float damage, bool isCritical)
