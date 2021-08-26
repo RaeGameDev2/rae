@@ -238,10 +238,6 @@ public class GameManager : MonoBehaviour
             this.checkpoints = formatter.Deserialize(stream) as Dictionary<Realm, List<bool>>;
             stream.Close();
         }
-        else
-        {
-            Debug.LogError("Save file not found in " + path);
-        }
     }
 
     public void SaveVolume()
@@ -263,10 +259,6 @@ public class GameManager : MonoBehaviour
 
             var floatString = readStream.ReadLine();
             volume = float.Parse(floatString);
-        }
-        else
-        {
-            Debug.LogError("Save file not found in " + path);
         }
     }
 
@@ -291,10 +283,6 @@ public class GameManager : MonoBehaviour
             int skillPoints = int.Parse(readStream.ReadLine());
 
             playerSkills.playerSkills.SetSkillPoints(skillPoints);
-        }
-        else
-        {
-            Debug.LogError("Save file not found in " + path);
         }
     }
 
@@ -329,10 +317,6 @@ public class GameManager : MonoBehaviour
 
             playerSkills.playerSkills.SetSkillLevel();
         }
-        else
-        {
-            Debug.LogError("Save file not found in " + path);
-        }
     }
 
     public void Die()
@@ -348,5 +332,12 @@ public class GameManager : MonoBehaviour
         LoadVolume();
         LoadSkillPoints();
         LoadSkillLevel();
+    }
+
+    public void ResetAllData()
+    {
+        checkpoints.Clear();
+        playerSkills.playerSkills.SetSkillPoints(10);
+        skillLevel = new int[10];
     }
 }
