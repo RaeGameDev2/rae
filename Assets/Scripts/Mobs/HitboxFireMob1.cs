@@ -10,7 +10,6 @@ public class HitboxFireMob1 : MonoBehaviour
     private FireMob1 parent;
     private PlayerResources playerResources;
 
-    // Start is called before the first frame update
     private void Start()
     {
         attackDelay = 2f;

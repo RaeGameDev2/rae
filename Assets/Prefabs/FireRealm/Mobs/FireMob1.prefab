@@ -769,16 +769,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dpsLifeDrain: 50
   hp: 300
-  initialAttackSpeed: 2
+  initialAttackSpeed: 100
   initialHP: 0
   initialScaleX: 0
   attackCooldown: 0.5
   initialTimeLifeDrain: 4
   isBoss: 0
-  speed: 0
+  speed: 5
+  patrolDirection: 1
+  patrolRange: 7
+  attackDistance: 2
   isAttacking: 0
-  patrolRange: 0
-  attackDistance: 5
 --- !u!61 &4591965405723241139
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -10,39 +10,44 @@ public class FireMob1 : Enemy
         Death
     }
 
-    public bool isAttacking;
-    private Directions patrolDirection;
+    public enum Direction
+    {
+        Left,
+        Right
+    }
+    public Direction patrolDirection;
 
     [SerializeField] private float patrolRange;
-    private PlayerResources playerResources;
+    private GameObject player;
 
     private Vector3 spawnPosition;
     [SerializeField] private float attackDistance = 5f;
 
     private PlayerSpells playerSpells;
     private Animator anim;
+    [HideInInspector] public bool isAttacking = false;
 
     private new void Start()
     {
         base.Start();
 
-        patrolRange = 5;
-        speed = 3;
-
         spawnPosition = transform.position;
-        patrolDirection = Directions.Left;
-
-        playerResources = FindObjectOfType<PlayerResources>();
-
-        isAttacking = false;
 
         anim = GetComponent<Animator>();
         playerSpells = FindObjectOfType<PlayerSpells>().GetComponent<PlayerSpells>();
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (patrolDirection == Direction.Left)
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        else
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private new void Update()
     {
         base.Update();
+        anim.SetFloat("speed", speed / 3);
+        anim.SetFloat("attackSpeed", attackSpeed / 100);
 
         if (hp <= 0)
         {
@@ -55,18 +60,19 @@ public class FireMob1 : Enemy
         if (GetDistanceFromPlayer() < attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0)
         {
             anim.SetInteger("state", (int)AttackType.Attack);
-            if (playerResources.transform.position.x < transform.position.x && patrolDirection == Directions.Right)
+            if (player.transform.position.x < transform.position.x && patrolDirection == Direction.Right)
             {
                 transform.localScale =
                     new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                patrolDirection = Directions.Left;
+                patrolDirection = Direction.Left;
             }
-            else if (playerResources.transform.position.x > transform.position.x && patrolDirection == Directions.Left)
+            else if (player.transform.position.x > transform.position.x && patrolDirection == Direction.Left)
             {
                 transform.localScale =
                     new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                patrolDirection = Directions.Right;
+                patrolDirection = Direction.Right;
             }
+            isAttacking = true;
         }
         else
         {
@@ -74,6 +80,7 @@ public class FireMob1 : Enemy
             timeSinceAttack -= Time.deltaTime;
             if (timeSinceAttack < 0)
                 timeSinceAttack = 0;
+            isAttacking = false;
         }
     }
 
@@ -81,9 +88,9 @@ public class FireMob1 : Enemy
     {
         anim.SetInteger("state", (int)AttackType.Idle);
 
-        if (patrolDirection == Directions.Right)
+        if (patrolDirection == Direction.Right)
             transform.position += Vector3.right * speed * Time.deltaTime;
-        else if (patrolDirection == Directions.Left)
+        else if (patrolDirection == Direction.Left)
             transform.position += Vector3.left * speed * Time.deltaTime;
 
         if (Mathf.Abs(transform.position.x - spawnPosition.x) >= patrolRange)
@@ -95,7 +102,7 @@ public class FireMob1 : Enemy
 
     private float GetDistanceFromPlayer()
     {
-        return (playerResources.transform.position - transform.position).magnitude;
+        return (player.transform.position - transform.position).magnitude;
     }
 
     public override void OnDamageTaken(float damage, bool isCritical)
@@ -113,11 +120,5 @@ public class FireMob1 : Enemy
     {
         anim.SetInteger("state", (int)AttackType.Idle);
         timeSinceAttack = attackCooldown;
-    }
-
-    private enum Directions
-    {
-        Left,
-        Right
     }
 }
