@@ -10,20 +10,17 @@ public class FireMob1 : Enemy
         Death
     }
 
-    public Animator anim;
-
-    private float damageFinish;
-
-    // Attack rate: seconds till next hit
     public bool isAttacking;
-    private Vector3 movementAxis;
     private Directions patrolDirection;
 
     [SerializeField] private float patrolRange;
     private PlayerResources playerResources;
 
     private Vector3 spawnPosition;
-    [SerializeField] private float thresholdDistance = 5f;
+    [SerializeField] private float attackDistance = 5f;
+
+    private PlayerSpells playerSpells;
+    private Animator anim;
 
     private new void Start()
     {
@@ -34,13 +31,13 @@ public class FireMob1 : Enemy
 
         spawnPosition = transform.position;
         patrolDirection = Directions.Left;
-        movementAxis = new Vector3(1, 0, 0);
 
         playerResources = FindObjectOfType<PlayerResources>();
 
         isAttacking = false;
 
         anim = GetComponent<Animator>();
+        playerSpells = FindObjectOfType<PlayerSpells>().GetComponent<PlayerSpells>();
     }
 
     // Update is called once per frame
@@ -48,12 +45,17 @@ public class FireMob1 : Enemy
     {
         base.Update();
 
-        if (damageFinish > Time.time) return;
-
-        if (GetDistanceFromPlayer() < thresholdDistance)
+        if (hp <= 0)
         {
-            isAttacking = true;
+            anim.SetInteger("state", (int)AttackType.Death);
+            return;
+        }
+        if (anim.GetInteger("state") == (int)AttackType.Damage) return;
+        if (anim.GetInteger("state") == (int)AttackType.Attack) return;
 
+        if (GetDistanceFromPlayer() < attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0)
+        {
+            anim.SetInteger("state", (int)AttackType.Attack);
             if (playerResources.transform.position.x < transform.position.x && patrolDirection == Directions.Right)
             {
                 transform.localScale =
@@ -69,23 +71,21 @@ public class FireMob1 : Enemy
         }
         else
         {
-            isAttacking = false;
-        }
-
-        if (!isAttacking)
             Patrol();
-        else
-            Attack();
+            timeSinceAttack -= Time.deltaTime;
+            if (timeSinceAttack < 0)
+                timeSinceAttack = 0;
+        }
     }
 
     private void Patrol()
     {
-        anim.SetInteger("state", (int) AttackType.Idle);
+        anim.SetInteger("state", (int)AttackType.Idle);
 
         if (patrolDirection == Directions.Right)
-            transform.position += movementAxis * speed * Time.deltaTime;
+            transform.position += Vector3.right * speed * Time.deltaTime;
         else if (patrolDirection == Directions.Left)
-            transform.position -= movementAxis * speed * Time.deltaTime;
+            transform.position += Vector3.left * speed * Time.deltaTime;
 
         if (Mathf.Abs(transform.position.x - spawnPosition.x) >= patrolRange)
         {
@@ -94,22 +94,27 @@ public class FireMob1 : Enemy
         }
     }
 
-    private void Attack()
-    {
-        anim.SetInteger("state", (int) AttackType.Attack);
-    }
-
     private float GetDistanceFromPlayer()
     {
         return (playerResources.transform.position - transform.position).magnitude;
     }
 
-    public new void OnDamageTaken(float damage, bool isCritical)
+    public override void OnDamageTaken(float damage, bool isCritical)
     {
         base.OnDamageTaken(damage, isCritical);
+        //Debug.Log("sex");
+        anim.SetInteger("state", (int)AttackType.Damage);
+    }
 
-        anim.SetInteger("state", (int) AttackType.Damage);
-        damageFinish = Time.time + 1;
+    public void OnDamageTakenEnd()
+    {
+        anim.SetInteger("state", (int)AttackType.Idle);
+    }
+
+    public void OnAttackEnd()
+    {
+        anim.SetInteger("state", (int)AttackType.Idle);
+        timeSinceAttack = attackCooldown;
     }
 
     private enum Directions

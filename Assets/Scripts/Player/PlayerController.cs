@@ -109,7 +109,6 @@ public class PlayerController : MonoBehaviour
                     if (rb.velocity.y * prevVelocityY <= 0)
                     {
                         rb.velocity = new Vector2(speed, -fallSpeed);
-                        Debug.Log(rb.velocity);
                     }
                     rb.velocity = new Vector2(speed, rb.velocity.y);
                 }
@@ -167,7 +166,7 @@ public class PlayerController : MonoBehaviour
         {
             case Weapon.AttackType.None:
                 {
-                    if (Mathf.Abs(rb.velocity.x) <= 0.1)
+                    if (Mathf.Abs(rb.velocity.x) < groundSpeed)
                         animState = State.IDLE;
                     else
                         animState = State.RUN;

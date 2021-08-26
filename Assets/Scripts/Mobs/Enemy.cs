@@ -6,9 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     protected float attackSpeed;
-    [SerializeField] protected int damageOnTouch = 1;
 
-    [SerializeField] private GameObject damageText;
     [SerializeField] private float dpsLifeDrain = 50f;
     [SerializeField] protected float hp;
     protected Transform hpBar;
@@ -17,6 +15,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float initialAttackSpeed = 2f;
     [SerializeField] protected float initialHP;
     [SerializeField] private float initialScaleX;
+    [SerializeField] protected float attackCooldown;
+    [HideInInspector] protected float timeSinceAttack;
 
     [SerializeField] private float initialTimeLifeDrain = 4f;
     [SerializeField] protected bool isBoss;
@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
         attackSpeed = initialAttackSpeed;
         initialHP = hp;
         initialScaleX = hpBar.transform.localScale.x;
+        timeSinceAttack = attackCooldown;
     }
 
     protected void Update()
@@ -63,7 +64,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnDamageTaken(float damage, bool isCrit)
+    public virtual void OnDamageTaken(float damage, bool isCrit)
     {
         // Debug.Log("Damage Enemy");
         if (Time.time < timeNextHit) return;
@@ -74,7 +75,7 @@ public class Enemy : MonoBehaviour
         hp = Mathf.Clamp(hp, 0f, initialHP);
         hpBar.localScale = new Vector3(hp / initialHP * initialScaleX, hpBar.localScale.y, hpBar.localScale.z);
 
-        DamagePopup.Create(transform.position, (int) damage, isCrit);
+        DamagePopup.Create(transform.position, (int)damage, isCrit);
         if (hp > 0) return;
         hp = 0;
         if (!isBoss)
@@ -94,30 +95,5 @@ public class Enemy : MonoBehaviour
         attackSpeed /= factor;
         speed *= factor;
         Debug.Log("debuff: " + factor);
-    }
-
-    private IEnumerator DamageTextAnimation(float damage, bool crit)
-    {
-        var instances = Instantiate(damageText, transform.position, Quaternion.identity, transform)
-            .GetComponent<TextMeshPro>();
-        instances.text = damage.ToString("####");
-        instances.color = crit ? Color.blue : Color.red;
-        var rectTransform = instances.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = new Vector2(1f, 3f);
-
-        var time = 2f;
-        var rotation = 0f;
-        while (time > 0f)
-        {
-            yield return new WaitForFixedUpdate();
-            time -= Time.fixedDeltaTime;
-            rotation -= 0.4f;
-            rectTransform.sizeDelta *= 1.003f;
-            rectTransform.anchoredPosition += 0.02f * new Vector2(-Mathf.Sin(Mathf.Deg2Rad * rotation),
-                Mathf.Cos(Mathf.Deg2Rad * rotation));
-            rectTransform.rotation = Quaternion.Euler(0, 0, rotation);
-        }
-
-        Destroy(instances.gameObject);
     }
 }

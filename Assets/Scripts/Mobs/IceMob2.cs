@@ -84,7 +84,7 @@ public class IceMob2 : Enemy
 
     private void UpdateAnimation()
     {
-        animator.SetInteger("state", (int) animState);
+        animator.SetInteger("state", (int)animState);
         animator.SetFloat("speed", attackSpeed / 3.5f);
     }
 
@@ -109,7 +109,7 @@ public class IceMob2 : Enemy
 
         if (attackTimer > 0) return;
         if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
-            playerResources.TakeDamage(damageOnTouch, transform.position);
+            playerResources.TakeDamage(1, transform.position);
         attackTimer = attackSpeed;
         animState = State.Idle;
     }

@@ -22,19 +22,13 @@ public class HitboxFireMob1 : MonoBehaviour
         isAttacking = false;
     }
 
-    // Update is called once per frame
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isAttacking)
+        if (collision.tag == "Player")
         {
-            attackTimer -= Time.deltaTime;
-
-            if (attackTimer <= 0)
+            if (parent.isAttacking)
             {
-                attackTimer = attackDelay;
-                isAttacking = false;
-
-                parent.anim.SetInteger("state", (int) FireMob1.AttackType.Idle);
+                playerResources.TakeDamage(1, transform.position);
                 parent.isAttacking = false;
             }
         }
@@ -42,14 +36,13 @@ public class HitboxFireMob1 : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
         if (collision.tag == "Player")
-            if (!isAttacking)
+        {
+            if (parent.isAttacking)
             {
-                isAttacking = true;
-                Debug.Log("Player attacked");
-                if (parent.isAttacking)
-                    playerResources.TakeDamage(1, transform.position);
+                playerResources.TakeDamage(1, transform.position);
+                parent.isAttacking = false;
             }
+        }
     }
 }
