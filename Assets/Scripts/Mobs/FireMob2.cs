@@ -133,6 +133,7 @@ public class FireMob2 : Enemy
         {
             isGrounded = true;
             canDamage = false;
+            timeSinceAttack = attackCooldown;
         }
         if (col.CompareTag("Player") && canDamage)
         {
