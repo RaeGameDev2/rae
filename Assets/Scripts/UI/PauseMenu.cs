@@ -54,6 +54,7 @@ public class PauseMenu : MonoBehaviour
         string checkpoints_file_path = Application.persistentDataPath + "/checkpoints.data";
         if (File.Exists(checkpoints_file_path))
         {
+            Debug.Log("AM STERS!");
             File.Delete(checkpoints_file_path);
         }
         if (File.Exists(skil_file_path))
