@@ -51,6 +51,6 @@ public class JungleMob1 : Enemy
         if (!col.CompareTag("Player")) return;
         if (FindObjectOfType<PlayerSpells>().phaseWalkActive) return;
 
-        playerResources.TakeDamage(damageOnTouch, transform.position);
+        playerResources.TakeDamage(1, transform.position);
     }
 }

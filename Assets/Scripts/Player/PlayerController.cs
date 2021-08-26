@@ -109,7 +109,6 @@ public class PlayerController : MonoBehaviour
                     if (rb.velocity.y * prevVelocityY <= 0)
                     {
                         rb.velocity = new Vector2(speed, -fallSpeed);
-                        Debug.Log(rb.velocity);
                     }
                     rb.velocity = new Vector2(speed, rb.velocity.y);
                 }
