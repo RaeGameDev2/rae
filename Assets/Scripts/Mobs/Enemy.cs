@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
     public void Debuff(int lvl)
     {
         var factor = 1f - 0.2f * lvl;
-        attackSpeed /= factor;
+        attackSpeed *= factor;
         speed *= factor;
         Debug.Log("debuff: " + factor);
     }
