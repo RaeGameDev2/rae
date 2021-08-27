@@ -50,25 +50,22 @@ public class PauseMenu : MonoBehaviour
 
     public void ResetPersistentData()
     {
-        string skil_file_path = Application.persistentDataPath + "/skill.data";
+        string skill_file_path = Application.persistentDataPath + "/skill.data";
+        string skilpoints_file_path = Application.persistentDataPath + "/skillpoints.data";
         string checkpoints_file_path = Application.persistentDataPath + "/checkpoints.data";
         if (File.Exists(checkpoints_file_path))
         {
-            Debug.Log("AM STERS!");
             File.Delete(checkpoints_file_path);
         }
-        if (File.Exists(skil_file_path))
+        if (File.Exists(skill_file_path))
         {
-            File.Delete(skil_file_path);
+            File.Delete(skill_file_path);
+        }
+        if (File.Exists(skilpoints_file_path))
+        {
+            File.Delete(skilpoints_file_path);
         }
         SceneManager.LoadScene(1);
-        /*#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #elif UNITY_WEBPLAYER
-                            Application.OpenURL(webplayerQuitURL);
-        #else
-                            Application.Quit();
-        #endif*/
     }
     private void Update()
     {
