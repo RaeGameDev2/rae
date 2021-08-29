@@ -60,7 +60,7 @@ public class FireMob2 : Enemy
         if (anim.GetInteger("state") == (int)AttackType.Attack) return;
         if (GetDistanceFromPlayer() <= attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0 && !isAttacking)
         {
-            // anim.SetInteger("state", (int)AttackType.Attack);
+            anim.SetInteger("state", (int)AttackType.Attack);
             if (player.transform.position.x < transform.position.x && patrolDirection == Direction.Right)
             {
                 transform.localScale =
@@ -115,7 +115,7 @@ public class FireMob2 : Enemy
 
     private void Patrol()
     {
-        anim.SetInteger("state", (int)AttackType.Idle);
+        //anim.SetInteger("state", (int)AttackType.Idle);
         if (patrolDirection == Direction.Right)
             transform.position += Vector3.right * speed * Time.deltaTime;
         else if (patrolDirection == Direction.Left)
@@ -178,6 +178,7 @@ public class FireMob2 : Enemy
     {
         anim.SetInteger("state", (int)AttackType.Idle);
         timeSinceAttack = attackCooldown;
+        spawnPosition = transform.position;
     }
 
 }
