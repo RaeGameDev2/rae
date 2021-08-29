@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FireMob1 : Enemy
 {
-    public enum AttackType
+    private enum AttackType
     {
         Idle,
         Attack,
@@ -10,7 +10,7 @@ public class FireMob1 : Enemy
         Death
     }
 
-    public enum Direction
+    private enum Direction
     {
         Left,
         Right
@@ -29,12 +29,9 @@ public class FireMob1 : Enemy
 
         spawnPosition = transform.position;
 
-        anim = GetComponent<Animator>();
-
-        if (patrolDirection == Direction.Left)
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        else
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        anim = GetComponent<Animator>(); 
+        
+        transform.localScale = new Vector3(patrolDirection == Direction.Left ? transform.localScale.x : -transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private new void Update()
@@ -54,13 +51,13 @@ public class FireMob1 : Enemy
         if (GetDistanceFromPlayer() <= attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0)
         {
             anim.SetInteger("state", (int)AttackType.Attack);
-            if (player.transform.position.x < transform.position.x && patrolDirection == Direction.Right)
+            if (playerSpells.transform.position.x < transform.position.x && patrolDirection == Direction.Right)
             {
                 transform.localScale =
                     new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 patrolDirection = Direction.Left;
             }
-            else if (player.transform.position.x > transform.position.x && patrolDirection == Direction.Left)
+            else if (playerSpells.transform.position.x > transform.position.x && patrolDirection == Direction.Left)
             {
                 transform.localScale =
                     new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);

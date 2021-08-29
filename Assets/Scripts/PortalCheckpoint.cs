@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Linq;
+using System.Security.Cryptography;
 
 public class PortalCheckpoint : MonoBehaviour
 {
@@ -8,6 +9,13 @@ public class PortalCheckpoint : MonoBehaviour
     public int portalId;
     [SerializeField] private GameManager.Realm portalType;
     [SerializeField] private GameObject teleportMenu;
+    [SerializeField] private GameObject teleportClosingAnimationPrefab;
+    [SerializeField] private GameObject teleportOpenAnimationPrefab;
+    [SerializeField] private GameObject teleportOpeningAnimationPrefab;
+
+    private GameObject animationClosing;
+    private GameObject animationOpening;
+    private GameObject animationOpen;
 
     private void Start()
     {
@@ -20,6 +28,7 @@ public class PortalCheckpoint : MonoBehaviour
         if (collision.tag != "Player")
             return;
 
+        animationOpening = Instantiate(teleportOpeningAnimationPrefab, transform.position, Quaternion.identity, transform);
         teleportMenu.SetActive(true);
         switch (portalType)
         {
@@ -27,7 +36,6 @@ public class PortalCheckpoint : MonoBehaviour
                 if (!gameManager.checkpoints[GameManager.Realm.Ice][portalId])
                 {
                     gameManager.checkpoints[GameManager.Realm.Ice][portalId] = true;
-                    // TODO: Save in file
                     gameManager.SaveCheckpoints();
                 }
 
@@ -37,7 +45,6 @@ public class PortalCheckpoint : MonoBehaviour
                 if (!gameManager.checkpoints[GameManager.Realm.Fire][portalId])
                 {
                     gameManager.checkpoints[GameManager.Realm.Fire][portalId] = true;
-                    // TODO: Save in file
                     gameManager.SaveCheckpoints();
                 }
 
@@ -47,7 +54,6 @@ public class PortalCheckpoint : MonoBehaviour
                 if (!gameManager.checkpoints[GameManager.Realm.Jungle][portalId])
                 {
                     gameManager.checkpoints[GameManager.Realm.Jungle][portalId] = true;
-                    // TODO: Save in file
                     gameManager.SaveCheckpoints();
                 }
 
@@ -63,19 +69,19 @@ public class PortalCheckpoint : MonoBehaviour
     {
         if (collision.tag != "Player")
             return;
-        switch (portalType)
-        {
-            case GameManager.Realm.Ice:
-                teleportMenu.SetActive(false);
-                break;
-            case GameManager.Realm.Fire:
-                teleportMenu.SetActive(false);
-                break;
-            case GameManager.Realm.Jungle:
-                teleportMenu.SetActive(false);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        teleportMenu.SetActive(false);
+        Destroy(animationOpen);
+        animationClosing = Instantiate(teleportClosingAnimationPrefab, transform.position, Quaternion.identity, transform);
+    }
+
+    public void onPortalOpened()
+    {
+        Destroy(animationOpening);
+        animationOpen = Instantiate(teleportOpenAnimationPrefab, transform.position, Quaternion.identity, transform);
+    }
+
+    public void OnPortalClosed()
+    {
+        Destroy(animationClosing);
     }
 }

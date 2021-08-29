@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] GameObject atStaffHeavyAttack;
     [SerializeField] GameObject atStaffBasicAttack;
-    GameObject atHeavyAttack;
 
     [SerializeField] private float dpsLifeDrain = 50f;
     [SerializeField] protected float hp;
@@ -38,8 +37,6 @@ public class Enemy : MonoBehaviour
         hpBar = components.FirstOrDefault(component => component.tag == "HP");
         lifeDrain = false;
         pause = false;
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerSpells = FindObjectOfType<PlayerSpells>().GetComponent<PlayerSpells>();
     }
 
     protected void Start()
@@ -47,7 +44,9 @@ public class Enemy : MonoBehaviour
         attackSpeed = initialAttackSpeed;
         initialHP = hp;
         initialScaleX = hpBar.transform.localScale.x;
-        timeSinceAttack = 0;
+        timeSinceAttack = attackCooldown;
+        playerSpells = FindObjectOfType<PlayerSpells>();
+        player = playerSpells.gameObject;
     }
 
     protected void Update()

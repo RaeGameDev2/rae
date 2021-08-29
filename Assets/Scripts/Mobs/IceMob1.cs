@@ -15,7 +15,6 @@ public class IceMob1 : Enemy
     [SerializeField] private float oldHp;
 
     private PlayerResources playerResources;
-    private PlayerSpells playerSpells;
 
     [SerializeField] private Direction state_mob;
     [SerializeField] private float thresholdDistance = 10f;
