@@ -185,7 +185,10 @@ public class PlayerController : MonoBehaviour
                     break;
                 }
         }
-
+        // if (rb.velocity.y < 0)
+        //     animState = State.FALL;
+        // else if (rb.velocity.y >= 0 || !isGrounded)
+        //     animState = State.JUMP;
         anim.SetInteger("weapon", (int)weapons.currWeapon.type);
         anim.SetInteger("state", (int)animState);
         anim.SetInteger("type", (int)weapons.currWeapon.attackType);
