@@ -22,8 +22,8 @@ public class FireMob2 : Enemy
     [HideInInspector] public bool isAttacking = false;
     public bool isGrounded;
     public bool canDamage;
-    public Rigidbody2D rb;
-
+    private Rigidbody2D rb;
+    private Animator anim;
     private Vector3 spawnPosition;
     private PlayerResources playerResources;
 
@@ -42,21 +42,22 @@ public class FireMob2 : Enemy
         rb.gravityScale = 0;
         playerResources = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerResources>();
         canDamage = false;
+        anim = GetComponent<Animator>();
     }
 
     private new void Update()
     {
         base.Update();
-        // anim.SetFloat("speed", speed / 3);
-        // anim.SetFloat("attackSpeed", attackSpeed / 100);
+        anim.SetFloat("speed", speed / 7);
+        anim.SetFloat("attackSpeed", attackSpeed / 100);
 
         if (hp <= 0)
         {
-            //anim.SetInteger("state", (int)AttackType.Death);
+            anim.SetInteger("state", (int)AttackType.Death);
             return;
         }
-        // if (anim.GetInteger("state") == (int)AttackType.Damage) return;
-        // if (anim.GetInteger("state") == (int)AttackType.Attack) return;
+        if (anim.GetInteger("state") == (int)AttackType.Damage) return;
+        if (anim.GetInteger("state") == (int)AttackType.Attack) return;
         if (GetDistanceFromPlayer() <= attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0 && !isAttacking)
         {
             // anim.SetInteger("state", (int)AttackType.Attack);
@@ -114,7 +115,7 @@ public class FireMob2 : Enemy
 
     private void Patrol()
     {
-        //anim.SetInteger("state", (int)AttackType.Idle);
+        anim.SetInteger("state", (int)AttackType.Idle);
         if (patrolDirection == Direction.Right)
             transform.position += Vector3.right * speed * Time.deltaTime;
         else if (patrolDirection == Direction.Left)
@@ -165,17 +166,17 @@ public class FireMob2 : Enemy
     public override void OnDamageTaken(float damage, bool isCritical)
     {
         base.OnDamageTaken(damage, isCritical);
-        // anim.SetInteger("state", (int)AttackType.Damage);
+        anim.SetInteger("state", (int)AttackType.Damage);
     }
 
     public void OnDamageTakenEnd()
     {
-        //anim.SetInteger("state", (int)AttackType.Idle);
+        anim.SetInteger("state", (int)AttackType.Idle);
     }
 
     public void OnAttackEnd()
     {
-        // anim.SetInteger("state", (int)AttackType.Idle);
+        anim.SetInteger("state", (int)AttackType.Idle);
         timeSinceAttack = attackCooldown;
     }
 
