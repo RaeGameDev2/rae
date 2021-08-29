@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,27 +14,31 @@ public class GameManager : MonoBehaviour
         Jungle
     }
 
+    public static GameManager instance;
+
+    private int checkpointId;
+
     public Dictionary<Realm, List<bool>> checkpoints = new Dictionary<Realm, List<bool>>();
-    public float volume;
-    public int[] skillLevel = new int[12];
+    
+    public bool crossfadeEndAnimation;
+    public bool crossfadeStartAnimation;
+    
+    [SerializeField] private GameObject fireHealthPointsPrefab;
+    [SerializeField] private GameObject iceHealthPointsPrefab;
+    public bool isDontDestroyOnLoad;
+    [SerializeField] private GameObject jungleHealthPointsPrefab;
+
+    public int lastCheckpointId = 0;
 
     private bool pause;
     private PlayerController playerController;
     private PlayerResources playerResources;
     private PlayerSkills playerSkills;
     private PlayerSpells playerSpells;
+    public int[] skillLevel = new int[12];
     private UI_Manager uiManager;
+    public float volume;
     private WeaponsHandler weaponsHandler;
-
-    private int checkpointId;
-    public bool isDontDestroyOnLoad;
-
-    public int lastCheckpointId = 0;
-    public static GameManager instance;
-
-    [SerializeField] GameObject IceHealthpointsPrefab;
-    [SerializeField] GameObject FireHealthpointsPrefab;
-    [SerializeField] GameObject JungleHealthpointsPrefab;
 
     private void Awake()
     {
@@ -84,19 +88,13 @@ public class GameManager : MonoBehaviour
         playerSpells = FindObjectOfType<PlayerSpells>();
         playerController = FindObjectOfType<PlayerController>();
         weaponsHandler = FindObjectOfType<WeaponsHandler>();
-        var checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-        if (checkpoints.Length == 4)
-        {
-            foreach (var checkpoint in checkpoints)
-            {
-                if (checkpoint.GetComponent<PortalCheckpoint>().portalId == checkpointId)
-                {
-                    playerController.transform.position = checkpoint.transform.position;
-                }
-            }
-        }
 
-        // Load the data from save files
+        var checkpointsGameObjects = GameObject.FindGameObjectsWithTag("Checkpoint");
+        if (checkpointsGameObjects.Length == 4)
+            foreach (var checkpoint in checkpointsGameObjects)
+                if (checkpoint.GetComponent<PortalCheckpoint>().portalId == checkpointId)
+                    playerController.transform.position = checkpoint.transform.position;
+
         LoadAllData();
     }
 
@@ -113,9 +111,6 @@ public class GameManager : MonoBehaviour
             weaponsHandler.Pause();
         }
 
-
-
-        // For Testing
         if (pause) return;
         if (Input.GetKeyDown(KeyCode.Alpha3))
             playerResources.AddLife();
@@ -149,7 +144,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject getCheckpointBySceneAndId(int id, int scene)
     {
-        string sceneName = "";
+        var sceneName = "";
 
         switch (scene)
         {
@@ -180,10 +175,8 @@ public class GameManager : MonoBehaviour
                 return;
         }
 
-
         if (SceneManager.GetActiveScene().buildIndex == scene)
         {
-
             var loader = GameObject.Find("Crossfade");
             loader.GetComponent<Animator>().SetTrigger("Start");
             crossfadeStartAnimation = true;
@@ -191,16 +184,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
             checkpointId = id;
             StartCoroutine(ChangeScene(scene));
             Debug.Log(checkpointId + " " + transform.position);
         }
-
     }
 
-    public bool crossfadeStartAnimation;
-    public bool crossfadeEndAnimation;
     private IEnumerator MovePlayer(GameObject loader, int id, int scene)
     {
         while (crossfadeStartAnimation)
@@ -220,12 +209,12 @@ public class GameManager : MonoBehaviour
 
     public void SaveCheckpoints()
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/checkpoints.data";
+        var formatter = new BinaryFormatter();
+        var path = Application.persistentDataPath + "/checkpoints.data";
 
 
         Debug.Log(Application.persistentDataPath + "/checkpoints.data");
-        FileStream stream = new FileStream(path, FileMode.Create);
+        var stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, checkpoints);
         stream.Close();
@@ -233,23 +222,23 @@ public class GameManager : MonoBehaviour
 
     public void LoadCheckpoints()
     {
-        string path = Application.persistentDataPath + "/checkpoints.data";
+        var path = Application.persistentDataPath + "/checkpoints.data";
 
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+            var formatter = new BinaryFormatter();
+            var stream = new FileStream(path, FileMode.Open);
 
-            this.checkpoints = formatter.Deserialize(stream) as Dictionary<Realm, List<bool>>;
+            checkpoints = formatter.Deserialize(stream) as Dictionary<Realm, List<bool>>;
             stream.Close();
         }
     }
 
     public void SaveVolume()
     {
-        string fileName = Application.persistentDataPath + "/volume.data";
+        var fileName = Application.persistentDataPath + "/volume.data";
 
-        StreamWriter stream = new StreamWriter(fileName);
+        var stream = new StreamWriter(fileName);
 
         stream.WriteLine(volume);
         stream.Close();
@@ -257,10 +246,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadVolume()
     {
-        string path = Application.persistentDataPath + "/volume.data";
+        var path = Application.persistentDataPath + "/volume.data";
         if (File.Exists(path))
         {
-            StreamReader readStream = new StreamReader(path);
+            var readStream = new StreamReader(path);
 
             var floatString = readStream.ReadLine();
             volume = float.Parse(floatString);
@@ -269,9 +258,9 @@ public class GameManager : MonoBehaviour
 
     public void SaveSkillPoints()
     {
-        string fileName = Application.persistentDataPath + "/skillpoints.data";
+        var fileName = Application.persistentDataPath + "/skillpoints.data";
 
-        StreamWriter stream = new StreamWriter(fileName);
+        var stream = new StreamWriter(fileName);
 
         stream.WriteLine(playerSkills.playerSkills.GetSkillPoints());
 
@@ -280,12 +269,12 @@ public class GameManager : MonoBehaviour
 
     public void LoadSkillPoints()
     {
-        string path = Application.persistentDataPath + "/skillpoints.data";
+        var path = Application.persistentDataPath + "/skillpoints.data";
         if (File.Exists(path))
         {
-            StreamReader readStream = new StreamReader(path);
+            var readStream = new StreamReader(path);
 
-            int skillPoints = int.Parse(readStream.ReadLine());
+            var skillPoints = int.Parse(readStream.ReadLine());
 
             playerSkills.playerSkills.SetSkillPoints(skillPoints);
         }
@@ -293,38 +282,32 @@ public class GameManager : MonoBehaviour
 
     public void SaveSkillLevel()
     {
-        string fileName = Application.persistentDataPath + "/skill.data";
+        var fileName = Application.persistentDataPath + "/skill.data";
 
-        StreamWriter stream = new StreamWriter(fileName);
+        var stream = new StreamWriter(fileName);
 
         stream.WriteLine(skillLevel.Length);
-        foreach (int i in skillLevel)
-        {
-            stream.WriteLine(i);
-        }
+        foreach (var i in skillLevel) stream.WriteLine(i);
 
         stream.Close();
     }
 
     public void LoadSkillLevel()
     {
-        string path = Application.persistentDataPath + "/skill.data";
+        var path = Application.persistentDataPath + "/skill.data";
         if (File.Exists(path))
         {
-            StreamReader readStream = new StreamReader(path);
+            var readStream = new StreamReader(path);
 
-            int size = int.Parse(readStream.ReadLine());
+            var size = int.Parse(readStream.ReadLine());
 
-            for (int i = 0; i < size; i++)
-            {
-                skillLevel[i] = int.Parse(readStream.ReadLine());
-            }
+            for (var i = 0; i < size; i++) skillLevel[i] = int.Parse(readStream.ReadLine());
 
             playerSkills.playerSkills.SetSkillLevel();
         }
     }
 
-    public void RespawnHealthpoints()
+    private void RespawnHealthPoints()
     {
         string name;
 
@@ -332,21 +315,21 @@ public class GameManager : MonoBehaviour
         {
             case 2:
                 Debug.Log("Fire hpoints instantiated");
-                name = FireHealthpointsPrefab.name;
+                name = fireHealthPointsPrefab.name;
                 Destroy(GameObject.Find(name));
-                Instantiate(FireHealthpointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
+                Instantiate(fireHealthPointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
                 break;
             case 3:
                 Debug.Log("Ice hpoints instantiated");
-                name = IceHealthpointsPrefab.name;
+                name = iceHealthPointsPrefab.name;
                 Destroy(GameObject.Find(name));
-                Instantiate(IceHealthpointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
+                Instantiate(iceHealthPointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
                 break;
             case 4:
                 Debug.Log("Jungle hpoints instantiated");
-                name = JungleHealthpointsPrefab.name;
+                name = jungleHealthPointsPrefab.name;
                 Destroy(GameObject.Find(name));
-                Instantiate(JungleHealthpointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
+                Instantiate(jungleHealthPointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
                 break;
         }
     }
@@ -356,10 +339,10 @@ public class GameManager : MonoBehaviour
         var loader = GameObject.Find("Crossfade");
         StartCoroutine(MovePlayer(loader, lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
         // TODO : Play player's death animation
-        RespawnHealthpoints();
+        RespawnHealthPoints();
     }
 
-    public void LoadAllData()
+    private void LoadAllData()
     {
         LoadCheckpoints();
         LoadVolume();

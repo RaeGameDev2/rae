@@ -5,13 +5,6 @@ public class PlayerSkills : MonoBehaviour
     private bool pause;
     public Skills playerSkills;
 
-    private GameObject Skilltree;
-    private GameObject UIBars;
-    private GameObject SkillHUDCanvas;
-
-    private bool stUI;
-    [SerializeField] private UI_SkillTree uiSkillTree;
-
     private void Awake()
     {
         playerSkills = new Skills();
@@ -19,46 +12,7 @@ public class PlayerSkills : MonoBehaviour
 
     private void Start()
     {
-        uiSkillTree = GameObject.Find("UI_Skilltree").GetComponent<UI_SkillTree>();
-        uiSkillTree.SetPlayerSkills(playerSkills);
-
-        Skilltree = GameObject.Find("UI_Skilltree");
-        UIBars = GameObject.Find("UI Bars");
-        SkillHUDCanvas = GameObject.Find("SkillHUDCanvas");
-
-        HideUI();
-    }
-
-    private void Update()
-    {
-        if (!Input.GetKeyDown(KeyCode.Tab)) return;
-
-        if (stUI == false)
-        {
-            ShowUI();
-            stUI = true;
-            GameManager.instance.Pause();
-        }
-        else
-        {
-            HideUI();
-            stUI = false;
-            GameManager.instance.Pause();
-        }
-    }
-
-    private void HideUI()
-    {
-        Skilltree.SetActive(false);
-        UIBars.SetActive(true);
-        SkillHUDCanvas.SetActive(true);
-    }
-
-    private void ShowUI()
-    {
-        Skilltree.SetActive(true);
-        UIBars.SetActive(false);
-        SkillHUDCanvas.SetActive(false);
+        FindObjectOfType<UI_SkillTree>().SetPlayerSkills(playerSkills);
     }
 
     public void Pause()

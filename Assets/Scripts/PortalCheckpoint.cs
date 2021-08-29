@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using System.Linq;
-using System.Security.Cryptography;
 
 public class PortalCheckpoint : MonoBehaviour
 {
@@ -9,17 +7,21 @@ public class PortalCheckpoint : MonoBehaviour
     public int portalId;
     [SerializeField] private GameManager.Realm portalType;
     [SerializeField] private GameObject teleportMenu;
-    [SerializeField] private GameObject teleportClosingAnimationPrefab;
-    [SerializeField] private GameObject teleportOpenAnimationPrefab;
-    [SerializeField] private GameObject teleportOpeningAnimationPrefab;
 
     private GameObject animationClosing;
     private GameObject animationOpening;
     private GameObject animationOpen;
+    private TeleportBackground teleportBackground;
+
+    private void Awake()
+    {
+        teleportBackground = GetComponentInChildren<TeleportBackground>();
+        teleportBackground.gameObject.SetActive(false);
+    }
 
     private void Start()
     {
-        gameManager = FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad);
+        gameManager = GameManager.instance;
         teleportMenu.SetActive(false);
     }
 
@@ -28,8 +30,12 @@ public class PortalCheckpoint : MonoBehaviour
         if (collision.tag != "Player")
             return;
 
-        animationOpening = Instantiate(teleportOpeningAnimationPrefab, transform.position, Quaternion.identity, transform);
+        if (teleportBackground.gameObject.activeInHierarchy)
+            teleportBackground.gameObject.SetActive(false);
+        teleportBackground.gameObject.SetActive(true);
+
         teleportMenu.SetActive(true);
+        
         switch (portalType)
         {
             case GameManager.Realm.Ice:
@@ -62,7 +68,6 @@ public class PortalCheckpoint : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        Debug.Log(gameManager.checkpoints[GameManager.Realm.Ice][1]);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -70,18 +75,6 @@ public class PortalCheckpoint : MonoBehaviour
         if (collision.tag != "Player")
             return;
         teleportMenu.SetActive(false);
-        Destroy(animationOpen);
-        animationClosing = Instantiate(teleportClosingAnimationPrefab, transform.position, Quaternion.identity, transform);
-    }
-
-    public void onPortalOpened()
-    {
-        Destroy(animationOpening);
-        animationOpen = Instantiate(teleportOpenAnimationPrefab, transform.position, Quaternion.identity, transform);
-    }
-
-    public void OnPortalClosed()
-    {
-        Destroy(animationClosing);
+        teleportBackground.ClosePortal();
     }
 }

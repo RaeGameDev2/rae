@@ -27,13 +27,11 @@ public class Portal : MonoBehaviour
     public void Fire_Load()
     {
         SceneManager.LoadScene(2);
-        /*LoadNextLevel(2);*/
     }
 
     public void Ice_Load()
     {
         SceneManager.LoadScene(3);
-        //LoadNextLevel(3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -52,28 +50,5 @@ public class Portal : MonoBehaviour
         iceButton.SetActive(false);
         natureButton.SetActive(false);
         interiorPortal.SetActive(false);
-    }
-
-    public void LoadNextLevel(int index)
-    {
-        StartCoroutine(LoadLevel(index));
-    }
-
-    public void StopEndAnimation()
-    {
-        FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad).crossfadeEndAnimation = false;
-    }
-    public void StopStartAnimation()
-    {
-        FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad).crossfadeStartAnimation = false;
-    }
-
-    private IEnumerator LoadLevel(int levelIndex)
-    {
-        animator.SetTrigger("Start");
-
-        yield return new WaitForSeconds(transitionTime);
-
-        SceneManager.LoadScene(levelIndex);
     }
 }

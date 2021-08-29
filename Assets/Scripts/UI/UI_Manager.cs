@@ -1,15 +1,18 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
+    [SerializeField] private float durationEffectChangingScene = 1f;
+
     private RectTransform healthBar;
-
     [SerializeField] private Image healthPoint;
-
     [SerializeField] private List<Image> healthPointInstances = new List<Image>();
     [SerializeField] private Image lightImage;
+    [SerializeField] private GameObject levelLoader;
+
     private RectTransform manaBar;
     [SerializeField] private Image manaPoint;
     [SerializeField] private List<Image> manaPointInstances = new List<Image>();
@@ -19,16 +22,98 @@ public class UI_Manager : MonoBehaviour
     private bool pause;
 
     private PlayerResources playerResources;
+    private GameObject uiBars;
+    private GameObject skillHUDCanvas;
+
+    private bool stUI;
+    private UI_SkillTree uiSkillTree;
 
     private void Start()
     {
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<RectTransform>();
         manaBar = GameObject.FindGameObjectWithTag("ManaBar").GetComponent<RectTransform>();
-        playerResources = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerResources>();
+        playerResources = FindObjectOfType<PlayerResources>();
         for (var i = 0; i < playerResources.maxHealth; i++)
             AddLife();
         for (var i = 0; i < playerResources.maxMana; i++)
             AddMana();
+
+        uiBars = GameObject.Find("UI Bars");
+        skillHUDCanvas = GameObject.Find("SkillHUDCanvas");
+
+        HideUI();
+    }
+
+    private void Update()
+    {
+        if (!Input.GetKeyDown(KeyCode.Tab)) return;
+
+        if (stUI == false)
+        {
+            ShowUI();
+            stUI = true;
+            GameManager.instance.Pause();
+        }
+        else
+        {
+            HideUI();
+            stUI = false;
+            GameManager.instance.Pause();
+        }
+    }
+
+    private void HideUI()
+    {
+        uiSkillTree.gameObject.SetActive(false);
+        uiBars.SetActive(true);
+        skillHUDCanvas.SetActive(true);
+    }
+
+    private void ShowUI()
+    {
+        uiSkillTree.gameObject.SetActive(true);
+        uiBars.SetActive(false);
+        skillHUDCanvas.SetActive(false);
+    }
+
+    private IEnumerator SceneLoadAnimation()
+    {
+        var image = levelLoader.GetComponent<Image>();
+        var color = image.color;
+        var albedo = 1f;
+        var time = durationEffectChangingScene;
+
+        while (time > 0f)
+        {
+            yield return new WaitForFixedUpdate();
+            time -= durationEffectChangingScene * Time.fixedDeltaTime;
+            albedo -= Time.fixedDeltaTime;
+            color.a = albedo;
+            image.color = color;
+        }
+
+        image.color = new Color(color.r, color.g, color.b, 0);
+        levelLoader.SetActive(false);
+    }
+
+    private IEnumerator EndSceneAnimation()
+    {
+        levelLoader.SetActive(true);
+        var image = levelLoader.GetComponent<Image>();
+        var color = image.color;
+        var albedo = 0f;
+        var time = durationEffectChangingScene;
+
+        while (time > 0f)
+        {
+            time -= durationEffectChangingScene * Time.fixedDeltaTime;
+            albedo += Time.fixedDeltaTime;
+            color.a = albedo;
+            image.color = color;
+            yield return new WaitForFixedUpdate();
+        }
+
+        image.color = new Color(color.r, color.g, color.b, 1);
     }
 
     public void Pause()
