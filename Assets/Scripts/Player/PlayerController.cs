@@ -278,6 +278,9 @@ public class PlayerController : MonoBehaviour
     {
         IDLE,
         RUN,
-        ATTACK
+        ATTACK,
+        JUMP,
+        FALL,
+        LAND
     }
 }
