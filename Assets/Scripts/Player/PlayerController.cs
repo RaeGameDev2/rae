@@ -311,4 +311,13 @@ public class PlayerController : MonoBehaviour
         LAND,
         DEATH
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        rb.velocity = new Vector2(0, rb.velocity.y);
+    }
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        rb.velocity = new Vector2(0, rb.velocity.y);
+    }
 }
