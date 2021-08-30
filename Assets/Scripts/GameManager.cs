@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<Realm, List<bool>> checkpoints = new Dictionary<Realm, List<bool>>();
     
-    public bool crossfadeEndAnimation;
-    public bool crossfadeStartAnimation;
+    public bool fadingToBlackAnimation;
+    public bool fadingFromBlackAnimation;
     
     [SerializeField] private GameObject fireHealthPointsPrefab;
     [SerializeField] private GameObject iceHealthPointsPrefab;
@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour
             uiManager.Pause();
             playerResources.Pause();
             playerSpells.Pause();
-            playerSkills.Pause();
             playerController.Pause();
             weaponsHandler.Pause();
         }
@@ -137,7 +136,6 @@ public class GameManager : MonoBehaviour
         uiManager.Pause();
         playerResources.Pause();
         playerSpells.Pause();
-        playerSkills.Pause();
         playerController.Pause();
         weaponsHandler.Pause();
     }
@@ -177,33 +175,32 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == scene)
         {
-            var loader = GameObject.Find("Crossfade");
-            loader.GetComponent<Animator>().SetTrigger("Start");
-            crossfadeStartAnimation = true;
-            StartCoroutine(MovePlayer(loader, id, scene));
+            StartCoroutine(MovePlayer(id, scene));
         }
         else
         {
             checkpointId = id;
             StartCoroutine(ChangeScene(scene));
-            Debug.Log(checkpointId + " " + transform.position);
         }
     }
 
-    private IEnumerator MovePlayer(GameObject loader, int id, int scene)
+    private IEnumerator MovePlayer(int id, int scene)
     {
-        while (crossfadeStartAnimation)
+        fadingToBlackAnimation = true;
+        StartCoroutine(uiManager.FadeToBlack());
+        while (fadingToBlackAnimation)
             yield return new WaitForFixedUpdate();
         playerController.transform.position = getCheckpointBySceneAndId(id, scene).transform.position;
-        crossfadeEndAnimation = true;
-        loader.GetComponent<Animator>().SetTrigger("End");
+        fadingToBlackAnimation = true;
+        StartCoroutine(uiManager.FadeFromBlack());
     }
 
     private IEnumerator ChangeScene(int scene)
     {
-        var loader = GameObject.Find("Crossfade");
-        loader.GetComponent<Animator>().SetTrigger("Start");
-        yield return new WaitForSeconds(1f);
+        fadingToBlackAnimation = true;
+        StartCoroutine(uiManager.FadeToBlack());
+        while (fadingToBlackAnimation)
+            yield return new WaitForFixedUpdate();
         SceneManager.LoadScene(scene);
     }
 
@@ -336,8 +333,7 @@ public class GameManager : MonoBehaviour
 
     public void Die()
     {
-        var loader = GameObject.Find("Crossfade");
-        StartCoroutine(MovePlayer(loader, lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
+        StartCoroutine(MovePlayer(lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
         // TODO : Play player's death animation
         RespawnHealthPoints();
     }

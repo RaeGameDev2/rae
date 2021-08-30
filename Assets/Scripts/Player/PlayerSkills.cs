@@ -2,22 +2,11 @@ using UnityEngine;
 
 public class PlayerSkills : MonoBehaviour
 {
-    private bool pause;
     public Skills playerSkills;
 
     private void Awake()
     {
         playerSkills = new Skills();
-    }
-
-    private void Start()
-    {
-        FindObjectOfType<UI_SkillTree>().SetPlayerSkills(playerSkills);
-    }
-
-    public void Pause()
-    {
-        pause = !pause;
     }
 
     public bool IsLifeDrainUnlocked()

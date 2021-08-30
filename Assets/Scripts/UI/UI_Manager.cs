@@ -11,7 +11,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Image healthPoint;
     [SerializeField] private List<Image> healthPointInstances = new List<Image>();
     [SerializeField] private Image lightImage;
-    [SerializeField] private GameObject levelLoader;
+    private GameObject levelLoader;
 
     private RectTransform manaBar;
     [SerializeField] private Image manaPoint;
@@ -32,7 +32,9 @@ public class UI_Manager : MonoBehaviour
     {
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<RectTransform>();
         manaBar = GameObject.FindGameObjectWithTag("ManaBar").GetComponent<RectTransform>();
+        levelLoader = GameObject.Find("LevelLoader");
         playerResources = FindObjectOfType<PlayerResources>();
+        uiSkillTree = FindObjectOfType<UI_SkillTree>();
         for (var i = 0; i < playerResources.maxHealth; i++)
             AddLife();
         for (var i = 0; i < playerResources.maxMana; i++)
@@ -42,6 +44,8 @@ public class UI_Manager : MonoBehaviour
         skillHUDCanvas = GameObject.Find("SkillHUDCanvas");
 
         HideUI();
+        GameManager.instance.fadingFromBlackAnimation = true;
+        StartCoroutine(FadeFromBlack());
     }
 
     private void Update()
@@ -75,8 +79,8 @@ public class UI_Manager : MonoBehaviour
         uiBars.SetActive(false);
         skillHUDCanvas.SetActive(false);
     }
-
-    private IEnumerator SceneLoadAnimation()
+    
+    public IEnumerator FadeFromBlack()
     {
         var image = levelLoader.GetComponent<Image>();
         var color = image.color;
@@ -94,9 +98,10 @@ public class UI_Manager : MonoBehaviour
 
         image.color = new Color(color.r, color.g, color.b, 0);
         levelLoader.SetActive(false);
+        GameManager.instance.fadingFromBlackAnimation = false;
     }
 
-    private IEnumerator EndSceneAnimation()
+    public IEnumerator FadeToBlack()
     {
         levelLoader.SetActive(true);
         var image = levelLoader.GetComponent<Image>();
@@ -114,6 +119,7 @@ public class UI_Manager : MonoBehaviour
         }
 
         image.color = new Color(color.r, color.g, color.b, 1);
+        GameManager.instance.fadingToBlackAnimation = false;
     }
 
     public void Pause()

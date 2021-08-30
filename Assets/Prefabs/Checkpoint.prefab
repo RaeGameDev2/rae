@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2629936234594017507}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.47, y: -2.15, z: 0}
-  m_LocalScale: {x: 0.71172, y: 0.71172, z: 0.71172}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9067777338066616447}
   - {fileID: 255428955560344056}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portalId: 0
   portalType: 0
-  teleportMenu: {fileID: 0}
+  teleportMenu: {fileID: 9067777338066616387}
 --- !u!61 &2629936234594017510
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,6 +249,226 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2629936234594017505}
     m_Modifications:
+    - target: {fileID: 5909537807872222335, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537807872222335, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777339445342039}
+    - target: {fileID: 5909537807872222335, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537807872222335, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808228234999, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808228234999, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777339244033271}
+    - target: {fileID: 5909537808228234999, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808228234999, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808228234999, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808828110469, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808828110469, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777339445342039}
+    - target: {fileID: 5909537808828110469, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808828110469, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808828110469, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808829789267, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808829789267, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777339244033271}
+    - target: {fileID: 5909537808829789267, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808829789267, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808872424619, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777338317900654}
+    - target: {fileID: 5909537808872424619, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Hub
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537808872424619, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809028951611, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809028951611, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777338317900654}
+    - target: {fileID: 5909537809028951611, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IceCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809028951611, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809028951611, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809341620697, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809341620697, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777339445342039}
+    - target: {fileID: 5909537809341620697, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809341620697, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809341620697, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809379707880, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809379707880, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777338317900654}
+    - target: {fileID: 5909537809379707880, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IceCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809379707880, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809379707880, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809525686452, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809525686452, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777338317900654}
+    - target: {fileID: 5909537809525686452, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IceCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809525686452, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809525686452, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809612190664, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809612190664, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777339244033271}
+    - target: {fileID: 5909537809612190664, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809612190664, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809612190664, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809710206119, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809710206119, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777339244033271}
+    - target: {fileID: 5909537809710206119, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809710206119, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809710206119, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809763434967, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809763434967, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777338317900654}
+    - target: {fileID: 5909537809763434967, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IceCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809763434967, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5909537809826481865, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -353,10 +573,68 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeleportMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 5909537809866072492, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809866072492, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9067777339445342039}
+    - target: {fileID: 5909537809866072492, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JungleCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809866072492, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeleportMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909537809866072492, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+--- !u!1 &9067777338066616387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5909537809826481909, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+  m_PrefabInstance: {fileID: 3446892132567008950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9067777338066616447 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5909537809826481865, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
   m_PrefabInstance: {fileID: 3446892132567008950}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9067777338317900654 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5909537809541647832, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+  m_PrefabInstance: {fileID: 3446892132567008950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93f6605118d1334a80076d73376a662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9067777339244033271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5909537808716198465, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+  m_PrefabInstance: {fileID: 3446892132567008950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93f6605118d1334a80076d73376a662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9067777339445342039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5909537808515017185, guid: 021026384681bd841bb11ddbc6854ba8, type: 3}
+  m_PrefabInstance: {fileID: 3446892132567008950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93f6605118d1334a80076d73376a662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
