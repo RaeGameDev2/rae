@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 114120838248538486}
-  - component: {fileID: 7715353440669825793}
+  - component: {fileID: 3532980959071500105}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Lava
@@ -233,8 +233,8 @@ Transform:
   m_Father: {fileID: 4984546262904053474}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &7715353440669825793
-EdgeCollider2D:
+--- !u!61 &3532980959071500105
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -246,18 +246,19 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 2.305818, y: -0.029166028}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.611623, y: 0.9416679}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: 5.1150603, y: 0.5474175}
-  - {x: 0.26848593, y: 0.5597031}
-  - {x: 0.038819373, y: -0.32773107}
-  - {x: 4.4220157, y: -0.33419058}
-  - {x: 5.129604, y: 0.5596076}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &4984546262031276243
 GameObject:
   m_ObjectHideFlags: 0

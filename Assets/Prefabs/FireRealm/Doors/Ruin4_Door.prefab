@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8044692236899080208}
   - component: {fileID: 8044692236899080209}
-  - component: {fileID: 8044692236899080210}
-  m_Layer: 0
+  - component: {fileID: 6151990435142648265}
+  m_Layer: 8
   m_Name: Ruin4_Door
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &8044692236899080210
-EdgeCollider2D:
+--- !u!61 &6151990435142648265
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -96,17 +96,16 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.46103072, y: 1.7951691}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 14.19, y: 5.92}
+    newSize: {x: 14.19, y: 5.92}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.158911, y: 0.33084822}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: -3.5931594, y: 1.9710507}
-  - {x: -2.905123, y: 2.0704634}
-  - {x: 0.054642625, y: 2.1351635}
-  - {x: 0.51877165, y: 1.6340765}
-  - {x: 0.94836843, y: 1.9863039}
-  - {x: 2.2816508, y: 1.9918096}
-  - {x: 2.5957403, y: 1.7545162}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0

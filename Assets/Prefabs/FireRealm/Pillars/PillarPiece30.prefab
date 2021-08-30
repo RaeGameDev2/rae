@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2413000972423533494}
   - component: {fileID: 2413000972423533495}
-  - component: {fileID: 2413000972423533492}
+  - component: {fileID: -7985389147437252985}
   m_Layer: 0
   m_Name: PillarPiece30
   m_TagString: Ground
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &2413000972423533492
-EdgeCollider2D:
+--- !u!60 &-7985389147437252985
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,18 +97,55 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.44, y: 3.32}
+    newSize: {x: 1.44, y: 3.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: 0.28014845, y: 1.3028067}
-  - {x: -0.7017109, y: 0.52602446}
-  - {x: -0.56626916, y: -0.4069153}
-  - {x: -0.40460768, y: -1.2144163}
-  - {x: 0.5028938, y: -1.5066402}
-  - {x: 0.77148676, y: -0.55439293}
-  - {x: 0.79530835, y: 0.23780954}
-  - {x: 0.44646713, y: 1.0057708}
-  - {x: 0.24771452, y: 1.3163532}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+    m_Paths:
+    - - {x: 0.7, y: -0.83}
+      - {x: 0.71999997, y: -0.77}
+      - {x: 0.71999997, y: 0.14}
+      - {x: 0.66999996, y: 0.24}
+      - {x: 0.71999997, y: 0.45}
+      - {x: 0.71999997, y: 0.63}
+      - {x: 0.68, y: 0.71999997}
+      - {x: 0.45, y: 0.94}
+      - {x: 0.38, y: 1.06}
+      - {x: 0.42999998, y: 1.28}
+      - {x: 0.63, y: 1.4499999}
+      - {x: 0.66999996, y: 1.53}
+      - {x: 0.68, y: 1.5999999}
+      - {x: 0.65, y: 1.66}
+      - {x: -0.34, y: 1.66}
+      - {x: -0.45999998, y: 1.5999999}
+      - {x: -0.48999998, y: 1.49}
+      - {x: -0.41, y: 1.36}
+      - {x: -0.32, y: 1.29}
+      - {x: -0.34, y: 0.94}
+      - {x: -0.56, y: 0.71999997}
+      - {x: -0.68, y: 0.56}
+      - {x: -0.71, y: 0.48}
+      - {x: -0.71, y: 0.13}
+      - {x: -0.68, y: 0.01}
+      - {x: -0.65999997, y: -0.24}
+      - {x: -0.69, y: -0.47}
+      - {x: -0.68, y: -0.55}
+      - {x: -0.65, y: -0.59999996}
+      - {x: -0.61, y: -0.65}
+      - {x: -0.48999998, y: -0.83}
+      - {x: -0.44, y: -1.0799999}
+      - {x: -0.35999998, y: -1.25}
+      - {x: -0.19999999, y: -1.37}
+      - {x: -0.089999996, y: -1.52}
+      - {x: 0.12, y: -1.49}
+      - {x: 0.24, y: -1.66}
+      - {x: 0.44, y: -1.66}
+      - {x: 0.5, y: -1.55}
+      - {x: 0.53999996, y: -1.43}
+      - {x: 0.57, y: -1.0799999}

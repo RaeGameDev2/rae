@@ -173,7 +173,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3137157664264974174}
-  - component: {fileID: 8940938790285205500}
+  - component: {fileID: 1263432486733732524}
+  - component: {fileID: 2316694926499025135}
   m_Layer: 0
   m_Name: FirePillar_1
   m_TagString: Ground
@@ -198,47 +199,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &8940938790285205500
-EdgeCollider2D:
+--- !u!65 &1263432486733732524
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3481088109277451431}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.5321045, y: 12.391418}
-  - {x: -0.6019287, y: 12.296295}
-  - {x: -0.37426758, y: 11.735901}
-  - {x: -0.8508301, y: 11.334076}
-  - {x: -0.9260254, y: 0.7138672}
-  - {x: -0.68688965, y: -0.50479126}
-  - {x: -0.44677734, y: -0.9631958}
-  - {x: -1.2235107, y: -1.7226257}
-  - {x: -1.2218018, y: -2.0795898}
-  - {x: 1.2568359, y: -2.0996094}
-  - {x: 1.2285156, y: -1.7597656}
-  - {x: 0.5263672, y: -1.31073}
-  - {x: 0.7918701, y: -0.4864502}
-  - {x: 0.81555176, y: 8.15448}
-  - {x: 0.8182373, y: 9.13028}
-  - {x: 0.7393799, y: 11.13089}
-  - {x: 0.6777344, y: 11.3013}
-  - {x: 0.45129395, y: 11.556824}
-  - {x: 0.29919434, y: 11.926453}
-  - {x: 0.5361328, y: 12.399292}
-  - {x: -0.64001465, y: 12.393463}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5540771, y: 14.358734, z: 1}
+  m_Center: {x: -0.014587402, y: 5.133499, z: 0}
+--- !u!65 &2316694926499025135
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481088109277451431}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.3708496, y: 0.416687, z: 1}
+  m_Center: {x: -0.014526367, y: -1.8666992, z: 0}
 --- !u!1 &4476400207306403743
 GameObject:
   m_ObjectHideFlags: 0

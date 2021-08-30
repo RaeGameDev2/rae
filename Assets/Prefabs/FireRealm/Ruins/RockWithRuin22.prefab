@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7167343746466272660}
   - component: {fileID: 7167343746466272661}
-  - component: {fileID: 7167343746466272662}
+  - component: {fileID: 6255684056470548970}
   m_Layer: 0
   m_Name: Ruin22
   m_TagString: Ground
@@ -115,8 +115,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &7167343746466272662
-EdgeCollider2D:
+--- !u!61 &6255684056470548970
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,20 +128,19 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 3.6858368}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 8.08, y: 11.68}
+    newSize: {x: 8.08, y: 11.68}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.08, y: 3.790985}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: -3.92208, y: 1.8275146}
-  - {x: -3.6514893, y: 5.7183533}
-  - {x: 3.30542, y: 5.7068176}
-  - {x: 3.921753, y: 4.3461914}
-  - {x: 3.6240234, y: 2.349762}
-  - {x: 2.9830322, y: 2.090271}
-  - {x: -3.7417383, y: 2.063324}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1001 &7167343746349595610
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -255,7 +255,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5422369981062725136}
-  - component: {fileID: 5422369981062725139}
   m_Layer: 0
   m_Name: DoorFrameCollision
   m_TagString: Ground
@@ -280,44 +279,6 @@ Transform:
   m_Father: {fileID: 5422369981487999931}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &5422369981062725139
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5422369981062725138}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 5.0736084, y: -2.1521912}
-  - {x: 4.932617, y: -2.0628357}
-  - {x: 4.08374, y: -1.5248718}
-  - {x: 3.446167, y: -0.5829773}
-  - {x: 2.6640625, y: -0.16564941}
-  - {x: 1.5322266, y: 0.09140015}
-  - {x: 0.85791016, y: -0.55075073}
-  - {x: -0.06628418, y: -0.48684692}
-  - {x: -0.61572266, y: 0.09298706}
-  - {x: -0.2434082, y: 0.63378906}
-  - {x: 0.47912598, y: 0.86898804}
-  - {x: 2.0872803, y: 0.9640503}
-  - {x: 3.2185059, y: 0.8916626}
-  - {x: 4.1152344, y: 0.5329895}
-  - {x: 4.920044, y: -0.18704224}
-  - {x: 5.6746826, y: -0.9379883}
-  - {x: 6.1556396, y: -1.6934509}
-  - {x: 5.095337, y: -2.0627441}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &5422369981075724423
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5422369981487999931}
+  - component: {fileID: 2688100080693861297}
   m_Layer: 0
   m_Name: StartingRoom_RightDoor
   m_TagString: Untagged
@@ -433,6 +395,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &2688100080693861297
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5422369981487999930}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 6.75}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 4.47081, y: -2.4248047}
+      - {x: 3.6695404, y: -0.8920746}
+      - {x: 2.3058777, y: 0.42375183}
+      - {x: 0, y: 1}
+      - {x: -2.1605139, y: 0.17463303}
+      - {x: -2.039125, y: -0.7821388}
+      - {x: -0.9640045, y: -1.2470169}
+      - {x: 0.58778536, y: -0.8090172}
+      - {x: 0.31808472, y: -1.3146057}
+      - {x: 0.71025085, y: -2.2928238}
+      - {x: 1.4467621, y: -2.310196}
+      - {x: 1.4518127, y: -1.3326416}
+      - {x: 2.0999298, y: -1.4127655}
+      - {x: 2.5367804, y: -2.3249092}
 --- !u!1 &5422369981592208836
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +444,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5422369981592208837}
   - component: {fileID: 5422369981592208835}
-  - component: {fileID: 5422369981592208834}
   m_Layer: 0
   m_Name: DoorLight_Pillar
   m_TagString: Ground
@@ -516,27 +516,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &5422369981592208834
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5422369981592208836}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.72, y: 0}
-  - {x: -0.22827148, y: -1.3901062}
-  - {x: 0.40490723, y: -1.6153259}
-  - {x: 0.72, y: -0.22241211}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
