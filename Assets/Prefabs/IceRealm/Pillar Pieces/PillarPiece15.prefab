@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5209747163040334801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8751949150837784190}
+  - component: {fileID: 3349882372197802641}
+  - component: {fileID: 3661263282061518823}
+  m_Layer: 0
+  m_Name: PillarPiece15
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8751949150837784190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5209747163040334801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -527.22266, y: -82.950325, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &3349882372197802641
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5209747163040334801}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 07dae348cba3ac24abc93fd1014663e6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3.25, y: 2.71}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!68 &3661263282061518823
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5209747163040334801}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -1.3482056, y: 0.5536194}
+  - {x: -1.1758423, y: 0.46060944}
+  - {x: -1.0385132, y: 0.510376}
+  - {x: -0.8197632, y: 0.075920105}
+  - {x: -0.7562256, y: -0.14065552}
+  - {x: -0.51116943, y: -0.29193115}
+  - {x: -0.33843994, y: -0.58968353}
+  - {x: -0.00390625, y: -1.201294}
+  - {x: 0.22283936, y: -1.185051}
+  - {x: 0.29840088, y: -1.0634308}
+  - {x: 0.5907593, y: -1.3169479}
+  - {x: 0.7785034, y: -1.2804108}
+  - {x: 0.94628906, y: -1.1905899}
+  - {x: 0.98394775, y: -0.86605835}
+  - {x: 0.7914429, y: -0.7953186}
+  - {x: 0.65875244, y: -0.64107513}
+  - {x: 0.64398193, y: -0.43408203}
+  - {x: 0.72058105, y: -0.17769623}
+  - {x: 0.85406494, y: -0.06437683}
+  - {x: 0.9696655, y: 0.062347412}
+  - {x: 0.98791504, y: 0.43896484}
+  - {x: 1.220398, y: 0.43161774}
+  - {x: 1.4041748, y: 0.49850464}
+  - {x: 1.6002197, y: 0.7052002}
+  - {x: 1.6790771, y: 0.91313934}
+  - {x: 1.6032715, y: 1.1336594}
+  - {x: 1.3848877, y: 1.3210449}
+  - {x: -1.3018188, y: 1.3688736}
+  - {x: -1.5458984, y: 1.1952286}
+  - {x: -1.5860596, y: 0.98552704}
+  - {x: -1.5211182, y: 0.7214966}
+  - {x: -1.3695679, y: 0.5357361}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
