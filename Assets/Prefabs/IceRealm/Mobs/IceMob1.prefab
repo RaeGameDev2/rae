@@ -1249,8 +1249,8 @@ GameObject:
   - component: {fileID: 5592046829643802178}
   - component: {fileID: 881013123887834204}
   - component: {fileID: 3314940865448766938}
-  - component: {fileID: 8924075215822012548}
   - component: {fileID: 8924075215822012547}
+  - component: {fileID: 4215162116569664363}
   m_Layer: 0
   m_Name: IceMob1
   m_TagString: Enemy
@@ -1312,40 +1312,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingOrder: 1
   applySpriterZOrder: 0
---- !u!114 &8924075215822012548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8924075215822012546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7e14750db027a7468fe6e294dc47fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackSpeed: 0
-  atStaffHeavyAttack: {fileID: 6036975801974468197, guid: 46938152a5352cd4583ef3dc38261579, type: 3}
-  atStaffBasicAttack: {fileID: 5368235276387312648, guid: 2ba27f9370fe5fa4dabe34b74b48ec33, type: 3}
-  damageOnTouch: 1
-  dpsLifeDrain: 5
-  hp: 300
-  initialAttackSpeed: 2
-  initialHP: 0
-  initialScaleX: 0
-  attackCooldown: 0
-  initialTimeLifeDrain: 4
-  isBoss: 0
-  speed: 0
-  anim: {fileID: 0}
-  damageAnimation: 0
-  oldHp: 0
-  state_mob: 0
-  thresholdDistance: 10
-  thresholdDown: -5
-  thresholdLeft: -5
-  thresholdRight: 5
-  thresholdUp: 5
 --- !u!61 &8924075215822012547
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1372,6 +1338,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5.5}
   m_EdgeRadius: 0
+--- !u!114 &4215162116569664363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8924075215822012546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e14750db027a7468fe6e294dc47fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atStaffHeavyAttack: {fileID: 6036975801974468197, guid: 46938152a5352cd4583ef3dc38261579, type: 3}
+  atStaffBasicAttack: {fileID: 5368235276387312648, guid: 2ba27f9370fe5fa4dabe34b74b48ec33, type: 3}
+  dpsLifeDrain: 50
+  hp: 300
+  speed: 5
+  damageAnimation: 0
+  oldHp: 0
+  patrolRange: 5
+  thresholdDistance: 10
 --- !u!1 &9076441363011391209
 GameObject:
   m_ObjectHideFlags: 0

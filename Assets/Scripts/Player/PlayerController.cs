@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
         anim.SetInteger("weapon", (int)weapons.currWeapon.type);
         anim.SetInteger("state", (int)animState);
         anim.SetInteger("type", (int)weapons.currWeapon.attackType);
-        Debug.Log(weapons.currWeapon.type);
+        // Debug.Log(weapons.currWeapon.type);
     }
 
     private void Jump()

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class HitboxIceBoss : MonoBehaviour
 {
-    private bool isAttacking;
-
     private IceFinalBoss parent;
     private PlayerResources playerResources;
     [SerializeField] private float timeNextAttack;
@@ -17,9 +15,6 @@ public class HitboxIceBoss : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag != "Player") return;
-        if (isAttacking) return;
-
-        isAttacking = true;
 
         if (parent.animType != IceFinalBoss.AnimType.Attack) return;
         if (Time.time < timeNextAttack) return;

@@ -2001,7 +2001,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 2}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2
 --- !u!114 &5308088960937526651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2028,23 +2028,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e7e849f2e027249928a105f5ecfcac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 0
   atStaffHeavyAttack: {fileID: 6036975801974468197, guid: 46938152a5352cd4583ef3dc38261579, type: 3}
   atStaffBasicAttack: {fileID: 5368235276387312648, guid: 2ba27f9370fe5fa4dabe34b74b48ec33, type: 3}
-  damageOnTouch: 1
   dpsLifeDrain: 50
   hp: 300
-  initialAttackSpeed: 1.7
-  initialHP: 0
-  initialScaleX: 0
-  attackCooldown: 0
-  initialTimeLifeDrain: 4
-  isBoss: 0
   speed: 3
+  anim: {fileID: 0}
   damageAnimation: 0
   oldHp: 0
-  patrolRange: 5
-  thresholdDistance: 6
+  state_mob: 0
+  thresholdDistance: 5
+  thresholdDown: -5
+  thresholdLeft: -5
+  thresholdRight: 5
+  thresholdUp: 5
 --- !u!1 &6301415598218907885
 GameObject:
   m_ObjectHideFlags: 0

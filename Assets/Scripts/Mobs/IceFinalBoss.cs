@@ -21,7 +21,6 @@ public class IceFinalBoss : Enemy
     private float initialLocalScaleX;
     [SerializeField] private bool isDying;
     private PlayerResources playerResources;
-    private PlayerSpells playerSpells;
     [SerializeField] private GameObject projectile;
     [SerializeField] private bool projectileAttack;
 

@@ -15,16 +15,17 @@ public class Enemy : MonoBehaviour
     protected Transform hpBar;
 
 
-    [SerializeField] private float initialAttackSpeed = 2f;
-    [SerializeField] protected float initialHP;
-    [SerializeField] private float initialScaleX;
-    [SerializeField] protected float attackCooldown;
-    [HideInInspector] protected float timeSinceAttack;
+    private float initialAttackSpeed = 2f;
+    protected float initialHP;
+    private float initialScaleX;
+    protected float attackCooldown;
+    protected float timeSinceAttack;
 
-    [SerializeField] private float initialTimeLifeDrain = 4f;
-    [SerializeField] protected bool isBoss;
+    private float initialTimeLifeDrain = 4f;
+    protected bool isBoss;
     private bool lifeDrain;
     protected bool pause;
+
     [SerializeField] protected float speed;
     private float timeLifeDrain;
     private float timeNextHit;

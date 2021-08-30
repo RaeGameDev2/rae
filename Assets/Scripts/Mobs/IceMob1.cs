@@ -1,99 +1,60 @@
 using System;
-using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
+
 
 public class IceMob1 : Enemy
 {
-    [SerializeField] private Animator anim;
+    private enum Direction
+    {
+        LEFT,
+        RIGHT
+    }
+    private enum State
+    {
+        Idle,
+        Attack,
+        Damage,
+        Death
+    }
+    private State animState = State.Idle;
 
-    private AnimType animType;
+    private Animator animator;
+    private float attackTimer;
     [SerializeField] private bool damageAnimation;
-    private Vector3 initialPosition;
-
-    private bool isAttacking;
     [SerializeField] private float oldHp;
-
+    private Direction patrolDirection;
+    [SerializeField] private float patrolRange;
     private PlayerResources playerResources;
 
-    [SerializeField] private Direction state_mob;
-    [SerializeField] private float thresholdDistance = 10f;
-    [SerializeField] private float thresholdDown = -5f;
-    [SerializeField] private float thresholdLeft = -5f;
-    [SerializeField] private float thresholdRight = 5f;
+    private Vector3 spawnPosition;
 
-    [SerializeField] private float thresholdUp = 5f;
-    private float timeAttack;
-    private float timeNextAttack;
-
-    private new void Awake()
-    {
-        base.Awake();
-        anim = GetComponent<Animator>();
-        isAttacking = false;
-        state_mob = Direction.UP;
-        speed = 5;
-        initialPosition = transform.position;
-    }
+    [SerializeField] private float thresholdDistance;
 
     private new void Start()
     {
         base.Start();
+
+        spawnPosition = transform.position;
+        patrolDirection = Direction.LEFT;
+
+        attackTimer = attackSpeed;
         playerResources = FindObjectOfType<PlayerResources>();
-        playerSpells = FindObjectOfType<PlayerSpells>();
-        animType = AnimType.Idle;
+        animator = GetComponent<Animator>();
         oldHp = hp;
     }
 
     private new void Update()
     {
-        if (hp <= 0) return;
+        UpdateAnimation();
 
-        base.Update();
-
-        if (damageAnimation) return;
-
-        if (isAttacking)
-        {
-            if (timeAttack <= Time.time)
-            {
-                if (GetDistanceFromPlayer() < 2 * thresholdDistance) playerResources.TakeDamage(1, transform.position);
-
-                isAttacking = false;
-            }
-
-            if (pause)
-                timeAttack += Time.deltaTime;
-        }
-        else
-        {
-            transform.position += state_mob switch
-            {
-                Direction.UP => Vector3.up * Time.deltaTime * speed,
-                Direction.DOWN => Vector3.down * Time.deltaTime * speed,
-                Direction.LEFT => Vector3.left * Time.deltaTime * speed,
-                Direction.RIGHT => Vector3.right * Time.deltaTime * speed,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
-            if (timeNextAttack > Time.time) return;
-            if (GetDistanceFromPlayer() < thresholdDistance && !playerSpells.phaseWalkActive)
-                Attack();
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        anim.SetFloat("speed", attackSpeed / 3.5f);
-        anim.SetInteger("state", (int) animType);
         if (hp <= 0)
         {
-            animType = AnimType.Death;
+            animState = State.Death;
             return;
         }
 
         if (damageAnimation) return;
-
+        base.Update();
         if (Math.Abs(oldHp - hp) > 0.1f)
         {
             DamageAnimation();
@@ -101,114 +62,62 @@ public class IceMob1 : Enemy
         }
 
         oldHp = hp;
-
-        transform.localScale = new Vector3(Mathf.Sign(transform.position.x - playerResources.transform.position.x),
-            transform.localScale.y, transform.localScale.z);
-
-        if (Random.Range(0f, 1f / Time.fixedDeltaTime) < 0.3f) state_mob = (Direction) Random.Range(0f, 3.99f);
-
-        var i = 0;
-        while (!CheckDirection())
-        {
-            i++;
-            if (i > 10)
-                break;
-            state_mob = (Direction) Random.Range(0f, 3.99f);
-        }
+        if (animState == State.Idle)
+            Patrol();
+        else
+            Attack();
     }
 
     private void DamageAnimation()
     {
         damageAnimation = true;
-        animType = AnimType.Damage;
+        animState = State.Damage;
     }
 
     public void DamageEnd()
     {
-        Debug.Log("DamageEnd");
         damageAnimation = false;
         oldHp = hp;
         if (hp > 0)
-            animType = AnimType.Idle;
+            animState = State.Idle;
     }
 
-    private bool CheckDirection()
+    private void UpdateAnimation()
     {
-        if (transform.position.y >= initialPosition.y + thresholdUp && state_mob == Direction.UP)
-            return false;
-        if (transform.position.y <= initialPosition.y + thresholdDown && state_mob == Direction.DOWN)
-            return false;
-        if (transform.position.x <= initialPosition.x + thresholdLeft && state_mob == Direction.LEFT)
-            return false;
-        if (transform.position.x >= initialPosition.x + thresholdRight && state_mob == Direction.RIGHT)
-            return false;
+        animator.SetInteger("state", (int)animState);
+        animator.SetFloat("speed", attackSpeed / 3.5f);
+    }
 
-        return true;
+    private void Patrol()
+    {
+        transform.position += patrolDirection switch
+        {
+            Direction.RIGHT => Vector3.right * speed * Time.deltaTime,
+            Direction.LEFT => Vector3.left * speed * Time.deltaTime,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        if (Mathf.Abs(transform.position.x - spawnPosition.x) < patrolRange) return;
+        patrolDirection = 1 - patrolDirection;
+        transform.localScale =
+            new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z); // flip x
     }
 
     private void Attack()
     {
-        anim.SetFloat("speed", attackSpeed / 2.5f);
-        animType = AnimType.Attack;
-        isAttacking = true;
-        timeAttack = Time.time + attackSpeed;
-        timeNextAttack = Time.time + 3f * attackSpeed / 2f;
-        StartCoroutine(AttackAnimation());
+        attackTimer -= Time.deltaTime;
+
+        if (attackTimer > 0) return;
+        if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
+            playerResources.TakeDamage(1, transform.position);
+        attackTimer = attackSpeed;
+        animState = State.Idle;
     }
 
-    private IEnumerator AttackAnimation()
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        var initialLocalScale = transform.localScale;
-        var initialPos = transform.position;
-        var playerInitialPosition = playerResources.transform.position;
-        yield return new WaitForSeconds(3f * attackSpeed / 4f);
-        if (GetDistanceFromPlayer() < 2 * thresholdDistance)
-            playerInitialPosition = playerResources.transform.position;
-
-        var time = attackSpeed / 4f;
-        while (time > 0)
-        {
-            transform.localScale *= 0.99f;
-            transform.position = Vector2.MoveTowards(transform.position, playerInitialPosition,
-                thresholdDistance * attackSpeed * Time.fixedDeltaTime);
-            yield return new WaitForFixedUpdate();
-            time -= Time.fixedDeltaTime;
-        }
-
-        time = attackSpeed / 4f;
-        while (time > 0)
-        {
-            transform.localScale *= 1.01f;
-            transform.position = Vector2.MoveTowards(transform.position, initialPos,
-                thresholdDistance * attackSpeed * Time.fixedDeltaTime);
-            yield return new WaitForFixedUpdate();
-            time -= Time.deltaTime;
-        }
-
-        anim.SetFloat("speed", attackSpeed / 3.5f);
-        animType = AnimType.Idle;
-        transform.position = initialPos;
-        transform.localScale = initialLocalScale;
-    }
-
-    private float GetDistanceFromPlayer()
-    {
-        return (playerResources.transform.position - transform.position).magnitude;
-    }
-
-    private enum Direction
-    {
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT
-    }
-
-    private enum AnimType
-    {
-        Idle,
-        Attack,
-        Damage,
-        Death
+        if (!col.CompareTag("Player")) return;
+        if (col.GetComponent<PlayerSpells>().phaseWalkActive) return;
+        animState = State.Attack;
     }
 }
