@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
                     break;
                 }
         }
-        if (animState != State.LAND)
+        if (animState != State.LAND && animState != State.ATTACK)
             if (rb.velocity.y < -0.1)
                 animState = State.FALL;
             else if (rb.velocity.y > 0.1)
