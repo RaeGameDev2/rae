@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerSkills skills;
     private WeaponsHandler weapons;
+    List<RaycastHit2D> results;
+    ContactFilter2D filter2D;
 
     private bool canDamage;
 
@@ -44,6 +46,8 @@ public class PlayerController : MonoBehaviour
         weapons = GetComponent<WeaponsHandler>();
         skills = GetComponent<PlayerSkills>();
         playerSpells = GetComponent<PlayerSpells>();
+        filter2D = filter2D.NoFilter();
+        results = new List<RaycastHit2D>();
         direction = Direction.right;
         diagonalJump = false;
         isGrounded = true;
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour
         canDoubleJump = false;
         prevVelocityY = 0;
         canDamage = true;
+        animState = State.IDLE;
     }
 
     private void Start()
@@ -162,10 +167,11 @@ public class PlayerController : MonoBehaviour
         {
             case Weapon.AttackType.None:
                 {
-                    if (Mathf.Abs(rb.velocity.x) < groundSpeed)
-                        animState = State.IDLE;
-                    else
-                        animState = State.RUN;
+                    if (animState != State.LAND)
+                        if (Mathf.Abs(rb.velocity.x) < groundSpeed)
+                            animState = State.IDLE;
+                        else
+                            animState = State.RUN;
                     break;
                 }
             case Weapon.AttackType.Basic:
@@ -185,13 +191,26 @@ public class PlayerController : MonoBehaviour
                     break;
                 }
         }
-        // if (rb.velocity.y < 0)
-        //     animState = State.FALL;
-        // else if (rb.velocity.y >= 0 || !isGrounded)
-        //     animState = State.JUMP;
+        if (animState != State.LAND && animState != State.ATTACK)
+            if (rb.velocity.y < -0.1)
+                animState = State.FALL;
+            else if (rb.velocity.y > 0.1)
+                animState = State.JUMP;
+        if (animState == State.FALL)
+        {
+            Physics2D.Raycast(transform.position, Vector2.down, filter2D, results, 5f);
+            foreach (RaycastHit2D hit in results)
+            {
+                if (hit.collider.tag == "Ground")
+                {
+                    animState = State.LAND;
+                }
+            }
+        }
         anim.SetInteger("weapon", (int)weapons.currWeapon.type);
         anim.SetInteger("state", (int)animState);
         anim.SetInteger("type", (int)weapons.currWeapon.attackType);
+        Debug.Log(weapons.currWeapon.type);
     }
 
     private void Jump()
@@ -233,6 +252,11 @@ public class PlayerController : MonoBehaviour
         animState = State.IDLE;
         canDamage = true;
         //  Debug.Log("se terminat animatia!");
+    }
+
+    public void OnLandEnd()
+    {
+        animState = State.IDLE;
     }
 
     public void OnAttackHit(Collider2D col)
@@ -284,6 +308,7 @@ public class PlayerController : MonoBehaviour
         ATTACK,
         JUMP,
         FALL,
-        LAND
+        LAND,
+        DEATH
     }
 }
