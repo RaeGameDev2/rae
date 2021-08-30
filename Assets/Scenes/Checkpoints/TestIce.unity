@@ -29916,6 +29916,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1071125409377669823, guid: 11f268773552c0e449bd6cb3a865a820, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1071125409377669823, guid: 11f268773552c0e449bd6cb3a865a820, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.31
+      objectReference: {fileID: 0}
     - target: {fileID: 4498439798160370845, guid: 11f268773552c0e449bd6cb3a865a820, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -34232,11 +34240,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3189662348097825356, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.6080008
+      value: 2.2780008
       objectReference: {fileID: 0}
     - target: {fileID: 3189662348097825356, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8081486
+      value: -2.5018513
       objectReference: {fileID: 0}
     - target: {fileID: 3189662348097825356, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34274,19 +34282,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 3189662348097825395, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
-      propertyPath: near clip plane
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3189662348097825395, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
-      propertyPath: orthographic size
-      value: 10.8
-      objectReference: {fileID: 0}
     - target: {fileID: 8474568439105525717, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1308608252}
-    m_RemovedComponents: []
+    - target: {fileID: 8474568439105525717, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1431917656, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
 --- !u!1 &1549281274
 GameObject:
@@ -44080,45 +44085,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3672320626718458796, guid: e040ac0d054951f4897e66b0c276cc0f, type: 3}
   m_PrefabInstance: {fileID: 1919650792}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1925218688 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3189662348097825393, guid: 4fe256dafdc4bc04faa46300743d9c9c, type: 3}
-  m_PrefabInstance: {fileID: 1541345259}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1925218694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925218688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1931936829
 GameObject:
   m_ObjectHideFlags: 0
@@ -48949,11 +48915,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6851649686837565226, guid: 321680ecf75478440bbbebe02a8dc6d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.6080008
+      value: 2.2780008
       objectReference: {fileID: 0}
     - target: {fileID: 6851649686837565226, guid: 321680ecf75478440bbbebe02a8dc6d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8081486
+      value: -2.5018513
       objectReference: {fileID: 0}
     - target: {fileID: 6851649686837565226, guid: 321680ecf75478440bbbebe02a8dc6d8, type: 3}
       propertyPath: m_LocalPosition.z

@@ -75,12 +75,10 @@ public class PlayerController : MonoBehaviour
             for (var i = -4; i < 5; i++)
             {
                 var start = new Vector2(transform.position.x, transform.position.y + i);
-                // LayerMask mask = LayerMask.GetMask("Enemy");
                 var hit = Physics2D.Raycast(start, direction == Direction.left ? Vector2.left : Vector2.right, 6f);
                 Debug.DrawLine(start, start + (direction == Direction.left ? Vector2.left : Vector2.right) * 6f,
                     Color.red, 2f);
                 var enemy = hit.transform?.GetComponent<Enemy>();
-                // Debug.Log(hit.transform?.tag);
                 if (enemy == null) continue;
                 OnAttackHit(enemy.GetComponent<Collider2D>());
                 break;
@@ -90,7 +88,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         //Reset gravity to falling gravity
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y <= 0)
             currGravity = gravity;
 
         //If not in dash, handles jump
@@ -98,11 +96,16 @@ public class PlayerController : MonoBehaviour
         {
             if (animState != State.ATTACK)
             {
-                // Debug.Log(hInput);
                 CheckJump();
                 if (isGrounded)
                 {
-                    rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
+                    if (rb.velocity.y >= 0) 
+                        rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
+                    else
+                    {
+                        rb.velocity = new Vector2(hInput * groundSpeed, 0);
+                        currGravity = 0;
+                    }
                 }
                 else
                 {
@@ -120,12 +123,20 @@ public class PlayerController : MonoBehaviour
             }
 
             //Add simulated gravity
-            rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
+            // rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
+            
+            var velocityY = rb.velocity.y - currGravity * Time.fixedDeltaTime;
+            rb.velocity = new Vector2(rb.velocity.x, velocityY);
+
         }
-        if (rb.velocity.y < 0 && rb.velocity.y > -fallSpeed)
+        if (!isGrounded && rb.velocity.y < 0 && rb.velocity.y > -fallSpeed)
             rb.velocity = new Vector2(rb.velocity.x, -fallSpeed);
-        //Save previous y-velocity for adding fallSpeed
-        prevVelocityY = rb.velocity.y;
+        if (isGrounded && rb.velocity.y < jumpSpeed / 2)
+        {
+            currGravity = 0;
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
+        // Debug.Log($"{rb.velocity}   {currGravity}");
     }
 
     //Polls input every frame and updates flags accordingly
@@ -141,23 +152,17 @@ public class PlayerController : MonoBehaviour
     {
         if (playerSpells.quickTeleportActive)
             return;
-        if (hInput > 0.01f && rb.velocity.x > 0)
+        if (hInput > 0.01f && direction == Direction.left)
         {
-            if (direction == Direction.left)
-            {
-                transform.localScale =
-                    new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                direction = Direction.right;
-            }
+            transform.localScale =
+                new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            direction = Direction.right;
         }
-        else if (hInput < -0.01f && rb.velocity.x < 0)
+        else if (hInput < -0.01f && direction == Direction.right)
         {
-            if (direction == Direction.right)
-            {
-                transform.localScale =
-                    new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                direction = Direction.left;
-            }
+            transform.localScale =
+                new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            direction = Direction.left;
         }
     }
 
