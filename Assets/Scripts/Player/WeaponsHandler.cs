@@ -62,7 +62,8 @@ public class WeaponsHandler : MonoBehaviour
     {
         if (pause) return;
         if ((Input.GetKeyDown(KeyCode.T) || Input.GetAxis("Mouse ScrollWheel") != 0f) &&
-            currWeapon.attackType == Weapon.AttackType.None) SwitchWeapon();
+            currWeapon.attackType == Weapon.AttackType.None) 
+            SwitchWeapon();
 
         if (playerSpells.phaseWalkActive || playerSpells.orbDropped) return;
 

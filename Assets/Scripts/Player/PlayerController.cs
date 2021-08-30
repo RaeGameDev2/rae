@@ -207,10 +207,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        anim.SetInteger("weapon", (int)weapons.currWeapon.type);
         anim.SetInteger("state", (int)animState);
+        anim.SetInteger("weapon", (int)weapons.currWeapon.type);
         anim.SetInteger("type", (int)weapons.currWeapon.attackType);
-        // Debug.Log(weapons.currWeapon.type);
+
+        // Debug.Log($"{animState} {weapons.currWeapon.type}    anim state {anim.GetInteger("state")} anim weapon {anim.GetInteger("weapon")}");
     }
 
     private void Jump()
@@ -251,7 +252,6 @@ public class PlayerController : MonoBehaviour
         weapons.currWeapon.attackType = Weapon.AttackType.None;
         animState = State.IDLE;
         canDamage = true;
-        //  Debug.Log("se terminat animatia!");
     }
 
     public void OnLandEnd()

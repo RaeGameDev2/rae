@@ -333,8 +333,8 @@ public class GameManager : MonoBehaviour
 
     public void Die()
     {
-        StartCoroutine(MovePlayer(lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
         // TODO : Play player's death animation
+        StartCoroutine(MovePlayer(lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
         RespawnHealthPoints();
     }
 
