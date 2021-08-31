@@ -1,9 +1,8 @@
-using System.Linq;
 using UnityEngine;
 
 public class FireMob2 : Enemy
 {
-    public enum AttackType
+    private enum AttackType
     {
         Idle,
         Attack,
@@ -11,36 +10,29 @@ public class FireMob2 : Enemy
         Death
     }
 
-    public enum Direction
+    private enum Direction
     {
         Left,
         Right
     }
     [SerializeField] private Direction patrolDirection;
     [SerializeField] private float patrolRange;
-    [SerializeField] private float attackDistance;
-    [HideInInspector] public bool isAttacking = false;
-    public bool isGrounded;
-    public bool canDamage;
+    [SerializeField] private float attackDistance; 
+    private bool isAttacking = false;
+    private bool isGrounded;
+    private bool canDamage;
     private Rigidbody2D rb;
     private Animator anim;
-    private Vector3 spawnPosition;
-    private PlayerResources playerResources;
 
     private new void Start()
     {
         base.Start();
 
-        spawnPosition = transform.position;
+        transform.localScale = new Vector3(patrolDirection == Direction.Left ? transform.localScale.x : -transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
-        if (patrolDirection == Direction.Left)
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        else
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         isGrounded = true;
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
-        playerResources = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerResources>();
         canDamage = false;
         anim = GetComponent<Animator>();
     }
@@ -113,24 +105,6 @@ public class FireMob2 : Enemy
         }
     }
 
-    private void Patrol()
-    {
-        //anim.SetInteger("state", (int)AttackType.Idle);
-        if (patrolDirection == Direction.Right)
-            transform.position += Vector3.right * speed * Time.deltaTime;
-        else if (patrolDirection == Direction.Left)
-            transform.position += Vector3.left * speed * Time.deltaTime;
-        if (Mathf.Abs(transform.position.x - spawnPosition.x) >= patrolRange)
-        {
-            // if (patrolDirection == Direction.Right)
-            //     transform.position = new Vector3(spawnPosition.x + patrolRange - 0.1f, transform.position.y, transform.position.z);
-            // else
-            //     transform.position = new Vector3(spawnPosition.x - patrolRange + 0.1f, transform.position.y, transform.position.z);
-            patrolDirection = 1 - patrolDirection;
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        }
-    }
-
     public void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Ground"))
@@ -160,6 +134,17 @@ public class FireMob2 : Enemy
         if (col.CompareTag("Ground"))
         {
             isGrounded = false;
+        }
+    }
+
+    private void Patrol()
+    {
+        transform.position += (patrolDirection == Direction.Right ? Vector3.right : Vector3.left) * speed * Time.deltaTime;
+
+        if (Mathf.Abs(transform.position.x - spawnPosition.x) >= patrolRange)
+        {
+            patrolDirection = 1 - patrolDirection;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
 

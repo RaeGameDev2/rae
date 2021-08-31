@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FireMob1 : Enemy
 {
-    private enum AttackType
+    private enum AnimType
     {
         Idle,
         Attack,
@@ -19,38 +19,35 @@ public class FireMob1 : Enemy
     [SerializeField] private float patrolRange;
     [SerializeField] private float attackDistance;
 
-    private Vector3 spawnPosition;
-    private Animator anim;
-    [HideInInspector] public bool isAttacking = false;
+    private Animator anim; 
+    public bool isAttacking;
 
     private new void Start()
     {
         base.Start();
 
-        spawnPosition = transform.position;
-
-        anim = GetComponent<Animator>(); 
-        
+        anim = GetComponent<Animator>();
         transform.localScale = new Vector3(patrolDirection == Direction.Left ? transform.localScale.x : -transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private new void Update()
     {
         base.Update();
+
         anim.SetFloat("speed", speed / 3);
         anim.SetFloat("attackSpeed", attackSpeed / 100);
 
         if (hp <= 0)
         {
-            anim.SetInteger("state", (int)AttackType.Death);
+            anim.SetInteger("state", (int)AnimType.Death);
             return;
         }
-        if (anim.GetInteger("state") == (int)AttackType.Damage) return;
-        if (anim.GetInteger("state") == (int)AttackType.Attack) return;
+        if (anim.GetInteger("state") == (int)AnimType.Damage) return;
+        if (anim.GetInteger("state") == (int)AnimType.Attack) return;
 
         if (GetDistanceFromPlayer() <= attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0)
         {
-            anim.SetInteger("state", (int)AttackType.Attack);
+            anim.SetInteger("state", (int)AnimType.Attack);
             if (playerSpells.transform.position.x < transform.position.x && patrolDirection == Direction.Right)
             {
                 transform.localScale =
@@ -77,7 +74,7 @@ public class FireMob1 : Enemy
 
     private void Patrol()
     {
-        anim.SetInteger("state", (int)AttackType.Idle);
+        anim.SetInteger("state", (int)AnimType.Idle);
 
         if (patrolDirection == Direction.Right)
             transform.position += Vector3.right * speed * Time.deltaTime;
@@ -97,17 +94,17 @@ public class FireMob1 : Enemy
     public override void OnDamageTaken(float damage, bool isCritical)
     {
         base.OnDamageTaken(damage, isCritical);
-        anim.SetInteger("state", (int)AttackType.Damage);
+        anim.SetInteger("state", (int)AnimType.Damage);
     }
 
     public void OnDamageTakenEnd()
     {
-        anim.SetInteger("state", (int)AttackType.Idle);
+        anim.SetInteger("state", (int)AnimType.Idle);
     }
 
     public void OnAttackEnd()
     {
-        anim.SetInteger("state", (int)AttackType.Idle);
+        anim.SetInteger("state", (int)AnimType.Idle);
         timeSinceAttack = attackCooldown;
     }
 }

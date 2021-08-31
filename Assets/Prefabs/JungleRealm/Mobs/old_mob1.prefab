@@ -574,25 +574,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e14750db027a7468fe6e294dc47fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageOnTouch: 1
-  damageText: {fileID: 6594461456278833772, guid: 5199d62bbc918524f9a81c9eb9158894, type: 3}
+  atStaffHeavyAttack: {fileID: 0}
+  atStaffBasicAttack: {fileID: 0}
   dpsLifeDrain: 5
   hp: 300
-  initialAttackSpeed: 2
-  initialHP: 0
-  initialScaleX: 0
-  initialTimeLifeDrain: 4
-  isBoss: 0
   speed: 0
-  anim: {fileID: 0}
   damageAnimation: 0
-  oldHp: 0
-  state_mob: 0
+  patrolRange: 0
   thresholdDistance: 10
-  thresholdDown: -5
-  thresholdLeft: -5
-  thresholdRight: 5
-  thresholdUp: 5
 --- !u!61 &3021107543405595683
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TestJungleMob3 : MonoBehaviour
+public class TestJungleMob3 : Enemy
 {
     private Transform tentacles;
     private Transform tentaclesFlip;
-    private Transform player;
     private Animator anim;
+
     private void Start()
     {
         tentacles = GetComponentsInChildren<Transform>(true).FirstOrDefault(child => child.name == "tentacles");
         tentaclesFlip = GetComponentsInChildren<Transform>(true).FirstOrDefault(child => child.name == "tentaclesFlip");
-        player = GameObject.Find("Rae").transform;
         tentacles.gameObject.SetActive(false);
         tentaclesFlip.gameObject.SetActive(false);
         tentaclesFlip.localScale =
@@ -34,16 +33,5 @@ public class TestJungleMob3 : MonoBehaviour
             tentacles.gameObject.SetActive(false);
             tentaclesFlip.gameObject.SetActive(false);
         }
-    }
-
-
-    private float GetDistanceFromPlayer()
-    {
-        return (player.transform.position - transform.position).magnitude;
-    }
-
-    public void EndAttackAnimation()
-    {
-
     }
 }

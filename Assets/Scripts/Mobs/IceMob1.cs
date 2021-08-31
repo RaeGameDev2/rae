@@ -1,123 +1,158 @@
 using System;
+using System.Collections;
 using UnityEngine;
-
 
 public class IceMob1 : Enemy
 {
     private enum Direction
     {
-        LEFT,
-        RIGHT
+        Left,
+        Right
     }
-    private enum State
+    private enum AnimType
     {
         Idle,
         Attack,
         Damage,
         Death
     }
-    private State animState = State.Idle;
-
-    private Animator animator;
-    private float attackTimer;
-    [SerializeField] private bool damageAnimation;
-    [SerializeField] private float oldHp;
+    private AnimType animType = AnimType.Idle;
+    private float animSpeed;
+    private Animator anim;
+    
     private Direction patrolDirection;
+
     [SerializeField] private float patrolRange;
-    private PlayerResources playerResources;
-
-    private Vector3 spawnPosition;
-
     [SerializeField] private float thresholdDistance;
+    private bool isAttacking;
+    private bool attackStarted;
+    private bool hasDamagedPlayer;
+    private bool damageAnimationActive;
+    private float timeNextAttack;
 
     private new void Start()
     {
         base.Start();
-
-        spawnPosition = transform.position;
-        patrolDirection = Direction.LEFT;
-
-        attackTimer = attackSpeed;
+        
+        patrolDirection = Direction.Left;
         playerResources = FindObjectOfType<PlayerResources>();
-        animator = GetComponent<Animator>();
-        oldHp = hp;
+        anim = GetComponent<Animator>();
+
+        animSpeed = speed / 9f;
     }
 
     private new void Update()
     {
+        base.Update();
         UpdateAnimation();
 
         if (hp <= 0)
         {
-            animState = State.Death;
+            animType = AnimType.Death;
             return;
         }
+        if (attackStarted) return;
+        if (damageAnimationActive) return;
 
-        if (damageAnimation) return;
-        base.Update();
-        if (Math.Abs(oldHp - hp) > 0.1f)
-        {
-            DamageAnimation();
-            return;
-        }
-
-        oldHp = hp;
-        if (animState == State.Idle)
+        if (animType == AnimType.Idle)
             Patrol();
-        else
+        if (GetDistanceFromPlayer() < thresholdDistance && !playerSpells.phaseWalkActive && Time.time >= timeNextAttack)
             Attack();
-    }
-
-    private void DamageAnimation()
-    {
-        damageAnimation = true;
-        animState = State.Damage;
-    }
-
-    public void DamageEnd()
-    {
-        damageAnimation = false;
-        oldHp = hp;
-        if (hp > 0)
-            animState = State.Idle;
     }
 
     private void UpdateAnimation()
     {
-        animator.SetInteger("state", (int)animState);
-        animator.SetFloat("speed", attackSpeed / 3.5f);
+        anim.SetInteger("state", (int)animType);
+        anim.SetFloat("speed", animSpeed);
     }
 
     private void Patrol()
     {
         transform.position += patrolDirection switch
         {
-            Direction.RIGHT => Vector3.right * speed * Time.deltaTime,
-            Direction.LEFT => Vector3.left * speed * Time.deltaTime,
+            Direction.Right => Vector3.right * speed * Time.deltaTime,
+            Direction.Left => Vector3.left * speed * Time.deltaTime,
             _ => throw new ArgumentOutOfRangeException()
         };
 
         if (Mathf.Abs(transform.position.x - spawnPosition.x) < patrolRange) return;
-        patrolDirection = 1 - patrolDirection;
-        transform.localScale =
-            new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z); // flip x
+
+        patrolDirection = patrolDirection == Direction.Left ? Direction.Right : Direction.Left;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private void Attack()
     {
-        attackTimer -= Time.deltaTime;
-
-        if (attackTimer > 0) return;
-        if ((playerResources.transform.position - transform.position).magnitude < thresholdDistance)
-            playerResources.TakeDamage(1, transform.position);
-        attackTimer = attackSpeed;
-        animState = State.Idle;
+        animSpeed = attackSpeed / 2.5f;
+        animType = AnimType.Attack;
+        attackStarted = true;
+        timeNextAttack = Time.time + 3f * attackSpeed / 2f;
+        StartCoroutine(AttackAnimation());
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+
+    private IEnumerator AttackAnimation()
+    {
+        var initialLocalScale = transform.localScale;
+        var initialPos = transform.position;
+        var playerInitialPosition = playerResources.transform.position;
+        yield return new WaitForSeconds(3f * attackSpeed / 4f);
+        if (GetDistanceFromPlayer() < 2 * thresholdDistance)
+            playerInitialPosition = playerResources.transform.position;
+
+        var time = attackSpeed / 4f;
+        while (time > 0)
+        {
+            transform.localScale *= 0.99f;
+            transform.position = Vector2.MoveTowards(transform.position, playerInitialPosition,
+                thresholdDistance * attackSpeed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+            time -= Time.fixedDeltaTime;
+        }
+
+        isAttacking = true;
+
+        time = attackSpeed / 4f;
+        while (time > 0)
+        {
+            transform.localScale *= 1.01f;
+            transform.position = Vector2.MoveTowards(transform.position, initialPos,
+                thresholdDistance * attackSpeed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+            time -= Time.deltaTime;
+        }
+
+        animSpeed = speed / 9f;
+        animType = AnimType.Idle;
+        isAttacking = false;
+        attackStarted = false;
+        hasDamagedPlayer = false;
+        transform.position = initialPos;
+        transform.localScale = initialLocalScale;
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
     {
         if (!col.CompareTag("Player")) return;
-        if (col.GetComponent<PlayerSpells>().phaseWalkActive) return;
-        animState = State.Attack;
+        if (!isAttacking) return;
+        if (playerSpells.phaseWalkActive) return;
+        if (hasDamagedPlayer) return;
+
+        hasDamagedPlayer = true;
+        playerResources.TakeDamage(1, transform.position);
+    }
+
+    public void DamageEnd()
+    {
+        damageAnimationActive = false;
+        if (hp > 0)
+            animType = AnimType.Idle;
+    }
+
+    public override void OnDamageTaken(float damage, bool isCritical)
+    {
+        base.OnDamageTaken(damage, isCritical);
+        animType = AnimType.Damage;
+        damageAnimationActive = true;
     }
 }

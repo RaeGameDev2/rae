@@ -1,14 +1,9 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class JungleMob1 : Enemy
 {
-    // Start is called before the first frame update
-    public static float speedY = 20f;
     public bool down;
-    private PlayerResources playerResources;
     public float relative_y;
     public float treshholdHeight = 20f;
     public bool up = true;
@@ -16,7 +11,6 @@ public class JungleMob1 : Enemy
     private new void Start()
     {
         base.Start();
-        playerResources = FindObjectOfType<PlayerResources>();
     }
 
     private new void Update()
@@ -35,21 +29,20 @@ public class JungleMob1 : Enemy
 
         if (up)
         {
-            relative_y += speedY * Time.deltaTime;
-            transform.Translate(0, speedY * Time.deltaTime, 0);
+            relative_y += speed * Time.deltaTime;
+            transform.Translate(0, speed * Time.deltaTime, 0);
         }
         else if (down)
         {
-            relative_y -= speedY * Time.deltaTime;
-            transform.Translate(0, -1 * speedY * Time.deltaTime, 0);
+            relative_y -= speed * Time.deltaTime;
+            transform.Translate(0, -1 * speed * Time.deltaTime, 0);
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (!col.CompareTag("Player")) return;
-        if (FindObjectOfType<PlayerSpells>().phaseWalkActive) return;
+        if (playerSpells.phaseWalkActive) return;
 
         playerResources.TakeDamage(1, transform.position);
     }

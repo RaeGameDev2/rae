@@ -7,10 +7,10 @@ public class IceMob2 : Enemy
 { 
     private enum Direction
     {
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT
+        Up,
+        Down,
+        Left,
+        Right
     }
 
     private enum AnimType
@@ -23,19 +23,15 @@ public class IceMob2 : Enemy
     [SerializeField] private Animator anim;
     private AnimType animType;
     [SerializeField] private bool damageAnimation;
-    private Vector3 initialPosition;
 
     private bool isAttacking;
-    [SerializeField] private float oldHp;
-
-    private PlayerResources playerResources;
 
     [SerializeField] private Direction state_mob;
     [SerializeField] private float thresholdDistance = 10f;
+
     [SerializeField] private float thresholdDown = -5f;
     [SerializeField] private float thresholdLeft = -5f;
     [SerializeField] private float thresholdRight = 5f;
-
     [SerializeField] private float thresholdUp = 5f;
     private float timeAttack;
     private float timeNextAttack;
@@ -45,18 +41,13 @@ public class IceMob2 : Enemy
         base.Awake();
         anim = GetComponent<Animator>();
         isAttacking = false;
-        state_mob = Direction.UP;
-        speed = 5;
-        initialPosition = transform.position;
+        state_mob = Direction.Up;
     }
 
     private new void Start()
     {
         base.Start();
-        playerResources = FindObjectOfType<PlayerResources>();
-        playerSpells = FindObjectOfType<PlayerSpells>();
         animType = AnimType.Idle;
-        oldHp = hp;
     }
 
     private new void Update()
@@ -83,10 +74,10 @@ public class IceMob2 : Enemy
         {
             transform.position += state_mob switch
             {
-                Direction.UP => Vector3.up * Time.deltaTime * speed,
-                Direction.DOWN => Vector3.down * Time.deltaTime * speed,
-                Direction.LEFT => Vector3.left * Time.deltaTime * speed,
-                Direction.RIGHT => Vector3.right * Time.deltaTime * speed,
+                Direction.Up => Vector3.up * Time.deltaTime * speed,
+                Direction.Down => Vector3.down * Time.deltaTime * speed,
+                Direction.Left => Vector3.left * Time.deltaTime * speed,
+                Direction.Right => Vector3.right * Time.deltaTime * speed,
                 _ => throw new ArgumentOutOfRangeException()
             };
 
@@ -107,14 +98,6 @@ public class IceMob2 : Enemy
         }
 
         if (damageAnimation) return;
-
-        if (Math.Abs(oldHp - hp) > 0.1f)
-        {
-            DamageAnimation();
-            return;
-        }
-
-        oldHp = hp;
 
         transform.localScale = new Vector3(Mathf.Sign(transform.position.x - playerResources.transform.position.x),
             transform.localScale.y, transform.localScale.z);
@@ -139,22 +122,20 @@ public class IceMob2 : Enemy
 
     public void DamageEnd()
     {
-        Debug.Log("DamageEnd");
         damageAnimation = false;
-        oldHp = hp;
         if (hp > 0)
             animType = AnimType.Idle;
     }
 
     private bool CheckDirection()
     {
-        if (transform.position.y >= initialPosition.y + thresholdUp && state_mob == Direction.UP)
+        if (transform.position.y >= spawnPosition.y + thresholdUp && state_mob == Direction.Up)
             return false;
-        if (transform.position.y <= initialPosition.y + thresholdDown && state_mob == Direction.DOWN)
+        if (transform.position.y <= spawnPosition.y + thresholdDown && state_mob == Direction.Down)
             return false;
-        if (transform.position.x <= initialPosition.x + thresholdLeft && state_mob == Direction.LEFT)
+        if (transform.position.x <= spawnPosition.x + thresholdLeft && state_mob == Direction.Left)
             return false;
-        if (transform.position.x >= initialPosition.x + thresholdRight && state_mob == Direction.RIGHT)
+        if (transform.position.x >= spawnPosition.x + thresholdRight && state_mob == Direction.Right)
             return false;
 
         return true;
@@ -205,8 +186,9 @@ public class IceMob2 : Enemy
         transform.localScale = initialLocalScale;
     }
 
-    private float GetDistanceFromPlayer()
+    public override void OnDamageTaken(float damage, bool isCritical)
     {
-        return (playerResources.transform.position - transform.position).magnitude;
+        base.OnDamageTaken(damage, isCritical);
+        anim.SetInteger("state", (int)AnimType.Damage);
     }
 }

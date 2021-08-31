@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -15,7 +14,7 @@ public class Enemy : MonoBehaviour
     protected Transform hpBar;
 
 
-    private float initialAttackSpeed = 2f;
+    protected float initialAttackSpeed = 2f;
     protected float initialHP;
     private float initialScaleX;
     protected float attackCooldown;
@@ -29,8 +28,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed;
     private float timeLifeDrain;
     private float timeNextHit;
-    protected GameObject player;
+    protected Transform player;
     protected PlayerSpells playerSpells;
+    protected PlayerResources playerResources;
+
+    protected Vector3 spawnPosition;
 
     protected void Awake()
     {
@@ -42,12 +44,14 @@ public class Enemy : MonoBehaviour
 
     protected void Start()
     {
+        spawnPosition = transform.position;
         attackSpeed = initialAttackSpeed;
         initialHP = hp;
         initialScaleX = hpBar.transform.localScale.x;
         timeSinceAttack = attackCooldown;
         playerSpells = FindObjectOfType<PlayerSpells>();
-        player = playerSpells.gameObject;
+        playerResources = playerSpells.GetComponent<PlayerResources>();
+        player = playerSpells.transform;
     }
 
     protected void Update()
@@ -74,27 +78,20 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnDamageTaken(float damage, bool isCrit)
     {
-        // check in Weapon , two enums weapons type, attack type 
-        // if weapon_type=staff si attack_type = basic
-        // instatiem obiect 
-        // else if weapon_type=staff si attack_type = heavy
-        // instatiem alt obiect 
-        // retinem instanta ca sa le distug dupa un delay
-
         if (Time.time < timeNextHit) return;
 
-        WeaponsHandler currWeaponHandler = (WeaponsHandler)FindObjectOfType(typeof(WeaponsHandler));
+        var currWeaponHandler = FindObjectOfType<WeaponsHandler>();
 
         if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
             currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Basic)
         {
-            GameObject instBasic = Instantiate(atStaffBasicAttack, transform.position, Quaternion.identity, transform);
+            var instBasic = Instantiate(atStaffBasicAttack, transform.position, Quaternion.identity, transform);
             Destroy(instBasic, 1f);
         }
         else if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
             currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Heavy)
         {
-            GameObject instHeavy = Instantiate(atStaffHeavyAttack, transform.position, Quaternion.identity, transform);
+            var instHeavy = Instantiate(atStaffHeavyAttack, transform.position, Quaternion.identity, transform);
             Destroy(instHeavy, 1f);
         }
 
@@ -114,7 +111,6 @@ public class Enemy : MonoBehaviour
     {
         lifeDrain = true;
         timeLifeDrain = initialTimeLifeDrain + lvl;
-        Debug.Log("Lifedrain: " + lvl);
     }
 
     public void Debuff(int lvl)
@@ -122,11 +118,10 @@ public class Enemy : MonoBehaviour
         var factor = 1f - 0.2f * lvl;
         attackSpeed *= factor;
         speed *= factor;
-        Debug.Log("debuff: " + factor);
     }
 
     protected float GetDistanceFromPlayer()
     {
-        return (player.transform.position - transform.position).magnitude;
+        return (player.position - transform.position).magnitude;
     }
 }
