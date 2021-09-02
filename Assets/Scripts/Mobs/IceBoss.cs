@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class IceFinalBoss : Enemy
+public class IceBoss : Enemy
 {
     public enum AnimType
     {
@@ -20,7 +20,6 @@ public class IceFinalBoss : Enemy
     [SerializeField] private AudioClip iceRealm;
     private float initialLocalScaleX;
     [SerializeField] private bool isDying;
-    private PlayerResources playerResources;
     [SerializeField] private GameObject projectile;
     [SerializeField] private bool projectileAttack;
 

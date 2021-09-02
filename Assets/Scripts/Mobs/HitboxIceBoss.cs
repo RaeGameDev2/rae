@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class HitboxIceBoss : MonoBehaviour
 {
-    private IceFinalBoss parent;
+    private IceBoss parent;
     private PlayerResources playerResources;
     [SerializeField] private float timeNextAttack;
 
     private void Start()
     {
-        parent = FindObjectOfType<IceFinalBoss>();
+        parent = FindObjectOfType<IceBoss>();
         playerResources = FindObjectOfType<PlayerResources>();
     }
 
@@ -16,7 +16,7 @@ public class HitboxIceBoss : MonoBehaviour
     {
         if (collision.tag != "Player") return;
 
-        if (parent.animType != IceFinalBoss.AnimType.Attack) return;
+        if (parent.animType != IceBoss.AnimType.Attack) return;
         if (Time.time < timeNextAttack) return;
 
         playerResources.TakeDamage(1, transform.position);
