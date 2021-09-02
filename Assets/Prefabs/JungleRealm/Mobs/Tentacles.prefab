@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4779220362770848962}
   - component: {fileID: 4779220362770848963}
   - component: {fileID: 4779220362770848988}
+  - component: {fileID: 4785548619451555189}
   m_Layer: 0
   m_Name: Tentacles
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4779220362770848989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.8300018, y: 4.63, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,3 +103,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4785548619451555189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4779220362770848989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7d5fe86b15d09438d0169ce885fbb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animType: 0

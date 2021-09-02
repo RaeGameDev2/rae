@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0">
+        <file id="0" name="IceMob3_Base.png" width="577" height="403" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="IceMob3_Flap1_Left.png" width="577" height="403" pivot_x="0.584055" pivot_y="0.377171"/>
+        <file id="2" name="IceMob3.png" width="1422" height="1191" pivot_x="0" pivot_y="1"/>
+        <file id="3" name="IceMob3_Flap1_Right.png" width="577" height="403" pivot_x="0.419411" pivot_y="0.379653"/>
+        <file id="4" name="IceMob3_Flap2_Left.png" width="577" height="403" pivot_x="0.54766" pivot_y="0.35732"/>
+        <file id="5" name="IceMob3_Ball.png" width="577" height="403" pivot_x="0" pivot_y="1"/>
+        <file id="6" name="IceMob3_Flap2_Right.png" width="577" height="403" pivot_x="0.461005" pivot_y="0.369727"/>
+    </folder>
+    <entity id="0" name="entity_000">
+        <obj_info name="bone_000" type="bone" w="209.309" h="10"/>
+        <obj_info name="bone_002" type="bone" w="96.5791" h="10"/>
+        <obj_info name="bone_001" type="bone" w="119.562" h="10"/>
+        <obj_info name="bone_004" type="bone" w="91.9828" h="10"/>
+        <obj_info name="bone_005" type="bone" w="104.655" h="10"/>
+        <obj_info name="bone_003" type="bone" w="108.144" h="10"/>
+        <obj_info name="bone_006" type="bone" w="74.8185" h="10"/>
+        <obj_info name="bone_007" type="bone" w="78.7418" h="10"/>
+        <obj_info name="bone_008" type="bone" w="73.8441" h="10"/>
+        <obj_info name="bone_009" type="bone" w="77.0664" h="10"/>
+        <obj_info name="bone_010" type="bone" w="69.9141" h="10"/>
+        <animation id="0" name="Skeleton+Bones" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <bone_ref id="0" timeline="6" key="0"/>
+                    <bone_ref id="1" timeline="7" key="0"/>
+                    <bone_ref id="2" timeline="8" key="0"/>
+                    <bone_ref id="3" timeline="9" key="0"/>
+                    <bone_ref id="4" timeline="10" key="0"/>
+                    <bone_ref id="5" timeline="11" key="0"/>
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" parent="2" timeline="1" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="0" z_index="2"/>
+                    <object_ref id="3" parent="4" timeline="3" key="0" z_index="3"/>
+                    <object_ref id="4" parent="5" timeline="4" key="0" z_index="4"/>
+                    <object_ref id="5" parent="3" timeline="5" key="0" z_index="5"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="IceMob3_Base">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-282.809524" y="390.380952" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="IceMob3_Flap1_Left">
+                <key id="0" spin="0">
+                    <object folder="0" file="1" x="4.032649" y="39.214181" angle="8.685717"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="IceMob3_Flap1_Right">
+                <key id="0" spin="0">
+                    <object folder="0" file="3" x="8.053675" y="94.899257" angle="89.078925"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="IceMob3_Ball">
+                <key id="0" spin="0">
+                    <object folder="0" file="5" x="-119.052184" y="-297.681351" angle="91.888188"/>
+                </key>
+            </timeline>
+            <timeline id="4" name="IceMob3_Flap2_Right">
+                <key id="0" spin="0">
+                    <object folder="0" file="6" x="42.01955" y="-8.803278" angle="95.612413"/>
+                </key>
+            </timeline>
+            <timeline id="5" name="IceMob3_Flap2_Left">
+                <key id="0" spin="0">
+                    <object folder="0" file="4" x="55.400641" y="19.894842" angle="88.567904"/>
+                </key>
+            </timeline>
+            <timeline id="6" obj="0" name="bone_000" object_type="bone">
+                <key id="0" spin="0">
+                    <bone x="9.195402" y="91.954023" angle="268.111812"/>
+                </key>
+            </timeline>
+            <timeline id="7" obj="1" name="bone_002" object_type="bone">
+                <key id="0" spin="0">
+                    <bone x="35.632184" y="112.643678" angle="268.636072"/>
+                </key>
+            </timeline>
+            <timeline id="8" obj="2" name="bone_001" object_type="bone">
+                <key id="0" spin="0">
+                    <bone x="-25.287356" y="110.344828" angle="268.898294"/>
+                </key>
+            </timeline>
+            <timeline id="9" obj="3" name="bone_004" object_type="bone">
+                <key id="0" spin="0">
+                    <bone x="21.83908" y="159.770115" angle="271.432096"/>
+                </key>
+            </timeline>
+            <timeline id="10" obj="4" name="bone_005" object_type="bone">
+                <key id="0" spin="0">
+                    <bone x="8.045977" y="205.747126" angle="268.111812"/>
+                </key>
+            </timeline>
+            <timeline id="11" obj="5" name="bone_003" object_type="bone">
+                <key id="0" spin="0">
+                    <bone x="-18.390805" y="155.172414" angle="272.436648"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="Unfold_circular_fara_pauza" length="1750" interval="100">
+            <mainline>
+                <key id="0">
+                    <bone_ref id="0" timeline="4" key="0"/>
+                    <bone_ref id="1" parent="0" timeline="5" key="0"/>
+                    <bone_ref id="2" parent="0" timeline="6" key="0"/>
+                    <bone_ref id="3" parent="0" timeline="9" key="0"/>
+                    <bone_ref id="4" parent="0" timeline="10" key="0"/>
+                    <object_ref id="0" parent="0" timeline="1" key="0" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="0" key="0" z_index="1"/>
+                    <object_ref id="2" parent="2" timeline="2" key="0" z_index="2"/>
+                    <object_ref id="3" parent="1" timeline="3" key="0" z_index="3"/>
+                    <object_ref id="4" parent="3" timeline="7" key="0" z_index="4"/>
+                    <object_ref id="5" parent="4" timeline="8" key="0" z_index="5"/>
+                </key>
+                <key id="1" time="875" curve_type="cubic" c1="0" c2="0">
+                    <bone_ref id="0" timeline="4" key="1"/>
+                    <bone_ref id="1" parent="0" timeline="5" key="1"/>
+                    <bone_ref id="2" parent="0" timeline="6" key="1"/>
+                    <bone_ref id="3" parent="0" timeline="9" key="1"/>
+                    <bone_ref id="4" parent="0" timeline="10" key="1"/>
+                    <object_ref id="0" parent="0" timeline="1" key="1" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="0" key="1" z_index="1"/>
+                    <object_ref id="2" parent="2" timeline="2" key="1" z_index="2"/>
+                    <object_ref id="3" parent="1" timeline="3" key="1" z_index="3"/>
+                    <object_ref id="4" parent="3" timeline="7" key="1" z_index="4"/>
+                    <object_ref id="5" parent="4" timeline="8" key="1" z_index="5"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="IceMob3_Base_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="326.71666" y="295.841752" angle="270.567266"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <object folder="0" file="0" x="326.71666" y="295.841752" angle="270.567266"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="IceMob3_Ball_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="5" x="205.241132" y="294.639024" angle="270.567266"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <object folder="0" file="5" x="295.236718" y="295.530069" angle="270.567266"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="IceMob3_Flap2_Right_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="6" x="5.632302" y="5.141891" angle="283.339249"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <object folder="0" file="6" x="5.632302" y="5.141891" angle="283.339249"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="IceMob3_Flap2_Left_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="4" x="3.888313" y="-3.093926" angle="258.055823" scale_x="1"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <object folder="0" file="4" x="3.888313" y="-3.093926" angle="258.055823" scale_x="1"/>
+                </key>
+            </timeline>
+            <timeline id="4" obj="6" name="bone_006" object_type="bone">
+                <key id="0" spin="0">
+                    <bone x="2.222222" y="25.185185" angle="89.432734"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <bone x="2.222222" y="25.185185" angle="89.432734"/>
+                </key>
+            </timeline>
+            <timeline id="5" obj="7" name="bone_007" object_type="bone">
+                <key id="0">
+                    <bone x="69.673362" y="70.746179" angle="313.589007" scale_x="1"/>
+                </key>
+                <key id="1" time="875" spin="-1">
+                    <bone x="69.683263" y="69.74623" angle="16.635037" scale_x="1"/>
+                </key>
+            </timeline>
+            <timeline id="6" obj="8" name="bone_008" object_type="bone">
+                <key id="0" spin="-1">
+                    <bone x="73.982439" y="-65.196658" angle="50.220992"/>
+                </key>
+                <key id="1" time="875">
+                    <bone x="73.99234" y="-66.196611" angle="342.191507"/>
+                </key>
+            </timeline>
+            <timeline id="7" name="IceMob3_Flap1_Left_000">
+                <key id="0" spin="-1">
+                    <object folder="0" file="1" x="9.038942" y="-4.849016" angle="70.781828" scale_x="-1" scale_y="1"/>
+                </key>
+                <key id="1" time="875">
+                    <object folder="0" file="1" x="9.673258" y="8.86137" angle="61.135012" scale_x="-1" scale_y="1"/>
+                </key>
+            </timeline>
+            <timeline id="8" name="IceMob3_Flap1_Right_000">
+                <key id="0" spin="-1">
+                    <object folder="0" file="3" x="7.18731" y="11.390719" angle="114.648871" scale_x="-1" scale_y="1"/>
+                </key>
+                <key id="1" time="875">
+                    <object folder="0" file="3" x="4.644318" y="0.4847" angle="114.375923" scale_x="-1"/>
+                </key>
+            </timeline>
+            <timeline id="9" obj="9" name="bone_009" object_type="bone">
+                <key id="0">
+                    <bone x="52.423435" y="49.410329" angle="320.58038"/>
+                </key>
+                <key id="1" time="875" spin="-1">
+                    <bone x="52.5743" y="34.172981" angle="6.498793"/>
+                </key>
+            </timeline>
+            <timeline id="10" obj="10" name="bone_010" object_type="bone">
+                <key id="0" spin="-1">
+                    <bone x="46.567994" y="-32.556422" angle="24.68825" scale_x="1"/>
+                </key>
+                <key id="1" time="875">
+                    <bone x="53.224904" y="-31.538084" angle="354.689874" scale_x="1"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="2" name="Unfold_necircular" length="1750" interval="100" looping="false">
+            <mainline>
+                <key id="0">
+                    <bone_ref id="0" timeline="4" key="0"/>
+                    <bone_ref id="1" parent="0" timeline="5" key="0"/>
+                    <bone_ref id="2" parent="0" timeline="6" key="0"/>
+                    <bone_ref id="3" parent="0" timeline="9" key="0"/>
+                    <bone_ref id="4" parent="0" timeline="10" key="0"/>
+                    <object_ref id="0" parent="0" timeline="1" key="0" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="0" key="0" z_index="1"/>
+                    <object_ref id="2" parent="2" timeline="2" key="0" z_index="2"/>
+                    <object_ref id="3" parent="1" timeline="3" key="0" z_index="3"/>
+                    <object_ref id="4" parent="3" timeline="7" key="0" z_index="4"/>
+                    <object_ref id="5" parent="4" timeline="8" key="0" z_index="5"/>
+                </key>
+                <key id="1" time="875" curve_type="cubic" c1="0" c2="0">
+                    <bone_ref id="0" timeline="4" key="1"/>
+                    <bone_ref id="1" parent="0" timeline="5" key="1"/>
+                    <bone_ref id="2" parent="0" timeline="6" key="1"/>
+                    <bone_ref id="3" parent="0" timeline="9" key="1"/>
+                    <bone_ref id="4" parent="0" timeline="10" key="1"/>
+                    <object_ref id="0" parent="0" timeline="1" key="1" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="0" key="1" z_index="1"/>
+                    <object_ref id="2" parent="2" timeline="2" key="1" z_index="2"/>
+                    <object_ref id="3" parent="1" timeline="3" key="1" z_index="3"/>
+                    <object_ref id="4" parent="3" timeline="7" key="1" z_index="4"/>
+                    <object_ref id="5" parent="4" timeline="8" key="1" z_index="5"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="IceMob3_Base_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="326.71666" y="295.841752" angle="270.567266"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <object folder="0" file="0" x="326.71666" y="295.841752" angle="270.567266"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="IceMob3_Ball_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="5" x="205.241132" y="294.639024" angle="270.567266"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <object folder="0" file="5" x="295.236718" y="295.530069" angle="270.567266"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="IceMob3_Flap2_Right_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="6" x="5.632302" y="5.141891" angle="283.339249"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <object folder="0" file="6" x="5.632302" y="5.141891" angle="283.339249"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="IceMob3_Flap2_Left_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="4" x="3.888313" y="-3.093926" angle="258.055823" scale_x="1"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <object folder="0" file="4" x="3.888313" y="-3.093926" angle="258.055823" scale_x="1"/>
+                </key>
+            </timeline>
+            <timeline id="4" obj="6" name="bone_006" object_type="bone">
+                <key id="0" spin="0">
+                    <bone x="2.222222" y="25.185185" angle="89.432734"/>
+                </key>
+                <key id="1" time="875" spin="0">
+                    <bone x="2.222222" y="25.185185" angle="89.432734"/>
+                </key>
+            </timeline>
+            <timeline id="5" obj="7" name="bone_007" object_type="bone">
+                <key id="0">
+                    <bone x="69.673362" y="70.746179" angle="313.589007" scale_x="1"/>
+                </key>
+                <key id="1" time="875" spin="-1">
+                    <bone x="69.683263" y="69.74623" angle="16.635037" scale_x="1"/>
+                </key>
+            </timeline>
+            <timeline id="6" obj="8" name="bone_008" object_type="bone">
+                <key id="0" spin="-1">
+                    <bone x="73.982439" y="-65.196658" angle="50.220992"/>
+                </key>
+                <key id="1" time="875">
+                    <bone x="73.99234" y="-66.196611" angle="342.191507"/>
+                </key>
+            </timeline>
+            <timeline id="7" name="IceMob3_Flap1_Left_000">
+                <key id="0" spin="-1">
+                    <object folder="0" file="1" x="9.038942" y="-4.849016" angle="70.781828" scale_x="-1" scale_y="1"/>
+                </key>
+                <key id="1" time="875">
+                    <object folder="0" file="1" x="9.673258" y="8.86137" angle="61.135012" scale_x="-1" scale_y="1"/>
+                </key>
+            </timeline>
+            <timeline id="8" name="IceMob3_Flap1_Right_000">
+                <key id="0" spin="-1">
+                    <object folder="0" file="3" x="7.18731" y="11.390719" angle="114.648871" scale_x="-1" scale_y="1"/>
+                </key>
+                <key id="1" time="875">
+                    <object folder="0" file="3" x="4.644318" y="0.4847" angle="114.375923" scale_x="-1"/>
+                </key>
+            </timeline>
+            <timeline id="9" obj="9" name="bone_009" object_type="bone">
+                <key id="0">
+                    <bone x="52.423435" y="49.410329" angle="320.58038"/>
+                </key>
+                <key id="1" time="875" spin="-1">
+                    <bone x="52.5743" y="34.172981" angle="6.498793"/>
+                </key>
+            </timeline>
+            <timeline id="10" obj="10" name="bone_010" object_type="bone">
+                <key id="0" spin="-1">
+                    <bone x="46.567994" y="-32.556422" angle="24.68825" scale_x="1"/>
+                </key>
+                <key id="1" time="875">
+                    <bone x="53.224904" y="-31.538084" angle="354.689874" scale_x="1"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="3" name="Unfold_circular_cu_pauza" length="1750" interval="100">
+            <mainline>
+                <key id="0" curve_type="cubic" c1="0" c2="0">
+                    <bone_ref id="0" timeline="4" key="0"/>
+                    <bone_ref id="1" parent="0" timeline="5" key="0"/>
+                    <bone_ref id="2" parent="0" timeline="6" key="0"/>
+                    <bone_ref id="3" parent="0" timeline="9" key="0"/>
+                    <bone_ref id="4" parent="0" timeline="10" key="0"/>
+                    <object_ref id="0" parent="0" timeline="1" key="0" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="0" key="0" z_index="1"/>
+                    <object_ref id="2" parent="2" timeline="2" key="0" z_index="2"/>
+                    <object_ref id="3" parent="1" timeline="3" key="0" z_index="3"/>
+                    <object_ref id="4" parent="3" timeline="7" key="0" z_index="4"/>
+                    <object_ref id="5" parent="4" timeline="8" key="0" z_index="5"/>
+                </key>
+                <key id="1" time="698" curve_type="cubic" c1="0.995025" c2="0.8358">
+                    <bone_ref id="0" timeline="4" key="1"/>
+                    <bone_ref id="1" parent="0" timeline="5" key="1"/>
+                    <bone_ref id="2" parent="0" timeline="6" key="1"/>
+                    <bone_ref id="3" parent="0" timeline="9" key="1"/>
+                    <bone_ref id="4" parent="0" timeline="10" key="1"/>
+                    <object_ref id="0" parent="0" timeline="1" key="1" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="0" key="1" z_index="1"/>
+                    <object_ref id="2" parent="2" timeline="2" key="1" z_index="2"/>
+                    <object_ref id="3" parent="1" timeline="3" key="1" z_index="3"/>
+                    <object_ref id="4" parent="3" timeline="7" key="1" z_index="4"/>
+                    <object_ref id="5" parent="4" timeline="8" key="1" z_index="5"/>
+                </key>
+                <key id="2" time="1225" curve_type="cubic" c1="0" c2="0">
+                    <bone_ref id="0" timeline="4" key="2"/>
+                    <bone_ref id="1" parent="0" timeline="5" key="2"/>
+                    <bone_ref id="2" parent="0" timeline="6" key="2"/>
+                    <bone_ref id="3" parent="0" timeline="9" key="2"/>
+                    <bone_ref id="4" parent="0" timeline="10" key="2"/>
+                    <object_ref id="0" parent="0" timeline="1" key="2" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="0" key="2" z_index="1"/>
+                    <object_ref id="2" parent="2" timeline="2" key="2" z_index="2"/>
+                    <object_ref id="3" parent="1" timeline="3" key="2" z_index="3"/>
+                    <object_ref id="4" parent="3" timeline="7" key="2" z_index="4"/>
+                    <object_ref id="5" parent="4" timeline="8" key="2" z_index="5"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="IceMob3_Base_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="326.71666" y="295.841752" angle="270.567266"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <object folder="0" file="0" x="326.71666" y="295.841752" angle="270.567266"/>
+                </key>
+                <key id="2" time="1225" spin="0">
+                    <object folder="0" file="0" x="326.71666" y="295.841752" angle="270.567266"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="IceMob3_Ball_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="5" x="205.241132" y="294.639024" angle="270.567266"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <object folder="0" file="5" x="295.236718" y="295.530069" angle="270.567266"/>
+                </key>
+                <key id="2" time="1225" spin="0">
+                    <object folder="0" file="5" x="295.236718" y="295.530069" angle="270.567266"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="IceMob3_Flap2_Right_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="6" x="5.632302" y="5.141891" angle="283.339249"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <object folder="0" file="6" x="5.632302" y="5.141891" angle="283.339249"/>
+                </key>
+                <key id="2" time="1225" spin="0">
+                    <object folder="0" file="6" x="5.632302" y="5.141891" angle="283.339249"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="IceMob3_Flap2_Left_000">
+                <key id="0" spin="0">
+                    <object folder="0" file="4" x="3.888313" y="-3.093926" angle="258.055823" scale_x="1"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <object folder="0" file="4" x="3.888313" y="-3.093926" angle="258.055823" scale_x="1"/>
+                </key>
+                <key id="2" time="1225" spin="0">
+                    <object folder="0" file="4" x="3.888313" y="-3.093926" angle="258.055823" scale_x="1"/>
+                </key>
+            </timeline>
+            <timeline id="4" obj="6" name="bone_006" object_type="bone">
+                <key id="0" spin="0">
+                    <bone x="2.222222" y="25.185185" angle="89.432734"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <bone x="2.222222" y="25.185185" angle="89.432734"/>
+                </key>
+                <key id="2" time="1225" spin="0">
+                    <bone x="2.222222" y="25.185185" angle="89.432734"/>
+                </key>
+            </timeline>
+            <timeline id="5" obj="7" name="bone_007" object_type="bone">
+                <key id="0">
+                    <bone x="69.673362" y="70.746179" angle="313.589007" scale_x="1"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <bone x="69.683263" y="69.74623" angle="16.635037" scale_x="1"/>
+                </key>
+                <key id="2" time="1225" spin="-1">
+                    <bone x="69.683263" y="69.74623" angle="16.635037" scale_x="1"/>
+                </key>
+            </timeline>
+            <timeline id="6" obj="8" name="bone_008" object_type="bone">
+                <key id="0" spin="-1">
+                    <bone x="73.982439" y="-65.196658" angle="50.220992"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <bone x="73.99234" y="-66.196611" angle="342.191507"/>
+                </key>
+                <key id="2" time="1225">
+                    <bone x="73.99234" y="-66.196611" angle="342.191507"/>
+                </key>
+            </timeline>
+            <timeline id="7" name="IceMob3_Flap1_Left_000">
+                <key id="0" spin="-1">
+                    <object folder="0" file="1" x="9.038942" y="-4.849016" angle="70.781828" scale_x="-1" scale_y="1"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <object folder="0" file="1" x="9.673258" y="8.86137" angle="61.135012" scale_x="-1" scale_y="1"/>
+                </key>
+                <key id="2" time="1225">
+                    <object folder="0" file="1" x="9.673258" y="8.86137" angle="61.135012" scale_x="-1" scale_y="1"/>
+                </key>
+            </timeline>
+            <timeline id="8" name="IceMob3_Flap1_Right_000">
+                <key id="0" spin="-1">
+                    <object folder="0" file="3" x="7.18731" y="11.390719" angle="114.648871" scale_x="-1" scale_y="1"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <object folder="0" file="3" x="4.644318" y="0.4847" angle="114.375923" scale_x="-1"/>
+                </key>
+                <key id="2" time="1225">
+                    <object folder="0" file="3" x="4.644318" y="0.4847" angle="114.375923" scale_x="-1"/>
+                </key>
+            </timeline>
+            <timeline id="9" obj="9" name="bone_009" object_type="bone">
+                <key id="0">
+                    <bone x="52.423435" y="49.410329" angle="320.58038"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <bone x="52.5743" y="34.172981" angle="6.498793"/>
+                </key>
+                <key id="2" time="1225" spin="-1">
+                    <bone x="52.5743" y="34.172981" angle="6.498793"/>
+                </key>
+            </timeline>
+            <timeline id="10" obj="10" name="bone_010" object_type="bone">
+                <key id="0" spin="-1">
+                    <bone x="46.567994" y="-32.556422" angle="24.68825" scale_x="1"/>
+                </key>
+                <key id="1" time="698" spin="0">
+                    <bone x="53.224904" y="-31.538084" angle="354.689874" scale_x="1"/>
+                </key>
+                <key id="2" time="1225">
+                    <bone x="53.224904" y="-31.538084" angle="354.689874" scale_x="1"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

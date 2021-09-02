@@ -141,8 +141,7 @@ public class IceMob2 : Enemy
             yield return new WaitForFixedUpdate();
             time -= Time.fixedDeltaTime;
         }
-
-        Time.timeScale = 0.3f;
+        
         animSpeed = attackSpeed;
         animType = AnimType.Attack;
         isAttacking = true;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tentacles : MonoBehaviour
@@ -14,23 +12,101 @@ public class Tentacles : MonoBehaviour
     private JungleMob3 parent;
 
     private Animator anim;
-    private AnimType animType;
-    private float animSpeed;
-
+    [SerializeField] private AnimType animType;
+    
     private bool growAnimation;
     private bool attackAnimation;
     private bool decentAnimation;
 
+    private Vector3 offsetAttack;
+    private Vector3 initialPosition;
     private void Awake()
     {
         parent = GetComponentInParent<JungleMob3>();
-        animSpeed = parent.GetSpeed();
+        animType = AnimType.Grow;
+        anim = GetComponent<Animator>();
+        offsetAttack = new Vector3(transform.name.Contains("Left") ? -2.84f : 2.84f, -0.57f) * parent.transform.localScale.x;
+        initialPosition = transform.position;
     }
 
+    private void Update()
+    {
+        anim.SetInteger("state", (int)animType);
+        anim.SetFloat("speed", parent.GetSpeed()); 
 
+    }
+
+    public void Attack()
+    {
+        growAnimation = true;
+        animType = AnimType.Grow;
+        transform.position = initialPosition;
+    }
 
     public void EndGrowAnimation()
     {
         growAnimation = false;
+        if (parent.playerInRange)
+        {
+            animType = AnimType.Attack;
+            attackAnimation = true;
+
+            // changePosition = true;
+        }
+        else
+        {
+            animType = AnimType.Decent;
+            decentAnimation = true;
+        }
+    }
+
+    private void BeginAttackAnimation()
+    {
+        changePosition = true;
+        // transform.position = initialPosition + offsetAttack;
+    }
+
+    public void EndAttackAnimation()
+    {
+        if (parent.playerInRange) return;
+        
+        attackAnimation = false;
+        animType = AnimType.Decent;
+        decentAnimation = true;
+
+        // changePositionBack = true;
+    }
+
+    [SerializeField] private bool changePosition;
+    [SerializeField] private bool changePositionBack;
+    private void BeginDecentAnimation()
+    {
+        changePositionBack = true;
+        // transform.position = initialPosition;
+    }
+    private void BeginGrowAnimation()
+    {
+        changePositionBack = true;
+        // transform.position = initialPosition;
+    }
+    public void EndDecentAnimation()
+    {
+        decentAnimation = false;
+    }
+
+    private void OnWillRenderObject()
+    {
+
+        if (changePosition)
+        {
+            changePosition = false;
+            transform.position = initialPosition + offsetAttack;
+        }
+
+        if (changePositionBack)
+        {
+            changePositionBack = false;
+            transform.position = initialPosition;
+        }
     }
 }

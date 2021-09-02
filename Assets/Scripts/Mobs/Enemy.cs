@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     protected Transform hpBar;
 
 
-    protected float initialAttackSpeed = 2f;
+    private float initialAttackSpeed = 2f;
     protected float initialHP;
     private float initialScaleX;
     protected float attackCooldown;
