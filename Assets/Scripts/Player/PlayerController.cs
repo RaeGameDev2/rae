@@ -136,7 +136,8 @@ public class PlayerController : MonoBehaviour
             currGravity = 0;
             rb.velocity = new Vector2(rb.velocity.x, 0);
         }
-        // Debug.Log($"{rb.velocity}   {currGravity}");
+
+        // rb.velocity = Vector2.zero;
     }
 
     //Polls input every frame and updates flags accordingly

@@ -17,7 +17,7 @@ public class GroundCheck : MonoBehaviour
         results = new List<RaycastHit2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (pc == null)
             pc = FindObjectOfType<PlayerController>();
