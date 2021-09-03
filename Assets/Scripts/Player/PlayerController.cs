@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
                 CheckJump();
                 if (isGrounded)
                 {
-                    if (rb.velocity.y >= 0) 
+                    if (rb.velocity.y >= 0)
                         rb.velocity = new Vector2(hInput * groundSpeed, rb.velocity.y);
                     else
                     {
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
             //Add simulated gravity
             // rb.AddForce(currGravity * Vector2.down, ForceMode2D.Force);
-            
+
             var velocityY = rb.velocity.y - currGravity * Time.fixedDeltaTime;
             rb.velocity = new Vector2(rb.velocity.x, velocityY);
 
@@ -152,6 +152,8 @@ public class PlayerController : MonoBehaviour
     private void ChangeDirection()
     {
         if (playerSpells.quickTeleportActive)
+            return;
+        if (animState == State.ATTACK)
             return;
         if (hInput > 0.01f && direction == Direction.left)
         {
