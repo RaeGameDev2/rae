@@ -23,8 +23,6 @@ public class FireBoss : Enemy
     [SerializeField] private AudioClip fireRealm;
     private float initialLocalScaleX;
     [SerializeField] private bool isDying;
-    [SerializeField] private float oldHp;
-    private PlayerResources playerResources;
     [SerializeField] private bool projectileAttack;
 
     [SerializeField] private bool simpleAttack;
@@ -40,11 +38,9 @@ public class FireBoss : Enemy
     private new void Start()
     {
         base.Start();
-        playerResources = FindObjectOfType<PlayerResources>();
         anim.SetInteger("state", (int)animType);
         initialHP = hp;
         isBoss = true;
-        oldHp = hp;
         initialLocalScaleX = transform.localScale.x;
     }
 
@@ -65,17 +61,9 @@ public class FireBoss : Enemy
         if (projectileAttack) return;
         if (damageAnimation) return;
 
-        if (Math.Abs(oldHp - hp) > 0.1f)
-        {
-            DamageAnimation();
-            return;
-        }
-
-        oldHp = hp;
-
         if (hp <= 0)
             Die();
-        if (GetDistanceToPlayer() < thresholdDistance && !playerSpells.phaseWalkActive)
+        if (GetDistanceFromPlayer() < thresholdDistance && !playerSpells.phaseWalkActive)
         {
             animType = Random.Range(0f, 2f) < 1f ? AnimType.Attack : AnimType.Projectile;
             switch (animType)
@@ -92,7 +80,7 @@ public class FireBoss : Enemy
 
     private void CheckOrientation()
     {
-        var deltaX = transform.position.x - playerResources.transform.position.x;
+        var deltaX = transform.position.x - player.position.x;
         const float threshold = 6f;
         if (deltaX > threshold)
             transform.localScale = new Vector3(initialLocalScaleX, transform.localScale.y, transform.localScale.z);
@@ -102,7 +90,7 @@ public class FireBoss : Enemy
 
     private void CheckCamera()
     {
-        if (GetDistanceToPlayer() < 40f)
+        if (GetDistanceFromPlayer() < 40f)
         {
             var cam = Camera.main;
             if (Math.Abs(cam.orthographicSize - 18f) < 0.1f)
@@ -112,7 +100,7 @@ public class FireBoss : Enemy
             cam.GetComponent<AudioSource>().Play();
         }
 
-        if (GetDistanceToPlayer() > 50f)
+        if (GetDistanceFromPlayer() > 50f)
         {
             var cam = Camera.main;
             if (Math.Abs(cam.orthographicSize - 10.8f) < 0.1f)
@@ -121,11 +109,6 @@ public class FireBoss : Enemy
             cam.GetComponent<AudioSource>().clip = fireRealm;
             cam.GetComponent<AudioSource>().Play();
         }
-    }
-
-    private float GetDistanceToPlayer()
-    {
-        return (playerResources.transform.position - transform.position).magnitude;
     }
 
     private void Die()
@@ -181,14 +164,19 @@ public class FireBoss : Enemy
     public void DamageEnd()
     {
         damageAnimation = false;
-        oldHp = hp;
         if (!isDying)
             animType = AnimType.Idle;
     }
 
-    public new void OnDamageTaken(float damage, bool isCrit)
+    public void DeathEnd()
+    {
+
+    }
+
+    public override void OnDamageTaken(float damage, bool isCrit)
     {
         if (isDying) return;
         base.OnDamageTaken(damage, isCrit);
+        DamageAnimation();
     }
 }

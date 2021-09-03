@@ -5,7 +5,6 @@ public class FireMob3 : Enemy
     // Start is called before the first frame update
     public static float speedY = 20f;
     public bool down;
-    private PlayerResources playerResources;
     public float relative_y;
     public float treshholdHeight = 20f;
     public bool up = true;
@@ -13,7 +12,6 @@ public class FireMob3 : Enemy
     private new void Start()
     {
         base.Start();
-        playerResources = FindObjectOfType<PlayerResources>();
     }
 
     private new void Update()

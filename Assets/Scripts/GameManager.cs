@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,6 +40,10 @@ public class GameManager : MonoBehaviour
     private UI_Manager uiManager;
     public float volume;
     private WeaponsHandler weaponsHandler;
+
+    public static bool spawn_fire_core;
+    public static bool spawn_ice_core;
+    public static bool spawn_nature_core;
 
     private void Awake()
     {
@@ -89,12 +94,35 @@ public class GameManager : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         weaponsHandler = FindObjectOfType<WeaponsHandler>();
 
+        Debug.Log("gameManager " + playerController.transform.position);
         var checkpointsGameObjects = GameObject.FindGameObjectsWithTag("Checkpoint");
         if (checkpointsGameObjects.Length == 4)
+        {
             foreach (var checkpoint in checkpointsGameObjects)
                 if (checkpoint.GetComponent<PortalCheckpoint>().portalId == checkpointId)
                     playerController.transform.position = checkpoint.transform.position;
+        }
+        else
+        {
+            var ice_Core = GameObject.FindGameObjectWithTag("IceCore");
+            var fire_Core = GameObject.FindGameObjectWithTag("FireCore");
+            var nature_Core = GameObject.FindGameObjectWithTag("NatureCore");
+            if (spawn_fire_core == false)
+            {
+                fire_Core.SetActive(false);
+            }
 
+            if(spawn_ice_core == false)
+            {
+                ice_Core.SetActive(false);
+            }
+
+            if(spawn_nature_core == false)
+            {
+                nature_Core.SetActive(false);
+            }
+        }
+        Debug.Log("gameManager " + playerController.transform.position);
         LoadAllData();
     }
 
@@ -140,27 +168,11 @@ public class GameManager : MonoBehaviour
         weaponsHandler.Pause();
     }
 
-    public GameObject getCheckpointBySceneAndId(int id, int scene)
+    private GameObject GetCheckpointById(int id)
     {
-        var sceneName = "";
+        var checkpointsGameObjects = GameObject.FindGameObjectsWithTag("Checkpoint");
 
-        switch (scene)
-        {
-            case 2:
-                sceneName += "Fire";
-                break;
-            case 3:
-                sceneName += "Ice";
-                break;
-            case 4:
-                sceneName += "Jungle";
-                break;
-        }
-
-        Debug.Log(sceneName + " Checkpoint " + (id + 1));
-        var checkpoint = GameObject.Find(sceneName + " Checkpoint " + (id + 1));
-
-        return checkpoint;
+        return checkpointsGameObjects.FirstOrDefault(go => go.GetComponent<PortalCheckpoint>().portalId == id);
     }
 
     public void ChangeCheckpointId(int id, int scene)
@@ -190,7 +202,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(uiManager.FadeToBlack());
         while (fadingToBlackAnimation)
             yield return new WaitForFixedUpdate();
-        playerController.transform.position = getCheckpointBySceneAndId(id, scene).transform.position;
+        playerController.transform.position = GetCheckpointById(id).transform.position;
         fadingToBlackAnimation = true;
         StartCoroutine(uiManager.FadeFromBlack());
     }

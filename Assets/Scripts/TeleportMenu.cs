@@ -14,28 +14,28 @@ public class TeleportMenu : MonoBehaviour
     private GameObject icePortal4;
     private GameObject player;
 
-    [SerializeField]private GameObject icePortal1Button;
-    [SerializeField]private GameObject icePortal2Button;
-    [SerializeField]private GameObject icePortal3Button;
-    [SerializeField]private GameObject icePortal4Button;
+    [SerializeField] private GameObject icePortal1Button;
+    [SerializeField] private GameObject icePortal2Button;
+    [SerializeField] private GameObject icePortal3Button;
+    [SerializeField] private GameObject icePortal4Button;
 
     [SerializeField] private GameObject icePortal2Blocked;
     [SerializeField] private GameObject icePortal3Blocked;
     [SerializeField] private GameObject icePortal4Blocked;
 
-    [SerializeField]private GameObject firePortal1Button;
-    [SerializeField]private GameObject firePortal2Button;
-    [SerializeField]private GameObject firePortal3Button;
-    [SerializeField]private GameObject firePortal4Button;
+    [SerializeField] private GameObject firePortal1Button;
+    [SerializeField] private GameObject firePortal2Button;
+    [SerializeField] private GameObject firePortal3Button;
+    [SerializeField] private GameObject firePortal4Button;
 
     [SerializeField] private GameObject firePortal2Blocked;
     [SerializeField] private GameObject firePortal3Blocked;
     [SerializeField] private GameObject firePortal4Blocked;
 
-    [SerializeField]private GameObject junglePortal1Button;
-    [SerializeField]private GameObject junglePortal2Button;
-    [SerializeField]private GameObject junglePortal3Button;
-    [SerializeField]private GameObject junglePortal4Button;
+    [SerializeField] private GameObject junglePortal1Button;
+    [SerializeField] private GameObject junglePortal2Button;
+    [SerializeField] private GameObject junglePortal3Button;
+    [SerializeField] private GameObject junglePortal4Button;
 
     [SerializeField] private GameObject junglePortal2Blocked;
     [SerializeField] private GameObject junglePortal3Blocked;
@@ -44,12 +44,35 @@ public class TeleportMenu : MonoBehaviour
     public void Start()
     {
         gameManager = GameManager.instance;
+        icePortal1Button.SetActive(false);
+        icePortal2Button.SetActive(false);
+        icePortal3Button.SetActive(false);
+        icePortal4Button.SetActive(false);
+        icePortal2Blocked.SetActive(false);
+        icePortal3Blocked.SetActive(false);
+        icePortal4Blocked.SetActive(false);
+
+        junglePortal1Button.SetActive(false);
+        junglePortal2Button.SetActive(false);
+        junglePortal3Button.SetActive(false);
+        junglePortal4Button.SetActive(false);
+        junglePortal2Blocked.SetActive(false);
+        junglePortal3Blocked.SetActive(false);
+        junglePortal4Blocked.SetActive(false);
+
+        firePortal1Button.SetActive(false);
+        firePortal2Button.SetActive(false);
+        firePortal3Button.SetActive(false);
+        firePortal4Button.SetActive(false);
+        firePortal2Blocked.SetActive(false);
+        firePortal3Blocked.SetActive(false);
+        firePortal4Blocked.SetActive(false);
     }
 
     public void OpenMeniuPortalIce()
     {
-        
-        if(icePortal1Button.activeInHierarchy == true)
+
+        if (icePortal1Button.activeInHierarchy == true)
         {
             icePortal1Button.SetActive(false);
             icePortal2Button.SetActive(false);
@@ -114,7 +137,7 @@ public class TeleportMenu : MonoBehaviour
     }
     public void OpenMeniuPortalFire()
     {
-        if(firePortal1Button.activeInHierarchy == true)
+        if (firePortal1Button.activeInHierarchy == true)
         {
             firePortal1Button.SetActive(false);
             firePortal2Button.SetActive(false);
@@ -181,7 +204,7 @@ public class TeleportMenu : MonoBehaviour
 
     public void OpenMeniuPortalJungle()
     {
-        if(junglePortal1Button.activeInHierarchy == true)
+        if (junglePortal1Button.activeInHierarchy == true)
         {
             junglePortal1Button.SetActive(false);
             junglePortal2Button.SetActive(false);
