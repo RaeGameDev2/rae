@@ -11,14 +11,14 @@ public class JungleBoss : Enemy
         Death
     }
 
-    public enum AnimatorShield
+    public enum AnimationShield
     {
         Idle,
         Damage,
         Death
     }
 
-    public enum AnimatorSpitter
+    public enum AnimationSpitter
     {
         IdleBeginning,
         Idle,
@@ -29,12 +29,32 @@ public class JungleBoss : Enemy
     }
 
     private Animator animatorBody;
+    [SerializeField] private AnimationBody animationState;
+
     private JungleBossShield shield;
     private JungleBossSpitter[] spitters;
+
+    private bool ShieldActive;
 
 
     private new void Awake()
     {
+        base.Awake();
         animatorBody = GetComponent<Animator>();
+        shield = GetComponents<JungleBossShield>()[0];
+        spitters = GetComponents<JungleBossSpitter>();
+        animationState = AnimationBody.Idle;
+        shield.animationState = AnimationShield.Idle;
+        foreach (var spitter in spitters)
+        {
+            spitter.animationState = AnimationSpitter.IdleBeginning;
+        }
     }
+
+    private new void Update()
+    {
+        base.Update();
+    }
+
+
 }
