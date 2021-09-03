@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.x != 0)
             diagonalJump = true;
         currGravity = jumpGravity;
-        SoundManagerScript.playJumpSound = true;
+        SoundManagerScript.instance.PlaySound(SoundManagerScript.SoundType.JUMP);
     }
 
     private void CheckJump()
