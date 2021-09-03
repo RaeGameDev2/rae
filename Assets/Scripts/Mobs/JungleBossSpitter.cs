@@ -6,4 +6,7 @@ public class JungleBossSpitter : MonoBehaviour
 {
     private Animator animatorSpitter;
     public JungleBoss.AnimationSpitter animationState;
+    public bool active;
+
+
 }
