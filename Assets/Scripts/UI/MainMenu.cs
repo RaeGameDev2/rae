@@ -5,15 +5,8 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] int hubSceneID;
-    [SerializeField] int playSceneID;
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
-
-
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject pauseButton;
-
-    private bool isPaused = false;
 
     public IEnumerator loadSceneAsync(int id)
     {
@@ -49,8 +42,6 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        hubSceneID = 1;
-        playSceneID = 1;
         foreach (Transform child in transform)
         {
             foreach (Transform nephew in child)
@@ -58,7 +49,7 @@ public class MainMenu : MonoBehaviour
                 nephew.GetComponent<TweenText>().FadeOut();
             }
         }
-        StartCoroutine(loadSceneAsync(playSceneID));
+        StartCoroutine(loadSceneAsync(hubSceneID));
     }
 
     public void Quit()
@@ -67,52 +58,16 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void SettingsMain()
+    public void Settings()
     {
         mainMenu.SetActive(false);
         settingsMenu.SetActive(true);
-    }
-
-    public void SettingPause()
-    {
-        isPaused = true;
-        settingsMenu.SetActive(true);
-        pauseMenu.SetActive(false);
+        Debug.Log("XD");
     }
 
     public void Back()
     {
-
-        if (isPaused)
-        {
-            pauseMenu.SetActive(true);
-            settingsMenu.SetActive(false);
-            return;
-        }
-        mainMenu.SetActive(true);
         settingsMenu.SetActive(false);
-    }
-
-    public void Pause()
-    {
-        pauseMenu.SetActive(true);
-        pauseButton.SetActive(false);
-        Time.timeScale = 0f;
-
-    }
-
-    public void Resume()
-    {
-        pauseButton.SetActive(true);
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-
-        isPaused = false;
-    }
-
-    public void BackToHub()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(hubSceneID);
+        mainMenu.SetActive(true);
     }
 }
