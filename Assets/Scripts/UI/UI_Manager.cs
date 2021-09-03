@@ -134,6 +134,7 @@ public class UI_Manager : MonoBehaviour
         instance.rectTransform.localScale = Vector3.one;
         healthPointInstances.Add(instance);
         offsetHealthSegments += 30;
+        lightImage.gameObject.SetActive(true);
     }
 
     public void TakeLives(int number)
@@ -146,7 +147,7 @@ public class UI_Manager : MonoBehaviour
         }
 
         if (offsetHealthSegments == 0)
-            lightImage.enabled = false;
+            lightImage.gameObject.SetActive(false);
     }
 
     public void AddMana()

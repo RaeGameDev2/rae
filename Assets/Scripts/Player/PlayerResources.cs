@@ -114,18 +114,22 @@ public class PlayerResources : MonoBehaviour
             currentMana = maxMana;
             gameManager.Die();
 
-            for (int i = 0; i < maxHealth; i++)
-            {
-                uiManager.AddMana();
-                uiManager.AddLife();
-            }
-
+            StartCoroutine(RegenerateUI());
         }
         else
         {
             currentHealth -= damage;
             uiManager.TakeLives(damage);
-            if (currentHealth <= 0) StartCoroutine(my_delay());
+        }
+    }
+
+    private IEnumerator RegenerateUI()
+    {
+        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < maxHealth; i++)
+        {
+            uiManager.AddMana();
+            uiManager.AddLife();
         }
     }
 

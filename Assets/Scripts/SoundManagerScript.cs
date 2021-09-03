@@ -4,54 +4,58 @@ using UnityEngine;
 
 public class SoundManagerScript : MonoBehaviour
 {
-    public static bool playJumpSound;
-    public static bool playAttackSound;
+    public static SoundManagerScript instance;
 
-    public const int jump = 0;
-    public const int attack = 1;
+    public enum SoundType
+    {
+        JUMP,
+        ATTACK,
+    }
 
     public AudioClip jumpSound;
     public AudioClip attackSound;
+    public AudioClip music;
 
-    private static AudioSource audioSource;
+    private AudioSource audioSource;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
-        playJumpSound = false;
-        playAttackSound = false;
+        audioSource = GetComponent<AudioSource>();
 
-        audioSource = GetComponent<AudioSource> ();
+        audioSource.volume = GameManager.instance.volume;
+        Camera.main.GetComponent<AudioSource>().volume = GameManager.instance.volume;
+        Camera.main.GetComponent<AudioSource>().clip = music;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlaySound(SoundType type)
     {
-        if (playJumpSound)
+        switch (type)
         {
-            PlaySound(jump);
-            playJumpSound = false;
-        }
-
-        if (playAttackSound)
-        {
-            PlaySound(attack);
-            playAttackSound = false;
-        }
-    }
-
-    public void PlaySound(int sound)
-    {
-        // Debug.Log("Sound started!");
-        switch (sound)
-        {
-            case jump:
+            case SoundType.JUMP:
                 audioSource.PlayOneShot(jumpSound);
                 break;
 
-            case attack:
+            case SoundType.ATTACK:
                 audioSource.PlayOneShot(attackSound);
                 break;
         }
+    }
+
+    public void UpdateVolume()
+    {
+        Camera.main.GetComponent<AudioSource>().volume = GameManager.instance.volume;
+        audioSource.volume = GameManager.instance.volume;
     }
 }
