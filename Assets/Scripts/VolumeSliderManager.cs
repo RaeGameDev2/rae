@@ -19,5 +19,6 @@ public class VolumeSliderManager : MonoBehaviour
     {
         GameManager.instance.volume = slider.value;
         GameManager.instance.SaveVolume();
+        SoundManagerScript.instance.UpdateVolume();
     }
 }
