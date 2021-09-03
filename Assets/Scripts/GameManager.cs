@@ -338,7 +338,8 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Jungle hpoints instantiated");
                 name = jungleHealthPointsPrefab.name;
                 Destroy(GameObject.Find(name));
-                Instantiate(jungleHealthPointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
+                if (jungleHealthPointsPrefab)
+                    Instantiate(jungleHealthPointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
                 break;
         }
     }
@@ -348,6 +349,8 @@ public class GameManager : MonoBehaviour
         // TODO : Play player's death animation
         StartCoroutine(MovePlayer(lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
         RespawnHealthPoints();
+
+        Debug.Log("Player died!");
     }
 
     private void LoadAllData()
