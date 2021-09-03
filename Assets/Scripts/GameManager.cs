@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
     public float volume;
     private WeaponsHandler weaponsHandler;
 
+    public static bool spawn_fire_core;
+    public static bool spawn_ice_core;
+    public static bool spawn_nature_core;
+
     private void Awake()
     {
         checkpoints.Add(Realm.Ice, new List<bool>());
@@ -93,10 +97,31 @@ public class GameManager : MonoBehaviour
         Debug.Log("gameManager " + playerController.transform.position);
         var checkpointsGameObjects = GameObject.FindGameObjectsWithTag("Checkpoint");
         if (checkpointsGameObjects.Length == 4)
+        {
             foreach (var checkpoint in checkpointsGameObjects)
                 if (checkpoint.GetComponent<PortalCheckpoint>().portalId == checkpointId)
                     playerController.transform.position = checkpoint.transform.position;
+        }
+        else
+        {
+            var ice_Core = GameObject.FindGameObjectWithTag("IceCore");
+            var fire_Core = GameObject.FindGameObjectWithTag("FireCore");
+            var nature_Core = GameObject.FindGameObjectWithTag("NatureCore");
+            if (spawn_fire_core == false)
+            {
+                fire_Core.SetActive(false);
+            }
 
+            if(spawn_ice_core == false)
+            {
+                ice_Core.SetActive(false);
+            }
+
+            if(spawn_nature_core == false)
+            {
+                nature_Core.SetActive(false);
+            }
+        }
         Debug.Log("gameManager " + playerController.transform.position);
         LoadAllData();
     }
