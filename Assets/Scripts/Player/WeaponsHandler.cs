@@ -62,7 +62,7 @@ public class WeaponsHandler : MonoBehaviour
     {
         if (pause) return;
         if ((Input.GetKeyDown(KeyCode.T) || Input.GetAxis("Mouse ScrollWheel") != 0f) &&
-            currWeapon.attackType == Weapon.AttackType.None) 
+            currWeapon.attackType == Weapon.AttackType.None)
             SwitchWeapon();
 
         if (playerSpells.phaseWalkActive || playerSpells.orbDropped) return;
@@ -70,13 +70,13 @@ public class WeaponsHandler : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && currWeapon.attackType == Weapon.AttackType.None)
         {
             currWeapon.attackType = Weapon.AttackType.Basic;
-            SoundManagerScript.playAttackSound = true;
+            SoundManagerScript.instance.PlaySound(SoundManagerScript.SoundType.ATTACK);
         }
 
         if (Input.GetMouseButtonDown(1) && currWeapon.attackType == Weapon.AttackType.None)
         {
             currWeapon.attackType = Weapon.AttackType.Heavy;
-            SoundManagerScript.playAttackSound = true;
+            SoundManagerScript.instance.PlaySound(SoundManagerScript.SoundType.ATTACK);
         }
     }
 
@@ -84,9 +84,9 @@ public class WeaponsHandler : MonoBehaviour
     {
         currWeapon = currWeapon.type switch
         {
-            Weapon.WeaponType.Scythe => weapons[(int) Weapon.WeaponType.Orb],
-            Weapon.WeaponType.Orb => weapons[(int) Weapon.WeaponType.Staff],
-            Weapon.WeaponType.Staff => weapons[(int) Weapon.WeaponType.Scythe],
+            Weapon.WeaponType.Scythe => weapons[(int)Weapon.WeaponType.Orb],
+            Weapon.WeaponType.Orb => weapons[(int)Weapon.WeaponType.Staff],
+            Weapon.WeaponType.Staff => weapons[(int)Weapon.WeaponType.Scythe],
             _ => currWeapon
         };
     }

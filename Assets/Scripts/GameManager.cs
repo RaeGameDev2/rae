@@ -20,10 +20,10 @@ public class GameManager : MonoBehaviour
     private int checkpointId;
 
     public Dictionary<Realm, List<bool>> checkpoints = new Dictionary<Realm, List<bool>>();
-    
+
     public bool fadingToBlackAnimation;
     public bool fadingFromBlackAnimation;
-    
+
     [SerializeField] private GameObject fireHealthPointsPrefab;
     [SerializeField] private GameObject iceHealthPointsPrefab;
     public bool isDontDestroyOnLoad;
@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        LoadVolume();
+
         checkpoints.Add(Realm.Ice, new List<bool>());
         checkpoints[Realm.Ice].Add(true);
         checkpoints[Realm.Ice].Add(false);
@@ -112,12 +114,12 @@ public class GameManager : MonoBehaviour
                 fire_Core.SetActive(false);
             }
 
-            if(spawn_ice_core == false)
+            if (spawn_ice_core == false)
             {
                 ice_Core.SetActive(false);
             }
 
-            if(spawn_nature_core == false)
+            if (spawn_nature_core == false)
             {
                 nature_Core.SetActive(false);
             }
