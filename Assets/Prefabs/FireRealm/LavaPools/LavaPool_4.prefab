@@ -666,6 +666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4160741320769737036}
   - component: {fileID: 4160741320769737039}
+  - component: {fileID: 5632308040339762921}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Lava
@@ -699,7 +700,7 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -715,6 +716,18 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &5632308040339762921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4160741320769737037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5ad0cbab1edb640a476b7c9d839eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4160741320780151857
 GameObject:
   m_ObjectHideFlags: 0
