@@ -168,6 +168,11 @@ public class FireBoss : Enemy
             animType = AnimType.Idle;
     }
 
+    public void DeathEnd()
+    {
+
+    }
+
     public override void OnDamageTaken(float damage, bool isCrit)
     {
         if (isDying) return;
