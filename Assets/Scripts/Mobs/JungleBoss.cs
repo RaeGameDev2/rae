@@ -30,6 +30,7 @@ public class JungleBoss : Enemy
 
     private Animator animatorBody;
     [SerializeField] private AnimationBody animationState;
+    [SerializeField] private GameObject projectilePrefab;
 
     private JungleBossShield shield;
     private JungleBossSpitter[] spitters;
@@ -46,6 +47,10 @@ public class JungleBoss : Enemy
     private float timeEndAttack;
     private bool isAttacking;
 
+    private float timeBetweenAttacks = 3f;
+    private float durationAttack = 3f;
+    private Transform coreTransform;
+
     private new void Awake()
     {
         base.Awake();
@@ -57,7 +62,14 @@ public class JungleBoss : Enemy
         foreach (var spitter in spitters)
         {
             spitter.animationState = AnimationSpitter.IdleBeginning;
+            spitter.animatorSpitter.SetFloat("speed", speed);
         }
+
+        animatorBody.SetFloat("speed", speed);
+        shield.animatorShield.SetFloat("speed", speed);
+
+        shieldActive = true;
+
     }
 
     private new void Update()
@@ -66,24 +78,51 @@ public class JungleBoss : Enemy
         if (bossActive)
         {
             if (damageAnimation) return;
-            
+            if (isAttacking) return;
+            if (Time.time >= timeNextAttack)
+                StartCoroutine(Attack());
         }
-        else if (spittersDeath == 4)
-            bossActive = true;
+        else
+        {
+
+            if (spittersDeath == 4)
+                bossActive = true;
+        }
+    }
+
+    private IEnumerator Attack()
+    {
+        timeEndAttack = Time.time + durationAttack;
+        var timeNextProjectile = Time.time;
+        while (Time.time > timeEndAttack)
+        {
+            yield return new WaitForFixedUpdate();
+            if (Time.time >= timeNextProjectile)
+            {
+                Instantiate(projectilePrefab, coreTransform.position, Quaternion.identity);
+                timeNextProjectile = Time.time;
+            }
+        }
+
+        timeNextAttack = Time.time + timeBetweenAttacks;
     }
 
     public override void OnDamageTaken(float damage, bool isCrit)
     {
         base.OnDamageTaken(damage, isCrit);
         if (shieldActive)
+        {
+            if (hp <= 0)
+            {
+                shield.animationState = AnimationShield.Death;
+                player.position += new Vector3(-20f, 5f);
+                StartCoroutine(ActivateSpitters());
+                return;
+            }
             shield.animationState = AnimationShield.Damage;
+        }
         else
             animationState = AnimationBody.Death;
-    }
-
-    public void OnShieldDeath()
-    {
-        player.position += new Vector3(-50f, 5f);
     }
 
     private IEnumerator ActivateSpitters()

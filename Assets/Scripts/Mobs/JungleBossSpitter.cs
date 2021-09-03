@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JungleBossSpitter : MonoBehaviour
 {
-    private Animator animatorSpitter;
+    public Animator animatorSpitter;
     public JungleBoss.AnimationSpitter animationState;
     public bool active;
 
