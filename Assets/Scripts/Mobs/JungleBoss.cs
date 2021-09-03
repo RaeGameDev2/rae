@@ -34,8 +34,17 @@ public class JungleBoss : Enemy
     private JungleBossShield shield;
     private JungleBossSpitter[] spitters;
 
-    private bool ShieldActive;
+    private bool shieldActive;
+    private bool spittersActive;
 
+    private bool bossActive;
+    private bool damageAnimation;
+    private bool deathAnimation;
+
+    public int spittersDeath;
+    private float timeNextAttack;
+    private float timeEndAttack;
+    private bool isAttacking;
 
     private new void Awake()
     {
@@ -54,7 +63,47 @@ public class JungleBoss : Enemy
     private new void Update()
     {
         base.Update();
+        if (bossActive)
+        {
+            if (damageAnimation) return;
+            
+        }
+        else if (spittersDeath == 4)
+            bossActive = true;
     }
 
+    public override void OnDamageTaken(float damage, bool isCrit)
+    {
+        base.OnDamageTaken(damage, isCrit);
+        if (shieldActive)
+            shield.animationState = AnimationShield.Damage;
+        else
+            animationState = AnimationBody.Death;
+    }
 
+    public void OnShieldDeath()
+    {
+        player.position += new Vector3(-50f, 5f);
+    }
+
+    private IEnumerator ActivateSpitters()
+    {
+        yield return new WaitForSeconds(1f);
+        spittersActive = true;
+        foreach (var spitter in spitters)
+        {
+            spitter.active = true;
+        }
+    }
+
+    public void OnShieldDestroy()
+    {
+        hp = initialHP;
+    }
+
+    public void EndDamageAnimation()
+    {
+        damageAnimation = false;
+        animationState = AnimationBody.Idle;
+    }
 }
