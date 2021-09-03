@@ -65,6 +65,7 @@ public class PauseMenu : MonoBehaviour
         {
             File.Delete(skilpoints_file_path);
         }
+        GameManager.instance.ResetAllData();
         SceneManager.LoadScene(1);
     }
     private void Update()
