@@ -5,5 +5,5 @@ using UnityEngine;
 public class JungleBossShield : MonoBehaviour
 {
     private Animator animatorShield;
-    public JungleBoss.AnimatorShield animationState;
+    public JungleBoss.AnimationShield animationState;
 }
