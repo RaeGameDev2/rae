@@ -87,12 +87,14 @@ public class Enemy : MonoBehaviour
             currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Basic)
         {
             var instBasic = Instantiate(atStaffBasicAttack, centerPiece.transform.position, Quaternion.identity, transform);
+            instBasic.transform.localScale = (isBoss ? 4f : 2f) * Vector3.one; 
             Destroy(instBasic, 1f);
         }
         else if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
             currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Heavy)
         {
             var instHeavy = Instantiate(atStaffHeavyAttack, centerPiece.transform.position, Quaternion.identity, transform);
+            instHeavy.transform.localScale = (isBoss ? 4f : 2f) * Vector3.one;
             Destroy(instHeavy, 1f);
         }
 

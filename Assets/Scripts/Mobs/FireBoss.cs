@@ -17,10 +17,10 @@ public class FireBoss : Enemy
 
     private Animator anim;
     [SerializeField] public AnimType animType;
-    [SerializeField] private AudioClip bossFight;
+    [SerializeField] private AudioClip bossFightClip;
     [SerializeField] private bool damageAnimation;
 
-    [SerializeField] private AudioClip fireRealm;
+    [SerializeField] private AudioClip fireRealmClip;
     private float initialLocalScaleX;
     [SerializeField] private bool isDying;
     [SerializeField] private bool projectileAttack;
@@ -90,23 +90,25 @@ public class FireBoss : Enemy
 
     private void CheckCamera()
     {
-        if (GetDistanceFromPlayer() < 40f)
+        if (GetDistanceFromPlayer() < 100f)
         {
             var cam = Camera.main;
             if (Math.Abs(cam.orthographicSize - 18f) < 0.1f)
                 return;
-            cam.orthographicSize = 18f;
-            cam.GetComponent<AudioSource>().clip = bossFight;
+            cam.orthographicSize = 21.6f;
+            GameObject.Find("Layer1").transform.localScale = new Vector3(2, 2);
+            cam.GetComponent<AudioSource>().clip = bossFightClip;
             cam.GetComponent<AudioSource>().Play();
         }
 
-        if (GetDistanceFromPlayer() > 50f)
+        if (GetDistanceFromPlayer() > 150f)
         {
             var cam = Camera.main;
             if (Math.Abs(cam.orthographicSize - 10.8f) < 0.1f)
                 return;
             cam.orthographicSize = 10.8f;
-            cam.GetComponent<AudioSource>().clip = fireRealm;
+            GameObject.Find("Layer1").transform.localScale = new Vector3(1, 1);
+            cam.GetComponent<AudioSource>().clip = fireRealmClip;
             cam.GetComponent<AudioSource>().Play();
         }
     }
