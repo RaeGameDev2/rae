@@ -116,12 +116,10 @@ public class FireBoss : Enemy
         isDying = true;
         animType = AnimType.Death;
         anim.SetInteger("state", (int)animType);
-
         Destroy(hpBar.gameObject, 1f);
         Destroy(
             gameObject.GetComponentsInChildren<Transform>()?.FirstOrDefault(component => component.name == "Square")
                 ?.gameObject, 1f);
-        Destroy(gameObject, 2f);
     }
 
     private IEnumerator ActivateAttacking()
@@ -157,6 +155,8 @@ public class FireBoss : Enemy
 
     private void DamageAnimation()
     {
+        simpleAttack = false;
+        projectileAttack = false;
         damageAnimation = true;
         animType = AnimType.Damage;
     }
@@ -168,9 +168,12 @@ public class FireBoss : Enemy
             animType = AnimType.Idle;
     }
 
-    public void DeathEnd()
-    {
+    [SerializeField] private GameObject corePrefab;
 
+    public void EndDeathAnimation()
+    {
+        Instantiate(corePrefab, transform.position + new Vector3(-19.60128f, 7.918855f), Quaternion.identity);
+        Destroy(gameObject);
     }
 
     public override void OnDamageTaken(float damage, bool isCrit)

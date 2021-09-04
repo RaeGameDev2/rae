@@ -126,7 +126,6 @@ public class IceBoss : Enemy
         Destroy(
             gameObject.GetComponentsInChildren<Transform>()?.FirstOrDefault(component => component.name == "Square")
                 ?.gameObject, 1f);
-        Destroy(gameObject, 2f);
     }
 
     private IEnumerator ActivateAttacking()
@@ -159,6 +158,14 @@ public class IceBoss : Enemy
         projectileAttack = false;
         if (!isDying)
             animType = AnimType.Idle;
+    }
+
+    [SerializeField] private GameObject corePrefab;
+
+    public void EndDeathAnimation()
+    {
+        Instantiate(corePrefab, transform.position + new Vector3(-15.02349f, 2.910582f), Quaternion.identity);
+        Destroy(gameObject);
     }
 
     public new void OnDamageTaken(float damage, bool isCrit)

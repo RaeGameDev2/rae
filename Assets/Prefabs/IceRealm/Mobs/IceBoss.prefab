@@ -112,7 +112,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2515429219929171931}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -150.99998}
 --- !u!212 &7016589568072281047
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -492,18 +492,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf9beb246858b84d8dd56d235c3ac48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 0
   atStaffHeavyAttack: {fileID: 6036975801974468197, guid: 46938152a5352cd4583ef3dc38261579, type: 3}
   atStaffBasicAttack: {fileID: 5368235276387312648, guid: 2ba27f9370fe5fa4dabe34b74b48ec33, type: 3}
-  damageOnTouch: 1
   dpsLifeDrain: 50
   hp: 5000
-  initialAttackSpeed: 2
-  initialHP: 5000
-  initialScaleX: 0
-  attackCooldown: 0
-  initialTimeLifeDrain: 4
-  isBoss: 0
   speed: 0
   animType: 0
   bossFight: {fileID: 8300000, guid: 5dbbd5a1093898e41bc2795b2debe570, type: 3}
@@ -513,6 +505,7 @@ MonoBehaviour:
   projectileAttack: 0
   simpleAttack: 0
   thresholdDistance: 10
+  corePrefab: {fileID: 3900596012037718902, guid: 5afdee2b87390f14aa660a3c7549d38e, type: 3}
 --- !u!61 &3184471506493267499
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -735,7 +728,7 @@ Transform:
   - {fileID: 32036665883792984}
   m_Father: {fileID: 2515429219929171931}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 33.774}
 --- !u!1 &4129560335781882151
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,7 +1000,7 @@ Transform:
   - {fileID: 3156928205649439929}
   m_Father: {fileID: 5862854385991606459}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 151}
 --- !u!1 &7963409894868061792
 GameObject:
   m_ObjectHideFlags: 0

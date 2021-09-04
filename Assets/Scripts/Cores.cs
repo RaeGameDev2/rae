@@ -1,20 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Cores : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+
+        if (transform.tag == "FireCore")
+            StartCoroutine(RiseCore());
+    }
+    
+    private IEnumerator RiseCore()
+    {
+        var dist = 8f;
+        while (dist > 0f)
+        {
+            dist -= 0.2f;
+            transform.position += new Vector3(0f, 0.2f);
+            yield return new WaitForFixedUpdate();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
