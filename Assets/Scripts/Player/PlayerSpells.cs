@@ -27,8 +27,8 @@ public class PlayerSpells : MonoBehaviour
     private Vector3 transportPosition;
     private WeaponsHandler weaponsHandler;
 
-    // Scythe_000
     private SpriteRenderer scytheRendererAttack;
+    private SpriteRenderer scytheRendererAttack2;
     private SpriteRenderer scytheRendererIdle;
     [SerializeField] private Sprite scythe;
     [SerializeField] private Sprite scytheBloodDrain;
@@ -39,8 +39,10 @@ public class PlayerSpells : MonoBehaviour
         weaponsHandler = GetComponent<WeaponsHandler>();
         playerResources = GetComponent<PlayerResources>();
 
-        scytheRendererIdle = GetComponentsInChildren<SpriteRenderer>().FirstOrDefault(obj => obj.transform.name == "Scythe_001");
-        scytheRendererAttack = GetComponentsInChildren<SpriteRenderer>().FirstOrDefault(obj => obj.transform.name == "Scythe_000");
+        var spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        scytheRendererIdle = spriteRenderers.FirstOrDefault(obj => obj.transform.name == "Scythe_001");
+        scytheRendererAttack2 = spriteRenderers.FirstOrDefault(obj => obj.transform.name == "Scythe");
+        scytheRendererAttack = spriteRenderers.FirstOrDefault(obj => obj.transform.name == "Scythe_000");
 
         phaseWalkActive = false;
         lifeDrainActive = false;
@@ -108,6 +110,7 @@ public class PlayerSpells : MonoBehaviour
     {
         lifeDrainActive = true;
         scytheRendererAttack.sprite = scytheBloodDrain;
+        scytheRendererAttack2.sprite = scytheBloodDrain;
         scytheRendererIdle.sprite = scytheBloodDrain;
         StartCoroutine(StopLifeDrain());
         StartCoroutine(SpellAnimation());
@@ -173,8 +176,9 @@ public class PlayerSpells : MonoBehaviour
         yield return new WaitForSeconds(timeLifeDrain);
         lifeDrainActive = false;
 
+        scytheRendererIdle.sprite = scythe;
         scytheRendererAttack.sprite = scythe;
-        scytheRendererAttack.sprite = scythe;
+        scytheRendererAttack2.sprite = scythe;
     }
 
     private IEnumerator StopParry()
