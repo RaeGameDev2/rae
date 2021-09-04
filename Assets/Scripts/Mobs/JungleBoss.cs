@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,10 @@ public class JungleBoss : Enemy
     private Animator animatorBody;
     [SerializeField] private AnimationBody animationState;
     [SerializeField] private GameObject projectilePrefab;
+
+
+    [SerializeField] private AudioClip bossFightClip;
+    [SerializeField] private AudioClip jungleRealmClip;
 
     private JungleBossShield shield;
     private JungleBossSpitter[] spitters;
@@ -94,6 +99,31 @@ public class JungleBoss : Enemy
         {
             if (spittersDeath == 4)
                 bossActive = true;
+        }
+    }
+
+    private void CheckCamera()
+    {
+        if (GetDistanceFromPlayer() < 100f)
+        {
+            var cam = Camera.main;
+            if (Math.Abs(cam.orthographicSize - 18f) < 0.1f)
+                return;
+            cam.orthographicSize = 21.6f;
+            GameObject.Find("Layer1").transform.localScale = new Vector3(2, 2);
+            cam.GetComponent<AudioSource>().clip = bossFightClip;
+            cam.GetComponent<AudioSource>().Play();
+        }
+
+        if (GetDistanceFromPlayer() > 150f)
+        {
+            var cam = Camera.main;
+            if (Math.Abs(cam.orthographicSize - 10.8f) < 0.1f)
+                return;
+            cam.orthographicSize = 10.8f;
+            GameObject.Find("Layer1").transform.localScale = new Vector3(1, 1);
+            cam.GetComponent<AudioSource>().clip = jungleRealmClip;
+            cam.GetComponent<AudioSource>().Play();
         }
     }
 

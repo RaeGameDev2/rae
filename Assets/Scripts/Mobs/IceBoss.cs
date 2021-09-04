@@ -16,8 +16,8 @@ public class IceBoss : Enemy
 
     private Animator anim;
     [SerializeField] public AnimType animType;
-    [SerializeField] private AudioClip bossFight;
-    [SerializeField] private AudioClip iceRealm;
+    [SerializeField] private AudioClip bossFightClip;
+    [SerializeField] private AudioClip iceRealmClip;
     private float initialLocalScaleX;
     [SerializeField] private bool isDying;
     [SerializeField] private GameObject projectile;
@@ -90,23 +90,25 @@ public class IceBoss : Enemy
 
     private void CheckCamera()
     {
-        if (GetDistanceToPlayer() < 40f)
+        if (GetDistanceFromPlayer() < 100f)
         {
             var cam = Camera.main;
-            if (Math.Abs(cam.orthographicSize - 15f) < 0.1f)
+            if (Math.Abs(cam.orthographicSize - 18f) < 0.1f)
                 return;
-            cam.orthographicSize = 15f;
-            cam.GetComponent<AudioSource>().clip = bossFight;
+            cam.orthographicSize = 21.6f;
+            GameObject.Find("Layer1").transform.localScale = new Vector3(2, 2);
+            cam.GetComponent<AudioSource>().clip = bossFightClip;
             cam.GetComponent<AudioSource>().Play();
         }
 
-        if (GetDistanceToPlayer() > 50f)
+        if (GetDistanceFromPlayer() > 150f)
         {
             var cam = Camera.main;
             if (Math.Abs(cam.orthographicSize - 10.8f) < 0.1f)
                 return;
             cam.orthographicSize = 10.8f;
-            cam.GetComponent<AudioSource>().clip = iceRealm;
+            GameObject.Find("Layer1").transform.localScale = new Vector3(1, 1);
+            cam.GetComponent<AudioSource>().clip = iceRealmClip;
             cam.GetComponent<AudioSource>().Play();
         }
     }
