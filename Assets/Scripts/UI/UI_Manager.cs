@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
@@ -30,20 +31,25 @@ public class UI_Manager : MonoBehaviour
 
     private void Start()
     {
-        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<RectTransform>();
-        manaBar = GameObject.FindGameObjectWithTag("ManaBar").GetComponent<RectTransform>();
+        if (SceneManager.GetActiveScene().name != "HubWorld")
+        {
+            healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<RectTransform>();
+            manaBar = GameObject.FindGameObjectWithTag("ManaBar").GetComponent<RectTransform>();
+            playerResources = FindObjectOfType<PlayerResources>();
+            uiSkillTree = FindObjectOfType<UI_SkillTree>();
+            for (var i = 0; i < playerResources.maxHealth; i++)
+                AddLife();
+            for (var i = 0; i < playerResources.maxMana; i++)
+                AddMana();
+
+            uiBars = GameObject.Find("UI Bars");
+            skillHUDCanvas = GameObject.Find("SkillHUDCanvas");
+
+            HideUI();
+        }
+
         levelLoader = GameObject.Find("LevelLoader");
-        playerResources = FindObjectOfType<PlayerResources>();
-        uiSkillTree = FindObjectOfType<UI_SkillTree>();
-        for (var i = 0; i < playerResources.maxHealth; i++)
-            AddLife();
-        for (var i = 0; i < playerResources.maxMana; i++)
-            AddMana();
 
-        uiBars = GameObject.Find("UI Bars");
-        skillHUDCanvas = GameObject.Find("SkillHUDCanvas");
-
-        HideUI();
         GameManager.instance.fadingFromBlackAnimation = true;
         StartCoroutine(FadeFromBlack());
     }
