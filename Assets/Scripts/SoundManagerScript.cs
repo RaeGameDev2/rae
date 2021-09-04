@@ -15,6 +15,7 @@ public class SoundManagerScript : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip attackSound;
     public AudioClip music;
+    public AudioClip bossMusic;
 
     private AudioSource audioSource;
 
@@ -37,6 +38,7 @@ public class SoundManagerScript : MonoBehaviour
         audioSource.volume = GameManager.instance.volume;
         Camera.main.GetComponent<AudioSource>().volume = GameManager.instance.volume;
         Camera.main.GetComponent<AudioSource>().clip = music;
+        Camera.main.GetComponent<AudioSource>().Play();
     }
 
     public void PlaySound(SoundType type)
@@ -57,5 +59,17 @@ public class SoundManagerScript : MonoBehaviour
     {
         Camera.main.GetComponent<AudioSource>().volume = GameManager.instance.volume;
         audioSource.volume = GameManager.instance.volume;
+    }
+
+    public void PlayMusic()
+    {
+        Camera.main.GetComponent<AudioSource>().clip = music;
+        Camera.main.GetComponent<AudioSource>().Play();
+    }
+
+    public void PlayBossMusic()
+    {
+        Camera.main.GetComponent<AudioSource>().clip = bossMusic;
+        Camera.main.GetComponent<AudioSource>().Play();
     }
 }

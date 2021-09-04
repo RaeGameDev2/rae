@@ -33,10 +33,6 @@ public class JungleBoss : Enemy
     [SerializeField] private AnimationBody animationState;
     [SerializeField] private GameObject projectilePrefab;
 
-
-    [SerializeField] private AudioClip bossFightClip;
-    [SerializeField] private AudioClip jungleRealmClip;
-
     private JungleBossShield shield;
     private JungleBossSpitter[] spitters;
 
@@ -64,7 +60,7 @@ public class JungleBoss : Enemy
         shield = GetComponentInChildren<JungleBossShield>();
         spitters = GetComponentsInChildren<JungleBossSpitter>();
         Debug.Log($"{spitters} {spitters.Length}");
-        
+
         animationState = AnimationBody.Idle;
         shield.animationState = AnimationShield.Idle;
         foreach (var spitter in spitters)
@@ -75,7 +71,7 @@ public class JungleBoss : Enemy
 
         animatorBody.SetFloat("speed", speed);
         shield.animatorShield.SetFloat("speed", speed);
-        
+
         shieldActive = true;
         isBoss = true;
     }
@@ -111,8 +107,7 @@ public class JungleBoss : Enemy
                 return;
             cam.orthographicSize = 21.6f;
             GameObject.Find("Layer1").transform.localScale = new Vector3(2, 2);
-            cam.GetComponent<AudioSource>().clip = bossFightClip;
-            cam.GetComponent<AudioSource>().Play();
+            SoundManagerScript.instance.PlayBossMusic();
         }
 
         if (GetDistanceFromPlayer() > 150f)
@@ -122,8 +117,7 @@ public class JungleBoss : Enemy
                 return;
             cam.orthographicSize = 10.8f;
             GameObject.Find("Layer1").transform.localScale = new Vector3(1, 1);
-            cam.GetComponent<AudioSource>().clip = jungleRealmClip;
-            cam.GetComponent<AudioSource>().Play();
+            SoundManagerScript.instance.PlayMusic();
         }
     }
 

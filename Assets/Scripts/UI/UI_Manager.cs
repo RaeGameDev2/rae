@@ -85,7 +85,7 @@ public class UI_Manager : MonoBehaviour
         uiBars.SetActive(false);
         skillHUDCanvas.SetActive(false);
     }
-    
+
     public IEnumerator FadeFromBlack()
     {
         var image = levelLoader.GetComponent<Image>();

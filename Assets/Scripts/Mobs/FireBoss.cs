@@ -17,10 +17,8 @@ public class FireBoss : Enemy
 
     private Animator anim;
     [SerializeField] public AnimType animType;
-    [SerializeField] private AudioClip bossFightClip;
     [SerializeField] private bool damageAnimation;
 
-    [SerializeField] private AudioClip fireRealmClip;
     private float initialLocalScaleX;
     [SerializeField] private bool isDying;
     [SerializeField] private bool projectileAttack;
@@ -97,8 +95,7 @@ public class FireBoss : Enemy
                 return;
             cam.orthographicSize = 21.6f;
             GameObject.Find("Layer1").transform.localScale = new Vector3(2, 2);
-            cam.GetComponent<AudioSource>().clip = bossFightClip;
-            cam.GetComponent<AudioSource>().Play();
+            SoundManagerScript.instance.PlayBossMusic();
         }
 
         if (GetDistanceFromPlayer() > 150f)
@@ -108,8 +105,7 @@ public class FireBoss : Enemy
                 return;
             cam.orthographicSize = 10.8f;
             GameObject.Find("Layer1").transform.localScale = new Vector3(1, 1);
-            cam.GetComponent<AudioSource>().clip = fireRealmClip;
-            cam.GetComponent<AudioSource>().Play();
+            SoundManagerScript.instance.PlayMusic();
         }
     }
 

@@ -88,13 +88,15 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == "MainMenu")
+            return;
         uiManager = FindObjectOfType<UI_Manager>();
         playerResources = FindObjectOfType<PlayerResources>();
         playerSkills = FindObjectOfType<PlayerSkills>();
         playerSpells = FindObjectOfType<PlayerSpells>();
         playerController = FindObjectOfType<PlayerController>();
         weaponsHandler = FindObjectOfType<WeaponsHandler>();
-        
+
         var checkpointsGameObjects = GameObject.FindGameObjectsWithTag("Checkpoint");
         if (checkpointsGameObjects.Length == 4)
         {

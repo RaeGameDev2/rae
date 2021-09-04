@@ -16,8 +16,6 @@ public class IceBoss : Enemy
 
     private Animator anim;
     [SerializeField] public AnimType animType;
-    [SerializeField] private AudioClip bossFightClip;
-    [SerializeField] private AudioClip iceRealmClip;
     private float initialLocalScaleX;
     [SerializeField] private bool isDying;
     [SerializeField] private GameObject projectile;
@@ -39,7 +37,7 @@ public class IceBoss : Enemy
         base.Start();
         playerResources = FindObjectOfType<PlayerResources>();
         playerSpells = FindObjectOfType<PlayerSpells>();
-        anim.SetInteger("state", (int) animType);
+        anim.SetInteger("state", (int)animType);
         initialHP = hp;
         isBoss = true;
     }
@@ -50,7 +48,7 @@ public class IceBoss : Enemy
         CheckCamera();
         CheckOrientation();
 
-        anim.SetInteger("state", (int) animType);
+        anim.SetInteger("state", (int)animType);
         if (isDying)
         {
             animType = AnimType.Death;
@@ -97,8 +95,7 @@ public class IceBoss : Enemy
                 return;
             cam.orthographicSize = 21.6f;
             GameObject.Find("Layer1").transform.localScale = new Vector3(2, 2);
-            cam.GetComponent<AudioSource>().clip = bossFightClip;
-            cam.GetComponent<AudioSource>().Play();
+            SoundManagerScript.instance.PlayBossMusic();
         }
 
         if (GetDistanceFromPlayer() > 150f)
@@ -108,8 +105,7 @@ public class IceBoss : Enemy
                 return;
             cam.orthographicSize = 10.8f;
             GameObject.Find("Layer1").transform.localScale = new Vector3(1, 1);
-            cam.GetComponent<AudioSource>().clip = iceRealmClip;
-            cam.GetComponent<AudioSource>().Play();
+            SoundManagerScript.instance.PlayMusic();
         }
     }
 
@@ -122,7 +118,7 @@ public class IceBoss : Enemy
     {
         isDying = true;
         animType = AnimType.Death;
-        anim.SetInteger("state", (int) animType);
+        anim.SetInteger("state", (int)animType);
 
         Destroy(hpBar.gameObject, 1f);
         Destroy(
