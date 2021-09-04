@@ -77,7 +77,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 400, y: 43.199997}
+  m_Size: {x: 400, y: 200}
   m_AdaptiveModeThreshold: 0.909
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteHorizontal: 1
   infiniteVertical: 0
-  parallaxFactor: {x: 0.5, y: 0}
+  parallaxFactor: {x: 0.5, y: 0.4}
 --- !u!1 &8353712239476726069
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +208,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 400, y: 86.399994}
+  m_Size: {x: 400, y: 400}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteHorizontal: 1
   infiniteVertical: 0
-  parallaxFactor: {x: 0.8, y: 0}
+  parallaxFactor: {x: 0.8, y: 0.6}
 --- !u!1 &8353712240524926321
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +256,7 @@ Transform:
   m_GameObject: {fileID: 8353712240524926321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8353712239476726070}
   m_RootOrder: 0
@@ -326,4 +326,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteHorizontal: 1
   infiniteVertical: 0
-  parallaxFactor: {x: 0.3, y: 0}
+  parallaxFactor: {x: 0, y: 0}
