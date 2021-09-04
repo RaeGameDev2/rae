@@ -85,6 +85,7 @@ public class JungleBoss : Enemy
     private new void Update()
     {
         base.Update();
+        CheckCamera();
         if (bossActive)
         {
             if (damageAnimation) return;
