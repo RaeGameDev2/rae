@@ -15,24 +15,20 @@ public class PlayerResources : MonoBehaviour
     private PlayerSpells spells;
 
     private UI_Manager uiManager;
-    public int maxHealth { get; private set; }
-    public int maxMana { get; private set; }
-    public int currentMana { get; private set; }
+    public int maxHealth;
+    public int maxMana;
+    public int currentMana;
 
     private GameManager gameManager;
 
     private void Awake()
     {
-        maxHealth = 3;
-        maxMana = 3;
         spells = GetComponent<PlayerSpells>();
     }
 
     private void Start()
     {
         uiManager = FindObjectOfType<UI_Manager>();
-        currentHealth = maxHealth;
-        currentMana = maxMana;
 
         gameManager = FindObjectsOfType<GameManager>().FirstOrDefault(manager => manager.isDontDestroyOnLoad);
     }

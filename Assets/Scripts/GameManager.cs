@@ -362,6 +362,10 @@ public class GameManager : MonoBehaviour
         LoadVolume();
         LoadSkillPoints();
         LoadSkillLevel();
+        playerResources.maxHealth = 3 + GameManager.instance.skillLevel[(int)Skills.SkillType.Life];
+        playerResources.maxMana = 3 + GameManager.instance.skillLevel[(int)Skills.SkillType.Mana];
+        playerResources.currentHealth = playerResources.maxHealth;
+        playerResources.currentMana = playerResources.maxMana;
     }
 
     public void ResetAllData()
