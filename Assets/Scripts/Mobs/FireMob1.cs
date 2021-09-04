@@ -106,5 +106,6 @@ public class FireMob1 : Enemy
     {
         anim.SetInteger("state", (int)AnimType.Idle);
         timeSinceAttack = attackCooldown;
+        isAttacking = false;
     }
 }

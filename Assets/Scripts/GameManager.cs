@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log($"OnSceneLoaded called checkpointId {checkpointId}");
         uiManager = FindObjectOfType<UI_Manager>();
         playerResources = FindObjectOfType<PlayerResources>();
         playerSkills = FindObjectOfType<PlayerSkills>();
@@ -103,7 +102,7 @@ public class GameManager : MonoBehaviour
                 if (checkpoint.GetComponent<PortalCheckpoint>().portalId == checkpointId)
                     playerController.transform.position = checkpoint.transform.position;
         }
-        else
+        else if (checkpointsGameObjects.Length == 1)
         {
             var ice_Core = GameObject.FindGameObjectWithTag("IceCore");
             var fire_Core = GameObject.FindGameObjectWithTag("FireCore");

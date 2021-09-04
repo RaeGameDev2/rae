@@ -23,8 +23,8 @@ public class JungleBoss : Enemy
         IdleBeginning,
         Idle,
         Jump,
-        InAir,
-        Land,
+        // InAir,
+        // Land,
         Death
     }
 
@@ -37,6 +37,7 @@ public class JungleBoss : Enemy
 
     private bool shieldActive;
     private bool spittersActive;
+    public bool shieldDamageAnimation;
 
     private bool bossActive;
     private bool damageAnimation;
@@ -53,10 +54,13 @@ public class JungleBoss : Enemy
 
     private new void Awake()
     {
+        Debug.Log("Awake Jungle Boss");
         base.Awake();
         animatorBody = GetComponent<Animator>();
-        shield = GetComponents<JungleBossShield>()[0];
-        spitters = GetComponents<JungleBossSpitter>();
+        shield = GetComponentInChildren<JungleBossShield>();
+        spitters = GetComponentsInChildren<JungleBossSpitter>();
+        Debug.Log($"{spitters} {spitters.Length}");
+        
         animationState = AnimationBody.Idle;
         shield.animationState = AnimationShield.Idle;
         foreach (var spitter in spitters)
@@ -67,9 +71,15 @@ public class JungleBoss : Enemy
 
         animatorBody.SetFloat("speed", speed);
         shield.animatorShield.SetFloat("speed", speed);
-
+        
         shieldActive = true;
+        isBoss = true;
+    }
 
+    private new void Start()
+    {
+        Debug.Log("Start Jungle Boss");
+        base.Start();
     }
 
     private new void Update()
@@ -84,7 +94,6 @@ public class JungleBoss : Enemy
         }
         else
         {
-
             if (spittersDeath == 4)
                 bossActive = true;
         }
@@ -119,6 +128,8 @@ public class JungleBoss : Enemy
                 StartCoroutine(ActivateSpitters());
                 return;
             }
+
+            shieldDamageAnimation = true;
             shield.animationState = AnimationShield.Damage;
         }
         else
@@ -138,6 +149,7 @@ public class JungleBoss : Enemy
     public void OnShieldDestroy()
     {
         hp = initialHP;
+        GetComponent<BoxCollider2D>().size = new Vector2(10f, 16f);
     }
 
     public void EndDamageAnimation()

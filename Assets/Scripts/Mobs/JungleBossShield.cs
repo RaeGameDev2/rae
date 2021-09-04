@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JungleBossShield : MonoBehaviour
@@ -12,7 +10,6 @@ public class JungleBossShield : MonoBehaviour
     {
         parent = GetComponentInParent<JungleBoss>();
         animatorShield = GetComponent<Animator>();
-        
     }
 
     private void Update()
@@ -23,10 +20,12 @@ public class JungleBossShield : MonoBehaviour
     public void EndDamageAnimation()
     {
         animationState = JungleBoss.AnimationShield.Idle;
+        parent.shieldDamageAnimation = false;
     }
 
     public void EndDeathAnimation()
     {
         Destroy(gameObject);
+        parent.OnShieldDestroy();
     }
 }
