@@ -340,11 +340,16 @@ MonoBehaviour:
   atStaffBasicAttack: {fileID: 0}
   dpsLifeDrain: 50
   hp: 300
-  speed: 20
-  attackSpeed: 100
-  down: 0
-  treshholdHeight: 20
-  up: 1
+  speed: 10
+  attackSpeed: 2
+  anim: {fileID: 0}
+  damageAnimation: 0
+  direction: 0
+  thresholdDistance: 10
+  thresholdDown: -5
+  thresholdLeft: -5
+  thresholdRight: 5
+  thresholdUp: 5
 --- !u!1 &6204375193653456403
 GameObject:
   m_ObjectHideFlags: 0
