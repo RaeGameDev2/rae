@@ -5,8 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    [SerializeField] GameObject atStaffHeavyAttack;
-    [SerializeField] GameObject atStaffBasicAttack;
+    [SerializeField] private GameObject atStaffHeavyAttack;
+    [SerializeField] private GameObject atStaffBasicAttack;
+    [SerializeField] private Transform centerPiece;
 
     [SerializeField] private float dpsLifeDrain = 50f;
     [SerializeField] protected float hp;
@@ -80,17 +81,18 @@ public class Enemy : MonoBehaviour
         if (Time.time < timeNextHit) return;
 
         var currWeaponHandler = FindObjectOfType<WeaponsHandler>();
-
+        if (centerPiece == null) 
+            centerPiece = transform;
         if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
             currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Basic)
         {
-            var instBasic = Instantiate(atStaffBasicAttack, transform.position, Quaternion.identity, transform);
+            var instBasic = Instantiate(atStaffBasicAttack, centerPiece.transform.position, Quaternion.identity, transform);
             Destroy(instBasic, 1f);
         }
         else if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
             currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Heavy)
         {
-            var instHeavy = Instantiate(atStaffHeavyAttack, transform.position, Quaternion.identity, transform);
+            var instHeavy = Instantiate(atStaffHeavyAttack, centerPiece.transform.position, Quaternion.identity, transform);
             Destroy(instHeavy, 1f);
         }
 

@@ -150,6 +150,10 @@ public class GameManager : MonoBehaviour
             playerResources.TakeDamage(1, Vector3.zero);
         if (Input.GetKeyDown(KeyCode.Alpha8))
             playerResources.UseMana();
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+            playerResources.transform.position = GameObject.Find("Point").transform.position;
     }
 
     private void OnDisable()
@@ -361,6 +365,25 @@ public class GameManager : MonoBehaviour
     public void ResetAllData()
     {
         checkpoints.Clear();
+
+        checkpoints.Add(Realm.Ice, new List<bool>());
+        checkpoints[Realm.Ice].Add(true);
+        checkpoints[Realm.Ice].Add(false);
+        checkpoints[Realm.Ice].Add(false);
+        checkpoints[Realm.Ice].Add(false);
+
+        checkpoints.Add(Realm.Fire, new List<bool>());
+        checkpoints[Realm.Fire].Add(true);
+        checkpoints[Realm.Fire].Add(false);
+        checkpoints[Realm.Fire].Add(false);
+        checkpoints[Realm.Fire].Add(false);
+
+        checkpoints.Add(Realm.Jungle, new List<bool>());
+        checkpoints[Realm.Jungle].Add(true);
+        checkpoints[Realm.Jungle].Add(false);
+        checkpoints[Realm.Jungle].Add(false);
+        checkpoints[Realm.Jungle].Add(false);
+
         playerSkills.playerSkills.SetSkillPoints(10);
         skillLevel = new int[10];
     }

@@ -13,7 +13,6 @@ public class PlayerSpells : MonoBehaviour
     public bool parryActive;
     private bool pause;
     public bool phaseWalkActive;
-    [SerializeField] private GameObject phaseWalkPrefab;
     private PlayerResources playerResources;
     private PlayerSkills playerSkills;
     public bool quickTeleportActive;
@@ -28,11 +27,23 @@ public class PlayerSpells : MonoBehaviour
     private Vector3 transportPosition;
     private WeaponsHandler weaponsHandler;
 
+    private SpriteRenderer scytheRendererAttack;
+    private SpriteRenderer scytheRendererAttack2;
+    private SpriteRenderer scytheRendererIdle;
+    [SerializeField] private Sprite scythe;
+    [SerializeField] private Sprite scytheBloodDrain;
+
     private void Awake()
     {
         playerSkills = GetComponent<PlayerSkills>();
         weaponsHandler = GetComponent<WeaponsHandler>();
         playerResources = GetComponent<PlayerResources>();
+
+        var spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
+        scytheRendererIdle = spriteRenderers.FirstOrDefault(obj => obj.transform.name == "Scythe_001");
+        scytheRendererAttack2 = spriteRenderers.FirstOrDefault(obj => obj.transform.name == "Scythe");
+        scytheRendererAttack = spriteRenderers.FirstOrDefault(obj => obj.transform.name == "Scythe_000");
+
         phaseWalkActive = false;
         lifeDrainActive = false;
         parryActive = false;
@@ -98,6 +109,9 @@ public class PlayerSpells : MonoBehaviour
     private void LifeDrain()
     {
         lifeDrainActive = true;
+        scytheRendererAttack.sprite = scytheBloodDrain;
+        scytheRendererAttack2.sprite = scytheBloodDrain;
+        scytheRendererIdle.sprite = scytheBloodDrain;
         StartCoroutine(StopLifeDrain());
         StartCoroutine(SpellAnimation());
         playerResources.UseMana();
@@ -161,6 +175,10 @@ public class PlayerSpells : MonoBehaviour
     {
         yield return new WaitForSeconds(timeLifeDrain);
         lifeDrainActive = false;
+
+        scytheRendererIdle.sprite = scythe;
+        scytheRendererAttack.sprite = scythe;
+        scytheRendererAttack2.sprite = scythe;
     }
 
     private IEnumerator StopParry()
