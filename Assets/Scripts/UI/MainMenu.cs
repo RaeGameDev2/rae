@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
             // Check if the load has finished
             if (asyncOperation.progress >= 0.9f)
             {
-                yield return new WaitForSeconds(0.7f);
+                yield return new WaitForSeconds(1f);
                 Destroy(GameObject.FindObjectOfType<AudioListener>());
                 asyncOperation.allowSceneActivation = true;
             }
@@ -42,14 +42,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        foreach (Transform child in transform)
-        {
-            foreach (Transform nephew in child)
-            {
-                nephew.GetComponent<TweenText>().FadeOut();
-            }
-        }
-        StartCoroutine(loadSceneAsync(hubSceneID));
+        SceneManager.LoadScene(hubSceneID);
     }
 
     public void Quit()

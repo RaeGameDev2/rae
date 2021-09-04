@@ -38,6 +38,7 @@ public class SoundManagerScript : MonoBehaviour
         audioSource.volume = GameManager.instance.volume;
         Camera.main.GetComponent<AudioSource>().volume = GameManager.instance.volume;
         Camera.main.GetComponent<AudioSource>().clip = music;
+        Camera.main.GetComponent<AudioSource>().Play();
     }
 
     public void PlaySound(SoundType type)
@@ -63,10 +64,12 @@ public class SoundManagerScript : MonoBehaviour
     public void PlayMusic()
     {
         Camera.main.GetComponent<AudioSource>().clip = music;
+        Camera.main.GetComponent<AudioSource>().Play();
     }
 
     public void PlayBossMusic()
     {
         Camera.main.GetComponent<AudioSource>().clip = bossMusic;
+        Camera.main.GetComponent<AudioSource>().Play();
     }
 }
