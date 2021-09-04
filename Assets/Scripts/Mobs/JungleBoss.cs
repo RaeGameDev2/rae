@@ -54,7 +54,6 @@ public class JungleBoss : Enemy
 
     private new void Awake()
     {
-        Debug.Log("Awake Jungle Boss");
         base.Awake();
         animatorBody = GetComponent<Animator>();
         shield = GetComponentInChildren<JungleBossShield>();
@@ -78,7 +77,6 @@ public class JungleBoss : Enemy
 
     private new void Start()
     {
-        Debug.Log("Start Jungle Boss");
         base.Start();
     }
 

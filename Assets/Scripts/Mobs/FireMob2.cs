@@ -27,7 +27,7 @@ public class FireMob2 : Enemy
     private new void Start()
     {
         base.Start();
-
+        attackCooldown = 1f;
         transform.localScale = new Vector3(patrolDirection == Direction.Left ? transform.localScale.x : -transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
         isGrounded = true;
@@ -41,7 +41,7 @@ public class FireMob2 : Enemy
     {
         base.Update();
         anim.SetFloat("speed", speed / 7);
-        anim.SetFloat("attackSpeed", attackSpeed / 100);
+        anim.SetFloat("attackSpeed", attackSpeed / 2);
 
         if (hp <= 0)
         {

@@ -26,6 +26,8 @@ public class FireMob1 : Enemy
     {
         base.Start();
 
+        attackCooldown = 1f;
+
         anim = GetComponent<Animator>();
         transform.localScale = new Vector3(patrolDirection == Direction.Left ? transform.localScale.x : -transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
@@ -36,7 +38,7 @@ public class FireMob1 : Enemy
 
         anim.SetFloat("speed", speed / 3);
         anim.SetFloat("attackSpeed", attackSpeed / 100);
-
+        
         if (hp <= 0)
         {
             anim.SetInteger("state", (int)AnimType.Death);
