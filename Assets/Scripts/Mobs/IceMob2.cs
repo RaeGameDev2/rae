@@ -23,7 +23,6 @@ public class IceMob2 : Enemy
 
     [SerializeField] private Animator anim;
     private AnimType animType;
-    private float animSpeed;
     [SerializeField] private bool damageAnimation;
 
     private bool isAttacking;
@@ -47,20 +46,21 @@ public class IceMob2 : Enemy
         isAttacking = false;
         direction = Direction.Up;
         animType = AnimType.Idle;
-        animSpeed = speed / 5f;
     }
 
-    private void FixedUpdate()
+    private new void Update()
     {
+        base.Update();
+
         if (hp <= 0)
         {
             animType = AnimType.Death;
             return;
         }
 
-        anim.SetFloat("speed", animSpeed);
         anim.SetInteger("state", (int)animType);
-
+        anim.SetFloat("speed", speed / 7);
+        anim.SetFloat("attackSpeed", attackSpeed / 100);
         if (damageAnimation) return;
         if (attackStarted) return;
 
@@ -73,13 +73,13 @@ public class IceMob2 : Enemy
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        if (Random.Range(0f, 1f / Time.fixedDeltaTime) < 0.3f) direction = (Direction) Random.Range(0f, 3.99f);
+        if (Random.Range(0f, 1f / Time.fixedDeltaTime) < 0.3f) direction = (Direction)Random.Range(0f, 3.99f);
 
         for (var i = 0; i < 10; i++)
         {
             if (CheckDirection())
                 break;
-            direction = (Direction) Random.Range(0f, 3.99f);
+            direction = (Direction)Random.Range(0f, 3.99f);
         }
 
         if (GetDistanceFromPlayer() < thresholdDistance && !playerSpells.phaseWalkActive && Time.time >= timeNextAttack)
@@ -141,8 +141,7 @@ public class IceMob2 : Enemy
             yield return new WaitForFixedUpdate();
             time -= Time.fixedDeltaTime;
         }
-        
-        animSpeed = attackSpeed;
+
         animType = AnimType.Attack;
         isAttacking = true;
 
@@ -156,7 +155,6 @@ public class IceMob2 : Enemy
             time -= Time.deltaTime;
         }
 
-        animSpeed = speed / 5f;
         animType = AnimType.Idle;
         isAttacking = false;
         attackStarted = false;

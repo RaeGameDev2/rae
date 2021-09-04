@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     protected Transform hpBar;
 
 
-    private float initialAttackSpeed = 2f;
     protected float initialHP;
     private float initialScaleX;
     protected float attackCooldown;
@@ -46,7 +45,6 @@ public class Enemy : MonoBehaviour
     protected void Start()
     {
         spawnPosition = transform.position;
-        attackSpeed = initialAttackSpeed;
         initialHP = hp;
         initialScaleX = hpBar.transform.localScale.x;
         timeSinceAttack = attackCooldown;
