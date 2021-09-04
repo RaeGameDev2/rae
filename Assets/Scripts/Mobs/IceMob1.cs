@@ -52,6 +52,7 @@ public class IceMob1 : Enemy
         anim.SetInteger("state", (int)animType);
         anim.SetFloat("speed", speed / 7);
         anim.SetFloat("attackSpeed", attackSpeed / 100);
+        
         transform.localScale = new Vector3(Mathf.Sign(transform.position.x - player.position.x),
             transform.localScale.y, transform.localScale.z);
 
