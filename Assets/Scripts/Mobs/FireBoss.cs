@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -88,22 +89,22 @@ public class FireBoss : Enemy
 
     private void CheckCamera()
     {
-        if (GetDistanceFromPlayer() < 100f)
+        var cam = GameObject.Find("CameraMachine").GetComponent<CinemachineVirtualCamera>();
+
+        if (GetDistanceFromPlayer() < 70f)
         {
-            var cam = Camera.main;
-            if (Math.Abs(cam.orthographicSize - 18f) < 0.1f)
+            if (Math.Abs(cam.m_Lens.OrthographicSize - 21.6f) < 0.1f)
                 return;
-            cam.orthographicSize = 21.6f;
+            cam.m_Lens.OrthographicSize = 21.6f;
             GameObject.Find("Layer1").transform.localScale = new Vector3(2, 2);
             SoundManagerScript.instance.PlayBossMusic();
         }
 
-        if (GetDistanceFromPlayer() > 150f)
+        if (GetDistanceFromPlayer() > 100f)
         {
-            var cam = Camera.main;
-            if (Math.Abs(cam.orthographicSize - 10.8f) < 0.1f)
+            if (Math.Abs(cam.m_Lens.OrthographicSize - 10.8f) < 0.1f)
                 return;
-            cam.orthographicSize = 10.8f;
+            cam.m_Lens.OrthographicSize = 10.8f;
             GameObject.Find("Layer1").transform.localScale = new Vector3(1, 1);
             SoundManagerScript.instance.PlayMusic();
         }
