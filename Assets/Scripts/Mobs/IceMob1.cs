@@ -51,7 +51,7 @@ public class IceMob1 : Enemy
 
         anim.SetInteger("state", (int)animType);
         anim.SetFloat("speed", speed / 7);
-        anim.SetFloat("attackSpeed", attackSpeed / 100);
+        anim.SetFloat("attackSpeed", attackSpeed / 2);
         
         transform.localScale = new Vector3(Mathf.Sign(transform.position.x - player.position.x),
             transform.localScale.y, transform.localScale.z);
@@ -147,7 +147,7 @@ public class IceMob1 : Enemy
     {
         if (animType == AnimType.Death) return;
         base.OnDamageTaken(damage, isCritical);
-        if (attackStarted) return;
+        // if (attackStarted) return;
         animType = AnimType.Damage;
         damageAnimationActive = true;
     }
