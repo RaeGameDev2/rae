@@ -17,7 +17,7 @@ public class FireMob2 : Enemy
     }
     [SerializeField] private Direction patrolDirection;
     [SerializeField] private float patrolRange;
-    [SerializeField] private float attackDistance; 
+    [SerializeField] private float attackDistance;
     private bool isAttacking = false;
     private bool isGrounded;
     private bool canDamage;
@@ -165,5 +165,4 @@ public class FireMob2 : Enemy
         timeSinceAttack = attackCooldown;
         spawnPosition = transform.position;
     }
-
 }
