@@ -15,6 +15,7 @@ public class SoundManagerScript : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip attackSound;
     public AudioClip music;
+    public AudioClip bossMusic;
 
     private AudioSource audioSource;
 
@@ -57,5 +58,15 @@ public class SoundManagerScript : MonoBehaviour
     {
         Camera.main.GetComponent<AudioSource>().volume = GameManager.instance.volume;
         audioSource.volume = GameManager.instance.volume;
+    }
+
+    public void PlayMusic()
+    {
+        Camera.main.GetComponent<AudioSource>().clip = music;
+    }
+
+    public void PlayBossMusic()
+    {
+        Camera.main.GetComponent<AudioSource>().clip = bossMusic;
     }
 }
