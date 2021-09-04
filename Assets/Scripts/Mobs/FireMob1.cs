@@ -34,16 +34,16 @@ public class FireMob1 : Enemy
 
     private new void Update()
     {
-        base.Update();
-
-        anim.SetFloat("speed", speed / 3);
-        anim.SetFloat("attackSpeed", attackSpeed / 100);
-        
         if (hp <= 0)
         {
             anim.SetInteger("state", (int)AnimType.Death);
             return;
         }
+        base.Update();
+
+        anim.SetFloat("speed", speed / 3);
+        anim.SetFloat("attackSpeed", attackSpeed / 100);
+        
         if (anim.GetInteger("state") == (int)AnimType.Damage) return;
         if (anim.GetInteger("state") == (int)AnimType.Attack) return;
 

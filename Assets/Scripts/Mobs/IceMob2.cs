@@ -50,14 +50,15 @@ public class IceMob2 : Enemy
 
     private new void Update()
     {
-        base.Update();
-
         if (hp <= 0)
         {
             animType = AnimType.Death;
+            anim.SetInteger("state", (int)animType);
             return;
         }
 
+        base.Update();
+        
         anim.SetInteger("state", (int)animType);
         anim.SetFloat("speed", speed / 7);
         anim.SetFloat("attackSpeed", attackSpeed / 100);

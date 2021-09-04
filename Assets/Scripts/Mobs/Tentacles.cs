@@ -32,8 +32,20 @@ public class Tentacles : MonoBehaviour
     private void Update()
     {
         anim.SetInteger("state", (int)animType);
-        anim.SetFloat("speed", parent.GetSpeed()); 
+        anim.SetFloat("speed", parent.GetSpeed());
 
+    }
+
+    private float timeNextAttack;
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag != "Player") return;
+
+        if (animType != AnimType.Attack) return;
+        if (Time.time < timeNextAttack) return;
+
+        FindObjectOfType<PlayerResources>().TakeDamage(1, transform.position);
+        timeNextAttack = Time.time + 1.5f;
     }
 
     public void Attack()

@@ -22,7 +22,7 @@ public class FireMob3 : Enemy
     }
 
     [SerializeField] private Animator anim;
-    private AnimType animType;
+    [SerializeField] private AnimType animType;
     [SerializeField] private bool damageAnimation;
 
     private bool isAttacking;
@@ -50,13 +50,14 @@ public class FireMob3 : Enemy
 
     private new void Update()
     {
-        base.Update();
-
         if (hp <= 0)
         {
             animType = AnimType.Death;
+            anim.SetInteger("state", (int)animType);
             return;
         }
+
+        base.Update();
 
         anim.SetInteger("state", (int)animType);
         anim.SetFloat("speed", speed / 7);
@@ -169,6 +170,12 @@ public class FireMob3 : Enemy
         if (animType == AnimType.Death) return;
         base.OnDamageTaken(damage, isCritical);
         if (attackStarted) return;
+        if (hp <= 0)
+        {
+            Debug.Log("Death");
+            animType = AnimType.Death;
+            return;
+        }
         animType = AnimType.Damage;
         damageAnimation = true;
     }

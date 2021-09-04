@@ -39,15 +39,15 @@ public class FireMob2 : Enemy
 
     private new void Update()
     {
-        base.Update();
-        anim.SetFloat("speed", speed / 7);
-        anim.SetFloat("attackSpeed", attackSpeed / 2);
-
         if (hp <= 0)
         {
             anim.SetInteger("state", (int)AttackType.Death);
             return;
         }
+        base.Update();
+        anim.SetFloat("speed", speed / 7);
+        anim.SetFloat("attackSpeed", attackSpeed / 2);
+
         if (anim.GetInteger("state") == (int)AttackType.Damage) return;
         if (anim.GetInteger("state") == (int)AttackType.Attack) return;
         if (GetDistanceFromPlayer() <= attackDistance && !playerSpells.phaseWalkActive && timeSinceAttack <= 0 && !isAttacking)

@@ -39,16 +39,17 @@ public class JungleMob3 : Enemy
 
         anim = GetComponent<Animator>();
     }
-
-    [SerializeField] private float dist;
+    
     private  new void Update()
     {
-        base.Update();
-        dist = GetDistanceFromPlayer();
+        anim.SetInteger("state", (int)animType);
+        
         if (hp <= 0) return;
+        
+        base.Update();
+        
         if (damageAnimation) return;
 
-        anim.SetInteger("state", (int)animType);
         anim.SetFloat("speed", animSpeed);
 
         if (GetDistanceFromPlayer() < thresholdDistance)

@@ -40,15 +40,16 @@ public class IceMob1 : Enemy
 
     private new void Update()
     {
-        base.Update();
-
         if (hp <= 0)
         {
             animType = AnimType.Death;
+            anim.SetInteger("state", (int)animType);
             return;
         }
 
-        UpdateAnimation();
+        base.Update();
+
+        anim.SetInteger("state", (int)animType);
         anim.SetFloat("speed", speed / 7);
         anim.SetFloat("attackSpeed", attackSpeed / 100);
         transform.localScale = new Vector3(Mathf.Sign(transform.position.x - player.position.x),
@@ -61,11 +62,6 @@ public class IceMob1 : Enemy
             StartCoroutine(Attack());
         else
             Patrol();
-    }
-
-    private void UpdateAnimation()
-    {
-        anim.SetInteger("state", (int)animType);
     }
 
     private void Patrol()
