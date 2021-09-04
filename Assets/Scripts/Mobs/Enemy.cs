@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    protected float attackSpeed;
 
     [SerializeField] GameObject atStaffHeavyAttack;
     [SerializeField] GameObject atStaffBasicAttack;
@@ -26,6 +25,8 @@ public class Enemy : MonoBehaviour
     protected bool pause;
 
     [SerializeField] protected float speed;
+    [SerializeField] protected float attackSpeed;
+
     private float timeLifeDrain;
     private float timeNextHit;
     protected Transform player;

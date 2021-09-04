@@ -20,10 +20,6 @@ public class JungleMob2 : Enemy
         Damage,
         Death
     }
-    [SerializeField] private Animator anim;
-    private AnimType animType;
-    [SerializeField] private bool damageAnimation;
-
     private bool isAttacking;
 
     [SerializeField] private Direction state_mob;
@@ -35,6 +31,7 @@ public class JungleMob2 : Enemy
     [SerializeField] private float thresholdUp = 5f;
     private float timeAttack;
     private float timeNextAttack;
+    private Animator anim;
 
     private new void Awake()
     {
@@ -47,23 +44,27 @@ public class JungleMob2 : Enemy
     private new void Start()
     {
         base.Start();
-        animType = AnimType.Idle;
     }
 
     private new void Update()
     {
-        if (hp <= 0) return;
-
         base.Update();
 
-        if (damageAnimation) return;
+        anim.SetFloat("speed", speed / 2);
+        anim.SetFloat("attackSpeed", attackSpeed / 100);
+
+        if (hp <= 0)
+        {
+            anim.SetInteger("state", (int)AnimType.Death);
+            return;
+        }
+        if (anim.GetInteger("state") == (int)AnimType.Damage) return;
+        if (anim.GetInteger("state") == (int)AnimType.Attack) return;
 
         if (isAttacking)
         {
             if (timeAttack <= Time.time)
             {
-                if (GetDistanceFromPlayer() < 2 * thresholdDistance) playerResources.TakeDamage(1, transform.position);
-
                 isAttacking = false;
             }
 
@@ -89,19 +90,6 @@ public class JungleMob2 : Enemy
 
     private void FixedUpdate()
     {
-        anim.SetFloat("speed", attackSpeed / 3.5f);
-        anim.SetInteger("state", (int)animType);
-        if (hp <= 0)
-        {
-            animType = AnimType.Death;
-            return;
-        }
-
-        if (damageAnimation) return;
-
-        transform.localScale = new Vector3(Mathf.Sign(transform.position.x - playerResources.transform.position.x),
-            transform.localScale.y, transform.localScale.z);
-
         if (Random.Range(0f, 1f / Time.fixedDeltaTime) < 0.3f) state_mob = (Direction)Random.Range(0f, 3.99f);
 
         var i = 0;
@@ -112,19 +100,6 @@ public class JungleMob2 : Enemy
                 break;
             state_mob = (Direction)Random.Range(0f, 3.99f);
         }
-    }
-
-    private void DamageAnimation()
-    {
-        damageAnimation = true;
-        animType = AnimType.Damage;
-    }
-
-    public void DamageEnd()
-    {
-        damageAnimation = false;
-        if (hp > 0)
-            animType = AnimType.Idle;
     }
 
     private bool CheckDirection()
@@ -143,8 +118,7 @@ public class JungleMob2 : Enemy
 
     private void Attack()
     {
-        anim.SetFloat("speed", attackSpeed / 2.5f);
-        animType = AnimType.Attack;
+        anim.SetInteger("state", (int)AnimType.Attack);
         isAttacking = true;
         timeAttack = Time.time + attackSpeed;
         timeNextAttack = Time.time + 3f * attackSpeed / 2f;
@@ -163,7 +137,6 @@ public class JungleMob2 : Enemy
         var time = attackSpeed / 4f;
         while (time > 0)
         {
-            transform.localScale *= 0.99f;
             transform.position = Vector2.MoveTowards(transform.position, playerInitialPosition,
                 thresholdDistance * attackSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
@@ -173,22 +146,32 @@ public class JungleMob2 : Enemy
         time = attackSpeed / 4f;
         while (time > 0)
         {
-            transform.localScale *= 1.01f;
             transform.position = Vector2.MoveTowards(transform.position, initialPos,
                 thresholdDistance * attackSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
             time -= Time.deltaTime;
         }
 
-        anim.SetFloat("speed", attackSpeed / 3.5f);
-        animType = AnimType.Idle;
+        anim.SetInteger("state", (int)AnimType.Idle);
         transform.position = initialPos;
-        transform.localScale = initialLocalScale;
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (!col.CompareTag("Player")) return;
+        if (playerSpells.phaseWalkActive) return;
+        playerResources.TakeDamage(1, transform.position);
+        anim.SetInteger("state", (int)AnimType.Attack);
     }
 
     public override void OnDamageTaken(float damage, bool isCritical)
     {
         base.OnDamageTaken(damage, isCritical);
         anim.SetInteger("state", (int)AnimType.Damage);
+    }
+
+    public void OnDamageTakenEnd()
+    {
+        anim.SetInteger("state", (int)AnimType.Idle);
     }
 }
