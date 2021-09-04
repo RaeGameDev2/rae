@@ -56,6 +56,7 @@ public class JungleMob2 : Enemy
         if (hp <= 0)
         {
             anim.SetInteger("state", (int)AnimType.Death);
+            StopAllCoroutines();
             return;
         }
         if (anim.GetInteger("state") == (int)AnimType.Damage) return;
@@ -118,7 +119,7 @@ public class JungleMob2 : Enemy
 
     private void Attack()
     {
-        anim.SetInteger("state", (int)AnimType.Attack);
+        // anim.SetInteger("state", (int)AnimType.Attack);
         isAttacking = true;
         timeAttack = Time.time + attackSpeed;
         timeNextAttack = Time.time + 3f * attackSpeed / 2f;
@@ -130,11 +131,12 @@ public class JungleMob2 : Enemy
         var initialLocalScale = transform.localScale;
         var initialPos = transform.position;
         var playerInitialPosition = playerResources.transform.position;
-        yield return new WaitForSeconds(3f * attackSpeed / 4f);
+        yield return new WaitForSeconds(1f * attackSpeed / 2f);
         if (GetDistanceFromPlayer() < 2 * thresholdDistance)
             playerInitialPosition = playerResources.transform.position;
 
-        var time = attackSpeed / 4f;
+        anim.SetInteger("state", (int)AnimType.Attack);
+        var time = attackSpeed / 2f;
         while (time > 0)
         {
             transform.position = Vector2.MoveTowards(transform.position, playerInitialPosition,

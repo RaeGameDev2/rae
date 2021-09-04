@@ -95,8 +95,7 @@ public class GameManager : MonoBehaviour
         playerSpells = FindObjectOfType<PlayerSpells>();
         playerController = FindObjectOfType<PlayerController>();
         weaponsHandler = FindObjectOfType<WeaponsHandler>();
-
-        Debug.Log("gameManager " + playerController.transform.position);
+        
         var checkpointsGameObjects = GameObject.FindGameObjectsWithTag("Checkpoint");
         if (checkpointsGameObjects.Length == 4)
         {
@@ -124,7 +123,6 @@ public class GameManager : MonoBehaviour
                 nature_Core.SetActive(false);
             }
         }
-        Debug.Log("gameManager " + playerController.transform.position);
         LoadAllData();
     }
 
@@ -351,8 +349,6 @@ public class GameManager : MonoBehaviour
         // TODO : Play player's death animation
         StartCoroutine(MovePlayer(lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
         RespawnHealthPoints();
-
-        Debug.Log("Player died!");
     }
 
     private void LoadAllData()

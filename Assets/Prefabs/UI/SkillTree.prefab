@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 215128063749353758}
   - component: {fileID: 2807118693204479371}
   m_Layer: 5
-  m_Name: Skill_Stats
+  m_Name: Skill_bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -771,7 +771,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Mana_MouseOver
           m_Mode: 1
@@ -787,7 +787,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Mana_MouseExit
           m_Mode: 1
@@ -974,7 +974,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Shield_MouseOver
           m_Mode: 1
@@ -990,7 +990,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Shield_MouseExit
           m_Mode: 1
@@ -1303,7 +1303,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: QuickTP_MouseOver
           m_Mode: 1
@@ -1319,7 +1319,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: QuickTP_MouseExit
           m_Mode: 1
@@ -1893,7 +1893,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: LifeDrain_MouseOver
           m_Mode: 1
@@ -1909,7 +1909,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: LifeDrain_MouseExit
           m_Mode: 1
@@ -2138,7 +2138,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Parry_MouseOver
           m_Mode: 1
@@ -2154,7 +2154,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Parry_MouseExit
           m_Mode: 1
@@ -2587,7 +2587,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: PhaseWalk_MouseOver
           m_Mode: 1
@@ -2603,7 +2603,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: PhaseWalk_MouseExit
           m_Mode: 1
@@ -2989,7 +2989,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Life_MouseOver
           m_Mode: 1
@@ -3005,7 +3005,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Life_MouseExit
           m_Mode: 1
@@ -3449,184 +3449,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!1 &4935903679846278751
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4935903679846278750}
-  - component: {fileID: 4935903679846278748}
-  - component: {fileID: 4935903679846278749}
-  - component: {fileID: 4935903679846278739}
-  m_Layer: 5
-  m_Name: UI_Skilltree
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &4935903679846278750
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4935903679846278751}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4935903680554839068}
-  m_RootOrder: 19
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.5985, y: 0}
-  m_SizeDelta: {x: 796.803, y: 461.38}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4935903679846278748
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4935903679846278751}
-  m_CullTransparentMesh: 1
---- !u!114 &4935903679846278749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4935903679846278751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &4935903679846278739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4935903679846278751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72dcdb70e4431a74c850c37fa6414ee4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Attack_button: {fileID: 4935903680277930069}
-  AttackSpeed_button: {fileID: 4935903680211084126}
-  CritBonus_button: {fileID: 4935903680648226168}
-  CritRate_button: {fileID: 4935903680079479896}
-  Debuff_button: {fileID: 4935903680165160266}
-  Life_button: {fileID: 4935903679539498677}
-  LifeDrain_button: {fileID: 4935903679251736684}
-  Mana_button: {fileID: 8133621344099399200}
-  Orb_button: {fileID: 4935903679462201962}
-  Parry_button: {fileID: 4935903679337692987}
-  PhaseWalk_button: {fileID: 4935903679406070174}
-  QuickTP_button: {fileID: 4935903678846760501}
-  Scythe_button: {fileID: 4935903679601770766}
-  Shield_button: {fileID: 4935903678629731542}
-  SkillDescriptionText: {fileID: 6232314097255578646}
-  SkillNameText: {fileID: 1054124503320713525}
-  SkillPointsNr: {fileID: 432657413541614154}
-  SP_Attack:
-  - {fileID: 21300000, guid: 418ff6c3016bdd84dbc67e4bf890e736, type: 3}
-  - {fileID: 21300000, guid: ac461097edf82d149aead6990d456430, type: 3}
-  - {fileID: 21300000, guid: 01971393302a2834fbf34b0e0cd3d090, type: 3}
-  - {fileID: 21300000, guid: 8a9b1863923b0d5418cbccb08df5eb55, type: 3}
-  - {fileID: 21300000, guid: c6674aab8f251b340a080bc238f8ae10, type: 3}
-  SP_AttackSpeed:
-  - {fileID: 21300000, guid: 0ab9176c12c033946adc8fa660393ae5, type: 3}
-  - {fileID: 21300000, guid: 45072a25d73e3c04cb2626731f429289, type: 3}
-  - {fileID: 21300000, guid: ab7260bac675c1849b6ce6eea328045e, type: 3}
-  - {fileID: 21300000, guid: 2738ed1ffb9d0dd43a572f608a1ee5b8, type: 3}
-  - {fileID: 21300000, guid: bb692de6d8c81b24b8ae41e0988d5e3f, type: 3}
-  SP_CritBonus:
-  - {fileID: 21300000, guid: 2d7e39167f38e084e87351584a8bb994, type: 3}
-  - {fileID: 21300000, guid: 6f9b387ee1250914d9a3a569fffef86d, type: 3}
-  - {fileID: 21300000, guid: cd2c469ecaa697a4cae003b8c4992391, type: 3}
-  - {fileID: 21300000, guid: ee65aa79a6989c840bd088bb8fceaf03, type: 3}
-  - {fileID: 21300000, guid: b421bbfa083479a40b56f5d4a072ef9c, type: 3}
-  SP_CritRate:
-  - {fileID: 21300000, guid: 5576bb74f6acaee42824d1e328ef8c74, type: 3}
-  - {fileID: 21300000, guid: 51e1a8df67875fa418ba8c1b03d3a34f, type: 3}
-  - {fileID: 21300000, guid: 2fac374e16eac4e4298c9e51bd5f6593, type: 3}
-  - {fileID: 21300000, guid: 3e394e4cfaef8314f8054109aa5952ea, type: 3}
-  - {fileID: 21300000, guid: c5c330b1d43cec843a26f764084d8091, type: 3}
-  SP_Debuff:
-  - {fileID: 21300000, guid: 99828b881c0399f46ad25bd919380cc3, type: 3}
-  - {fileID: 21300000, guid: 65bd07eff61c2354b99affc2fc82aa53, type: 3}
-  - {fileID: 21300000, guid: c9548a10e9d7a5d41b4ea9d6aa21dbb5, type: 3}
-  - {fileID: 21300000, guid: d550ccd7d0ada874c9fa33ea0509800d, type: 3}
-  - {fileID: 21300000, guid: 79351e354a75d0941811750c41bbb6b7, type: 3}
-  SP_Life:
-  - {fileID: 21300000, guid: 33a2cad1d6cd4904c97842077b61229a, type: 3}
-  - {fileID: 21300000, guid: 3e1a38426438e3c45b356ec5b0bf21c8, type: 3}
-  - {fileID: 21300000, guid: 35608e001764e9241ad21ad2ebf2d976, type: 3}
-  - {fileID: 21300000, guid: 100010c7063c6e64fb9a512f36bcfb66, type: 3}
-  - {fileID: 21300000, guid: a3b59341b200465438cc1065ceb95a69, type: 3}
-  SP_LifeDrain:
-  - {fileID: 21300000, guid: 68bf21de68b20b64baf8f729ab3920bd, type: 3}
-  - {fileID: 21300000, guid: b4d54f17ef35fb24d97514a8da8d58e4, type: 3}
-  - {fileID: 21300000, guid: 7b60802e8ebcf6048a3d2c516e5d85d8, type: 3}
-  - {fileID: 21300000, guid: bce6aa4e604a13549b1e28c44c9a141e, type: 3}
-  - {fileID: 21300000, guid: 4966e5f89c3879c448e70666a74264bc, type: 3}
-  SP_Mana:
-  - {fileID: 21300000, guid: b8f95f9bbc98028479c7d336366a9b16, type: 3}
-  - {fileID: 21300000, guid: 4819b70842f25da448588c60e986d80a, type: 3}
-  - {fileID: 21300000, guid: 7b26894c3be1b454182ed39504b39e6a, type: 3}
-  - {fileID: 21300000, guid: f72d187715c60114ebbddac62d08707c, type: 3}
-  - {fileID: 21300000, guid: f319d4d101737fa4ebcb92696929bb3a, type: 3}
-  SP_Parry:
-  - {fileID: 21300000, guid: d8105f0657c79ac4d8a31d26d8c79e17, type: 3}
-  - {fileID: 21300000, guid: 3358555ea913e494bbb3a7073287efce, type: 3}
-  - {fileID: 21300000, guid: 79c8b883a97f9c34c8c54b84a225a436, type: 3}
-  - {fileID: 21300000, guid: fe178aaf46da7c64094313103e1cda7c, type: 3}
-  - {fileID: 21300000, guid: 2cf5c190e1546294fbd88a5a3d44f757, type: 3}
-  SP_PhaseWalk:
-  - {fileID: 21300000, guid: e986c9a0d2744354ea26ec57c3b3b5d7, type: 3}
-  - {fileID: 21300000, guid: f126c3d84fdd48c46adb59e04b1e125d, type: 3}
-  - {fileID: 21300000, guid: f27007c9a36700a46a79690fc87af095, type: 3}
-  - {fileID: 21300000, guid: c13a216bf04c52d499c7314c4ff53716, type: 3}
-  - {fileID: 21300000, guid: 771dd798ea6a61447ad83e035157d0bd, type: 3}
-  SP_QuickTP:
-  - {fileID: 21300000, guid: f6072677737588c4cb8520171496c4e9, type: 3}
-  - {fileID: 21300000, guid: b7d32babd387d1c4184a5fd64aea3515, type: 3}
-  - {fileID: 21300000, guid: 869626f138c35824f83557e86ebb0e6c, type: 3}
-  - {fileID: 21300000, guid: 6f09a157bd2e98e4c8910a7459bbe257, type: 3}
-  - {fileID: 21300000, guid: fb54d4910c284be49bff0e0f340280dc, type: 3}
-  SP_Shield:
-  - {fileID: 21300000, guid: fac4f4f1f7832d942a6832d2422b80e7, type: 3}
-  - {fileID: 21300000, guid: 418d895677ea62549a65416cf8ef262a, type: 3}
-  - {fileID: 21300000, guid: 98081dd03a8ebdf4ab55fd97acf1a525, type: 3}
-  - {fileID: 21300000, guid: aa2419233a828094fb5b036843b17602, type: 3}
-  - {fileID: 21300000, guid: 3751b37f6bb22ed459f469162c009465, type: 3}
-  Staff_button: {fileID: 4935903679363489361}
 --- !u!1 &4935903679865385841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4037,7 +3859,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: CritRate_MouseOver
           m_Mode: 1
@@ -4053,7 +3875,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: CritRate_MouseExit
           m_Mode: 1
@@ -4203,7 +4025,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Debuff_MouseOver
           m_Mode: 1
@@ -4219,7 +4041,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Debuff_MouseExit
           m_Mode: 1
@@ -4369,7 +4191,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: AttackSpeed_MouseOver
           m_Mode: 1
@@ -4385,7 +4207,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: AttackSpeed_MouseExit
           m_Mode: 1
@@ -4693,7 +4515,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Attack_MouseOver
           m_Mode: 1
@@ -4709,7 +4531,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: Attack_MouseExit
           m_Mode: 1
@@ -4929,7 +4751,6 @@ RectTransform:
   - {fileID: 4935903679089340039}
   - {fileID: 4935903679497934711}
   - {fileID: 6794783715173878240}
-  - {fileID: 4935903679846278750}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5025,6 +4846,7 @@ MonoBehaviour:
   QuickTP_button: {fileID: 4935903678846760501}
   Scythe_button: {fileID: 4935903679601770766}
   Shield_button: {fileID: 4935903678629731542}
+  Skill_stats: {fileID: 0}
   SkillDescriptionText: {fileID: 6232314097255578646}
   SkillNameText: {fileID: 1054124503320713525}
   SkillPointsNr: {fileID: 432657413541614154}
@@ -5239,7 +5061,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: CritBonus_MouseOver
           m_Mode: 1
@@ -5255,7 +5077,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4935903679846278739}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UI_SkillTree, Assembly-CSharp
           m_MethodName: CritBonus_MouseExit
           m_Mode: 1
@@ -5517,7 +5339,7 @@ GameObject:
   - component: {fileID: 4786077371982479552}
   - component: {fileID: 1054124503320713525}
   m_Layer: 5
-  m_Name: Skill_Stats
+  m_Name: Skill_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

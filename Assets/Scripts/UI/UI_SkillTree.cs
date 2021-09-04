@@ -40,7 +40,7 @@ public class UI_SkillTree : MonoBehaviour
     private Text ScytheCritBonusText;
     private Text ScytheCritRateText;
     [SerializeField] private Button Shield_button;
-    private GameObject Skill_stats;
+    [SerializeField] private GameObject Skill_stats;
 
     private  string[] SkillDescription =
     {
@@ -126,7 +126,7 @@ public class UI_SkillTree : MonoBehaviour
         StaffCritRateText = components.FirstOrDefault(component => component.name == "Staff_CritRate_text");
         StaffCritBonusText = components.FirstOrDefault(component => component.name == "Staff_CritBonus_text");
         StaffAttackSpeedText = components.FirstOrDefault(component => component.name == "Staff_AttackSpeed_text");
-
+    
         Skill_stats.SetActive(false);
         Scythe_stats.SetActive(false);
         Staff_stats.SetActive(false);
