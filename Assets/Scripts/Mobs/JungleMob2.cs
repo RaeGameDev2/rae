@@ -50,7 +50,7 @@ public class JungleMob2 : Enemy
     {
         base.Update();
 
-        anim.SetFloat("speed", speed / 3);
+        anim.SetFloat("speed", speed / 2);
         anim.SetFloat("attackSpeed", attackSpeed / 100);
 
         if (hp <= 0)
