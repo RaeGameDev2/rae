@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public int lastCheckpointId = 0;
 
-    private bool pause;
+    public bool pause;
     private PlayerController playerController;
     private PlayerResources playerResources;
     private PlayerSkills playerSkills;
@@ -166,6 +166,7 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         pause = !pause;
+        Time.timeScale = pause ? 0 : 1;
         uiManager.Pause();
         playerResources.Pause();
         playerSpells.Pause();

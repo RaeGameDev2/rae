@@ -4,38 +4,31 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    private bool isPaused;
-    [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject pauseMenu;
 
     [SerializeField] private GameObject settingsMenu;
-    [SerializeField] private GameObject resetdataButton;
 
     public void Pause()
     {
         pauseMenu.SetActive(true);
-        pauseButton.SetActive(false);
-        Time.timeScale = 0f;
+        GameManager.instance.Pause();
     }
 
     public void Resume()
     {
-        pauseButton.SetActive(true);
         pauseMenu.SetActive(false);
-        resetdataButton.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
+        GameManager.instance.Pause();
     }
 
     public void BackToHub()
     {
-        Time.timeScale = 1f;
+        Resume();
+        GameManager.instance.Pause();
         SceneManager.LoadScene(1);
     }
 
     public void Settings()
     {
-        pauseButton.SetActive(false);
         pauseMenu.SetActive(false);
         settingsMenu.SetActive(true);
     }
@@ -43,9 +36,7 @@ public class PauseMenu : MonoBehaviour
     public void Back()
     {
         pauseMenu.SetActive(true);
-        isPaused = true;
         settingsMenu.SetActive(false);
-        resetdataButton.SetActive(true);
     }
 
     public void ResetPersistentData()
@@ -70,10 +61,12 @@ public class PauseMenu : MonoBehaviour
     }
     private void Update()
     {
-        if (!Input.GetKeyDown("escape")) return;
-        if (isPaused == false)
-            Back();
-        else
-            Resume();
+        if (Input.GetKeyDown("escape"))
+        {
+            if (!pauseMenu.activeSelf && !settingsMenu.activeSelf)
+            {
+                Pause();
+            }
+        }
     }
 }

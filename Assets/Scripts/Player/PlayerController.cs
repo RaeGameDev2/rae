@@ -67,6 +67,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (pause)
+            return;
         if (animState == State.DEATH)
             return;
         HandleInput();
@@ -90,6 +92,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (pause)
+            return;
         if (animState == State.DEATH)
             return;
         //Reset gravity to falling gravity
