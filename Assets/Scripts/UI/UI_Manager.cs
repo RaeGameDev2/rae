@@ -86,17 +86,10 @@ public class UI_Manager : MonoBehaviour
 
     public void InitUiBars()
     {
-        for (var i = 0; i < playerResources.currentHealth; i++) {
+        for (var i = 0; i < playerResources.currentHealth; i++)
             AddLife();
-            Debug.Log($"{i} {offsetHealthSegments}");
-        }
         for (var i = 0; i < playerResources.currentMana; i++)
             AddMana();
-
-        foreach (var healthPointInstance in healthPointInstances)
-        {
-            Debug.Log(healthPointInstance.transform.position);
-        }
     }
 
     public IEnumerator FadeFromBlack()

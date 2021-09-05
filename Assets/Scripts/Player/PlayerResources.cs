@@ -106,8 +106,6 @@ public class PlayerResources : MonoBehaviour
                 uiManager.UseMana();
             
             gameManager.Die();
-
-            StartCoroutine(RegenerateUI());
         }
         else
         {
@@ -115,17 +113,7 @@ public class PlayerResources : MonoBehaviour
             uiManager.TakeLives(damage);
         }
     }
-
-    private IEnumerator RegenerateUI()
-    {
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i < maxHealth; i++)
-        {
-            uiManager.AddMana();
-            uiManager.AddLife();
-        }
-    }
-
+    
     private IEnumerator DamageKnockback(Vector3 dir)
     {
         var rb = GetComponent<Rigidbody2D>();
