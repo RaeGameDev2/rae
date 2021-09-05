@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cinemachine;
 using UnityEngine;
 
@@ -60,18 +61,9 @@ public class JungleBoss : Enemy
         animatorBody = GetComponent<Animator>();
         shield = GetComponentInChildren<JungleBossShield>();
         spitters = GetComponentsInChildren<JungleBossSpitter>();
-        Debug.Log($"{spitters} {spitters.Length}");
 
         animationState = AnimationBody.Idle;
         shield.animationState = AnimationShield.Idle;
-        foreach (var spitter in spitters)
-        {
-            spitter.animationState = AnimationSpitter.IdleBeginning;
-            spitter.animatorSpitter.SetFloat("speed", speed);
-        }
-
-        animatorBody.SetFloat("speed", speed);
-        shield.animatorShield.SetFloat("speed", speed);
 
         shieldActive = true;
         isBoss = true;
@@ -80,12 +72,21 @@ public class JungleBoss : Enemy
     private new void Start()
     {
         base.Start();
+        animatorBody.SetFloat("speed", speed);
+        shield.animatorShield.SetFloat("speed", speed);
+        
+        foreach (var spitter in spitters)
+        {
+            spitter.animationState = AnimationSpitter.IdleBeginning;
+            spitter.animatorSpitter.SetFloat("speed", speed);
+        }
     }
 
     private new void Update()
     {
         base.Update();
         CheckCamera();
+
         if (bossActive)
         {
             if (damageAnimation) return;
@@ -149,7 +150,6 @@ public class JungleBoss : Enemy
             {
                 shield.animationState = AnimationShield.Death;
                 player.position += new Vector3(-20f, 5f);
-                StartCoroutine(ActivateSpitters());
                 return;
             }
 
@@ -160,20 +160,19 @@ public class JungleBoss : Enemy
             animationState = AnimationBody.Death;
     }
 
-    private IEnumerator ActivateSpitters()
-    {
-        yield return new WaitForSeconds(1f);
-        spittersActive = true;
-        foreach (var spitter in spitters)
-        {
-            spitter.active = true;
-        }
-    }
-
     public void OnShieldDestroy()
     {
         hp = initialHP;
+        hp = Mathf.Clamp(hp, 0f, initialHP);
+        hpBar.localScale = new Vector3(hp / initialHP * initialScaleX, hpBar.localScale.y, hpBar.localScale.z);
         GetComponent<BoxCollider2D>().size = new Vector2(10f, 16f);
+        spittersActive = true;
+        foreach (var spitter in spitters)
+        {
+            spitter.activated = true;
+        }
+
+        Destroy(GetComponentsInChildren<Transform>().First(child => child.name == "SupportSpitters").gameObject, 0.1f);
     }
 
     public void EndDamageAnimation()

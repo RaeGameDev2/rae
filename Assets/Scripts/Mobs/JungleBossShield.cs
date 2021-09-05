@@ -25,7 +25,7 @@ public class JungleBossShield : MonoBehaviour
 
     public void EndDeathAnimation()
     {
-        Destroy(gameObject);
         parent.OnShieldDestroy();
+        Destroy(gameObject);
     }
 }

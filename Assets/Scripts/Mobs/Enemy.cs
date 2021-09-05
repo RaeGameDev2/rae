@@ -15,10 +15,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float dpsLifeDrain = 50f;
     [SerializeField] protected float hp;
     protected Transform hpBar;
+    protected Transform squareHpBar;
 
 
     protected float initialHP;
-    private float initialScaleX;
+    protected float initialScaleX;
     protected float attackCooldown;
     protected float timeSinceAttack;
 
@@ -42,6 +43,7 @@ public class Enemy : MonoBehaviour
     {
         var components = gameObject.GetComponentsInChildren<Transform>();
         hpBar = components.FirstOrDefault(component => component.tag == "HP");
+        squareHpBar = components.FirstOrDefault(component => component.name == "Square");
         lifeDrain = false;
         pause = false;
     }

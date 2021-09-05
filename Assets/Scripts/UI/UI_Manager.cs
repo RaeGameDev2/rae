@@ -86,6 +86,8 @@ public class UI_Manager : MonoBehaviour
 
     public void InitUiBars()
     {
+        if (healthPointInstances.Count != 0) return;
+
         for (var i = 0; i < playerResources.currentHealth; i++)
             AddLife();
         for (var i = 0; i < playerResources.currentMana; i++)

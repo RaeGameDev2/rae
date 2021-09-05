@@ -330,8 +330,6 @@ public class GameManager : MonoBehaviour
 
         playerResources.currentHealth = playerResources.maxHealth;
         playerResources.currentMana = playerResources.maxMana;
-
-        uiManager.InitUiBars();
     }
 
     private void RespawnHealthPoints()
