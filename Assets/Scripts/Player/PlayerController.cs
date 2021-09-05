@@ -343,4 +343,11 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         GameManager.instance.Die();
     }
+
+    public void deactivateDeath()
+    {
+        animState = State.IDLE;
+        anim.SetInteger("state", (int)animState);
+        GetComponent<CapsuleCollider2D>().enabled = true;
+    }
 }

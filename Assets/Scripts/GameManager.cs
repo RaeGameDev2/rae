@@ -208,6 +208,7 @@ public class GameManager : MonoBehaviour
         while (fadingToBlackAnimation)
             yield return new WaitForFixedUpdate();
         playerController.transform.position = GetCheckpointById(id).transform.position;
+        playerController.deactivateDeath();
         fadingToBlackAnimation = true;
         StartCoroutine(uiManager.FadeFromBlack());
     }

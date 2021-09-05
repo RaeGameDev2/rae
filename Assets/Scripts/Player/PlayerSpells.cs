@@ -55,7 +55,7 @@ public class PlayerSpells : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) 
+        if (Input.GetKeyDown(KeyCode.Q))
             PhaseWalk();
         CheckShield();
 
@@ -166,7 +166,7 @@ public class PlayerSpells : MonoBehaviour
     private void CheckShield()
     {
         if (!shieldActive) return;
-        if (shieldDamage != 0) return;
+        if (shieldDamage > 0) return;
         shieldActive = false;
         Destroy(instanceShield);
     }
@@ -186,7 +186,7 @@ public class PlayerSpells : MonoBehaviour
         yield return new WaitForSeconds(timeParry);
         parryActive = false;
     }
-    
+
     private IEnumerator StopPhaseWalk()
     {
         var spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
@@ -214,7 +214,7 @@ public class PlayerSpells : MonoBehaviour
         time = 1f;
         while (time > 0)
         {
-            albedo += Time.fixedDeltaTime /(2 * initialTime);
+            albedo += Time.fixedDeltaTime / (2 * initialTime);
             for (var i = 0; i < spriteRenderers.Length; i++)
             {
                 colors[i].a = albedo;
