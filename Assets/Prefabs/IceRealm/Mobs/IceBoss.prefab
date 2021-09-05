@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &463362468966246453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3700986125730280205}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3700986125730280205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463362468966246453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.49, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5862854385991606459}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &697417349990520607
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +474,7 @@ Transform:
   - {fileID: 2515429219929171931}
   - {fileID: 3484073844995154287}
   - {fileID: 3484073843708304542}
+  - {fileID: 3700986125730280205}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -494,14 +525,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atStaffHeavyAttack: {fileID: 6036975801974468197, guid: 46938152a5352cd4583ef3dc38261579, type: 3}
   atStaffBasicAttack: {fileID: 5368235276387312648, guid: 2ba27f9370fe5fa4dabe34b74b48ec33, type: 3}
-  centerPiece: {fileID: 7104977434006099822}
+  atOrbHeavyAttack: {fileID: 8474508594649476019, guid: 26154c4696c5d744a908d6de601c1871, type: 3}
+  atOrbBasicAttack: {fileID: 2390177993119064764, guid: 36308e03391b0af428eca56af1d99d2b, type: 3}
+  centerPiece: {fileID: 3700986125730280205}
   dpsLifeDrain: 50
   hp: 5000
   speed: 0
   attackSpeed: 0
   animType: 0
-  bossFightClip: {fileID: 8300000, guid: 5dbbd5a1093898e41bc2795b2debe570, type: 3}
-  iceRealmClip: {fileID: 8300000, guid: b771be66d556a7043a66bf130b714304, type: 3}
   isDying: 0
   projectile: {fileID: 5777892390895327323, guid: cc0835ce7ca8a864682b2136486b7040, type: 3}
   projectileAttack: 0

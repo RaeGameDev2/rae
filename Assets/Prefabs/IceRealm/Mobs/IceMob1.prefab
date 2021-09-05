@@ -504,6 +504,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2164368054114734553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7823350514600309868}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7823350514600309868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2164368054114734553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5592046829643802178}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2638597471561985429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,6 +1306,7 @@ Transform:
   - {fileID: 9006217606827661773}
   - {fileID: 6550391297776810134}
   - {fileID: 6550391299041304425}
+  - {fileID: 7823350514600309868}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1352,7 +1383,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atStaffHeavyAttack: {fileID: 6036975801974468197, guid: 46938152a5352cd4583ef3dc38261579, type: 3}
   atStaffBasicAttack: {fileID: 5368235276387312648, guid: 2ba27f9370fe5fa4dabe34b74b48ec33, type: 3}
-  centerPiece: {fileID: 4715384523868382724}
+  atOrbHeavyAttack: {fileID: 8474508594649476019, guid: 26154c4696c5d744a908d6de601c1871, type: 3}
+  atOrbBasicAttack: {fileID: 2390177993119064764, guid: 36308e03391b0af428eca56af1d99d2b, type: 3}
+  centerPiece: {fileID: 7823350514600309868}
   dpsLifeDrain: 50
   hp: 300
   speed: 5

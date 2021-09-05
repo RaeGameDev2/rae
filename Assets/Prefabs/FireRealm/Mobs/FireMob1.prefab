@@ -719,6 +719,7 @@ Transform:
   - {fileID: 7694906205707766933}
   - {fileID: 1693366302331718843}
   - {fileID: 1693366302226128739}
+  - {fileID: 708513573192017176}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -769,7 +770,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atStaffHeavyAttack: {fileID: 6036975801974468197, guid: 46938152a5352cd4583ef3dc38261579, type: 3}
   atStaffBasicAttack: {fileID: 5368235276387312648, guid: 2ba27f9370fe5fa4dabe34b74b48ec33, type: 3}
-  centerPiece: {fileID: 4551157920354279316}
+  atOrbHeavyAttack: {fileID: 8474508594649476019, guid: 26154c4696c5d744a908d6de601c1871, type: 3}
+  atOrbBasicAttack: {fileID: 2390177993119064764, guid: 36308e03391b0af428eca56af1d99d2b, type: 3}
+  centerPiece: {fileID: 708513573192017176}
   dpsLifeDrain: 50
   hp: 300
   speed: 5
@@ -1162,6 +1165,36 @@ Transform:
   - {fileID: 4078851312037255757}
   m_Father: {fileID: 7694906205707766933}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5997708537261405455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 708513573192017176}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &708513573192017176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997708537261405455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.1, y: 3.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3536852309844211182}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6061686452662547961
 GameObject:

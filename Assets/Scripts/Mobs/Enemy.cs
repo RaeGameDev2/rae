@@ -7,6 +7,9 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private GameObject atStaffHeavyAttack;
     [SerializeField] private GameObject atStaffBasicAttack;
+    [SerializeField] private GameObject atOrbHeavyAttack;
+    [SerializeField] private GameObject atOrbBasicAttack;
+
     [SerializeField] private Transform centerPiece;
 
     [SerializeField] private float dpsLifeDrain = 50f;
@@ -81,19 +84,32 @@ public class Enemy : MonoBehaviour
         if (Time.time < timeNextHit) return;
 
         var currWeaponHandler = FindObjectOfType<WeaponsHandler>();
-        if (centerPiece == null) 
+        if (centerPiece == null)
             centerPiece = transform;
         if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
             currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Basic)
         {
             var instBasic = Instantiate(atStaffBasicAttack, centerPiece.transform.position, Quaternion.identity, transform);
-            instBasic.transform.localScale = (isBoss ? 4f : 2f) * Vector3.one; 
+            instBasic.transform.localScale = (isBoss ? 4f : 2f) * Vector3.one;
             Destroy(instBasic, 1f);
         }
         else if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Staff &&
             currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Heavy)
         {
             var instHeavy = Instantiate(atStaffHeavyAttack, centerPiece.transform.position, Quaternion.identity, transform);
+            instHeavy.transform.localScale = (isBoss ? 4f : 2f) * Vector3.one;
+            Destroy(instHeavy, 1f);
+        }
+
+        if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Orb && currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Basic)
+        {
+            var instBasic = Instantiate(atOrbBasicAttack, centerPiece.transform.position, Quaternion.identity, transform);
+            instBasic.transform.localScale = (isBoss ? 4f : 2f) * Vector3.one;
+            Destroy(instBasic, 1f);
+        }
+        else if (currWeaponHandler.currWeapon.type == Weapon.WeaponType.Orb && currWeaponHandler.currWeapon.attackType == Weapon.AttackType.Heavy)
+        {
+            var instHeavy = Instantiate(atOrbHeavyAttack, centerPiece.transform.position, Quaternion.identity, transform);
             instHeavy.transform.localScale = (isBoss ? 4f : 2f) * Vector3.one;
             Destroy(instHeavy, 1f);
         }
