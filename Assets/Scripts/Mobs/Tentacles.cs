@@ -45,7 +45,7 @@ public class Tentacles : MonoBehaviour
         if (Time.time < timeNextAttack) return;
 
         FindObjectOfType<PlayerResources>().TakeDamage(1, transform.position);
-        timeNextAttack = Time.time + 1.5f;
+        timeNextAttack = Time.time + 2f;
     }
 
     public void Attack()

@@ -54,11 +54,9 @@ public class JungleMob3 : Enemy
 
         if (GetDistanceFromPlayer() < thresholdDistance)
         {
-            Debug.Log("in range");
             if (!playerInRange)
                 foreach (var tentacles in tentaclesArray)
                     tentacles.Attack();
-            Debug.Log("in rage true");
             playerInRange = true;
         }
 
