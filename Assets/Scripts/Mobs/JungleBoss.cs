@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Cinemachine;
 using UnityEngine;
 
@@ -53,7 +54,7 @@ public class JungleBoss : Enemy
 
     private float timeBetweenAttacks = 3f;
     private float durationAttack = 3f;
-    private Transform coreTransform;
+    [SerializeField] private GameObject corePrefab;
 
     private new void Awake()
     {
@@ -86,6 +87,8 @@ public class JungleBoss : Enemy
     {
         base.Update();
         CheckCamera();
+
+        animatorBody.SetInteger("state", (int)animationState);
 
         if (bossActive)
         {
@@ -126,23 +129,22 @@ public class JungleBoss : Enemy
 
     private IEnumerator Attack()
     {
+        isAttacking = true;
         timeEndAttack = Time.time + durationAttack;
-        var timeNextProjectile = Time.time;
-        while (Time.time > timeEndAttack)
+        for (var i = 0; i < 7; i++)
         {
-            yield return new WaitForFixedUpdate();
-            if (Time.time >= timeNextProjectile)
-            {
-                Instantiate(projectilePrefab, coreTransform.position, Quaternion.identity);
-                timeNextProjectile = Time.time;
-            }
+            Instantiate(projectilePrefab,  centerPiece.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.5f);
         }
 
+        isAttacking = false;
         timeNextAttack = Time.time + timeBetweenAttacks;
     }
 
     public override void OnDamageTaken(float damage, bool isCrit)
     {
+        if (hp <= 0) return;
+
         base.OnDamageTaken(damage, isCrit);
         if (shieldActive)
         {
@@ -152,32 +154,47 @@ public class JungleBoss : Enemy
                 player.position += new Vector3(-20f, 5f);
                 return;
             }
-
+            
             shieldDamageAnimation = true;
             shield.animationState = AnimationShield.Damage;
         }
         else
-            animationState = AnimationBody.Death;
+        {
+            if (hp <= 0)
+            {
+                animationState = AnimationBody.Death;
+                return;
+            }
+            animationState = AnimationBody.Damage;
+            damageAnimation = true;
+        }
     }
 
     public void OnShieldDestroy()
     {
+        shieldActive = false;
         hp = initialHP;
         hp = Mathf.Clamp(hp, 0f, initialHP);
         hpBar.localScale = new Vector3(hp / initialHP * initialScaleX, hpBar.localScale.y, hpBar.localScale.z);
         GetComponent<BoxCollider2D>().size = new Vector2(10f, 16f);
-        spittersActive = true;
-        foreach (var spitter in spitters)
-        {
-            spitter.activated = true;
-        }
+        bossActive = true;
+        // spittersActive = true;
+        // foreach (var spitter in spitters)
+        // {
+        //     spitter.activated = true;
+        // }
 
-        Destroy(GetComponentsInChildren<Transform>().First(child => child.name == "SupportSpitters").gameObject, 0.1f);
+        // Destroy(GetComponentsInChildren<Transform>().First(child => child.name == "SupportSpitters").gameObject, 0.1f);
     }
 
     public void EndDamageAnimation()
     {
         damageAnimation = false;
         animationState = AnimationBody.Idle;
+    }
+    public void EndDeathAnimation()
+    {
+        Instantiate(corePrefab, transform.position + new Vector3(-15.02349f, 2.910582f), Quaternion.identity);
+        Destroy(gameObject);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ProjectileJungleBoss : MonoBehaviour
@@ -5,16 +6,18 @@ public class ProjectileJungleBoss : MonoBehaviour
     private Vector3 target;
 
     private const float speed = 20f;
-
+    private Vector3 initialPosition;
     private void Start()
     {
         target = FindObjectOfType<PlayerController>().transform.position;
-        target += (transform.position - target).normalized * 10f;
+        target += (target - transform.position).normalized * 10f;
+        StartCoroutine(Die());
+        initialPosition = transform.position;
     }
 
     private void FixedUpdate()
     {
-        transform.position += (transform.position - target).normalized * speed * Time.timeScale;
+        transform.position += (target - initialPosition).normalized * speed * Time.fixedDeltaTime;
         if ((transform.position - target).magnitude < 0.1f) 
             Destroy(gameObject);
     }
@@ -27,5 +30,11 @@ public class ProjectileJungleBoss : MonoBehaviour
             return;
         }
         collider2D.GetComponent<PlayerResources>().TakeDamage(1, transform.position);
+    }
+
+    private IEnumerator Die()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }
