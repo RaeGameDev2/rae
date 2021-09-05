@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject atOrbHeavyAttack;
     [SerializeField] private GameObject atOrbBasicAttack;
 
-    [SerializeField] private Transform centerPiece;
+    [SerializeField] protected Transform centerPiece;
 
     [SerializeField] private float dpsLifeDrain = 50f;
     [SerializeField] protected float hp;
