@@ -23,7 +23,6 @@ public class PauseMenu : MonoBehaviour
     public void BackToHub()
     {
         Resume();
-        GameManager.instance.Pause();
         SceneManager.LoadScene(1);
     }
 
