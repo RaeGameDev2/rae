@@ -104,8 +104,8 @@ public class PlayerResources : MonoBehaviour
 
             for (int i = 0; i < currentMana; i++)
                 uiManager.UseMana();
-            
-            gameManager.Die();
+
+            StartCoroutine(transform.GetComponent<PlayerController>().activateDeath());
         }
         else
         {
@@ -113,7 +113,7 @@ public class PlayerResources : MonoBehaviour
             uiManager.TakeLives(damage);
         }
     }
-    
+
     private IEnumerator DamageKnockback(Vector3 dir)
     {
         var rb = GetComponent<Rigidbody2D>();

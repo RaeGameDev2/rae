@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,6 +67,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (animState == State.DEATH)
+            return;
         HandleInput();
         ChangeDirection();
         UpdateAnimation();
@@ -87,6 +90,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (animState == State.DEATH)
+            return;
         //Reset gravity to falling gravity
         if (rb.velocity.y <= 0)
             currGravity = gravity;
@@ -327,5 +332,15 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         rb.velocity = new Vector2(0, rb.velocity.y);
+    }
+
+    public IEnumerator activateDeath()
+    {
+        animState = State.DEATH;
+        anim.SetInteger("state", (int)animState);
+        rb.velocity = Vector2.zero;
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        yield return new WaitForSeconds(2f);
+        GameManager.instance.Die();
     }
 }
