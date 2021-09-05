@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
         stream.Close();
     }
 
-    public void LoadCheckpoints()
+    private void LoadCheckpoints()
     {
         var path = Application.persistentDataPath + "/checkpoints.data";
 
@@ -258,7 +258,7 @@ public class GameManager : MonoBehaviour
         stream.Close();
     }
 
-    public void LoadVolume()
+    private void LoadVolume()
     {
         var path = Application.persistentDataPath + "/volume.data";
         if (File.Exists(path))
@@ -281,7 +281,7 @@ public class GameManager : MonoBehaviour
         stream.Close();
     }
 
-    public void LoadSkillPoints()
+    private void LoadSkillPoints()
     {
         var path = Application.persistentDataPath + "/skillpoints.data";
         if (File.Exists(path))
@@ -306,7 +306,7 @@ public class GameManager : MonoBehaviour
         stream.Close();
     }
 
-    public void LoadSkillLevel()
+    private void LoadSkillLevel()
     {
         var path = Application.persistentDataPath + "/skill.data";
         if (File.Exists(path))
@@ -318,7 +318,20 @@ public class GameManager : MonoBehaviour
             for (var i = 0; i < size; i++) skillLevel[i] = int.Parse(readStream.ReadLine());
 
             playerSkills.playerSkills.SetSkillLevel();
+
+            playerResources.maxHealth = 3 + skillLevel[(int)Skills.SkillType.Life];
+            playerResources.maxMana = 3 + skillLevel[(int)Skills.SkillType.Mana];
         }
+        else
+        {
+            playerResources.maxHealth = 3;
+            playerResources.maxMana = 3;
+        }
+
+        playerResources.currentHealth = playerResources.maxHealth;
+        playerResources.currentMana = playerResources.maxMana;
+
+        uiManager.InitUiBars();
     }
 
     private void RespawnHealthPoints()
@@ -328,19 +341,16 @@ public class GameManager : MonoBehaviour
         switch (SceneManager.GetActiveScene().buildIndex)
         {
             case 2:
-                Debug.Log("Fire hpoints instantiated");
                 name = fireHealthPointsPrefab.name;
                 Destroy(GameObject.Find(name));
                 Instantiate(fireHealthPointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
                 break;
             case 3:
-                Debug.Log("Ice hpoints instantiated");
                 name = iceHealthPointsPrefab.name;
                 Destroy(GameObject.Find(name));
                 Instantiate(iceHealthPointsPrefab, new Vector3(0, 0, 0), Quaternion.identity).name = name;
                 break;
             case 4:
-                Debug.Log("Jungle hpoints instantiated");
                 name = jungleHealthPointsPrefab.name;
                 Destroy(GameObject.Find(name));
                 if (jungleHealthPointsPrefab)
@@ -354,6 +364,9 @@ public class GameManager : MonoBehaviour
         // TODO : Play player's death animation
         StartCoroutine(MovePlayer(lastCheckpointId, SceneManager.GetActiveScene().buildIndex));
         RespawnHealthPoints();
+        playerResources.currentHealth = playerResources.maxHealth;
+        playerResources.currentMana = playerResources.maxMana;
+        uiManager.InitUiBars();
     }
 
     private void LoadAllData()
@@ -362,10 +375,6 @@ public class GameManager : MonoBehaviour
         LoadVolume();
         LoadSkillPoints();
         LoadSkillLevel();
-        playerResources.maxHealth = 3 + GameManager.instance.skillLevel[(int)Skills.SkillType.Life];
-        playerResources.maxMana = 3 + GameManager.instance.skillLevel[(int)Skills.SkillType.Mana];
-        playerResources.currentHealth = playerResources.maxHealth;
-        playerResources.currentMana = playerResources.maxMana;
     }
 
     public void ResetAllData()

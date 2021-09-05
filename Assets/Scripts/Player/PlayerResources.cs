@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerResources : MonoBehaviour
 {
     public int currentHealth;
     [SerializeField] private GameObject damageRae;
     [SerializeField] private float manaRegeneration;
-    [SerializeField] private float manaRegenerationRate = 0.25f;
+    private const float manaRegenerationRate = 0.1f;
 
     private bool pause;
     public int skillPoints = 10;
@@ -105,9 +104,7 @@ public class PlayerResources : MonoBehaviour
 
             for (int i = 0; i < currentMana; i++)
                 uiManager.UseMana();
-
-            currentHealth = maxHealth;
-            currentMana = maxMana;
+            
             gameManager.Die();
 
             StartCoroutine(RegenerateUI());
@@ -127,13 +124,6 @@ public class PlayerResources : MonoBehaviour
             uiManager.AddMana();
             uiManager.AddLife();
         }
-    }
-
-
-    private IEnumerator my_delay()
-    {
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(1);
     }
 
     private IEnumerator DamageKnockback(Vector3 dir)

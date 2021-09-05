@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,10 +38,7 @@ public class UI_Manager : MonoBehaviour
             manaBar = GameObject.FindGameObjectWithTag("ManaBar").GetComponent<RectTransform>();
             playerResources = FindObjectOfType<PlayerResources>();
             uiSkillTree = FindObjectOfType<UI_SkillTree>();
-            for (var i = 0; i < playerResources.maxHealth; i++)
-                AddLife();
-            for (var i = 0; i < playerResources.maxMana; i++)
-                AddMana();
+            InitUiBars();
 
             uiBars = GameObject.Find("UI Bars");
             skillHUDCanvas = GameObject.Find("SkillHUDCanvas");
@@ -84,6 +82,21 @@ public class UI_Manager : MonoBehaviour
         uiSkillTree.gameObject.SetActive(true);
         uiBars.SetActive(false);
         skillHUDCanvas.SetActive(false);
+    }
+
+    public void InitUiBars()
+    {
+        for (var i = 0; i < playerResources.currentHealth; i++) {
+            AddLife();
+            Debug.Log($"{i} {offsetHealthSegments}");
+        }
+        for (var i = 0; i < playerResources.currentMana; i++)
+            AddMana();
+
+        foreach (var healthPointInstance in healthPointInstances)
+        {
+            Debug.Log(healthPointInstance.transform.position);
+        }
     }
 
     public IEnumerator FadeFromBlack()
