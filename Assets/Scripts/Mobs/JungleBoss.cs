@@ -75,7 +75,7 @@ public class JungleBoss : Enemy
         base.Start();
         animatorBody.SetFloat("speed", speed);
         shield.animatorShield.SetFloat("speed", speed);
-        
+
         foreach (var spitter in spitters)
         {
             spitter.animationState = AnimationSpitter.IdleBeginning;
@@ -133,7 +133,7 @@ public class JungleBoss : Enemy
         timeEndAttack = Time.time + durationAttack;
         for (var i = 0; i < 7; i++)
         {
-            Instantiate(projectilePrefab,  centerPiece.position, Quaternion.identity);
+            Instantiate(projectilePrefab, centerPiece.position, Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
         }
 
@@ -154,7 +154,7 @@ public class JungleBoss : Enemy
                 player.position += new Vector3(-20f, 5f);
                 return;
             }
-            
+
             shieldDamageAnimation = true;
             shield.animationState = AnimationShield.Damage;
         }
@@ -163,6 +163,7 @@ public class JungleBoss : Enemy
             if (hp <= 0)
             {
                 animationState = AnimationBody.Death;
+                StopAllCoroutines();
                 return;
             }
             animationState = AnimationBody.Damage;
@@ -194,7 +195,7 @@ public class JungleBoss : Enemy
     }
     public void EndDeathAnimation()
     {
-        Instantiate(corePrefab, transform.position + new Vector3(-15.02349f, 2.910582f), Quaternion.identity);
+        Instantiate(corePrefab, transform.position + new Vector3(-4.45f, 10f), Quaternion.identity);
         Destroy(gameObject);
     }
 }
